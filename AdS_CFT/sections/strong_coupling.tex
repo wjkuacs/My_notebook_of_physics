@@ -1,0 +1,702 @@
+
+在前面的章节中，我们介绍了 AdS/CFT 对偶的基本框架，以及它在全息纠缠熵和重整化群流中的应用。现在我们转向 AdS/CFT 对偶最重要的应用之一：强耦合量子色动力学（quantum chromodynamics, QCD）。QCD 是描述强相互作用的基本理论，它解释了夸克和胶子如何结合形成强子（如质子和中子）。然而，QCD 在低能区域是强耦合的，传统的微扰方法失效。AdS/CFT 对偶为研究强耦合 QCD 提供了新的思路和工具。
+
+%=============================================================================
+\section{QCD 基础}
+%=============================================================================
+
+量子色动力学（quantum chromodynamics, QCD）是描述强相互作用的基本理论。它是标准模型（Standard Model）的重要组成部分，解释了夸克（quark）和胶子（gluon）如何结合形成强子（hadron），如质子（proton）、中子（neutron）和介子（meson）。QCD 是一个非阿贝尔规范理论（non-Abelian gauge theory），具有渐近自由（asymptotic freedom）和夸克禁闭（quark confinement）的独特性质。
+
+\subsection{QCD 的定义与基本结构}
+
+在讨论 QCD 的具体性质之前，我们首先需要明确其数学结构。QCD 的核心是一个非阿贝尔规范理论，其规范群为 $SU(3)$，这决定了强相互作用的基本特征。
+
+\begin{definition}[量子色动力学]
+QCD 是基于 $SU(3)$ 规范对称性（gauge symmetry）的规范理论。夸克属于 $SU(3)$ 的基本表示（fundamental representation），具有三种颜色（color）自由度：红（red）、绿（green）、蓝（blue）。胶子是 $SU(3)$ 规范场，属于伴随表示（adjoint representation），共有 $3^2 - 1 = 8$ 种胶子。与量子电动力学（quantum electrodynamics, QED）中的光子不同，胶子本身携带颜色电荷，因此具有自相互作用。
+\end{definition}
+
+\begin{definition}[QCD 拉格朗日量]
+QCD 的拉格朗日量（Lagrangian）为：
+\begin{equation}
+    \mathcal{L}_{\rm QCD} = \bar{q}(i\gamma^\mu D_\mu - m)q - \frac{1}{4}G_{\mu\nu}^a G^{a\mu\nu},
+\end{equation}
+其中：
+\begin{itemize}
+    \item $q$ 是夸克场（quark field），$\bar{q} = q^\dagger \gamma^0$ 是狄拉克共轭（Dirac conjugate）
+    \item $D_\mu = \partial_\mu - igA_\mu^a T^a$ 是协变导数（covariant derivative）
+    \item $A_\mu^a$ 是胶子场（gluon field），$a = 1, \ldots, 8$
+    \item $T^a$ 是 $SU(3)$ 的生成元（generators），满足 $[T^a, T^b] = if^{abc}T^c$
+    \item $G_{\mu\nu}^a = \partial_\mu A_\nu^a - \partial_\nu A_\mu^a + gf^{abc}A_\mu^b A_\nu^c$ 是胶子场强张量（gluon field strength tensor）
+    \item $m$ 是夸克质量（quark mass）
+    \item $g$ 是强耦合常数（strong coupling constant）
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+与 QED 不同，QCD 的胶子自相互作用项 $gf^{abc}A_\mu^b A_\nu^c$ 导致了非线性效应。这些非线性效应是 QCD 区别于 QED 的根本原因，也是渐近自由和夸克禁闭的起源。
+\end{remark}
+
+\subsection{渐近自由与 $\beta$ 函数}
+
+渐近自由是 QCD 最重要的性质之一，它决定了 QCD 在高能区域的行为。理解渐近自由需要计算 QCD 的 $\beta$ 函数。
+
+\begin{property}[渐近自由]
+QCD 最重要的性质之一是渐近自由。在高能区域，QCD 耦合常数 $\alpha_s = g^2/(4\pi)$ 变小，相互作用变弱。耦合常数的能量依赖由 $\beta$ 函数决定：
+\begin{equation}
+    \beta(\alpha_s) = \mu \frac{d\alpha_s}{d\mu} = -\frac{\beta_0}{2\pi} \alpha_s^2 + \mathcal{O}(\alpha_s^3),
+\end{equation}
+其中 $\beta_0 = 11 - \frac{2}{3}N_f$，$N_f$ 是夸克味数（flavor number）。对于 $N_f < 16$（实际 QCD 中 $N_f = 6$），$\beta_0 > 0$，因此 $\beta(\alpha_s) < 0$，耦合常数随能量增加而减小。
+\end{property}
+
+\begin{proof}[$\beta$ 函数的推导]
+考虑 QCD 的单圈修正。规范场的自能图有三个贡献：
+\begin{enumerate}
+    \item 胶子圈贡献：$-\frac{11}{3}C_2(G)$
+    \item 夸克圈贡献：$+\frac{2}{3}N_f T(F)$
+    \item 鬼圈贡献：$-\frac{1}{3}C_2(G)$
+\end{enumerate}
+其中 $C_2(G) = N_c$，$T(F) = 1/2$。总贡献为：
+\begin{equation}
+    \beta_0 = \frac{11}{3}N_c - \frac{2}{3}N_f.
+\end{equation}
+对于 $SU(3)$，$N_c = 3$，因此 $\beta_0 = 11 - \frac{2}{3}N_f$。当 $N_f < 16$ 时，$\beta_0 > 0$，耦合常数随能量增加而减小。
+\end{proof}
+
+\begin{remark}
+渐近自由的物理意义是：在高能散射中，夸克和胶子的行为类似于自由粒子。这使得我们可以用微扰论来计算高能过程，如深度非弹性散射（deep inelastic scattering）。渐近自由的发现者 Gross、Wilczel 和 Politzer 获得了 2004 年诺贝尔物理学奖 \cite{Gross1973, Politzer1973}。
+\end{remark}
+
+\begin{proposition}[跑动耦合常数]
+从 $\beta$ 函数可以解出跑动耦合常数：
+\begin{equation}
+    \alpha_s(\mu) = \frac{\alpha_s(\mu_0)}{1 + \frac{\beta_0}{2\pi}\alpha_s(\mu_0)\ln(\mu/\mu_0)}.
+\end{equation}
+这个解表明，当 $\mu \to \infty$ 时，$\alpha_s \to 0$，这就是渐近自由。
+\end{proposition}
+
+\begin{proof}
+从 $\beta$ 函数的定义出发：
+\begin{equation}
+    \mu \frac{d\alpha_s}{d\mu} = -\frac{\beta_0}{2\pi} \alpha_s^2.
+\end{equation}
+分离变量并积分：
+\begin{equation}
+    \int_{\alpha_s(\mu_0)}^{\alpha_s(\mu)} \frac{d\alpha_s}{\alpha_s^2} = -\frac{\beta_0}{2\pi} \int_{\mu_0}^{\mu} \frac{d\mu'}{\mu'}.
+\end{equation}
+计算积分：
+\begin{equation}
+    -\frac{1}{\alpha_s(\mu)} + \frac{1}{\alpha_s(\mu_0)} = -\frac{\beta_0}{2\pi} \ln\frac{\mu}{\mu_0}.
+\end{equation}
+整理得到跑动耦合常数的表达式。
+\end{proof}
+
+\subsection{夸克禁闭与弦模型}
+
+夸克禁闭是 QCD 的另一个重要性质，它解释了为什么我们观察不到自由夸克。禁闭机制至今尚未被严格证明，但格点 QCD 模拟强烈支持这一图像。
+
+\begin{property}[夸克禁闭]
+QCD 的另一个重要性质是夸克禁闭。在低能区域，QCD 耦合常数变大，夸克和胶子被束缚在强子内部，无法单独存在。禁闭机制至今尚未被严格证明，但格点 QCD（lattice QCD）模拟强烈支持这一图像。
+\end{property}
+
+禁闭的物理图像可以用"弦模型"（string model）来描述：
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % 绘制夸克和反夸克
+    \fill[red] (0,0) circle (0.2) node[below] {$q$};
+    \fill[blue] (4,0) circle (0.2) node[below] {$\bar{q}$};
+    
+    % 绘制弦（通量管）
+    \draw[thick, red!70!black] (0.2,0) -- (3.8,0);
+    \draw[thick, red!70!black, decorate, decoration={snake, amplitude=0.5mm, segment length=3mm}] (0.2,0) -- (3.8,0);
+    
+    % 标注弦张力
+    \draw[->, thick] (2,0.5) -- (2,-0.5) node[midway, right] {$\sigma$};
+    
+    % 标注距离
+    \draw[<->] (0,-1) -- (4,-1) node[midway, below] {$r$};
+    
+    % 添加注释
+    \node at (2,1.5) {夸克-反夸克之间的弦（通量管）};
+\end{tikzpicture}
+\caption{夸克禁闭的弦模型示意图。夸克和反夸克之间由弦（通量管）连接，弦的张力为 $\sigma$。}
+\label{fig:confinement_string}
+\end{figure}
+
+\begin{definition}[弦张力]
+弦张力 $\sigma$ 定义为弦单位长度的能量。在 QCD 中，弦张力约为：
+\begin{equation}
+    \sigma \approx 0.18 \text{ GeV}^2 \approx 0.9 \text{ GeV/fm}.
+\end{equation}
+弦张力决定了夸克-反夸克之间的势能：
+\begin{equation}
+    V(r) \approx \sigma r, \quad r \to \infty.
+\end{equation}
+\end{definition}
+
+\begin{remark}
+线性势 $V(r) = \sigma r$ 意味着分离夸克需要无限大的能量，这就是禁闭的物理机制。当能量足够大时，弦断裂，产生新的夸克-反夸克对，这就是"弦断裂"（string breaking）现象。
+\end{remark}
+
+\subsection{手征对称性破缺}
+
+手征对称性破缺是 QCD 中最重要的非微扰现象之一，它解释了强子质量的起源。
+
+\begin{property}[手征对称性破缺]
+在零质量极限下，QCD 拉格朗日量具有手征对称性 $SU(N_f)_L \times SU(N_f)_R$。然而，在低能下，夸克凝聚（quark condensate）$\langle \bar{q}q \rangle \neq 0$ 手征对称性自发破缺。这导致了强子质量的产生，是 QCD 中最重要的非微扰现象之一。
+\end{property}
+
+\begin{definition}[夸克凝聚]
+夸克凝聚定义为：
+\begin{equation}
+    \langle \bar{q}q \rangle = \langle 0 | \bar{q}q | 0 \rangle.
+\end{equation}
+在真空中，夸克-反夸克对不断产生和湮灭，形成一个非零的凝聚体：
+\begin{equation}
+    \langle \bar{q}q \rangle \approx -(250 \text{ MeV})^3.
+\end{equation}
+这个凝聚体类似于超导体中的库珀对凝聚，它破坏了手征对称性，并产生了强子的质量。
+\end{definition}
+
+\begin{theorem}[Goldstone 定理]
+当连续对称性自发破缺时，会出现无质量的 Goldstone 玻色子。对于 QCD 的手征对称性破缺 $SU(N_f)_L \times SU(N_f)_R \to SU(N_f)_V$，会出现 $N_f^2 - 1$ 个 Goldstone 玻色子。
+\end{theorem}
+
+\begin{remark}
+对于 $N_f = 2$，Goldstone 玻色子是三个 $\pi$ 介子。由于夸克质量不为零，手征对称性是近似的，$\pi$ 介子获得小质量（$m_\pi \approx 140$ MeV），称为"准 Goldstone 玻色子"。
+\end{remark}
+
+%=============================================================================
+\section{QCD 相结构}
+%=============================================================================
+
+QCD 具有丰富的相结构，在不同的温度和密度条件下，物质处于不同的相。理解 QCD 相图对于研究早期宇宙、中子星内部结构以及重离子碰撞实验具有重要意义。
+
+\subsection{QCD 相图}
+
+QCD 相图的完整理解是当前核物理和粒子物理研究的重要目标之一。图 \ref{fig:QCD_phase} 展示了 QCD 相图的示意图。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % 绘制坐标轴
+    \draw[thick, ->] (0,0) -- (7,0) node[right] {重子化学势 $\mu_B$};
+    \draw[thick, ->] (0,0) -- (0,6) node[above] {温度 $T$};
+    
+    % 绘制相边界
+    \draw[thick, blue] (0,4) .. controls (2,3.5) and (3,2.5) .. (4,1.5) .. controls (5,0.8) and (6,0.3) .. (7,0);
+    
+    % 标注各相
+    \node at (2,5) {QGP（夸克-胶子等离子体）};
+    \node at (2,2) {强子相};
+    \node at (5,1) {色超导};
+    
+    % 标注临界点
+    \fill[red] (3,2.5) circle (0.15) node[above right] {临界点};
+    
+    % 标注交叉线
+    \draw[thick, dashed, red] (0,3) -- (2,3) node[midway, above] {交叉线};
+    
+    % 添加箭头表示相变类型
+    \draw[->, thick] (1,3.5) -- (1,2.5) node[midway, right] {一阶相变};
+    \draw[->, thick] (4,3) -- (4,2) node[midway, right] {交叉};
+    
+    % 标注当前实验
+    \fill[green] (1,3.8) circle (0.1) node[above left] {RHIC};
+    \fill[green] (0.5,4.5) circle (0.1) node[above left] {LHC};
+\end{tikzpicture}
+\caption{QCD 相图示意图。横轴是重子化学势 $\mu_B$，纵轴是温度 $T$。不同颜色表示不同的相。}
+\label{fig:QCD_phase}
+\end{figure}
+
+\subsection{夸克-胶子等离子体}
+
+夸克-胶子等离子体（quark-gluon plasma, QGP）是 QCD 相图中最重要的相之一。
+
+\begin{definition}[夸克-胶子等离子体]
+在高温（$T > T_c \approx 150-200$ MeV）条件下，强子"熔化"，夸克和胶子成为自由粒子。这类似于电磁等离子体，但"电荷"是颜色电荷。QGP 在重离子碰撞实验中被产生出来。
+\end{definition}
+
+\begin{remark}
+QGP 的物理图像可以这样理解：在低温下，夸克和胶子被禁闭在强子内部。当温度升高时，强子的热运动加剧，当温度超过临界温度 $T_c$ 时，强子"熔化"，夸克和胶子成为自由粒子。这个过程类似于冰融化成水，但"相变"的性质更加复杂。
+\end{remark}
+
+\begin{proposition}[QGP 的临界温度]
+格点 QCD 计算表明，QGP 的临界温度约为：
+\begin{equation}
+    T_c \approx 150-200 \text{ MeV}.
+\end{equation}
+对于纯规范理论（无夸克），$T_c \approx 270$ MeV。加入夸克后，$T_c$ 降低。
+\end{proposition}
+
+\subsection{色超导相}
+
+色超导相是 QCD 相图中的另一个重要相。
+
+\begin{definition}[色超导]
+在高密度、低温条件下，夸克可能形成库珀对（Cooper pair），出现色超导相。色超导相中，颜色对称性被破缺，类似于超导体中的 $U(1)$ 对称性破缺。
+\end{definition}
+
+\begin{remark}
+色超导的物理机制类似于 BCS 超导：在费米面附近，夸克通过胶子交换相互吸引，形成库珀对。但由于夸克有颜色自由度，库珀对可以有更丰富的结构。最简单的色超导相是 2SC 相（two-flavor color superconductivity），其中两种味道的夸克形成库珀对。
+\end{remark}
+
+\begin{proposition}[色超导能隙]
+色超导相中的能隙约为：
+\begin{equation}
+    \Delta \sim \mu_B e^{-1/g},
+\end{equation}
+其中 $\mu_B$ 是重子化学势，$g$ 是强耦合常数。在典型条件下，$\Delta \sim 10-100$ MeV。
+\end{proposition}
+
+\subsection{手征对称性恢复}
+
+手征对称性恢复是 QCD 相图中的重要现象。
+
+\begin{definition}[手征对称性恢复]
+在高温或高密度条件下，手征对称性恢复。这对应于夸克凝聚的消失：$\langle \bar{q}q \rangle = 0$。
+\end{definition}
+
+\begin{remark}
+手征对称性恢复的物理意义是：在高温下，热涨落破坏了夸克凝聚，手征对称性恢复。这类似于铁磁体在居里温度以上失去磁性。手征对称性恢复的临界温度约为 $T_\chi \approx 150-170$ MeV，与 QGP 的临界温度相近。
+\end{remark}
+
+%=============================================================================
+\section{重离子实验}
+%=============================================================================
+
+重离子实验（heavy-ion experiments）的目标是产生 QGP 并测量其物理性质。实验中，重原子核（如金核）被加速到接近光速并发生碰撞，产生极端高温的物质。这些实验在 RHIC 和 LHC 上进行，已经取得了许多重要发现。
+
+\subsection{RHIC 实验}
+
+RHIC 是第一个专门设计用来产生 QGP 的实验装置。
+
+\begin{definition}[RHIC]
+RHIC（Relativistic Heavy Ion Collider）位于布鲁克海文国家实验室，2000 年开始运行。RHIC 的碰撞能量约为 $\sqrt{s_{NN}} = 200$ GeV，产生的 QGP 温度约为 $2T_c$。
+\end{definition}
+
+\begin{property}[RHIC 的主要发现]
+RHIC 的主要发现包括：
+\begin{itemize}
+    \item QGP 是"完美流体"，剪切粘滞系数与熵密度的比值接近 AdS/CFT 预言值 \cite{Policastro2001,Kovtun2005}
+    \item 夸克物质具有集体流行为，表明 QGP 是强耦合的
+    \item 喷注淬火现象，表明 QGP 是稠密的介质
+\end{itemize}
+\end{property}
+
+\subsection{LHC 实验}
+
+LHC 的重离子实验提供了更高能量的 QGP。
+
+\begin{definition}[LHC]
+LHC（Large Hadron Collider）位于 CERN，2010 年开始进行重离子实验。LHC 的碰撞能量更高，产生的 QGP 温度约为 $5T_c$。
+\end{definition}
+
+\begin{property}[LHC 的主要发现]
+LHC 的主要发现包括：
+\begin{itemize}
+    \item QGP 的剪切粘滞系数与熵密度的比值仍然接近 $1/(4\pi)$
+    \item 重夸克（粲夸克、底夸克）在 QGP 中的扩散系数与 AdS/CFT 预言一致
+    \item 喷注淬火的参数与 AdS/CFT 预言一致
+\end{itemize}
+\end{property}
+
+\subsection{QGP 的输运性质}
+
+QGP 的输运性质是理解其物理行为的关键。
+
+\begin{proposition}[QGP 的剪切粘滞系数]
+实验发现 QGP 行为像一个"完美流体"（perfect fluid），其剪切粘滞系数（shear viscosity）与熵密度（entropy density）的比值非常小：
+\begin{equation}
+    \frac{\eta}{s} \approx \frac{1}{4\pi}.
+\end{equation}
+这个结果接近 AdS/CFT 的预言值 \cite{Policastro2001}，暗示着 QGP 是强耦合的。
+\end{proposition}
+
+\begin{remark}
+QGP 的"完美流体"性质可以用以下物理解释：在强耦合下，粒子的平均自由程非常短，流体内部的摩擦很小。这类似于蜂蜜的粘滞性比水大，但蜂蜜的流动性比水差。在强耦合极限下，流体的粘滞性达到最小可能值，这就是"完美流体"。
+\end{remark}
+
+%=============================================================================
+\section{大 $N_c$ 极限与 AdS/QCD}
+%=============================================================================
+
+在大 $N_c$ 极限下，$SU(N_c)$ 规范理论可以与弦理论联系。't Hooft 提出 \cite{tHooft1974}，当 $N_c \to \infty$，$\lambda = g_{\rm YM}^2 N_c$ 固定时，费曼图可以按拓扑分类，类似于弦理论的世界面展开 \cite{Polchinski1998}。Maldacena \cite{Maldacena1998} 在此基础上建立了 AdS/CFT 对偶，为 AdS/QCD 提供了坚实的理论基础。
+
+\subsection{'t Hooft 极限}
+
+'t Hooft 极限是连接规范理论与弦理论的关键。
+
+\begin{definition}['t Hooft 极限]
+'t Hooft 极限定义为：$N_c \to \infty$，$\lambda = g_{\rm YM}^2 N_c$ 固定。在这个极限下，规范理论的行为发生根本变化。
+\end{definition}
+
+\begin{theorem}[大 $N_c$ 计数规则]
+在大 $N_c$ 极限下，费曼图的贡献按拓扑分类：
+\begin{equation}
+    \langle \mathcal{O} \rangle = \sum_{h=0}^{\infty} N_c^{2-2h} f_h(\lambda),
+\end{equation}
+其中 $h$ 是图的亏格（genus），$f_h(\lambda)$ 是 $\lambda$ 的函数。
+\end{theorem}
+
+\begin{proof}[大 $N_c$ 计数规则的推导]
+考虑 $SU(N_c)$ 规范理论的费曼图。每个顶点贡献因子 $g_{\rm YM}$，每条胶子线贡献因子 $1/g_{\rm YM}^2$，每个夸克圈贡献因子 $N_c$。
+
+对于具有 $V$ 个顶点、$E$ 条边和 $F$ 个面的图，总贡献为：
+\begin{equation}
+    g_{\rm YM}^{2V-2E} N_c^F = (g_{\rm YM}^2 N_c)^{V-E} N_c^{E-V+F} = \lambda^{V-E} N_c^{\chi},
+\end{equation}
+其中 $\chi = V - E + F$ 是欧拉示性数。对于亏格为 $h$ 的闭曲面，$\chi = 2 - 2h$，因此：
+\begin{equation}
+    \text{贡献} \sim N_c^{2-2h}.
+\end{equation}
+当 $N_c \to \infty$ 时，只有 $h=0$（平面图）的贡献占主导。
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 平面图
+    \begin{scope}[shift={(0,0)}]
+        \draw[thick, blue] (0,0) circle (1);
+        \draw[thick, red] (0,0) -- (1,0);
+        \draw[thick, red] (0,0) -- (-1,0);
+        \draw[thick, red] (0,0) -- (0,1);
+        \draw[thick, red] (0,0) -- (0,-1);
+        \node at (0,-1.5) {平面图（$h=0$）};
+        \node at (0,-2) {$\sim N_c^2$};
+    \end{scope}
+    
+    % 非平面图
+    \begin{scope}[shift={(4,0)}]
+        \draw[thick, blue] (0,0) circle (1);
+        \draw[thick, red] (0.5,0.5) -- (-0.5,-0.5);
+        \draw[thick, red] (-0.5,0.5) -- (0.5,-0.5);
+        \draw[thick, red] (0,1) -- (0,-1);
+        \draw[thick, red] (1,0) -- (-1,0);
+        \node at (0,-1.5) {非平面图（$h=1$）};
+        \node at (0,-2) {$\sim N_c^0$};
+    \end{scope}
+    
+    % 更高亏格图
+    \begin{scope}[shift={(8,0)}]
+        \draw[thick, blue] (0,0) ellipse (1 and 0.7);
+        \draw[thick, blue] (0,0.7) .. controls (0.3,1) and (0.7,1) .. (1,0.7);
+        \draw[thick, red] (0,0) -- (1,0);
+        \node at (0,-1.5) {高亏格图（$h=2$）};
+        \node at (0,-2) {$\sim N_c^{-2}$};
+    \end{scope}
+\end{tikzpicture}
+\caption{大 $N_c$ 计数规则示意图。平面图贡献 $\sim N_c^2$，非平面图贡献 $\sim N_c^0$，高亏格图贡献 $\sim N_c^{-2}$。}
+\label{fig:large_N_double_line}
+\end{figure}
+
+\begin{remark}
+大 $N_c$ 计数规则表明，当 $N_c \to \infty$ 时，只有平面图对物理量有贡献。这与弦理论的世界面展开类似，其中 $1/N_c$ 对应于弦耦合常数 $g_s$。
+\end{remark}
+
+\begin{corollary}[大 $N_c$ 等价于弦理论]
+在大 $N_c$ 极限下，$SU(N_c)$ 规范理论等价于弦理论，其中弦耦合常数为 $g_s \sim 1/N_c$。这为 AdS/CFT 对偶提供了理论基础。
+\end{corollary}
+
+\subsection{AdS/QCD 模型}
+
+AdS/QCD 模型通过构造适当的 AdS 背景来模拟 QCD 的某些特性。
+
+\begin{definition}[硬壁模型]
+硬壁模型（hard wall model）是最简单的 AdS/QCD 模型。它在 AdS 空间中引入红外截断 $z_0$，可以实现禁闭。硬壁模型的度规为：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left( -dt^2 + d\vec{x}^2 + dz^2 \right), \quad 0 \leq z \leq z_0.
+\end{equation}
+当 $z \to z_0$ 时，势能发散，夸克被禁闭。
+\end{definition}
+
+\begin{definition}[软壁模型]
+软壁模型（soft wall model）在 AdS 空间中引入一个背景标量场，可以产生线性禁闭势。软壁模型的度规为：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left( -dt^2 + d\vec{x}^2 + dz^2 \right) e^{2A(z)},
+\end{equation}
+其中 $A(z)$ 是 warp 因子。线性禁闭势要求 $A(z) \sim z^2$。
+\end{definition}
+
+\begin{remark}
+硬壁模型和软壁模型都能实现禁闭，但软壁模型更自然地产生线性禁闭势。这两个模型都是 AdS/QCD 的近似，它们只能描述 QCD 的某些特征，不能完全替代 QCD。
+\end{remark}
+
+\subsection{手征对称性破缺的全息描述}
+
+在 AdS/QCD 模型中，手征对称性破缺可以通过体空间中的标量场凝聚来实现。
+
+\begin{proposition}[手征对称性破缺的全息描述]
+标量场的边界值对应于手征凝聚 $\langle \bar{q}q \rangle$。具体来说，考虑一个体空间中的标量场 $X$，其边界行为为：
+\begin{equation}
+    X(z) \sim m_q z + \langle \bar{q}q \rangle z^3,
+\end{equation}
+其中 $m_q$ 是夸克质量，$\langle \bar{q}q \rangle$ 是手征凝聚。
+\end{proposition}
+
+\begin{remark}
+这个结果可以从 AdS/CFT 对偶的字典中直接得到。标量场 $X$ 对应于边界上的算符 $\bar{q}q$，场的边界行为决定了算符的期望值。
+\end{remark}
+
+\subsection{介子谱}
+
+AdS/QCD 模型可以预言介子谱，这是检验模型的重要手段。
+
+\begin{proposition}[介子谱]
+在硬壁模型中，矢量介子的质量满足：
+\begin{equation}
+    M_n^2 \sim n^2,
+\end{equation}
+其中 $n$ 是径向量子数。这与实验观测的 Regge 轨迹（Regge trajectory）一致。
+\end{proposition}
+
+\begin{remark}
+Regge 轨迹是强子物理中的重要现象，它表明强子的质量和自旋之间存在线性关系。AdS/QCD 模型自然地预言了这种关系，这是模型成功的重要标志。
+\end{remark}
+
+\subsection{Sakai-Sugimoto 模型}
+
+Sakai-Sugimoto 模型是基于 D4-D8-$\overline{\text{D8}}$ 膜系统的全息 QCD 模型 \cite{Sakai2004}。
+
+\begin{definition}[Sakai-Sugimoto 模型]
+Sakai-Sugimoto 模型是基于 D4-D8-$\overline{\text{D8}}$ 膜系统的全息 QCD 模型 \cite{Sakai2004}。在这个模型中：
+\begin{itemize}
+    \item D4 膜提供 5 维规范理论
+    \item D8-$\overline{\text{D8}}$ 膜提供手征对称性
+    \item 手征对称性破缺由膜的弯曲实现
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+Sakai-Sugimoto 模型可以自然地描述手征对称性破缺和介子谱，是 AdS/QCD 最成功的模型之一。它的优点是基于弦理论，具有明确的微观起源。
+\end{remark}
+
+\subsection{色超导相}
+
+在高密度低温条件下，QCD 物质可能进入色超导相。
+
+\begin{definition}[色超导相]
+色超导相（color superconducting phase）是高密度低温条件下 QCD 物质的一种相。在色超导相中，夸克形成库珀对，破坏色规范对称性。色超导相的特征包括：
+\begin{itemize}
+    \item 夸克形成库珀对，类似于 BCS 超导体
+    \item 色规范对称性被破坏
+    \item 存在能隙，低能激发被抑制
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+色超导相的研究对于理解中子星内部结构具有重要意义。中子星的密度极高，可能达到色超导相的条件。
+\end{remark}
+
+%=============================================================================
+\section{全息 QGP}
+%=============================================================================
+
+AdS/CFT 对偶为研究 QGP 提供了新的工具。通过计算黑洞的热力学性质，可以得到 QGP 的输运系数。这些计算结果与实验观测一致，表明 AdS/CFT 对偶是研究强耦合 QCD 的有力工具。
+
+\subsection{剪切粘滞系数}
+
+剪切粘滞系数是描述 QGP 流动性的关键参数。
+
+\begin{theorem}[AdS/CFT 预言的剪切粘滞系数]
+AdS/CFT 预言 \cite{Policastro2001}：
+\begin{equation}
+    \frac{\eta}{s} = \frac{1}{4\pi}.
+\end{equation}
+这个结果与 RHIC 和 LHC 的实验观测一致，暗示着 QGP 是强耦合的。
+\end{theorem}
+
+\begin{proof}[剪切粘滞系数的推导]
+考虑 AdS-Schwarzschild 黑洞背景：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left( -f(z)dt^2 + d\vec{x}^2 + \frac{dz^2}{f(z)} \right),
+\end{equation}
+其中 $f(z) = 1 - (z/z_h)^4$，$z_h$ 是黑洞视界。
+
+剪切粘滞系数可以通过 Kubo 公式计算：
+\begin{equation}
+    \eta = \lim_{\omega \to 0} \frac{1}{\omega} \text{Im} \, G_R^{xy,xy}(\omega, \mathbf{k}=0).
+\end{equation}
+在 AdS/CFT 对偶中，$G_R^{xy,xy}$ 可以通过求解体空间中的波动方程得到。最终结果为：
+\begin{equation}
+    \eta = \frac{\pi}{8} N_c^2 T^3.
+\end{equation}
+结合熵密度 $s = \frac{\pi^2}{2} N_c^2 T^3$，得到 $\eta/s = 1/(4\pi)$。
+\end{proof}
+
+\begin{remark}
+这个结果是 AdS/CFT 对偶最成功的预言之一。它表明强耦合系统的粘滞性有一个下限，这个下限由量子力学决定。
+\end{remark}
+
+\subsection{扩散系数}
+
+重夸克的扩散系数是描述其在 QGP 中运动的关键参数。
+
+\begin{proposition}[重夸克扩散系数]
+重夸克的扩散系数为：
+\begin{equation}
+    D = \frac{1}{2\pi T}.
+\end{equation}
+这个结果也与实验观测一致。
+\end{proposition}
+
+\begin{remark}
+扩散系数的物理意义是：它度量了重夸克在 QGP 中的扩散速度。扩散系数越小，重夸克在 QGP 中运动越困难。这个结果表明 QGP 是强耦合的，重夸克在其中运动受到很大的阻力。
+\end{remark}
+
+\subsection{喷注淬火}
+
+喷注淬火是 QGP 的重要特征之一。
+
+\begin{definition}[喷注淬火]
+在 QGP 中，高能夸克损失能量的现象称为喷注淬火（jet quenching）。AdS/CFT 可以计算喷注淬火的参数 $\hat{q}$，与实验观测一致。
+\end{definition}
+
+\begin{proposition}[喷注淬火参数]
+AdS/CFT 预言的喷注淬火参数为：
+\begin{equation}
+    \hat{q} = \frac{\sqrt{\lambda} T^3}{2},
+\end{equation}
+其中 $\lambda$ 是 't Hooft 耦合常数，$T$ 是温度。这个结果与 RHIC 和 LHC 的实验观测一致。
+\end{proposition}
+
+\begin{remark}
+喷注淬火的物理机制是：高能夸克在 QGP 中与胶子相互作用，损失能量。AdS/CFT 的预言表明，喷注淬火的参数与温度的三次方成正比，这与实验观测一致。
+\end{remark}
+
+\subsection{全息 QGP 的物理图像}
+
+全息 QGP 的物理图像为理解 QGP 的性质提供了新的视角。
+
+\begin{remark}
+在 AdS/CFT 对偶中，QGP 对应于黑洞。黑洞的霍金温度对应于 QGP 的温度，黑洞的熵对应于 QGP 的熵。黑洞的"吸收"过程对应于 QGP 中的能量损失。这个图像为理解 QGP 的性质提供了新的视角。
+\end{remark}
+
+\begin{remark}
+需要指出的是，AdS/CFT 对偶描述的是 $\mathcal{N}=4$ 超对称杨-米尔斯理论，而不是真实的 QCD。因此，AdS/CFT 的预言只能作为 QCD 的近似。然而，实验表明，AdS/CFT 的预言与 QGP 的实验观测惊人地一致，这暗示着强耦合系统的某些性质是普适的。
+\end{remark}
+
+%=============================================================================
+\section{深度非弹性散射与全息对偶}
+%=============================================================================
+
+深度非弹性散射（deep inelastic scattering, DIS）是研究核子内部结构的重要实验手段。在 DIS 实验中，高能轻子（如电子）通过交换虚光子与核子发生散射。虚光子的四动量 $q$ 和能量损失 $\nu$ 是两个关键的运动学变量。
+
+\subsection{DIS 的运动学变量}
+
+\begin{definition}[DIS 运动学变量]
+定义以下无量纲变量：
+\begin{equation}
+    x = \frac{Q^2}{2M\nu}, \qquad y = \frac{\nu}{E},
+\end{equation}
+其中 $Q^2 = -q^2$ 是虚光子的动量转移平方，$M$ 是核子质量，$E$ 是入射轻子能量。变量 $x$ 的物理意义是被敲出夸克携带的核子动量分数。
+\end{definition}
+
+\subsection{结构函数}
+
+结构函数是描述 DIS 截面的关键量。
+
+\begin{definition}[结构函数]
+DIS 截面可以参数化为结构函数 $F_1(x, Q^2)$ 和 $F_2(x, Q^2)$：
+\begin{equation}
+    \frac{d^2\sigma}{dx \, dQ^2} = \frac{4\pi \alpha^2}{Q^4} \left[ \frac{1}{2} y^2 F_1(x, Q^2) + \left(1 - y - \frac{M^2 x^2 y^2}{Q^2}\right) \frac{F_2(x, Q^2)}{x} \right].
+\end{equation}
+\end{definition}
+
+\begin{proposition}[结构函数与部分子分布函数]
+在 QCD 中，结构函数可以通过部分子分布函数（parton distribution functions, PDFs）$f_i(x, Q^2)$ 来计算：
+\begin{equation}
+    F_2(x, Q^2) = \sum_i e_i^2 x f_i(x, Q^2),
+\end{equation}
+其中 $e_i$ 是夸克的电荷。
+\end{proposition}
+
+\subsection{Bjorken 标度与 DGLAP 方程}
+
+Bjorken 标度是 DIS 中的重要现象。
+
+\begin{definition}[Bjorken 标度]
+在深度非弹性极限（$Q^2 \to \infty$，$\nu \to \infty$，$x$ 固定）下，QCD 的渐近自由保证了结构函数只依赖于 $x$，而不依赖于 $Q^2$，这被称为 Bjorken 标度（Bjorken scaling）。
+\end{definition}
+
+\begin{proposition}[DGLAP 方程]
+标度破坏（scaling violation）由 DGLAP 方程描述：
+\begin{equation}
+    \frac{\partial f_i(x, Q^2)}{\partial \ln Q^2} = \frac{\alpha_s(Q^2)}{2\pi} \sum_j \int_x^1 \frac{dz}{z} P_{ij}(z) f_j\left(\frac{x}{z}, Q^2\right),
+\end{equation}
+其中 $P_{ij}(z)$ 是分裂函数（splitting functions）。
+\end{proposition}
+
+\subsection{全息 DIS}
+
+在 AdS/CFT 对偶中，DIS 可以用弦理论的语言来描述。
+
+\begin{definition}[全息 DIS]
+在 AdS/CFT 对偶中，DIS 可以用弦理论的语言来描述。虚光子对应于体空间中的规范场，核子对应于体空间中的孤子解（如 D 膜）。散射截面可以通过计算弦的世界面来得到。
+\end{definition}
+
+\begin{proposition}[全息 DIS 结构函数]
+在 AdS 空间中，DIS 结构函数可以通过求解体空间中的波动方程来计算。对于自旋 $s$ 的强子，结构函数在小 $x$ 区域的行为为：
+\begin{equation}
+    F_2(x, Q^2) \sim x^{-(s-1)},
+\end{equation}
+这与 HERA 实验数据一致。
+\end{proposition}
+
+\begin{remark}
+全息 DIS 的物理图像：在全息框架中，虚光子在体空间中传播，与边界上的强子发生相互作用。散射过程可以用 Witten 图来描述，其中虚光子对应于体空间中的规范场传播子，强子对应于体空间中的态。
+\end{remark}
+
+%=============================================================================
+\section{硬散射与全息对偶}
+%=============================================================================
+
+硬散射过程是 QCD 的另一个重要应用。在硬散射中，大动量转移保证了渐近自由的应用，使得微扰 QCD 计算成为可能。
+
+\subsection{喷注产生}
+
+喷注产生是强子碰撞中的重要现象。
+
+\begin{definition}[喷注产生]
+在强子碰撞中，硬散射产生高能部分子，部分子通过碎裂形成喷注。喷注截面可以通过因子化公式计算：
+\begin{equation}
+    d\sigma = \sum_{i,j} \int dx_1 \, dx_2 \, f_i(x_1, \mu_F^2) f_j(x_2, \mu_F^2) \, d\hat{\sigma}_{ij}(\hat{s}, \mu_R^2, \mu_F^2),
+\end{equation}
+其中 $f_i$ 是部分子分布函数，$d\hat{\sigma}_{ij}$ 是部分子截面，$\mu_F$ 是因子化标度，$\mu_R$ 是重整化标度。
+\end{definition}
+
+\subsection{全息硬散射}
+
+在 AdS/CFT 对偶中，硬散射过程可以用弦理论的语言来描述。
+
+\begin{definition}[全息硬散射]
+在 AdS/CFT 对偶中，硬散射过程可以用弦理论的语言来描述。部分子对应于体空间中的弦态，散射截面可以通过计算弦的 S-矩阵来得到。
+\end{definition}
+
+\begin{proposition}[Regge 轨迹]
+在 AdS 空间中，硬散射截面可以通过求解体空间中的波动方程来计算。对于高能散射，截面的行为由 Regge 轨迹（Regge trajectory）决定：
+\begin{equation}
+    \frac{d\sigma}{dt} \sim s^{2\alpha(t) - 2},
+\end{equation}
+其中 $\alpha(t)$ 是 Regge 轨迹函数。
+\end{proposition}
+
+\subsection{全息喷注淬火}
+
+在 QGP 中，高能部分子损失能量的现象称为喷注淬火。
+
+\begin{definition}[全息喷注淬火]
+AdS/CFT 可以计算喷注淬火的参数 $\hat{q}$：
+\begin{equation}
+    \hat{q} = \frac{\sqrt{\lambda} T^3}{2},
+\end{equation}
+其中 $\lambda$ 是 't Hooft 耦合常数，$T$ 是温度。这个结果与 RHIC 和 LHC 的实验观测一致。
+\end{definition}
+
+\begin{remark}
+全息硬散射的物理图像：在全息框架中，硬散射过程对应于体空间中的弦散射。高能部分子对应于高速运动的弦，散射过程对应于弦的分裂和合并。这个图像为理解强耦合 QCD 中的硬散射提供了新的视角。
+\end{remark}
+
+%=============================================================================

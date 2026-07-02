@@ -1,0 +1,426 @@
+% chapter04.tex - 微分形式与外微分
+\chapter{微分形式与外微分 (Differential Forms and Exterior Calculus)}
+\label{chap:forms}
+
+\section{为什么需要微分形式？}
+
+\begin{note}[物理动机]
+在电磁学中，我们习惯分别处理电场 $\mathbf{E}$ 和磁场 $\mathbf{B}$。但在相对论电动力学中，这两个场自然地统一为一个反对称张量 $F_{\mu\nu}$ —— 电磁场张量。类似地，Maxwell 方程的四个分量方程自然合并为两个简洁的方程。这里起作用的就是微分形式的语言：它使得反对称张量、积分、以及微分运算之间的相互作用变得极其自然。在广义相对论中，微分形式更是不可或缺 —— 从 Palatini 变分到 Cartan 结构方程，从 Chern--Simons 理论到拓扑不变量。
+\end{note}
+
+\section{外代数与楔积}
+
+\subsection{p-形式}
+
+\begin{definition}[$k$-形式]
+流形 $M$ 上的一个\textbf{$k$-形式}（或\textbf{微分 $k$-形式}）$\omega$ 是一个光滑的完全反对称 $(0,k)$ 型张量场：
+\begin{equation}
+    \omega_{\mu_1\cdots\mu_k} = \omega_{[\mu_1\cdots\mu_k]}.
+\end{equation}
+$M$ 上全体 $k$-形式的空间记作 $\Omega^k(M)$。
+\end{definition}
+
+按此约定：
+\begin{itemize}
+    \item $\Omega^0(M) = C^\infty(M)$：0-形式就是光滑函数
+    \item $\Omega^1(M)$：1-形式就是余向量场（余切空间的截面）
+    \item $\Omega^n(M)$：$n$ 维流形上的 $n$-形式也称为\textbf{体积形式} (volume form)，因为它的独立分量只有一个
+\end{itemize}
+
+\begin{property}[$k$-形式的独立分量数]
+在 $n$ 维流形上，$k$-形式的独立分量数为 $\binom{n}{k}$。因此 $\dim \Omega^k(M) = \binom{n}{k}$。特别地，当 $k > n$ 时，$\Omega^k(M) = \{0\}$（任何 $k$-形式必然为零）。
+\end{property}
+
+\subsection{楔积：反对称的张量积}
+
+\begin{definition}[楔积]
+设 $\omega \in \Omega^p(M)$ 和 $\eta \in \Omega^q(M)$。它们的\textbf{楔积} (wedge product) $\omega \wedge \eta \in \Omega^{p+q}(M)$ 定义为：
+\begin{equation}
+    (\omega \wedge \eta)_{\mu_1\cdots\mu_{p+q}} = \frac{(p+q)!}{p!q!} \, \omega_{[\mu_1\cdots\mu_p} \eta_{\mu_{p+1}\cdots\mu_{p+q}]}.
+\end{equation}
+在分量表示下（取 1-形式为例）：
+\begin{equation}
+    \dd x^\mu \wedge \dd x^\nu = \dd x^\mu \otimes \dd x^\nu - \dd x^\nu \otimes \dd x^\mu.
+\end{equation}
+\end{definition}
+
+\begin{property}[楔积的性质]
+\begin{enumerate}
+    \item \textbf{分次反交换性}：$\omega \wedge \eta = (-1)^{pq} \, \eta \wedge \omega$
+    \item \textbf{结合性}：$(\omega \wedge \eta) \wedge \alpha = \omega \wedge (\eta \wedge \alpha)$
+    \item \textbf{双线性}：$(\omega_1 + \omega_2) \wedge \eta = \omega_1 \wedge \eta + \omega_2 \wedge \eta$
+    \item \textbf{对偶基}：$\dd x^{\mu_1} \wedge \cdots \wedge \dd x^{\mu_k}$ 构成 $\Omega^k(M)$ 的局部基
+\end{enumerate}
+分次反交换性意味着：如果 $p$ 是奇数，则 $\omega \wedge \omega = 0$（因为 $\omega \wedge \omega = (-1)^{p^2} \omega \wedge \omega = -\omega \wedge \omega$）。
+\end{property}
+
+在 $\mathbb{R}^2$ 中，面积元是 $\dd x \wedge \dd y$。在 $\mathbb{R}^3$ 中，体积元是 $\dd x \wedge \dd y \wedge \dd z$。在四维时空中，体积元是 $\dd x^0 \wedge \dd x^1 \wedge \dd x^2 \wedge \dd x^3$。楔积自然地编码了"有向面积"和"有向体积"的概念。
+
+\section{外微分：推广的梯度、旋度与散度}
+
+\begin{definition}[外微分]
+\textbf{外微分} (exterior derivative) 是一个线性映射 $\dd: \Omega^k(M) \to \Omega^{k+1}(M)$，由以下性质唯一确定：
+\begin{enumerate}
+    \item 对 0-形式（函数）$f$：$\dd f$ 是 $f$ 的普通微分（1-形式）：
+    \begin{equation}
+        (\dd f)_\mu = \pd_\mu f.
+    \end{equation}
+    \item 对任意 $k$-形式 $\omega$：\textbf{幂零性} (nilpotency)：
+    \begin{equation}
+        \dd(\dd\omega) = 0. \quad \text{（等价于偏导数的可交换性：$\pd_\mu\pd_\nu = \pd_\nu\pd_\mu$）}
+    \end{equation}
+    \item \textbf{Leibniz 法则}（反导子性）：对 $\omega \in \Omega^p$ 和 $\eta \in \Omega^q$：
+    \begin{equation}
+        \dd(\omega \wedge \eta) = \dd\omega \wedge \eta + (-1)^p \, \omega \wedge \dd\eta.
+    \end{equation}
+\end{enumerate}
+\end{definition}
+
+在分量形式下，$k$-形式 $\omega = \frac{1}{k!} \omega_{\mu_1\cdots\mu_k} \dd x^{\mu_1} \wedge \cdots \wedge \dd x^{\mu_k}$ 的外微分为：
+\begin{equation}
+    \dd\omega = \frac{1}{k!} (\pd_\nu \omega_{\mu_1\cdots\mu_k}) \, \dd x^\nu \wedge \dd x^{\mu_1} \wedge \cdots \wedge \dd x^{\mu_k}.
+\end{equation}
+
+在 $\mathbb{R}^3$ 中，外微分统一了梯度、旋度和散度：
+\begin{itemize}
+    \item $\dd f$（0-形式 $\to$ 1-形式）对应 $\nabla f$（梯度）
+    \item $\dd \omega$（1-形式 $\to$ 2-形式）对应 $\nabla \times \mathbf{A}$（旋度）
+    \item $\dd \eta$（2-形式 $\to$ 3-形式）对应 $\nabla \cdot \mathbf{B}$（散度）
+\end{itemize}
+恒等式 $\dd^2 = 0$ 同时给出了 $\nabla \times (\nabla f) = 0$ 和 $\nabla \cdot (\nabla \times \mathbf{A}) = 0$。
+
+\begin{example}[$\dd^2 = 0$ 推出向量恒等式]
+在 $\mathbb{R}^3$ 中具体验证 $\dd^2 = 0$ 如何给出两个经典的向量恒等式。
+
+\textbf{(1) 梯度再旋度为零：}$\nabla \times (\nabla f) = 0$
+
+取光滑函数 $f(x,y,z) \in \Omega^0(\mathbb{R}^3)$。其外微分为 1-形式：
+\begin{equation}
+    \dd f = \pd_x f \dd x + \pd_y f \dd y + \pd_z f \dd z.
+\end{equation}
+再取外微分，得到 2-形式：
+\begin{align}
+    \dd(\dd f) &= \dd(\pd_x f) \wedge \dd x + \dd(\pd_y f) \wedge \dd y + \dd(\pd_z f) \wedge \dd z \nonumber\\
+    &= (\pd_{yx} f \dd y + \pd_{zx} f \dd z) \wedge \dd x
+     + (\pd_{xy} f \dd x + \pd_{zy} f \dd z) \wedge \dd y \nonumber\\
+    &\quad + (\pd_{xz} f \dd x + \pd_{yz} f \dd y) \wedge \dd z \nonumber\\
+    &= (\pd_{yz} f - \pd_{zy} f) \dd y \wedge \dd z
+     + (\pd_{zx} f - \pd_{xz} f) \dd z \wedge \dd x \nonumber\\
+    &\quad + (\pd_{xy} f - \pd_{yx} f) \dd x \wedge \dd y.
+\end{align}
+由于偏导数可交换（$\pd_\mu \pd_\nu f = \pd_\nu \pd_\mu f$），每一项的系数均为零，故 $\dd(\dd f) = 0$。在向量分析中，$\dd f$ 的分量 $(\pd_x f, \pd_y f, \pd_z f)$ 即 $\nabla f$，而 $\dd(\dd f)$ 的分量（$\dd y \wedge \dd z$, $\dd z \wedge \dd x$, $\dd x \wedge \dd y$ 的系数）正是 $\nabla \times (\nabla f)$ 的分量。因此 $\dd^2 f = 0 \;\Longleftrightarrow\; \nabla \times (\nabla f) = 0$。
+
+\textbf{(2) 旋度再散度为零：}$\nabla \cdot (\nabla \times \mathbf{A}) = 0$
+
+取 1-形式 $\omega = A_x \dd x + A_y \dd y + A_z \dd z \in \Omega^1(\mathbb{R}^3)$。其外微分为 2-形式：
+\begin{equation}
+    \dd\omega = (\pd_y A_z - \pd_z A_y) \dd y \wedge \dd z
+              + (\pd_z A_x - \pd_x A_z) \dd z \wedge \dd x
+              + (\pd_x A_y - \pd_y A_x) \dd x \wedge \dd y.
+\end{equation}
+这三个系数正是 $\nabla \times \mathbf{A}$ 的三个分量。再取外微分：
+\begin{align}
+    \dd(\dd\omega) &= \bigl[\pd_x(\pd_y A_z - \pd_z A_y) + \pd_y(\pd_z A_x - \pd_x A_z) + \pd_z(\pd_x A_y - \pd_y A_x)\bigr] \dd x \wedge \dd y \wedge \dd z \nonumber\\
+    &= (\pd_{xy} A_z - \pd_{xz} A_y + \pd_{yz} A_x - \pd_{yx} A_z + \pd_{zx} A_y - \pd_{zy} A_x) \dd x \wedge \dd y \wedge \dd z \nonumber\\
+    &= 0,
+\end{align}
+再次由偏导数可交换性，每一项成对抵消。3-形式的系数 $\pd_x(\nabla \times \mathbf{A})_x + \pd_y(\nabla \times \mathbf{A})_y + \pd_z(\nabla \times \mathbf{A})_z$ 正是 $\nabla \cdot (\nabla \times \mathbf{A})$。因此 $\dd^2 \omega = 0 \;\Longleftrightarrow\; \nabla \cdot (\nabla \times \mathbf{A}) = 0$。
+
+综上，单一恒等式 $\dd^2 = 0$ 同时编码了向量分析中两个最基本的恒等式，展示了微分形式语言的统一力量。
+\end{example}
+
+\subsection{闭形式与恰当形式}
+
+\begin{definition}[闭形式与恰当形式]
+一个 $k$-形式 $\omega$ 称为：
+\begin{itemize}
+    \item \textbf{闭形式} (closed form)：如果 $\dd\omega = 0$
+    \item \textbf{恰当形式} (exact form)：如果存在 $\eta \in \Omega^{k-1}$ 使得 $\omega = \dd\eta$
+\end{itemize}
+\end{definition}
+
+由 $\dd^2 = 0$，每个恰当形式都是闭形式。但反过来不一定成立——这由流形的\textbf{拓扑}决定。具体而言，闭形式模掉恰当形式的商空间就是 \textbf{de Rham 上同调}：
+\begin{equation}
+    H^k_{\text{dR}}(M) = \frac{\{\text{闭 } k\text{-形式}\}}{\{\text{恰当 } k\text{-形式}\}} = \frac{\ker(\dd: \Omega^k \to \Omega^{k+1})}{\operatorname{im}(\dd: \Omega^{k-1} \to \Omega^k)}.
+\end{equation}
+
+de Rham 上同调群 $H^k_{\text{dR}}(M)$ 是流形的拓扑不变量：它的维数（称为第 $k$ 个 \textbf{Betti 数} $b_k = \dim H^k_{\text{dR}}$）不依赖于流形上度规的具体选择，而仅仅取决于 $M$ 的拓扑结构（即"洞"的个数）。例如：
+\begin{itemize}
+    \item $H^0(\mathbb{R}^n) \cong \mathbb{R}$（连通流形上的局部常值函数必为整体常值函数）
+    \item $H^1(\mathbb{R}^2 \setminus \{0\}) \cong \mathbb{R}$（平面挖去原点后有一个一维"洞"）
+    \item $H^2(S^2) \cong \mathbb{R}$（球面有一个二维"洞"——内部是空的）
+    \item $T^2 = S^1 \times S^1$：$H^0 \cong \mathbb{R},\; H^1 \cong \mathbb{R}^2,\; H^2 \cong \mathbb{R}$，Euler 示性数 $\chi = b_0 - b_1 + b_2 = 0$
+\end{itemize}
+
+\begin{theorem}[Poincaré 引理]
+如果 $U \subseteq \mathbb{R}^n$ 是一个可缩的开集（即可以连续变形为一点），那么 $U$ 上的每个闭形式都是恰当的。也就是说，在可缩区域上，$H^k_{\text{dR}}(U) = 0$（对 $k \geq 1$）。
+\end{theorem}
+
+\begin{note}[物理意义]
+在物理学中，Poincaré 引理告诉我们：在局部（可缩的）区域上，$\dd\omega = 0$ 意味着 $\omega = \dd\eta$。例如，无源的磁场满足 $\nabla \cdot \mathbf{B} = 0$，因此在局部上 $\mathbf{B} = \nabla \times \mathbf{A}$ —— 这就是磁矢势 $\mathbf{A}$ 的存在性。但球对称磁单极的存在要求流形上有一个"洞"（即 $H^2 \neq 0$），此时 $\mathbf{B}$ 是闭但不是恰当的。
+\end{note}
+
+\section{李导数：沿流的微分}
+
+在进入积分之前，我们需要一个比协变导数更基本的导数概念——李导数。李导数不依赖于度规和联络，仅依赖于流形的光滑结构。
+
+\begin{definition}[李导数]
+设 $X \in \mathfrak{X}(M)$ 是向量场。$X$ 沿自身的流 $\phi_t$ 定义了局部的单参数微分同胚群。张量场 $T$ 沿 $X$ 的\textbf{李导数} (Lie derivative) 定义为：
+\begin{equation}
+    \Lie_X T = \lim_{t \to 0} \frac{\phi_t^* T - T}{t} = \left.\frac{\dd}{\dd t} \phi_t^* T\right|_{t=0}.
+\end{equation}
+\end{definition}
+
+对具体类型的张量场，李导数有简洁的表达式：
+
+\begin{align}
+    \Lie_X f &= X(f) = X^\mu \pd_\mu f, \quad \text{（函数）} \\
+    \Lie_X Y &= [X, Y] = X^\mu \pd_\mu Y^\nu \pd_\nu - Y^\mu \pd_\mu X^\nu \pd_\nu, \quad \text{（向量场）} \\
+    \Lie_X \omega_\mu &= X^\nu \pd_\nu \omega_\mu + \omega_\nu \pd_\mu X^\nu, \quad \text{（1-形式）}
+\end{align}
+
+\begin{property}[Cartan 公式]
+对微分形式，李导数可以由外微分、内乘和楔积表示：
+\begin{equation}
+    \Lie_X \omega = \iota_X \dd \omega + \dd(\iota_X \omega),
+\end{equation}
+其中 $\iota_X: \Omega^k \to \Omega^{k-1}$ 是内乘（代入）运算：$(\iota_X \omega)(Y_1,\ldots,Y_{k-1}) = \omega(X, Y_1, \ldots, Y_{k-1})$。
+\end{property}
+
+\begin{note}[物理意义]
+李导数衡量的是张量场沿向量场流的"变化率"。在广义相对论中：如果一个张量场沿某个向量场 $X$ 的李导数为零（$\Lie_X T = 0$），则称 $T$ 关于由 $X$ 生成的对称性是\textbf{不变的}。例如，如果 $\Lie_K g = 0$，则称 $K$ 为时空的\textbf{Killing 向量场}——它生成时空的一个等距对称性（如时间平移对称性或旋转对称性）。
+\end{note}
+
+\section{Stokes 定理：积分与边界}
+
+\begin{theorem}[Stokes 定理]
+设 $M$ 是 $n$ 维定向紧流形（可带边界），$\partial M$ 是其诱导定向的边界。对任意 $(n-1)$-形式 $\omega \in \Omega^{n-1}(M)$：
+\begin{equation}
+    \boxed{\int_M \dd\omega = \int_{\partial M} \omega}.
+\end{equation}
+\end{theorem}
+
+\begin{remark}[统一性]
+Stokes 定理是微积分基本定理的终极推广，它统一了多个经典定理 \cite{StokesTheorem2011}：
+\begin{itemize}
+    \item 微积分基本定理（$\int_a^b f'(x) \dd x = f(b) - f(a)$）：$n=1$，边界是两端点
+    \item Green 定理（平面区域上旋度的积分 = 边界环量）：$n=2$
+    \item 经典 Stokes 定理（曲面上旋度的通量 = 边界环量）：$n=2$（嵌入 $\mathbb{R}^3$）
+    \item Gauss 散度定理（体积上散度的积分 = 边界通量）：$n=3$
+\end{itemize}
+所有这些定理都来自同一个等式 $\int_M \dd\omega = \int_{\partial M} \omega$——只需选择不同的 $n$ 和 $\omega$。
+\end{remark}
+
+\begin{example}[电荷守恒——由 Maxwell 方程和 Stokes 定理推导]
+在四维时空中，Maxwell 方程的外微分表述为：
+\begin{equation}
+    \dd F = 0, \qquad \dd \star F = \mu_0 J,
+\end{equation}
+其中 $F$ 是电磁场 2-形式，$J$ 是电流 3-形式（在 Hodge 对偶下等价于电流密度 1-形式）。由第二个方程取外微分：
+\begin{equation}
+    \dd(\dd \star F) = \mu_0 \dd J.
+\end{equation}
+由幂零性 $\dd^2 = 0$，左边恒为零，故得到：
+\begin{equation}
+    \dd J = 0.
+\end{equation}
+这就是微分形式语言下的\textbf{连续性方程}（等价于 $\pd_\mu J^\mu = 0$）。
+
+现在考虑时空中由两张类空超曲面 $\Sigma_1$（时刻 $t_1$）和 $\Sigma_2$（时刻 $t_2$）以及连接它们的类时边界 $B$ 所围成的四维区域 $\Omega$（见图）。由 Stokes 定理：
+\begin{equation}
+    \int_\Omega \dd J = \int_{\partial\Omega} J = \int_{\Sigma_2} J - \int_{\Sigma_1} J + \int_B J = 0,
+\end{equation}
+其中 $\Sigma_1$ 和 $\Sigma_2$ 的定向差一个符号（向外法向的定义不同），边界 $B$ 上的积分表示穿过类时侧面的总电流。如果考虑的空间区域足够大使得边界 $B$ 上无电流流出（或 $B$ 取在无穷远），则 $\int_B J = 0$，于是：
+\begin{equation}
+    Q(t_2) \equiv \int_{\Sigma_2} J = \int_{\Sigma_1} J \equiv Q(t_1).
+\end{equation}
+即总电荷 $Q$ 在时间演化下守恒。这个推导优美地展示了：$\dd^2 = 0$ 给出连续性方程，而 Stokes 定理将其转化为积分形式的守恒律——电荷守恒本质上由规范场的外微分结构的幂零性保证。
+\end{example}
+
+\section{Hodge 对偶：从 $k$-形式到 $(n-k)$-形式}
+
+在配备了度规的定向流形上，我们可以定义 Hodge 星算子（Hodge 对偶），将 $k$-形式映射为 $(n-k)$-形式。
+
+\begin{definition}[Hodge 星算子]
+\textbf{Hodge 星算子} $\star: \Omega^k(M) \to \Omega^{n-k}(M)$ 定义为：
+\begin{equation}
+    (\star \omega)_{\mu_1\cdots\mu_{n-k}} = \frac{1}{k!} \, \varepsilon_{\nu_1\cdots\nu_k\mu_1\cdots\mu_{n-k}} \, \omega^{\nu_1\cdots\nu_k},
+\end{equation}
+其中 $\omega^{\nu_1\cdots\nu_k} = g^{\nu_1\rho_1} \cdots g^{\nu_k\rho_k} \omega_{\rho_1\cdots\rho_k}$。
+\end{definition}
+
+\begin{property}[Hodge 对偶的性质]
+\begin{enumerate}
+    \item 对 $\omega \in \Omega^k(M)$：$\star\!\star\omega = (-1)^{k(n-k) + s} \omega$，其中 $s$ 是度规中负号的数量（在洛伦兹号差 $(-,+,+,+)$ 下，$s=1$）
+    \item Hodge 对偶是线性同构：$\Omega^k(M) \cong \Omega^{n-k}(M)$
+    \item 内积：$\omega \wedge \star \eta = \langle \omega, \eta \rangle \, \varepsilon$，其中 $\varepsilon$ 是体积形式
+\end{enumerate}
+\end{property}
+
+\begin{example}[Maxwell 场的 Hodge 对偶：$\mathbf{E} \leftrightarrow \mathbf{B}$ 互换]
+在 Minkowski 时空 $(\mathbb{R}^{1,3}, \eta_{\mu\nu})$ 中，取号差 $(-,+,+,+)$。电磁场 2-形式为：
+\begin{equation}
+    F = E_x \dd t \wedge \dd x + E_y \dd t \wedge \dd y + E_z \dd t \wedge \dd z
+      + B_x \dd y \wedge \dd z + B_y \dd z \wedge \dd x + B_z \dd x \wedge \dd y.
+\end{equation}
+现在逐项计算 Hodge 对偶 $\star F$。在号差 $(-,+,+,+)$ 下，需要将指标用度规上升后与 Levi-Civita 张量缩并。注意 $\varepsilon_{txyz} = +1$（或按约定），且度规 $\eta^{tt} = -1$, $\eta^{xx} = \eta^{yy} = \eta^{zz} = +1$。
+
+\textbf{计算规则：}对于基 2-形式，Hodge 对偶本质上交换"含时"与"纯空间"指标对，并带有符号。具体地（由定义直接验证）：
+\begin{align}
+    \star(\dd t \wedge \dd x) &= -\dd y \wedge \dd z, \\
+    \star(\dd t \wedge \dd y) &= -\dd z \wedge \dd x, \\
+    \star(\dd t \wedge \dd z) &= -\dd x \wedge \dd y, \\[4pt]
+    \star(\dd y \wedge \dd z) &= +\dd t \wedge \dd x, \\
+    \star(\dd z \wedge \dd x) &= +\dd t \wedge \dd y, \\
+    \star(\dd x \wedge \dd y) &= +\dd t \wedge \dd z.
+\end{align}
+（符号约定：$\star\!\star = -1$ 对 2-形式在四维 Lorentz 号差下，因为 $k(n-k)+s = 2\cdot2+1 = 5$ 为奇数。）
+
+将这些规则应用于 $F$：
+\begin{align}
+    \star F &= E_x \star(\dd t \wedge \dd x) + E_y \star(\dd t \wedge \dd y) + E_z \star(\dd t \wedge \dd z) \nonumber\\
+            &\quad + B_x \star(\dd y \wedge \dd z) + B_y \star(\dd z \wedge \dd x) + B_z \star(\dd x \wedge \dd y) \nonumber\\[4pt]
+            &= -E_x \dd y \wedge \dd z - E_y \dd z \wedge \dd x - E_z \dd x \wedge \dd y \nonumber\\
+            &\quad + B_x \dd t \wedge \dd x + B_y \dd t \wedge \dd y + B_z \dd t \wedge \dd z.
+\end{align}
+与 $F$ 的表达式对比，可见：
+\begin{equation}
+    \boxed{\star F: \quad \mathbf{E} \to -\mathbf{B}, \quad \mathbf{B} \to +\mathbf{E}}.
+\end{equation}
+即 Hodge 对偶将电场分量映射为磁场分量（带符号），将磁场映射为电场。这正是电磁对偶变换的几何本质：在无源区域（$J=0$），Maxwell 方程 $\dd F = 0$ 和 $\dd \star F = 0$ 在交换 $F \leftrightarrow \star F$ 下是对称的。电磁对偶 $F \to \star F$ 即 $\mathbf{E} \to -\mathbf{B}$, $\mathbf{B} \to \mathbf{E}$——这正是真空 Maxwell 方程在 $\mathbf{E} \leftrightarrow \mathbf{B}$ 互换下的对称性的几何根源。
+\end{example}
+
+\section{用微分形式重新表述电动力学}
+
+微分形式使电磁场的几何结构变得透明。在四维时空中：
+
+\begin{definition}[电磁场 2-形式]
+电磁场张量 $F_{\mu\nu}$ 对应一个 2-形式：
+\begin{equation}
+    F = \frac{1}{2} F_{\mu\nu} \dd x^\mu \wedge \dd x^\nu.
+\end{equation}
+Maxwell 方程组可以写成两个极其简洁的方程：
+\begin{equation}
+    \dd F = 0, \qquad \dd \star F = \mu_0 J,
+\end{equation}
+其中 $J$ 是电流 3-形式。第一个方程（$\dd F = 0$）由 Poincaré 引理在局部给出 $F = \dd A$（$A$ 是电磁势 1-形式）。第二个方程（$\dd \star F = \mu_0 J$）经 Hodge 对偶后等价于 $\star \dd \star F = \mu_0 \star J$。
+
+在 $\mathbb{R}^{1,3}$ 中展开 $F = E_x \dd t \wedge \dd x + E_y \dd t \wedge \dd y + E_z \dd t \wedge \dd z + B_x \dd y \wedge \dd z + B_y \dd z \wedge \dd x + B_z \dd x \wedge \dd y$。计算 $\dd F$：
+\begin{equation}
+    \dd F = (\pd_y E_z - \pd_z E_y + \pd_t B_x) \dd t \wedge \dd y \wedge \dd z + \cdots
+\end{equation}
+令 $\dd F = 0$ 给出：$\nabla \times \mathbf{E} + \pd_t \mathbf{B} = 0$（Faraday 定律）和 $\nabla \cdot \mathbf{B} = 0$（无磁单极）。类似地，$\dd \star F = \mu_0 J$ 给出含源的 Maxwell 方程：$\nabla \times \mathbf{B} - \pd_t \mathbf{E} = \mu_0 \mathbf{J}$ 和 $\nabla \cdot \mathbf{E} = \rho/\varepsilon_0$。四个方程被压缩为两个方程 $\dd F = 0$ 和 $\dd \star F = \mu_0 J$！
+\end{definition}
+
+\section{微分形式的拉回与推前}
+
+设 $\phi: M \to N$ 是光滑流形之间的光滑映射。$\phi$ 自然地诱导了微分形式的\textbf{拉回} (pullback)：
+
+\begin{definition}[拉回]
+拉回映射 $\phi^*: \Omega^k(N) \to \Omega^k(M)$ 定义为：
+\begin{equation}
+    (\phi^* \omega)_p (v_1, \ldots, v_k) = \omega_{\phi(p)} (\phi_* v_1, \ldots, \phi_* v_k),
+\end{equation}
+其中 $\phi_*: T_pM \to T_{\phi(p)}N$ 是 $\phi$ 的微分（推前，pushforward）。
+\end{definition}
+
+\begin{property}[拉回与外微分交换]
+外微分与拉回交换：
+\begin{equation}
+    \phi^*(\dd\omega) = \dd(\phi^* \omega).
+\end{equation}
+这是拉回最重要的性质之一——它不依赖于度规，纯粹是光滑结构的结果。
+\end{property}
+
+\begin{note}[物理意义]
+拉回在物理中有广泛应用。例如：
+\begin{itemize}
+    \item 时空嵌入：将四维度规拉回到三维超曲面上得到诱导度规（$3+1$ 分解的核心）
+    \item 规范理论：从底流形拉回主丛上的联络形式
+    \item 弦论：将目标空间中的场拉回到世界面上
+\end{itemize}
+在广义相对论中，当我们在空间超曲面 $\Sigma$ 上做 3+1 分解时，$\Sigma$ 上的空间度规 $\gamma_{ij}$ 正是四维度规 $g_{\mu\nu}$ 的拉回：$\gamma = \iota^* g$，其中 $\iota: \Sigma \hookrightarrow M$ 是嵌入映射。
+\end{note}
+
+\section{算例}
+
+\subsection{例 1：$\dd(x \dd y)$ 及 Stokes 定理在单位圆盘上的验证}
+
+在 $\mathbb{R}^2$ 上考虑 1-形式 $\omega = x \dd y$。计算其外微分：
+\begin{equation}
+    \dd\omega = \dd(x \dd y) = \dd x \wedge \dd y + x \underbrace{\dd(\dd y)}_{=0} = \dd x \wedge \dd y.
+\end{equation}
+这里使用了 Leibniz 法则：$\dd(f \eta) = \dd f \wedge \eta + f \dd\eta$，对 $f = x$, $\eta = \dd y$，有 $\dd f = \dd x$ 且 $\dd\eta = \dd(\dd y) = 0$。
+
+现在在单位圆盘 $D = \{(x,y) \mid x^2 + y^2 \leq 1\}$ 上验证 Stokes 定理。左边（面积分）：
+\begin{equation}
+    \int_D \dd\omega = \int_D \dd x \wedge \dd y = \text{Area}(D) = \pi \cdot 1^2 = \pi.
+\end{equation}
+右边（边界线积分）：$\partial D$ 是单位圆周，参数化 $x = \cos\theta$, $y = \sin\theta$, $\theta \in [0, 2\pi]$。在此参数化下 $\dd y = \cos\theta \dd\theta$，故：
+\begin{equation}
+    \int_{\partial D} \omega = \int_{\partial D} x \dd y = \int_0^{2\pi} \cos\theta \cdot \cos\theta \dd\theta = \int_0^{2\pi} \cos^2\theta \dd\theta = \pi.
+\end{equation}
+两边相等，Stokes 定理 $\int_D \dd\omega = \int_{\partial D} \omega$ 得以验证。$\checkmark$
+
+\subsection{例 2：非平凡上同调 —— $\mathbb{R}^2\setminus\{0\}$ 上闭但非恰当的 1-形式}
+
+在穿孔平面 $\mathbb{R}^2 \setminus \{0\}$ 上考虑著名的 1-形式：
+\begin{equation}
+    \omega = \frac{x \dd y - y \dd x}{x^2 + y^2}.
+\end{equation}
+
+\textbf{第一步：证明 $\omega$ 是闭形式。}计算 $\dd\omega$。令 $r^2 = x^2 + y^2$：
+\begin{align}
+    \dd\omega &= \dd\!\left(\frac{x}{r^2}\right) \wedge \dd y - \dd\!\left(\frac{y}{r^2}\right) \wedge \dd x \nonumber\\
+    &= \left(\frac{r^2 - 2x^2}{r^4} \dd x - \frac{2xy}{r^4} \dd y\right) \wedge \dd y
+     - \left(\frac{r^2 - 2y^2}{r^4} \dd y - \frac{2xy}{r^4} \dd x\right) \wedge \dd x \nonumber\\
+    &= \frac{r^2 - 2x^2}{r^4} \dd x \wedge \dd y - \frac{r^2 - 2y^2}{r^4} \dd y \wedge \dd x \nonumber\\
+    &= \frac{r^2 - 2x^2 + r^2 - 2y^2}{r^4} \dd x \wedge \dd y \nonumber\\
+    &= \frac{2r^2 - 2(x^2+y^2)}{r^4} \dd x \wedge \dd y = \frac{2r^2 - 2r^2}{r^4} \dd x \wedge \dd y = 0.
+\end{align}
+故 $\dd\omega = 0$，$\omega$ 是闭形式。
+
+\textbf{第二步：证明 $\omega$ 不是恰当形式。}若 $\omega$ 是恰当的，则存在光滑函数 $f$ 使得 $\omega = \dd f$，此时由 Stokes 定理，$\omega$ 沿任何闭合回路的积分应为零：
+\begin{equation}
+    \oint_\gamma \omega = \oint_\gamma \dd f = \int_{\partial\gamma = \varnothing} f = 0.
+\end{equation}
+然而，取 $\gamma$ 为单位圆 $S^1$（参数化 $x = \cos\theta$, $y = \sin\theta$）：
+\begin{equation}
+    \oint_{S^1} \omega = \int_0^{2\pi} \frac{\cos\theta \cdot \cos\theta \dd\theta - \sin\theta \cdot (-\sin\theta \dd\theta)}{\cos^2\theta + \sin^2\theta}
+    = \int_0^{2\pi} (\cos^2\theta + \sin^2\theta) \dd\theta = \int_0^{2\pi} \dd\theta = 2\pi \neq 0.
+\end{equation}
+因此 $\omega$ 不可能是恰当形式。事实上，在极坐标 $(r, \theta)$ 下，$\omega = \dd\theta$（形式上的全微分），但 $\theta$ 在 $\mathbb{R}^2 \setminus \{0\}$ 上不是单值函数——这正是"洞"的拓扑效应。
+
+\textbf{物理意义：}$\omega$ 是闭但非恰当的，代表了 $H^1_{\text{dR}}(\mathbb{R}^2 \setminus \{0\}) \cong \mathbb{R}$（Betti 数 $b_1 = 1$）。这一非平凡的上同调类在物理中有重要应用：
+\begin{itemize}
+    \item \textbf{Aharonov--Bohm 效应：}磁通管所在位置挖去后，矢势 $A$ 对应一个闭但非恰当的 1-形式，其绕磁通管的环路积分（不可积相因子 $e^{i\oint A}$）是物理可观测的，尽管局部上 $A_\mu$ 可规范变换为零。
+    \item \textbf{磁单极：}Dirac 磁单极的矢势在 $\mathbb{R}^3 \setminus \{0\}$ 上定义，对应 $H^2 \neq 0$（"洞"在原点），磁荷 $g = \frac{1}{4\pi} \oint_{S^2} F$ 正是非平凡上同调类的表征。
+\end{itemize}
+这个简单的例子展示了 de Rham 上同调如何从微分形式的可积性条件（闭性）出发，自然地引出流形的整体拓扑信息。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3]
+    % 2D surface
+    \draw[thick,fill=blue!5] (0,0) ellipse (2.2 and 1.5);
+    \node at (1.8,1.5) {$\Sigma$};
+    
+    % 1-form as "stacks of planes"
+    \foreach \x in {-1.6,-1.2,...,1.6} {
+        \draw[red!30,thin] (\x,-1.5) -- (\x+0.4,1.5);
+    }
+    \foreach \x in {-0.4,0.0,...,1.6} {
+        \draw[red!60,thin] (\x-0.2,-1.5) -- (\x+0.2,1.5);
+    }
+    
+    % Tangent vector crossing planes
+    \draw[->,blue,very thick] (-0.5,-0.5) -- (1.2,0.8);
+    \node[blue] at (1.4,1.0) {$v$};
+    
+    % Annotation
+    \node[red] at (-1.8,1.2) {$\omega$};
+    \node at (0,-1.9) {1-形式 $\omega$ 可视化为"等值面堆"；$\omega(v)$ = $v$ 穿过的层数};
+\end{tikzpicture}
+\caption{1-形式的几何可视化：$\omega$ 表示为空间中的等值面堆栈，向量 $v$ 与 $\omega$ 的配对 $\omega(v)$ 正是 $v$ 穿过的等值面层数。这是理解余向量最直观的方式——向量是"箭头"，余向量是"堆栈"。}
+\label{fig:one_form_visual}
+\end{figure}

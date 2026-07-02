@@ -1,0 +1,237 @@
+\chapter{\protect\hyperlink{:}{重整化群}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+重整化群（Renormalization Group, RG）是量子场论中最重要的概念之一。它不仅解决了紫外发散的问题，而且揭示了物理理论在不同能量标度下的行为，以及普适性的起源。
+
+\section{\protect\hyperlink{:}{重整化的基本概念}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+\subsection{\protect\hyperlink{:}{紫外发散问题}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+在量子场论的微扰计算中，我们经常会遇到紫外发散的积分。例如，$\phi^4$ 理论中的单圈自能图给出
+\begin{equation}
+    \Sigma(p) = \frac{\lambda}{2} \int \frac{d^4k}{(2\pi)^4} \frac{1}{k^2 - m^2 + i\epsilon}
+\end{equation}
+
+这个积分在 $k \to \infty$ 时是对数发散的。紫外发散的出现表明我们的理论在高能标度下需要修正。
+
+\subsection{\protect\hyperlink{:}{正规化}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+为了处理发散，我们首先需要正规化（regularization），即将发散的积分变为有限的。常用的正规化方法包括：
+
+\begin{enumerate}
+    \item \textbf{截断正规化}：在动量空间中引入一个高能截断 $\Lambda$
+    \begin{equation}
+        \Sigma(p) = \frac{\lambda}{2} \int^{\Lambda} \frac{d^4k}{(2\pi)^4} \frac{1}{k^2 - m^2 + i\epsilon}
+    \end{equation}
+    
+    \item \textbf{维数正规化}：将时空维数从 $4$ 维推广到 $d = 4 - \epsilon$ 维
+    \begin{equation}
+        \Sigma(p) = \frac{\lambda}{2} \mu^{\epsilon} \int \frac{d^dk}{(2\pi)^d} \frac{1}{k^2 - m^2 + i\epsilon}
+    \end{equation}
+    其中 $\mu$ 是引入的质量标度。
+    
+    \item \textbf{Pauli-Villars正规化}：引入虚质量的辅助场来抵消发散
+\end{enumerate}
+
+\subsection{\protect\hyperlink{:}{重整化}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+正规化之后，我们需要进行重整化（renormalization），即将发散吸收到物理参数的重新定义中。
+
+考虑 $\phi^4$ 理论，其裸拉格朗日量为
+\begin{equation}
+    \mathcal{L} = \frac{1}{2}(\partial_\mu\phi_0)^2 - \frac{1}{2}m_0^2\phi_0^2 - \frac{\lambda_0}{4!}\phi_0^4
+\end{equation}
+
+其中下标 $0$ 表示裸量。我们定义重整化场和参数
+\begin{align}
+    \phi_0 &= \sqrt{Z_\phi}\phi \\
+    m_0^2 &= Z_m m^2 \\
+    \lambda_0 &= Z_\lambda \mu^{\epsilon} \lambda
+\end{align}
+
+其中 $Z_\phi$、$Z_m$、$Z_\lambda$ 是重整化常数，$m$ 和 $\lambda$ 是重整化后的物理参数。
+
+\section{\protect\hyperlink{:}{重整化群方程}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+\subsection{\protect\hyperlink{:}{标度依赖性}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+重整化引入了一个任意的质量标度 $\mu$（在维数正规化中）。物理可观测量不应该依赖于这个任意标度，这个要求导致了重整化群方程。
+
+考虑 $n$ 点关联函数的重整化版本
+\begin{equation}
+    \Gamma^{(n)}(p_1, \ldots, p_n; \lambda, m, \mu) = Z_\phi^{n/2} \Gamma_0^{(n)}(p_1, \ldots, p_n; \lambda_0, m_0)
+\end{equation}
+
+由于裸关联函数不依赖于 $\mu$，我们有
+\begin{equation}
+    \mu\frac{d}{d\mu}\Gamma_0^{(n)} = 0
+\end{equation}
+
+这导致了Callan-Symanzik方程
+\begin{equation}
+    \left[\mu\frac{\partial}{\partial\mu} + \beta(\lambda)\frac{\partial}{\partial\lambda} + \gamma_m(\lambda)m\frac{\partial}{\partial m} + n\gamma_\phi(\lambda)\right]\Gamma^{(n)} = 0
+\end{equation}
+
+其中
+\begin{align}
+    \beta(\lambda) &= \mu\frac{d\lambda}{d\mu} \\
+    \gamma_m(\lambda) &= \mu\frac{d\ln m}{d\mu} \\
+    \gamma_\phi(\lambda) &= \frac{1}{2}\mu\frac{d\ln Z_\phi}{d\mu}
+\end{align}
+
+\subsection{\protect\hyperlink{:}{$\beta$函数}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+$\beta$函数描述了耦合常数随能量标度的变化。对于 $\phi^4$ 理论，在单圈近似下
+\begin{equation}
+    \beta(\lambda) = \frac{3\lambda^2}{16\pi^2} + O(\lambda^3)
+\end{equation}
+
+$\beta$函数的符号决定了理论在高能标度下的行为：
+\begin{itemize}
+    \item $\beta > 0$：耦合常数随能量增加而增加（如 $\phi^4$ 理论、QCD）
+    \item $\beta < 0$：耦合常数随能量增加而减小（如 QED）
+    \item $\beta = 0$：耦合常数不随能量变化（共形场论）
+\end{itemize}
+
+\section{\protect\hyperlink{:}{不动点与普适性}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+\subsection{\protect\hyperlink{:}{不动点}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+$\beta$函数的零点称为不动点（fixed point）。在不动点处，耦合常数不随能量标度变化，理论具有标度不变性。
+
+\begin{example}[QCD的不动点]
+    对于非Abel规范理论（如QCD），$\beta$函数为
+    \begin{equation*}
+        \beta(g) = -\frac{g^3}{16\pi^2}\left(\frac{11}{3}C_A - \frac{4}{3}T_F n_f\right)
+    \end{equation*}
+
+    其中 $C_A$ 是伴随表示的Casimir，$T_F$ 是基本表示的归一化因子，$n_f$ 是夸克味数。
+
+    当 $n_f$ 较小时（如QCD，$n_f = 6$），$\beta < 0$，这意味着在低能标度下耦合常数变大（渐近自由），而在高能标度下耦合常数变小（紫外自由）。
+\end{example}
+
+\subsection{\protect\hyperlink{:}{临界指数与普适性}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+在临界点附近，物理量表现出幂律行为，幂指数称为临界指数。例如，关联长度在临界点附近发散
+\begin{equation}
+    \xi \sim |T - T_c|^{-\nu}
+\end{equation}
+
+重整化群理论解释了为什么不同的物理系统可以有相同的临界指数（普适性）：
+\begin{enumerate}
+    \item 不同的微观系统在重整化群流下可以流向同一个不动点
+    \item 在不动点附近，系统的长程行为由不动点的普适性质决定
+    \item 临界指数由不动点处的线性化重整化群流的本征值决定
+\end{enumerate}
+
+\section{\protect\hyperlink{:}{动量空间重整化群}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+\subsection{\protect\hyperlink{:}{Kadanoff块自旋}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+Kadanoff提出了一个直观的重整化群图像：将自旋分块，然后将每个块的自旋用一个有效自旋代替。
+
+考虑一维Ising模型
+\begin{equation}
+    H = -J\sum_i s_i s_{i+1}
+\end{equation}
+
+Kadanoff块自旋变换的步骤：
+\begin{enumerate}
+    \item 将自旋分成大小为 $b$ 的块
+    \item 定义块自旋为块内多数自旋的方向
+    \item 计算有效哈密顿量
+    \item 重复上述过程
+\end{enumerate}
+
+\subsection{\protect\hyperlink{:}{转移矩阵方法}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+对于一维系统，可以使用转移矩阵方法精确地实现重整化群变换。一维Ising模型的转移矩阵为
+\begin{equation}
+    T = \begin{pmatrix}
+        e^{\beta J} & e^{-\beta J} \\
+        e^{-\beta J} & e^{\beta J}
+    \end{pmatrix}
+\end{equation}
+
+转移矩阵的最大本征值给出自由能
+\begin{equation}
+    f = -\frac{1}{\beta}\ln\lambda_{\max}
+\end{equation}
+
+\section{\protect\hyperlink{:}{动量空间重整化群}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+\subsection{\protect\hyperlink{:}{Wilson重整化群}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+Wilson提出了动量空间中的重整化群方案。其基本思想是：
+\begin{enumerate}
+    \item 将场分解为高动量和低动量部分
+    \item 积掉高动量部分
+    \item 重新标度动量和场
+\end{enumerate}
+
+具体来说，将场分解为
+\begin{equation}
+    \phi(k) = \begin{cases}
+        \phi_<(k) & |k| < \Lambda/b \\
+        \phi_>(k) & \Lambda/b \leq |k| < \Lambda
+    \end{cases}
+\end{equation}
+
+其中 $b > 1$，$\Lambda$ 是截断。配分函数变为
+\begin{equation}
+    Z = \int \mathcal{D}\phi_< \mathcal{D}\phi_> \, e^{-S[\phi_< + \phi_>]}
+\end{equation}
+
+积掉高动量部分，得到有效作用量
+\begin{equation}
+    e^{-S_{\text{eff}}[\phi_<]} = \int \mathcal{D}\phi_> \, e^{-S[\phi_< + \phi_>]}
+\end{equation}
+
+\subsection{\protect\hyperlink{:}{有效作用量}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+有效作用量包含了高动量模式的贡献。在 $\phi^4$ 理论中，有效作用量可以写成
+\begin{equation}
+    S_{\text{eff}}[\phi_<] = \int d^4x \left[\frac{1}{2}Z(\partial_\mu\phi_<)^2 + \frac{1}{2}m^2\phi_<^2 + \frac{\lambda}{4!}\phi_<^4 + \cdots\right]
+\end{equation}
+
+其中 $Z$、$m^2$、$\lambda$ 都是标度相关的。
+
+\section{\protect\hyperlink{:}{重整化群的应用}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+\subsection{\protect\hyperlink{:}{渐近自由}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+渐近自由是指在高能标度下耦合常数趋于零的现象。QCD是渐近自由的，这意味着在高能散射中可以使用微扰论。
+
+渐近自由的发现者Gross、Wilczek和Politzer获得了2004年诺贝尔物理学奖。
+
+\subsection{\protect\hyperlink{:}{大质量粒子的解耦}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+当能量标度低于某个粒子的质量时，该粒子的效应可以被积分掉，其贡献被吸收到有效理论的参数中。这就是Appelquist-Carazzone解耦定理。
+
+\subsection{\protect\hyperlink{:}{有效场论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+重整化群的思想导致了有效场论的概念：任何量子场论都只在某个能量标度范围内有效，超出这个范围就需要新的物理。
+
+\begin{remark}
+    重整化群是现代理论物理的基石之一。它不仅解决了紫外发散问题，而且揭示了物理理论在不同能量标度下的行为，以及普适性的起源。重整化群的思想已经渗透到物理学的各个分支，从粒子物理到凝聚态物理，从统计物理到宇宙学。
+\end{remark}

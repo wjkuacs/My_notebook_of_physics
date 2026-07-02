@@ -1,0 +1,502 @@
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{10}
+
+
+
+%\cite{Maldacena:1997re}
+\bibitem{Maldacena:1997re}
+  J.~M.~Maldacena,
+  %``The Large N limit of superconformal field theories and supergravity,''
+  Int.\ J.\ Theor.\ Phys.\  {\bf 38} (1999) 1113
+   [Adv.\ Theor.\ Math.\ Phys.\  {\bf 2} (1998) 231]
+  doi:10.1023/A:1026654312961
+  [\arXiv{hep-th/9711200}].
+  %%CITATION = doi:10.1023/A:1026654312961;%%
+  %12969 citations counted in INSPIRE as of 21 Aug 2017
+
+
+%\cite{Witten:1998qj}
+\bibitem{Witten:1998qj}
+  E.~Witten,
+  %``Anti-de Sitter space and holography,''
+  Adv.\ Theor.\ Math.\ Phys.\  {\bf 2} (1998) 253
+  [\arXiv{hep-th/9802150}].
+  %%CITATION = HEP-TH/9802150;%%
+  %8503 citations counted in INSPIRE as of 21 Aug 2017
+
+%\cite{Balasubramanian:1999ri}
+\bibitem{Balasubramanian:1999ri}
+  V.~Balasubramanian, S.~B.~Giddings and A.~E.~Lawrence,
+  %``What do CFTs tell us about Anti-de Sitter space-times?,''
+  JHEP {\bf 9903} (1999) 001
+  doi:10.1088/1126-6708/1999/03/001
+  [\arXiv{hep-th/9902052}].
+  %%CITATION = doi:10.1088/1126-6708/1999/03/001;%%
+  %110 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Giddings:1999qu}
+
+\bibitem{Giddings:1999qu}
+  S.~B.~Giddings,
+  %``The Boundary S matrix and the AdS to CFT dictionary,''
+  Phys.\ Rev.\ Lett.\  {\bf 83} (1999) 2707
+  doi:10.1103/PhysRevLett.83.2707
+  [\arXiv{hep-th/9903048}].
+  %%CITATION = doi:10.1103/PhysRevLett.83.2707;%%
+  %96 citations counted in INSPIRE as of 07 Oct 2017
+
+
+%\cite{Ryu:2006bv}
+\bibitem{Ryu:2006bv}
+  S.~Ryu and T.~Takayanagi,
+  %``Holographic derivation of entanglement entropy from AdS/CFT,''
+  Phys.\ Rev.\ Lett.\  {\bf 96} (2006) 181602
+  doi:10.1103/PhysRevLett.96.181602
+  [\arXiv{hep-th/0603001}].
+  %%CITATION = doi:10.1103/PhysRevLett.96.181602;%%
+  %1318 citations counted in INSPIRE as of 21 Aug 2017
+
+%\cite{VanRaamsdonk:2009ar}
+\bibitem{VanRaamsdonk:2009ar}
+  M.~Van Raamsdonk,
+  %``Comments on quantum gravity and entanglement,''
+  \arXiv{arXiv:0907.2939} [hep-th].
+  %%CITATION = ARXIV:0907.2939;%%
+  %148 citations counted in INSPIRE as of 21 Aug 2017
+
+%\cite{Hamilton:2005ju}
+\bibitem{Hamilton:2005ju}
+  A.~Hamilton, D.~N.~Kabat, G.~Lifschytz and D.~A.~Lowe,
+  %``Local bulk operators in AdS/CFT: A Boundary view of horizons and locality,''
+  Phys.\ Rev.\ D {\bf 73} (2006) 086003
+  doi:10.1103/PhysRevD.73.086003
+  [\arXiv{hep-th/0506118}].
+  %%CITATION = doi:10.1103/PhysRevD.73.086003;%%
+  %124 citations counted in INSPIRE as of 07 Oct 2017
+
+%\cite{Hamilton:2006fh}
+\bibitem{Hamilton:2006fh}
+  A.~Hamilton, D.~N.~Kabat, G.~Lifschytz and D.~A.~Lowe,
+  %``Local bulk operators in AdS/CFT: A Holographic description of the black hole interior,''
+  Phys.\ Rev.\ D {\bf 75} (2007) 106001
+   Erratum: [Phys.\ Rev.\ D {\bf 75} (2007) 129902]
+  doi:10.1103/PhysRevD.75.106001, 10.1103/PhysRevD.75.129902
+  [\arXiv{hep-th/0612053}].
+  %%CITATION = doi:10.1103/PhysRevD.75.106001, 10.1103/PhysRevD.75.129902;%%
+  %79 citations counted in INSPIRE as of 07 Oct 2017
+  
+%\cite{Hamilton:2006az}
+\bibitem{Hamilton:2006az}
+  A.~Hamilton, D.~N.~Kabat, G.~Lifschytz and D.~A.~Lowe,
+  %``Holographic representation of local bulk operators,''
+  Phys.\ Rev.\ D {\bf 74} (2006) 066009
+  doi:10.1103/PhysRevD.74.066009
+  [\arXiv{hep-th/0606141}].
+  %%CITATION = doi:10.1103/PhysRevD.74.066009;%%
+  %152 citations counted in INSPIRE as of 21 Aug 2017
+
+%\cite{Hamilton:2007wj}
+\bibitem{Hamilton:2007wj}
+  A.~Hamilton, D.~N.~Kabat, G.~Lifschytz and D.~A.~Lowe,
+  %``Local bulk operators in AdS/CFT and the fate of the BTZ singularity,''
+  AMS/IP Stud.\ Adv.\ Math.\  {\bf 44} (2008) 85
+  [\arXiv{arXiv:0710.4334} [hep-th]].
+  %%CITATION = ARXIV:0710.4334;%%
+  %21 citations counted in INSPIRE as of 07 Oct 2017
+
+ 
+%\cite{DiFrancesco:1997nk}
+\bibitem{DiFrancesco:1997nk}
+  P.~Di Francesco, P.~Mathieu and D.~Senechal,
+  %``Conformal Field Theory,''
+  doi:10.1007/978-1-4612-2256-9
+  %%CITATION = doi:10.1007/978-1-4612-2256-9;%%
+  %95 citations counted in INSPIRE as of 21 Aug 2017
+  
+%\cite{Aharony:1999ti}
+\bibitem{Aharony:1999ti}
+  O.~Aharony, S.~S.~Gubser, J.~M.~Maldacena, H.~Ooguri and Y.~Oz,
+  %``Large N field theories, string theory and gravity,''
+  Phys.\ Rept.\  {\bf 323} (2000) 183
+  doi:10.1016/S0370-1573(99)00083-6
+  [\arXiv{hep-th/9905111}].
+  %%CITATION = doi:10.1016/S0370-1573(99)00083-6;%%
+  %4090 citations counted in INSPIRE as of 21 Aug 2017
+  
+%\cite{Almheiri:2014lwa}
+\bibitem{Almheiri:2014lwa}
+  A.~Almheiri, X.~Dong and D.~Harlow,
+  %``Bulk Locality and Quantum Error Correction in AdS/CFT,''
+  JHEP {\bf 1504} (2015) 163
+  doi:10.1007/JHEP04(2015)163
+  [\arXiv{arXiv:1411.7041} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP04(2015)163;%%
+  %107 citations counted in INSPIRE as of 22 Aug 2017
+ 
+%\cite{Swingle:2009bg}
+\bibitem{Swingle:2009bg}
+  B.~Swingle,
+  %``Entanglement Renormalization and Holography,''
+  Phys.\ Rev.\ D {\bf 86} (2012) 065007
+  doi:10.1103/PhysRevD.86.065007
+  [\arXiv{arXiv:0905.1317} [cond-mat.str-el]].
+  %%CITATION = doi:10.1103/PhysRevD.86.065007;%%
+  %239 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Swingle:2012wq}
+\bibitem{Swingle:2012wq}
+  B.~Swingle,
+  %``Constructing holographic spacetimes using entanglement renormalization,''
+  \arXiv{arXiv:1209.3304} [hep-th].
+  %%CITATION = ARXIV:1209.3304;%%
+  %115 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Qi:2013caa}
+\bibitem{Qi:2013caa}
+  X.~L.~Qi,
+  %``Exact holographic mapping and emergent space-time geometry,''
+  \arXiv{arXiv:1309.6282} [hep-th].
+  %%CITATION = ARXIV:1309.6282;%%
+  %67 citations counted in INSPIRE as of 07 Oct 2017
+
+ 
+ 
+%\cite{Pastawski:2015qua}
+\bibitem{Pastawski:2015qua}
+  F.~Pastawski, B.~Yoshida, D.~Harlow and J.~Preskill,
+  %``Holographic quantum error-correcting codes: Toy models for the bulk/boundary correspondence,''
+  JHEP {\bf 1506} (2015) 149
+  doi:10.1007/JHEP06(2015)149
+  [\arXiv{arXiv:1503.06237} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP06(2015)149;%%
+  %109 citations counted in INSPIRE as of 23 Aug 2017
+
+%\cite{Yang:2015uoa}
+\bibitem{Yang:2015uoa}
+  Z.~Yang, P.~Hayden and X.~L.~Qi,
+  %``Bidirectional holographic codes and sub-AdS locality,''
+  JHEP {\bf 1601} (2016) 175
+  doi:10.1007/JHEP01(2016)175
+  [\arXiv{arXiv:1510.03784} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP01(2016)175;%%
+  %26 citations counted in INSPIRE as of 23 Aug 2017
+
+
+%\cite{Hayden:2016cfa}
+\bibitem{Hayden:2016cfa}
+  P.~Hayden, S.~Nezami, X.~L.~Qi, N.~Thomas, M.~Walter and Z.~Yang,
+  %``Holographic duality from random tensor networks,''
+  JHEP {\bf 1611} (2016) 009
+  doi:10.1007/JHEP11(2016)009
+  [\arXiv{arXiv:1601.01694} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP11(2016)009;%%
+  %50 citations counted in INSPIRE as of 23 Aug 2017
+
+%\cite{Mintun:2015qda}
+\bibitem{Mintun:2015qda}
+  E.~Mintun, J.~Polchinski and V.~Rosenhaus,
+  %``Bulk-Boundary Duality, Gauge Invariance, and Quantum Error Corrections,''
+  Phys.\ Rev.\ Lett.\  {\bf 115} (2015) no.15,  151601
+  doi:10.1103/PhysRevLett.115.151601
+  [\arXiv{arXiv:1501.06577} [hep-th]].
+  %%CITATION = doi:10.1103/PhysRevLett.115.151601;%%
+  %34 citations counted in INSPIRE as of 07 Oct 2017
+  
+%\cite{deBoer:2016yiz}
+\bibitem{deBoer:2016yiz}
+  J.~de Boer, B.~Freivogel, L.~Kabir and S.~F.~Lokhande,
+  %``Precursors and BRST Symmetry,''
+  JHEP {\bf 1707} (2017) 024
+  doi:10.1007/JHEP07(2017)024
+  [\arXiv{arXiv:1612.05265} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP07(2017)024;%%
+  %1 citations counted in INSPIRE as of 07 Oct 2017
+
+%\cite{Freivogel:2016zsb}
+\bibitem{Freivogel:2016zsb}
+  B.~Freivogel, R.~A.~Jefferson and L.~Kabir,
+  %``Precursors, Gauge Invariance, and Quantum Error Correction in AdS/CFT,''
+  JHEP {\bf 1604} (2016) 119
+  doi:10.1007/JHEP04(2016)119
+  [\arXiv{arXiv:1602.04811} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP04(2016)119;%%
+  %13 citations counted in INSPIRE as of 07 Oct 2017
+
+%\cite{Dirac:1955uv}
+\bibitem{Dirac:1955uv}
+  P.~A.~M.~Dirac,
+  %``Gauge invariant formulation of quantum electrodynamics,''
+  Can.\ J.\ Phys.\  {\bf 33} (1955) 650.
+  doi:10.1139/p55-081
+  %%CITATION = doi:10.1139/p55-081;%%
+  %274 citations counted in INSPIRE as of 07 Oct 2017
+
+%\cite{Donnelly:2015hta}
+\bibitem{Donnelly:2015hta}
+  W.~Donnelly and S.~B.~Giddings,
+  %``Diffeomorphism-invariant observables and their nonlocal algebra,''
+  Phys.\ Rev.\ D {\bf 93} (2016) no.2,  024030
+   Erratum: [Phys.\ Rev.\ D {\bf 94} (2016) no.2,  029903]
+  doi:10.1103/PhysRevD.94.029903, 10.1103/PhysRevD.93.024030
+  [\arXiv{arXiv:1507.07921} [hep-th]].
+  %%CITATION = doi:10.1103/PhysRevD.94.029903, 10.1103/PhysRevD.93.024030;%%
+  %35 citations counted in INSPIRE as of 07 Oct 2017
+
+%\cite{Donnelly:2015taa}
+\bibitem{Donnelly:2015taa}
+  W.~Donnelly, D.~Marolf and E.~Mintun,
+  %``Combing gravitational hair in 2 + 1 dimensions,''
+  Class.\ Quant.\ Grav.\  {\bf 33} (2016) no.2,  025010
+  doi:10.1088/0264-9381/33/2/025010
+  [\arXiv{arXiv:1510.00672} [hep-th]].
+  %%CITATION = doi:10.1088/0264-9381/33/2/025010;%%
+  %8 citations counted in INSPIRE as of 07 Oct 2017
+
+%\cite{Miyaji:2015fia}
+\bibitem{Miyaji:2015fia}
+  M.~Miyaji, T.~Numasawa, N.~Shiba, T.~Takayanagi and K.~Watanabe,
+  %``Continuous Multiscale Entanglement Renormalization Ansatz as Holographic Surface-State Correspondence,''
+  Phys.\ Rev.\ Lett.\  {\bf 115} (2015) no.17,  171602
+  doi:10.1103/PhysRevLett.115.171602
+  [\arXiv{arXiv:1506.01353} [hep-th]].
+  %%CITATION = doi:10.1103/PhysRevLett.115.171602;%%
+  %49 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Nakayama:2015mva}
+\bibitem{Nakayama:2015mva}
+  Y.~Nakayama and H.~Ooguri,
+  %``Bulk Locality and Boundary Creating Operators,''
+  JHEP {\bf 1510} (2015) 114
+  doi:10.1007/JHEP10(2015)114
+  [\arXiv{arXiv:1507.04130} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP10(2015)114;%%
+  %29 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Nakayama:2016xvw}
+\bibitem{Nakayama:2016xvw}
+  Y.~Nakayama and H.~Ooguri,
+  %``Bulk Local States and Crosscaps in Holographic CFT,''
+  JHEP {\bf 1610} (2016) 085
+  doi:10.1007/JHEP10(2016)085
+  [\arXiv{arXiv:1605.00334} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP10(2016)085;%%
+  %9 citations counted in INSPIRE as of 07 Oct 2017
+  %\cite{Verlinde:2015qfa}
+\bibitem{Verlinde:2015qfa}
+  H.~Verlinde,
+  %``Poking Holes in AdS/CFT: Bulk Fields from Boundary States,''
+  \arXiv{arXiv:1505.05069} [hep-th].
+  %%CITATION = ARXIV:1505.05069;%%
+  %29 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Lewkowycz:2016ukf}
+\bibitem{Lewkowycz:2016ukf}
+  A.~Lewkowycz, G.~J.~Turiaci and H.~Verlinde,
+  %``A CFT Perspective on Gravitational Dressing and Bulk Locality,''
+  JHEP {\bf 1701} (2017) 004
+  doi:10.1007/JHEP01(2017)004
+  [\arXiv{arXiv:1608.08977} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP01(2017)004;%%
+  %15 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Hawking:1974sw}
+\bibitem{Hawking:1974sw}
+  S.~W.~Hawking,
+  %``Particle Creation by Black Holes,''
+  Commun.\ Math.\ Phys.\  {\bf 43} (1975) 199
+   Erratum: [Commun.\ Math.\ Phys.\  {\bf 46} (1976) 206].
+  doi:10.1007/BF02345020
+  %%CITATION = doi:10.1007/BF02345020;%%
+  %6755 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Bekenstein:1973ur}
+\bibitem{Bekenstein:1973ur}
+  J.~D.~Bekenstein,
+  %``Black holes and entropy,''
+  Phys.\ Rev.\ D {\bf 7} (1973) 2333.
+  doi:10.1103/PhysRevD.7.2333
+  %%CITATION = doi:10.1103/PhysRevD.7.2333;%%
+  %3735 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Balasubramanian:2013lsa}
+
+
+\bibitem{Balasubramanian:2013lsa}
+  V.~Balasubramanian, B.~D.~Chowdhury, B.~Czech, J.~de Boer and M.~P.~Heller,
+  %``Bulk curves from boundary data in holography,''
+  Phys.\ Rev.\ D {\bf 89} (2014) no.8,  086004
+  doi:10.1103/PhysRevD.89.086004
+  [\arXiv{arXiv:1310.4204} [hep-th]].
+  %%CITATION = doi:10.1103/PhysRevD.89.086004;%%
+  %84 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Headrick:2014eia}
+\bibitem{Headrick:2014eia}
+  M.~Headrick, R.~C.~Myers and J.~Wien,
+  %``Holographic Holes and Differential Entropy,''
+  JHEP {\bf 1410} (2014) 149
+  doi:10.1007/JHEP10(2014)149
+  [\arXiv{arXiv:1408.4770} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP10(2014)149;%%
+  %46 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Balasubramanian:2014sra}
+\bibitem{Balasubramanian:2014sra}
+  V.~Balasubramanian, B.~D.~Chowdhury, B.~Czech and J.~de Boer,
+  %``Entwinement and the emergence of spacetime,''
+  JHEP {\bf 1501} (2015) 048
+  doi:10.1007/JHEP01(2015)048
+  [\arXiv{arXiv:1406.5859} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP01(2015)048;%%
+  %52 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Balasubramanian:2016xho}
+\bibitem{Balasubramanian:2016xho}
+  V.~Balasubramanian, A.~Bernamonti, B.~Craps, T.~De Jonckheere and F.~Galli,
+  %``Entwinement in discretely gauged theories,''
+  JHEP {\bf 1612} (2016) 094
+  doi:10.1007/JHEP12(2016)094
+  [\arXiv{arXiv:1609.03991} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP12(2016)094;%%
+  %8 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Faulkner:2017vdd}
+\bibitem{Faulkner:2017vdd}
+  T.~Faulkner and A.~Lewkowycz,
+  %``Bulk locality from modular flow,''
+  JHEP {\bf 1707} (2017) 151
+  doi:10.1007/JHEP07(2017)151
+  [\arXiv{arXiv:1704.05464} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP07(2017)151;%%
+  %11 citations counted in INSPIRE as of 07 Oct 2017
+%\cite{Engelhardt:2016wgb}
+\bibitem{Engelhardt:2016wgb}
+  N.~Engelhardt and G.~T.~Horowitz,
+  %``Towards a Reconstruction of General Bulk Metrics,''
+  Class.\ Quant.\ Grav.\  {\bf 34} (2017) no.1,  015004
+  doi:10.1088/1361-6382/34/1/015004
+  [\arXiv{arXiv:1605.01070} [hep-th]].
+  %%CITATION = doi:10.1088/1361-6382/34/1/015004;%%
+  %12 citations counted in INSPIRE as of 31 Oct 2017
+%\cite{ElShowk:2011ag}
+\bibitem{ElShowk:2011ag}
+  S.~El-Showk and K.~Papadodimas,
+  %``Emergent Spacetime and Holographic CFTs,''
+  JHEP {\bf 1210} (2012) 106
+  doi:10.1007/JHEP10(2012)106
+  [\arXiv{arXiv:1101.4163} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP10(2012)106;%%
+  %107 citations counted in INSPIRE as of 15 Oct 2017
+%\cite{Kabat:2013wga}
+\bibitem{Kabat:2013wga}
+  D.~Kabat and G.~Lifschytz,
+  %``Decoding the hologram: Scalar fields interacting with gravity,''
+  Phys.\ Rev.\ D {\bf 89} (2014) no.6,  066010
+  doi:10.1103/PhysRevD.89.066010
+  [\arXiv{arXiv:1311.3020} [hep-th]].
+  %%CITATION = doi:10.1103/PhysRevD.89.066010;%%
+  %45 citations counted in INSPIRE as of 15 Oct 2017
+%\cite{Hubeny:2012wa}
+\bibitem{Hubeny:2012wa}
+  V.~E.~Hubeny and M.~Rangamani,
+  %``Causal Holographic Information,''
+  JHEP {\bf 1206} (2012) 114
+  doi:10.1007/JHEP06(2012)114
+  [\arXiv{arXiv:1204.1698} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP06(2012)114;%%
+  %101 citations counted in INSPIRE as of 15 Oct 2017
+%\cite{Headrick:2014cta}
+\bibitem{Headrick:2014cta}
+  M.~Headrick, V.~E.~Hubeny, A.~Lawrence and M.~Rangamani,
+  %``Causality & holographic entanglement entropy,''
+  JHEP {\bf 1412} (2014) 162
+  doi:10.1007/JHEP12(2014)162
+  [\arXiv{arXiv:1408.6300} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP12(2014)162;%%
+  %80 citations counted in INSPIRE as of 15 Oct 2017
+%\cite{Ostlund:1995zz}
+\bibitem{Ostlund:1995zz}
+  S.~Ostlund and S.~Rommer,
+  %``Thermodynamic Limit of Density Matrix Renormalization for the spin-1 heisenberg chain,''
+  Phys.\ Rev.\ Lett.\  {\bf 75} (1995) 3537
+  doi:10.1103/PhysRevLett.75.3537
+  [\arXiv{cond-mat/9503107}].
+  %%CITATION = doi:10.1103/PhysRevLett.75.3537;%%
+  %115 citations counted in INSPIRE as of 15 Oct 2017
+%\cite{Vidal:2003lvx}
+\bibitem{Vidal:2003lvx}
+  G.~Vidal,
+  %``Efficient simulation of one-dimensional quantum many-body systems,''
+  Phys.\ Rev.\ Lett.\  {\bf 93} (2004) no.4,  040502
+  doi:10.1103/PhysRevLett.93.040502
+  [\arXiv{quant-ph/0310089}].
+  %%CITATION = doi:10.1103/PhysRevLett.93.040502;%%
+  %108 citations counted in INSPIRE as of 15 Oct 2017
+\bibitem{Cirac:2004}
+F.~Verstraete, J.I.~Cirac,
+``Matrix product states represent ground states faithfully,"
+ [\arXiv{arXiv:cond-mat/0505140} [cond-mat.str-el]].
+%\cite{Vidal:2007hda}
+\bibitem{Vidal:2007hda}
+  G.~Vidal,
+  %``Entanglement Renormalization,''
+  Phys.\ Rev.\ Lett.\  {\bf 99} (2007) no.22,  220405
+  doi:10.1103/PhysRevLett.99.220405
+  [\arXiv{cond-mat/0512165}].
+  %%CITATION = doi:10.1103/PhysRevLett.99.220405;%%
+  %220 citations counted in INSPIRE as of 15 Oct 2017
+%\cite{Swingle:2009bg}
+%\cite{Peach:2017npp}
+\bibitem{Peach:2017npp}
+  A.~Peach and S.~F.~Ross,
+  %``Tensor Network Models of Multiboundary Wormholes,''
+  Class.\ Quant.\ Grav.\  {\bf 34} (2017) no.10,  105011
+  doi:10.1088/1361-6382/aa6b0f
+  [\arXiv{arXiv:1702.05984} [hep-th]].
+  %%CITATION = doi:10.1088/1361-6382/aa6b0f;%%
+  %3 citations counted in INSPIRE as of 15 Oct 2017
+%\cite{Bhattacharyya:2016hbx}
+\bibitem{Bhattacharyya:2016hbx}
+  A.~Bhattacharyya, Z.~S.~Gao, L.~Y.~Hung and S.~N.~Liu,
+  %``Exploring the Tensor Networks/AdS Correspondence,''
+  JHEP {\bf 1608} (2016) 086
+  doi:10.1007/JHEP08(2016)086
+  [\arXiv{arXiv:1606.00621} [hep-th]].
+  %%CITATION = doi:10.1007/JHEP08(2016)086;%%
+  %11 citations counted in INSPIRE as of 15 Oct 2017
+%\cite{Mintun:2015qda}
+%\cite{Blumenhagen:2009zz}
+\bibitem{Blumenhagen:2009zz}
+  R.~Blumenhagen and E.~Plauschinn,
+  %``Introduction to conformal field theory : with applications to String theory,''
+  Lect.\ Notes Phys.\  {\bf 779} (2009) 1.
+  doi:10.1007/978-3-642-00450-6
+  %%CITATION = doi:10.1007/978-3-642-00450-6;%%
+  %49 citations counted in INSPIRE as of 21 Oct 2017
+
+%\cite{Balasubramanian:1998sn}
+\bibitem{Balasubramanian:1998sn}
+  V.~Balasubramanian, P.~Kraus and A.~E.~Lawrence,
+  %``Bulk versus boundary dynamics in anti-de Sitter space-time,''
+  Phys.\ Rev.\ D {\bf 59} (1999) 046003
+  doi:10.1103/PhysRevD.59.046003
+  [\arXiv{hep-th/9805171}].
+  %%CITATION = doi:10.1103/PhysRevD.59.046003;%%
+  %419 citations counted in INSPIRE as of 28 Oct 2017
+
+%\cite{Polchinski:1995mt}
+\bibitem{Polchinski:1995mt}
+  J.~Polchinski,
+  %``Dirichlet Branes and Ramond-Ramond charges,''
+  Phys.\ Rev.\ Lett.\  {\bf 75} (1995) 4724
+  doi:10.1103/PhysRevLett.75.4724
+  [\arXiv{hep-th/9510017}].
+  %%CITATION = doi:10.1103/PhysRevLett.75.4724;%%
+  %2456 citations counted in INSPIRE as of 05 Nov 2017
+
+%\cite{Freedman:1998tz}
+\bibitem{Freedman:1998tz}
+  D.~Z.~Freedman, S.~D.~Mathur, A.~Matusis and L.~Rastelli,
+  %``Correlation functions in the CFT(d) / AdS(d+1) correspondence,''
+  Nucl.\ Phys.\ B {\bf 546} (1999) 96
+  doi:10.1016/S0550-3213(99)00053-X
+  [\arXiv{hep-th/9804058}].
+  %%CITATION = doi:10.1016/S0550-3213(99)00053-X;%%
+  %626 citations counted in INSPIRE as of 11 Nov 2017
+
+%\cite{Parikh:2012kg}
+\bibitem{Parikh:2012kg}
+  M.~Parikh and P.~Samantray,
+  %``Rindler-AdS/CFT,''
+  \arXiv{arXiv:1211.7370} [hep-th].
+  %%CITATION = ARXIV:1211.7370;%%
+  %24 citations counted in INSPIRE as of 27 Jun 2018
+
+
+\end{thebibliography}\endgroup

@@ -1,0 +1,174 @@
+\chapter{\protect\hyperlink{:}{路径积分}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+路径积分是量子力学和量子场论中最重要的表述形式之一。它由费曼提出，提供了一种完全不同于薛定谔方程和海森堡绘景的量子力学描述方式。路径积分不仅在概念上深刻，而且在计算上也非常强大，它是现代量子场论的基础。
+
+\section{\protect\hyperlink{:}{量子力学的路径积分表述}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+\subsection{\protect\hyperlink{:}{传播子的路径积分表示}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+在量子力学中，传播子描述了粒子从时空点 $(x_i, t_i)$ 传播到 $(x_f, t_f)$ 的概率振幅。在薛定谔绘景中，传播子可以写成
+\begin{equation}
+    K(x_f, t_f; x_i, t_i) = \braket{x_f}{e^{-i\hat{H}(t_f-t_i)/\hbar}}{x_i}
+\end{equation}
+
+费曼的关键洞察是：这个传播子可以写成所有可能路径的贡献之和
+\begin{equation}
+    K(x_f, t_f; x_i, t_i) = \int \mathcal{D}x(t) \, e^{iS[x]/\hbar}
+\end{equation}
+
+其中 $S[x] = \int_{t_i}^{t_f} dt \, L(x, \dot{x})$ 是经典作用量，$\int \mathcal{D}x(t)$ 表示对所有从 $(x_i, t_i)$ 到 $(x_f, t_f)$ 的路径进行积分。
+
+\subsection{\protect\hyperlink{:}{路径积分的物理意义}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+路径积分的物理意义非常深刻：
+\begin{enumerate}
+    \item 量子力学中，粒子不是只走一条经典路径，而是同时走所有可能的路径
+    \item 每条路径贡献一个相位 $e^{iS/\hbar}$，其中 $S$ 是该路径的作用量
+    \item 经典路径（作用量取极值的路径）的贡献最大，因为其相位变化最慢
+    \item 其他路径的贡献由于快速振荡而相互抵消，这就是为什么经典力学是量子力学的极限
+\end{enumerate}
+
+\begin{example}[自由粒子的路径积分]
+    考虑一个自由粒子，其拉格朗日量为
+    \begin{equation*}
+        L = \frac{1}{2}m\dot{x}^2
+    \end{equation*}
+
+    自由粒子的传播子可以精确计算出来
+    \begin{equation*}
+        K(x_f, t_f; x_i, t_i) = \sqrt{\frac{m}{2\pi i\hbar(t_f-t_i)}} \exp\left[\frac{im(x_f-x_i)^2}{2\hbar(t_f-t_i)}\right]
+    \end{equation*}
+
+    这个结果也可以通过路径积分得到，只是计算过程需要一些技巧。
+\end{example}
+
+\section{\protect\hyperlink{:}{从量子力学到量子场论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+将路径积分从量子力学推广到量子场论是直接的：将粒子的坐标 $x(t)$ 替换为场 $\phi(t, \vec{x})$，将对路径的积分替换为对场构型的积分。
+
+\subsection{\protect\hyperlink{:}{标量场的路径积分}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+对于自由标量场，生成泛函定义为
+\begin{equation}
+    Z[J] = \int \mathcal{D}\phi \, \exp\left\{i\int d^4x \left[\mathcal{L}(\phi) + J(x)\phi(x)\right]\right\}
+\end{equation}
+
+其中 $J(x)$ 是外源场。生成泛函是量子场论中最基本的量，所有物理可观测量都可以从它导出。
+
+\subsection{\protect\hyperlink{:}{关联函数的生成}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+$n$ 点关联函数可以通过对外源求导得到
+\begin{equation}
+    \langle\phi(x_1)\phi(x_2)\cdots\phi(x_n)\rangle = \frac{1}{Z[0]} \left.\frac{\delta^n Z[J]}{i\delta J(x_1) i\delta J(x_2) \cdots i\delta J(x_n)}\right|_{J=0}
+\end{equation}
+
+这就是为什么 $Z[J]$ 被称为生成泛函——它生成了所有的关联函数。
+
+\section{\protect\hyperlink{:}{自由场的路径积分}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+对于自由场，路径积分可以精确计算出来。
+
+\subsection{\protect\hyperlink{:}{高斯积分}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+自由场的路径积分是一个高斯积分。回顾一下有限维的高斯积分公式
+\begin{equation}
+    \int d^n x \, e^{-\frac{1}{2}x^T A x + b^T x} = \sqrt{\frac{(2\pi)^n}{\det A}} \, e^{\frac{1}{2}b^T A^{-1} b}
+\end{equation}
+
+推广到无穷维的场空间，我们得到
+\begin{equation}
+    Z[J] = Z[0] \exp\left[-\frac{1}{2}\int d^4x \, d^4y \, J(x) \Delta_F(x-y) J(y)\right]
+\end{equation}
+
+其中 $\Delta_F(x-y)$ 是费曼传播子，满足
+\begin{equation}
+    (\partial^2 + m^2)\Delta_F(x-y) = -\delta^{(4)}(x-y)
+\end{equation}
+
+\subsection{\protect\hyperlink{:}{自由场的关联函数}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+利用高斯积分的结果，我们可以计算自由场的关联函数。$2n$ 点关联函数满足 Wick 定理
+\begin{equation}
+    \langle\phi(x_1)\phi(x_2)\cdots\phi(x_{2n})\rangle = \sum_{\text{pairings}} \prod_{\text{pairs}} \langle\phi(x_i)\phi(x_j)\rangle
+\end{equation}
+
+其中求和是对所有可能的配对方式进行。这正是我们在 Wick 定理一节中看到的结果！
+
+\section{\protect\hyperlink{:}{相互作用场的路径积分}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+对于相互作用场，路径积分不能精确计算，需要使用微扰论。
+
+\subsection{\protect\hyperlink{:}{微扰展开}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+考虑 $\phi^4$ 理论，其拉格朗日量为
+\begin{equation}
+    \mathcal{L} = \frac{1}{2}(\partial_\mu\phi)^2 - \frac{1}{2}m^2\phi^2 - \frac{\lambda}{4!}\phi^4
+\end{equation}
+
+生成泛函可以写成
+\begin{equation}
+    Z[J] = \exp\left[-i\frac{\lambda}{4!}\int d^4x \left(\frac{\delta}{i\delta J(x)}\right)^4\right] Z_0[J]
+\end{equation}
+
+其中 $Z_0[J]$ 是自由场的生成泛函。将指数展开，我们得到微扰级数
+\begin{equation}
+    Z[J] = \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{i\lambda}{4!}\right)^n \int d^4x_1 \cdots d^4x_n \left(\frac{\delta}{i\delta J(x_1)}\right)^4 \cdots \left(\frac{\delta}{i\delta J(x_n)}\right)^4 Z_0[J]
+\end{equation}
+
+\subsection{\protect\hyperlink{:}{费曼规则的路径积分推导}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+从路径积分出发，可以系统地推导出费曼规则。这比从正则量子化出发推导更加简洁和自然。
+
+对于 $\phi^4$ 理论，费曼规则为：
+\begin{enumerate}
+    \item 传播子：$\displaystyle \frac{i}{k^2 - m^2 + i\epsilon}$
+    \item 顶点：$-i\lambda$
+    \item 外线：$1$
+    \item 动量守恒：$(2\pi)^4\delta^{(4)}(\sum p)$
+    \item 圈积分：$\displaystyle \int \frac{d^4k}{(2\pi)^4}$
+\end{enumerate}
+
+这些规则与我们从 Wick 定理得到的完全相同！
+
+\section{\protect\hyperlink{:}{路径积分的数学基础}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+路径积分在数学上并不严格，但它在物理上非常成功。这里我们简要讨论一下路径积分的数学基础。
+
+\subsection{\protect\hyperlink{:}{Wiener测度与欧几里得路径积分}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+在欧几里得空间中，路径积分可以建立在严格的测度论基础上。考虑虚时路径积分
+\begin{equation}
+    Z = \int \mathcal{D}\phi \, e^{-S_E[\phi]}
+\end{equation}
+
+这个积分可以理解为关于Wiener测度的积分，Wiener测度是布朗运动的数学描述。
+
+\subsection{\protect\hyperlink{:}{路径积分的计算方法}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+虽然路径积分在数学上不严格，但物理学家发展了许多计算方法：
+\begin{enumerate}
+    \item \textbf{稳相近似}：在 $\hbar \to 0$ 的极限下，路径积分的主要贡献来自经典路径
+    \item \textbf{微扰论}：将相互作用项展开，逐阶计算
+    \item \textbf{格点化}：将时空离散化，将路径积分转化为有限维积分
+    \item \textbf{蒙特卡洛方法}：使用随机抽样来数值计算路径积分
+\end{enumerate}
+
+\begin{remark}
+    路径积分是量子场论中最优美的表述形式之一。它不仅提供了计算关联函数的强大工具，而且揭示了量子力学与统计物理之间的深刻联系。路径积分的思想已经渗透到现代理论物理的各个分支，从粒子物理到凝聚态物理，从宇宙学到量子引力。
+\end{remark}

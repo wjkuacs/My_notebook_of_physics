@@ -1,0 +1,1277 @@
+%=============================================================================
+
+量子场论（quantum field theory, QFT）是描述粒子物理和凝聚态物理的基本理论框架。在量子场论中，配分函数扮演着与统计物理中类似的核心角色，但它的物理意义更加丰富。它不仅是统计权重的总和，更是所有关联函数（correlation function）的生成泛函（generating functional）。在本节中，我们将介绍量子场论的基本概念，然后详细讨论配分函数的定义和性质。
+
+\section{量子场论的基本概念}
+
+\subsection{从粒子到场}
+
+在经典力学中，我们用粒子的坐标 $q_i(t)$ 来描述系统。在量子力学中，我们将坐标提升为算符 $\hat{q}_i$。但在量子场论中，我们走得更远：基本对象不是粒子，而是\textbf{场}（field）$\phi(x)$，它是时空坐标 $x^\mu = (t, \vec{x})$ 的函数。
+
+\begin{note}[为什么要用场？]
+为什么我们需要场，而不是直接用粒子？有以下几个原因：
+\begin{itemize}
+    \item \textbf{狭义相对论的要求}：在狭义相对论中，信息传播不能超光速。如果我们用粒子描述，粒子之间的瞬时相互作用会违反因果性。场论通过局域相互作用解决了这个问题。
+    \item \textbf{粒子数不守恒}：在相对论性理论中，粒子可以产生和湮灭（如正负电子对产生）。场论自然地描述了这种现象。
+    \item \textbf{全同粒子}：场论自动处理了全同粒子的统计性质（玻色子或费米子）。
+\end{itemize}
+\end{note}
+
+场可以是：
+\begin{itemize}
+    \item \textbf{标量场}（scalar field）：在洛伦兹变换下不变的场，如 Higgs 场。用一个实数或复数函数描述。
+    \item \textbf{旋量场}（spinor field）：在洛伦兹变换下按旋量表示变换的场，如电子场。用四分量旋量描述。
+    \item \textbf{矢量场}（vector field）：在洛伦兹变换下按矢量表示变换的场，如光子场。用四矢量描述。
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % 绘制时空网格
+    \draw[gray, thin] (0,0) grid (4,4);
+    
+    % 绘制场的值
+    \foreach \x in {0,0.5,...,4} {
+        \foreach \y in {0,0.5,...,4} {
+            \pgfmathsetmacro{\val}{sin(\x*180)*cos(\y*180)}
+            \pgfmathsetmacro{\colorval}{50+50*\val}
+            \fill[blue!\colorval] (\x,\y) circle (0.15);
+        }
+    }
+    
+    % 标注
+    \node at (2,-0.5) {空间};
+    \node at (-0.5,2) {时间};
+    \node at (2,4.5) {$\phi(t, \vec{x})$：场在每个时空点有一个值};
+\end{tikzpicture}
+\caption{场的直观理解。场 $\phi(t, \vec{x})$ 在每个时空点都有一个值，就像一张"橡皮膜"覆盖在整个时空上。}
+\label{fig:field}
+\end{figure}
+
+\subsection{场算符与量子化}
+
+在量子场论中，场被提升为算符 $\hat{\phi}(x)$，它作用在希尔伯特空间上。场算符满足对易关系（对于玻色子）或反对易关系（对于费米子）：
+\begin{align}
+    [\hat{\phi}(x), \hat{\pi}(y)] &= i\delta^{(3)}(\vec{x} - \vec{y}), \\
+    \{\hat{\psi}(x), \hat{\psi}^\dagger(y)\} &= \delta^{(3)}(\vec{x} - \vec{y}),
+\end{align}
+其中 $\hat{\pi}$ 是共轭动量，$\hat{\psi}$ 是费米子场。
+
+\begin{note}[量子化的物理意义]
+量子化将经典场提升为算符，这带来了深刻的物理后果：
+\begin{itemize}
+    \item \textbf{真空涨落}：即使在真空中，场也在不断涨落。这些涨落导致了 Lamb 移位、Casimir 效应等可观测效应。
+    \item \textbf{粒子产生}：场的量子涨落可以产生粒子-反粒子对。
+    \item \textbf{不确定性原理}：场和共轭动量不能同时精确测量。
+\end{itemize}
+\end{note}
+
+\subsection{真空态与粒子态}
+
+\textbf{真空态}（vacuum state）$|0\rangle$：是系统的基态，即能量最低的状态。真空态满足 $\hat{H}|0\rangle = E_0|0\rangle$，其中 $E_0$ 是真空能量。
+
+\begin{note}[真空不是"空"的]
+在量子场论中，真空不是"空"的，而是充满了量子涨落。这些涨落导致了许多可观测效应：
+\begin{itemize}
+    \item \textbf{Lamb 移位}：氢原子能级的微小偏移，由真空涨落引起
+    \item \textbf{Casimir 效应}：两块平行金属板之间的吸引力，由真空涨落引起
+    \item \textbf{自发辐射}：激发态原子自发地发射光子，由真空涨落引起
+\end{itemize}
+\end{note}
+
+\textbf{粒子态}（particle states）：通过对场算符作用在真空态上产生。例如，单粒子态为 $|p\rangle = \hat{a}^\dagger(p)|0\rangle$，其中 $\hat{a}^\dagger(p)$ 是产生算符。产生算符和湮灭算符满足对易关系：
+\begin{equation}
+    [\hat{a}(p), \hat{a}^\dagger(q)] = (2\pi)^3 2E_p \delta^{(3)}(\vec{p} - \vec{q}).
+\end{equation}
+
+\subsection{作用量与运动方程}
+
+\textbf{拉格朗日密度}（Lagrangian density）$\mathcal{L}$：是场和场导数的函数，它决定了系统的动力学。拉格朗日密度必须是洛伦兹标量，并且满足局域性和幺正性。
+
+\textbf{作用量}（action）$S[\phi]$：是场的泛函，定义为拉格朗日密度对时空的积分：
+\begin{equation}
+    S[\phi] = \int d^d x \, \mathcal{L}(\phi, \partial_\mu \phi).
+\end{equation}
+
+\begin{note}[最小作用量原理]
+根据最小作用量原理，经典运动方程由作用量的极值条件给出：
+\begin{equation}
+    \frac{\delta S}{\delta \phi(x)} = 0.
+\end{equation}
+这个原理将物理学中的所有动力学统一在一个框架下：粒子沿着使作用量极值的路径运动，场沿着使作用量极值的构型演化。
+\end{note}
+
+\begin{example}[标量场的 Klein-Gordon 作用量]
+考虑标量场 $\phi$，作用量为：
+\begin{equation}
+    S[\phi] = \int d^d x \left[ \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2}m^2 \phi^2 - V(\phi) \right],
+\end{equation}
+其中 $m$ 是质量，$V(\phi)$ 是相互作用势。第一项是动能项，第二项是质量项，第三项是相互作用项。
+
+运动方程为 $(\Box + m^2)\phi = 0$，其中 $\Box = \partial_\mu \partial^\mu$ 是达朗贝尔算符。这个方程描述了自由标量场的传播。
+\end{example}
+
+\section{路径积分量子化}
+
+\subsection{从经典到量子}
+
+在经典力学中，粒子沿着使作用量极值的路径运动。在量子力学中，粒子可以沿着所有可能的路径运动，每条路径贡献一个相位 $e^{iS/\hbar}$。这就是费曼的路径积分表述。
+
+\begin{note}[路径积分的物理直觉]
+路径积分的核心思想是：量子理论是对所有可能历史的求和。这类似于统计力学中的配分函数——在统计力学中，我们对所有可能的微观状态求和；在量子力学中，我们对所有可能的路径求和。
+
+这个思想的深刻之处在于：它将量子力学的叠加原理推广到了路径空间。在量子力学中，一个粒子可以同时处于多个位置；在路径积分中，一个粒子可以同时沿着多条路径运动。
+\end{note}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % 绘制起点和终点
+    \fill[red] (0,0) circle (0.1) node[below] {起点};
+    \fill[red] (4,3) circle (0.1) node[above] {终点};
+    
+    % 绘制多条路径
+    \draw[blue, thick] (0,0) .. controls (1,2) and (3,1) .. (4,3);
+    \draw[green!60!black, thick] (0,0) .. controls (2,3) and (2,0) .. (4,3);
+    \draw[orange, thick] (0,0) .. controls (0.5,1) and (3.5,2) .. (4,3);
+    \draw[purple, thick] (0,0) .. controls (1.5,0.5) and (2.5,2.5) .. (4,3);
+    
+    % 标注
+    \node at (2,-0.5) {所有路径都贡献 $e^{iS/\hbar}$};
+    \node at (2,-1) {经典路径是使 $S$ 极值的路径};
+\end{tikzpicture}
+\caption{路径积分的直观理解。粒子从起点到终点，可以沿着所有可能的路径运动。每条路径贡献一个相位 $e^{iS/\hbar}$，经典路径是使作用量 $S$ 极值的路径。}
+\label{fig:path_integral}
+\end{figure}
+
+\subsection{配分函数（生成泛函）}
+
+\begin{definition}[配分函数]
+\textbf{配分函数}（partition function）$Z[J]$ 定义为：
+\begin{equation}
+    Z[J] = \int \mathcal{D}\phi \, e^{-S[\phi] + \int d^d x \, J(x) \phi(x)},
+    \label{eq:QFT_Z}
+\end{equation}
+其中：
+\begin{itemize}
+    \item $\mathcal{D}\phi$ 是路径积分测度，表示对所有可能的场构型求和
+    \item $S[\phi]$ 是作用量
+    \item $J(x)$ 是外源，是一个辅助场，我们加上它是为了能够通过微分来生成关联函数
+\end{itemize}
+\end{definition}
+
+\begin{note}[配分函数的物理意义]
+配分函数 $Z[J]$ 是量子场论中最核心的对象。它的物理意义是：
+\begin{itemize}
+    \item \textbf{生成泛函}：通过对外源 $J$ 求泛函微分，可以得到所有关联函数。这使得配分函数成为"生成"所有物理量的"母函数"。
+    \item \textbf{路径积分}：配分函数是对所有可能场构型的加权求和，权重是 $e^{-S}$。这类似于统计力学中的配分函数。
+    \item \textbf{与 AdS/CFT 的联系}：在 AdS/CFT 对偶中，CFT 的配分函数等于引力理论的配分函数：$Z_{\rm CFT} = Z_{\rm gravity}$。
+\end{itemize}
+\end{note}
+
+\subsection{路径积分测度}
+
+\textbf{路径积分测度}的定义：将时空离散化为 $N$ 个点，对每个点的场值积分，然后取 $N \to \infty$ 的极限：
+\begin{equation}
+    \int \mathcal{D}\phi = \lim_{N \to \infty} \prod_{i=1}^{N} \int d\phi(x_i).
+\end{equation}
+这个定义虽然形式上简单，但在实际计算中通常需要正规化（regularization）。
+
+\subsection{欧几里得配分函数}
+
+\textbf{欧几里得配分函数}：在欧几里得空间中，配分函数定义为：
+\begin{equation}
+    Z_E[J] = \int \mathcal{D}\phi \, e^{-S_E[\phi] + \int d^d x \, J(x) \phi(x)},
+\end{equation}
+其中 $S_E[\phi]$ 是欧几里得作用量，它是通过 Wick 转动 $t \to -i\tau$ 从闵可夫斯基作用量得到的。
+
+\begin{note}[为什么要 Wick 转动？]
+Wick 转动将闵可夫斯基空间变为欧几里得空间，这有几个好处：
+\begin{itemize}
+    \item \textbf{收敛性}：在闵可夫斯基空间中，被积函数是振荡的 $e^{iS}$，积分不收敛；在欧几里得空间中，被积函数是衰减的 $e^{-S_E}$，积分良定义。
+    \item \textbf{与统计力学的联系}：欧几里得路径积分与统计力学的配分函数形式相同，这揭示了量子场论与统计力学之间的深刻联系。
+    \item \textbf{数值计算}：欧几里得路径积分更容易用数值方法（如格点 QCD）计算。
+\end{itemize}
+\end{note}
+
+\section{关联函数}
+
+\subsection{关联函数的定义}
+
+关联函数是量子场论中最重要的物理量之一，它描述了场在不同时空点的关联程度。关联函数可以直接与实验测量相联系——散射截面、衰变率等所有可观测量都可以用关联函数表示。
+
+\begin{theorem}[$n$ 点关联函数]
+\textbf{$n$ 点关联函数}定义为：
+\begin{equation}
+    \langle \phi(x_1) \cdots \phi(x_n) \rangle = \frac{1}{Z[0]} \int \mathcal{D}\phi \, \phi(x_1) \cdots \phi(x_n) \, e^{-S[\phi]}.
+\end{equation}
+这个定义表明，关联函数是场算符在路径积分下的期望值。
+\end{theorem}
+
+关联函数可以通过对配分函数进行 $n$ 次泛函微分得到：
+\begin{equation}
+    \langle \phi(x_1) \cdots \phi(x_n) \rangle = \frac{1}{Z[0]} \left. \frac{\delta^n Z[J]}{\delta J(x_1) \cdots \delta J(x_n)} \right|_{J=0}.
+    \label{eq:QFT_corr}
+\end{equation}
+这个公式表明，配分函数包含了所有关联函数的信息。
+
+\begin{note}[关联函数的物理意义]
+关联函数描述了场在不同时空点的关联程度：
+\begin{itemize}
+    \item \textbf{两点函数} $\langle \phi(x) \phi(y) \rangle$：描述了粒子从 $y$ 传播到 $x$ 的振幅
+    \item \textbf{三点函数} $\langle \phi(x) \phi(y) \phi(z) \rangle$：描述了三个粒子之间的相互作用
+    \item \textbf{$n$ 点函数}：描述了 $n$ 个粒子之间的关联
+\end{itemize}
+所有可观测量（如散射截面、衰变率）都可以用关联函数表示。
+\end{note}
+
+\subsection{传播子}
+
+\begin{definition}[传播子]
+\textbf{传播子}（propagator）：自由场的两点关联函数称为传播子：
+\begin{equation}
+    \langle \phi(x) \phi(y) \rangle_0 = \int \frac{d^d k}{(2\pi)^d} \frac{e^{ik \cdot (x-y)}}{k^2 + m^2}.
+\end{equation}
+传播子描述了粒子从 $y$ 传播到 $x$ 的振幅。在动量空间中，传播子为 $1/(k^2 + m^2)$，这是 Klein-Gordon 算符的逆。
+\end{definition}
+
+\begin{note}[传播子的物理图像]
+传播子可以被理解为粒子在时空中传播的"概率幅"。当粒子从 $y$ 传播到 $x$ 时，它会经历所有可能的路径，每条路径贡献一个相位。传播子就是这些路径的相干叠加。
+
+在动量空间中，传播子 $1/(k^2 + m^2)$ 有一个极点在 $k^2 = -m^2$ 处，这对应于质壳条件（on-shell condition）。物理上，这意味着传播子主要由质壳上的粒子贡献。
+\end{note}
+
+\section{连通关联函数和 1PI 关联函数}
+
+\subsection{连通关联函数}
+
+关联函数可以分解为连通部分和非连通部分。这种分解在微扰计算中非常重要。
+
+\begin{definition}[连通关联函数]
+\textbf{连通生成泛函}（connected generating functional）$W[J]$ 定义为：
+\begin{equation}
+    W[J] = \ln Z[J].
+\end{equation}
+连通关联函数通过 $W[J]$ 的泛函微分得到：
+\begin{equation}
+    \langle \phi(x_1) \cdots \phi(x_n) \rangle_{\rm conn} = \left. \frac{\delta^n W[J]}{\delta J(x_1) \cdots \delta J(x_n)} \right|_{J=0}.
+\end{equation}
+\end{definition}
+
+\begin{note}[连通与非连通的区别]
+连通关联函数只包含"真正"的关联，不包含由于独立部分的关联导致的"假"关联。例如，对于两点函数：
+\begin{equation}
+    \langle \phi(x) \phi(y) \rangle = \langle \phi(x) \phi(y) \rangle_{\rm conn} + \langle \phi(x) \rangle \langle \phi(y) \rangle.
+\end{equation}
+第一项是连通部分，描述了 $x$ 和 $y$ 之间的真实关联；第二项是非连通部分，是两个独立期望值的乘积。
+\end{note}
+
+\subsection{1PI 关联函数}
+
+\begin{definition}[1PI 关联函数]
+\textbf{单粒子不可约}（one-particle irreducible, 1PI）关联函数：是不能通过切断一条内线而分成两部分的费曼图的贡献。1PI 关联函数在量子场论中起着核心作用，因为它们包含了所有量子修正的信息。
+\end{definition}
+
+\begin{note}[1PI 的物理意义]
+1PI 图是量子场论中"不可约"的相互作用。例如，在 $\phi^4$ 理论中，单圈 1PI 图是一个"气泡"，它不能被分解为更简单的图。1PI 图包含了所有量子修正的信息，是计算有效作用量的基础。
+\end{note}
+
+\section{有效作用量}
+
+\subsection{有效作用量的定义}
+
+\begin{definition}[有效作用量]
+有效作用量（effective action）$\Gamma[\phi_{\rm cl}]$ 是量子场论中另一个重要的概念。它是通过对 $W[J]$ 进行勒让德变换得到的：
+\begin{equation}
+    \Gamma[\phi_{\rm cl}] = W[J] - \int d^d x \, J(x) \phi_{\rm cl}(x),
+    \label{eq:eff_action}
+\end{equation}
+其中 $\phi_{\rm cl}(x) = \delta W / \delta J(x)$ 是经典场，即场算符的真空期望值：
+\begin{equation}
+    \phi_{\rm cl}(x) = \langle \hat{\phi}(x) \rangle_J.
+\end{equation}
+\end{definition}
+
+\begin{note}[有效作用量的物理意义]
+有效作用量是量子场论中最重要的概念之一。它的物理意义是：
+\begin{itemize}
+    \item \textbf{包含所有量子修正}：有效作用量包含了所有圈图（量子修正）的贡献。经典作用量只包含树图（经典）贡献。
+    \item \textbf{量子运动方程}：有效作用量的运动方程 $\delta \Gamma / \delta \phi_{\rm cl} = -J$ 给出量子理论的真空态。当 $J = 0$ 时，这给出了量子修正的真空。
+    \item \textbf{1PI 生成泛函}：有效作用量是 1PI 关联函数的生成泛函。
+\end{itemize}
+\end{note}
+
+\subsection{有效作用量的性质}
+
+\begin{property}[有效作用量的性质]
+\textbf{有效作用量的性质}：
+\begin{itemize}
+    \item 有效作用量包含了所有量子修正（quantum correction）的贡献
+    \item 有效作用量的运动方程 $\delta \Gamma / \delta \phi_{\rm cl} = -J$ 给出量子理论的真空态（当 $J = 0$ 时）
+    \item 有效作用量的展开系数给出 1PI 关联函数
+\end{itemize}
+\end{property}
+
+\subsection{树图与圈图}
+
+\begin{remark}[树图与圈图]
+\textbf{树图近似}（tree approximation）：在树图近似下，有效作用量等于经典作用量：$\Gamma[\phi_{\rm cl}] = S[\phi_{\rm cl}]$。树图对应于经典物理。
+
+\textbf{圈图修正}（loop corrections）：量子修正以圈图的形式出现：
+\begin{equation}
+    \Gamma[\phi_{\rm cl}] = S[\phi_{\rm cl}] + \hbar \Gamma_1[\phi_{\rm cl}] + \hbar^2 \Gamma_2[\phi_{\rm cl}] + \cdots
+\end{equation}
+其中 $\Gamma_n$ 是 $n$ 圈图的贡献。圈图对应于量子效应。
+\end{remark}
+
+\section{费曼图}
+
+\subsection{费曼图的物理直觉}
+
+费曼图是计算关联函数的图形方法，由费曼于 1948 年提出。费曼图将复杂的数学表达式转化为直观的图形，极大地简化了微扰计算。
+
+\begin{note}[费曼图的物理意义]
+费曼图不仅仅是计算工具，它们还有深刻的物理意义：
+\begin{itemize}
+    \item \textbf{粒子的传播}：线代表粒子在时空中传播
+    \item \textbf{相互作用}：顶点代表粒子之间的相互作用
+    \item \textbf{量子涨落}：圈代表量子涨落（虚粒子的产生和湮灭）
+\end{itemize}
+费曼图将量子场论的计算转化为"粒子物理"的语言，使得物理直觉可以指导计算。
+\end{note}
+
+\section{费曼规则}
+
+费曼规则是从路径积分形式体系中系统地推导出来的计算规则，它将关联函数的计算转化为代数运算。本节将从路径积分出发，详细推导费曼规则的每一个组成部分。
+
+\begin{definition}[费曼规则]
+\textbf{费曼规则}（Feynman rules）：将费曼图的每个元素映射到数学表达式的规则体系：
+\begin{itemize}
+    \item \textbf{外线}（external lines）：外态粒子的波函数（标量场取 1）
+    \item \textbf{内线}（internal lines）：传播子 $\Delta(k) = 1/(k^2 + m^2)$
+    \item \textbf{顶点}（vertices）：相互作用拉格朗日量中的耦合常数
+    \item \textbf{圈}（loops）：对未确定动量的积分 $\int d^d k/(2\pi)^d$
+    \item \textbf{对称性因子}（symmetry factor）：$1/S$，消除重复计数
+\end{itemize}
+\end{definition}
+
+\begin{note}[费曼规则的物理来源]
+费曼规则不是"人为规定"的，而是从路径积分严格推导出来的。推导的逻辑链条为：
+\begin{enumerate}
+    \item \textbf{配分函数的微扰展开}：将 $Z[J]$ 按耦合常数展开为无穷级数
+    \item \textbf{高斯积分}：对自由场部分做高斯积分，产生传播子
+    \item \textbf{Wick 定理}：将场算符的乘积分解为传播子的组合
+    \item \textbf{图形表示}：将代数表达式用图形（费曼图）表示
+\end{enumerate}
+每条费曼规则都对应路径积分中的一个精确的数学步骤。
+\end{note}
+
+%------ 传播子的推导 ------
+
+\subsection{传播子的推导}
+
+\begin{theorem}[自由场传播子]
+对于自由标量场，传播子是自由场的两点关联函数。考虑配分函数：
+\begin{equation}
+    Z_0[J] = \int \mathcal{D}\phi \, \exp\left\{-\int d^d x \left[\frac{1}{2}(\partial_\mu \phi)^2 + \frac{1}{2}m^2 \phi^2 - J\phi\right]\right\}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}[传播子的完整推导]
+推导分为以下步骤：
+
+\textbf{第一步：动量空间的作用量}
+
+对场做傅里叶变换 $\phi(x) = \int \frac{d^d k}{(2\pi)^d} \tilde{\phi}(k) e^{ik\cdot x}$，作用量变为：
+\begin{equation}
+    S_0[\phi, J] = \int \frac{d^d k}{(2\pi)^d} \left[\frac{1}{2}\tilde{\phi}(-k)(k^2 + m^2)\tilde{\phi}(k) - \tilde{J}(-k)\tilde{\phi}(k)\right].
+\end{equation}
+这里利用了 $\int d^d x \, (\partial_\mu \phi)^2 = \int \frac{d^d k}{(2\pi)^d} k^2 |\tilde{\phi}(k)|^2$（分部积分）。
+
+\textbf{第二步：完成平方}
+
+定义 $A(k) = k^2 + m^2$，配方得：
+\begin{equation}
+    S_0 = \int \frac{d^d k}{(2\pi)^d} \frac{1}{2}A(k)\left[\tilde{\phi}(k) - \frac{\tilde{J}(k)}{A(k)}\right]\left[\tilde{\phi}(-k) - \frac{\tilde{J}(-k)}{A(k)}\right] - \frac{1}{2}\frac{\tilde{J}(k)\tilde{J}(-k)}{A(k)}.
+\end{equation}
+
+\textbf{第三步：做高斯积分}
+
+对 $\tilde{\phi}$ 积分（高斯积分），得到：
+\begin{equation}
+    Z_0[J] = Z_0[0] \exp\left[\frac{1}{2}\int \frac{d^d k}{(2\pi)^d} \frac{\tilde{J}(k)\tilde{J}(-k)}{k^2 + m^2}\right].
+\end{equation}
+
+\textbf{第四步：对 $J$ 求泛函导数}
+
+两点关联函数为：
+\begin{equation}
+    \langle \phi(x)\phi(y)\rangle = \frac{1}{Z_0[0]}\left.\frac{\delta^2 Z_0[J]}{\delta J(x)\delta J(y)}\right|_{J=0} = \int \frac{d^d k}{(2\pi)^d} \frac{e^{ik\cdot(x-y)}}{k^2 + m^2} \equiv \Delta(x-y).
+\end{equation}
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a) {$x$};
+        \vertex[right=2.5cm of a] (b) {$y$};
+        \diagram* {
+            (a) -- [scalar, momentum'={$k$}] (b),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{自由标量场的传播子。在动量空间中，传播子为 $\Delta(k) = 1/(k^2 + m^2)$。}
+\label{fig:propagator}
+\end{figure}
+
+\begin{remark}[传播子的物理意义]
+传播子 $\Delta(k) = 1/(k^2 + m^2)$ 有深刻的物理含义：
+\begin{itemize}
+    \item \textbf{极点}：在 $k^2 = -m^2$ 处有极点，对应于质壳条件 $E^2 = \vec{p}^2 + m^2$
+    \item \textbf{虚粒子}：不在质壳上的传播子描述了虚粒子（virtual particle）的传播
+    \item \textbf{闵可夫斯基 vs 欧几里得}：闵可夫斯基空间传播子为 $i/(k^2 - m^2 + i\epsilon)$，欧几里得空间为 $1/(k^2 + m^2)$
+\end{itemize}
+$i\epsilon$ 项（Feynman prescription）确保了因果性：正频模向未来传播，负频模向过去传播。
+\end{remark}
+
+%------ 顶点因子的推导 ------
+
+\subsection{顶点因子的推导}
+
+\begin{theorem}[相互作用顶点]
+顶点因子来自于相互作用项在微扰展开中的贡献。对于一般的相互作用 $\mathcal{L}_{\rm int} = -\frac{\lambda}{n!}\phi^n$，每个顶点贡献因子 $-\lambda$（欧几里得空间）或 $-i\lambda$（闵可夫斯基空间）。
+\end{theorem}
+
+\begin{proof}[$\phi^4$ 理论顶点的推导]
+考虑 $\phi^4$ 相互作用：
+\begin{equation}
+    S_{\rm int} = \frac{\lambda}{4!}\int d^d x \, \phi(x)^4.
+\end{equation}
+
+将 $e^{-S_{\rm int}}$ 展开：
+\begin{equation}
+    e^{-S_{\rm int}} = 1 - \frac{\lambda}{4!}\int d^d x \, \phi(x)^4 + \frac{1}{2!}\left(\frac{\lambda}{4!}\right)^2 \int d^d x \, d^d y \, \phi(x)^4 \phi(y)^4 + \cdots
+\end{equation}
+
+一阶项 $-\frac{\lambda}{4!}\int d^d x \, \phi(x)^4$ 产生一个顶点。因子 $4!$ 来自于 $\phi^4$ 的排列组合数，在做 Wick 缩并时，每个顶点有 $4!$ 种配对方式，恰好与分母抵消。因此每个顶点净贡献因子 $-\lambda$。
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (o);
+        \vertex[above left=1cm of o] (a);
+        \vertex[below left=1cm of o] (b);
+        \vertex[above right=1cm of o] (c);
+        \vertex[below right=1cm of o] (d);
+        \diagram* {
+            (a) -- [scalar] (o),
+            (b) -- [scalar] (o),
+            (o) -- [scalar] (c),
+            (o) -- [scalar] (d),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{$\phi^4$ 理论的四点顶点。每个顶点贡献因子 $-\lambda$，有 4 条线连接。}
+\label{fig:vertex}
+\end{figure}
+
+%------ 对称性因子 ------
+
+\subsection{对称性因子}
+
+\begin{definition}[对称性因子]
+\textbf{对称性因子}（symmetry factor）$S$：一个费曼图内部对称变换的数目，用于消除 Wick 缩并中的重复计数。
+\end{definition}
+
+\begin{example}[对称性因子的计算]
+考虑以下"浴缸图"（tadpole diagram）：
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a);
+        \vertex[right=2cm of a] (b);
+        \diagram* {
+            (a) -- [scalar] (b),
+            (b) -- [scalar, half right, looseness=2] (b),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{浴缸图（tadpole）。圈可以沿任何方向遍历，产生因子 $S=2$。}
+\label{fig:tadpole}
+\end{figure}
+
+对称性因子为 $S=2$（圈的两条线可以交换）。因此贡献为 $-\lambda/2 \cdot \int d^d k/(2\pi)^d \cdot 1/(k^2+m^2)$。
+\end{example}
+
+\begin{property}[对称性因子的计算规则]
+对称性因子可以通过以下方式计算：
+\begin{enumerate}
+    \item 数出可以交换的等价线的数目
+    \item 数出可以交换的等价顶点的数目
+    \item 数出可以翻转的圈的数目
+\end{enumerate}
+对于 $\phi^4$ 理论，常见的对称性因子有：
+\begin{itemize}
+    \item 自能图（"太阳图"）：$S = 2$
+    \item 浴缸图（tadpole）：$S = 2$
+    \item "眼镜图"（s, t, u 通道）：$S = 2$
+\end{itemize}
+\end{property}
+
+%------ 完整的费曼规则汇总 ------
+
+\subsection{费曼规则的完整汇总}
+
+\begin{theorem}[$\phi^4$ 理论的完整费曼规则]
+对于欧几里得空间中的 $\phi^4$ 理论 $\mathcal{L} = \frac{1}{2}(\partial\phi)^2 + \frac{1}{2}m^2\phi^2 + \frac{\lambda}{4!}\phi^4$，费曼规则为：
+\begin{enumerate}
+    \item \textbf{传播子}：$\displaystyle \frac{1}{k^2 + m^2}$\quad（内部线，用直线表示）
+    \item \textbf{顶点因子}：$-\lambda$\quad（4 条线的交点）
+    \item \textbf{外线因子}：$1$\quad（标量场的外线）
+    \item \textbf{圈积分}：$\displaystyle \int \frac{d^d k}{(2\pi)^d}$\quad（每个未确定的内部动量）
+    \item \textbf{动量守恒}：每个顶点处 $\sum k_{\rm in} = \sum k_{\rm out}$
+    \item \textbf{对称性因子}：$1/S$
+\end{enumerate}
+
+对于闵可夫斯基空间，将传播子替换为 $i/(k^2 - m^2 + i\epsilon)$，顶点替换为 $-i\lambda$。
+\end{theorem}
+
+\begin{remark}[Wick 定理与费曼规则的关系]
+费曼规则的本质是 \textbf{Wick 定理}：将时间编序的场算符乘积分解为传播子的组合。
+\begin{equation}
+    T\{\phi(x_1)\cdots\phi(x_n)\} = :\!\phi(x_1)\cdots\phi(x_n)\!: + \text{所有可能的缩并},
+\end{equation}
+其中 $:\cdots:$ 表示正规序（normal ordering），缩并 $\phi(x)\phi(y)$ 就是传播子 $\Delta(x-y)$。
+每个费曼图对应 Wick 定理中的一种缩并方式。
+\end{remark}
+
+\section{$\phi^4$ 理论：完整计算示例}
+
+$\phi^4$ 理论是量子场论中最简单的可重正化相互作用理论，虽然它不描述真实粒子物理（标量 $\phi^4$ 理论在 4 维是"平庸的"），但它是学习费曼图计算、正规化和重整化的最佳范例。本节将用 $\phi^4$ 理论作为"量子场论的实验室"，完整演示从拉格朗日量到物理可观测量的计算流程。
+
+\begin{definition}[$\phi^4$ 理论]
+\textbf{$\phi^4$ 理论}的拉格朗日密度为：
+\begin{equation}
+    \mathcal{L} = \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2}m^2 \phi^2 - \frac{\lambda}{4!} \phi^4.
+\end{equation}
+其中 $m$ 是粒子质量，$\lambda$ 是无量纲耦合常数（在 4 维中）。因子 $4!$ 是为了消除 Wick 缩并中的重复计数而引入的约定。
+\end{definition}
+
+\begin{property}[$\phi^4$ 理论的费曼规则]
+在欧几里得空间中，$\phi^4$ 理论的费曼规则为：
+\begin{enumerate}
+    \item \textbf{传播子}：$\displaystyle \Delta(k) = \frac{1}{k^2 + m^2}$
+    \item \textbf{顶点因子}：$-\lambda$
+    \item \textbf{外线因子}：$1$（标量场）
+    \item \textbf{圈积分}：$\displaystyle \int \frac{d^d k}{(2\pi)^d}$
+    \item \textbf{动量守恒}：每个顶点处四条线的动量之和为零
+\end{enumerate}
+\end{property}
+
+%------ 两点函数 ------
+
+\subsection{两点函数的逐阶计算}
+
+两点函数（传播子的全量子修正）是理解自能、质量重整化的最简单例子。我们按 $\lambda$ 的幂次逐阶计算。
+
+\begin{example}[两点函数的树图贡献（$\lambda^0$ 阶）]
+在树图水平，两点函数就是自由场传播子：
+\begin{equation}
+    G^{(2)}_{\rm tree}(p) = \frac{1}{p^2 + m^2}.
+\end{equation}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a) {$x$};
+        \vertex[right=2.5cm of a] (b) {$y$};
+        \diagram* {
+            (a) -- [scalar] (b),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{两点函数的树图贡献：自由传播子。}
+\label{fig:phi4_2pt_tree}
+\end{figure}
+\end{example}
+
+\begin{example}[两点函数的单圈修正（$\lambda^1$ 阶）]
+在 $\lambda^1$ 阶，两点函数有一个单圈修正——"自能图"（self-energy diagram），也称为"太阳图"（sunset diagram，不过这里其实是"哑铃图"）：
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a);
+        \vertex[right=1.5cm of a] (b);
+        \vertex[right=1.5cm of b] (c);
+        \vertex[right=1.5cm of c] (d);
+        \diagram* {
+            (a) -- [scalar] (b),
+            (b) -- [scalar, half left, looseness=1.5] (c),
+            (b) -- [scalar, half right, looseness=1.5] (c),
+            (c) -- [scalar] (d),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{$\phi^4$ 理论中两点函数的单圈修正（自能图）。}
+\label{fig:phi4_self_energy}
+\end{figure}
+
+\textbf{详细计算}：自能 $\Sigma(p)$ 的贡献为：
+\begin{equation}
+    \Sigma(p) = \frac{\lambda}{2} \int \frac{d^d k}{(2\pi)^d} \frac{1}{k^2 + m^2},
+\end{equation}
+
+推导过程：
+\begin{enumerate}
+    \item 一个顶点贡献因子 $-\lambda$
+    \item 两条内部线各贡献传播子 $1/(k^2 + m^2)$，但这里只有一条内部线形成圈
+    \item 对称性因子 $S = 2$（圈中两条线可交换），因此 $1/S = 1/2$
+    \item 对圈动量 $k$ 积分
+\end{enumerate}
+
+\textbf{注意}：这个积分在 $k \to \infty$ 时发散（紫外发散）！在 $d = 4$ 维中，
+\begin{equation}
+    \Sigma \sim \frac{\lambda}{2} \int_0^\Lambda \frac{k^3 dk}{k^2 + m^2} \sim \frac{\lambda}{2} \Lambda^2 \quad (\Lambda \to \infty).
+\end{equation}
+这表明我们需要正规化来处理这个发散。
+\end{example}
+
+\begin{remark}[戴森方程]
+自能修正可以通过 \textbf{戴森方程}（Dyson equation）重新求和。全传播子为：
+\begin{equation}
+    G^{(2)}(p) = \frac{1}{p^2 + m^2} + \frac{1}{p^2 + m^2}\Sigma(p)\frac{1}{p^2 + m^2} + \cdots = \frac{1}{p^2 + m^2 - \Sigma(p)}.
+\end{equation}
+这是几何级数的求和，物理上对应于将所有自能修正"插入"到传播子中。
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a);
+        \vertex[right=0.8cm of a] (b);
+        \vertex[right=0.4cm of b] (dots1) {$\cdots$};
+        \vertex[right=0.4cm of dots1] (c);
+        \vertex[right=0.8cm of c] (d);
+        \diagram* {
+            (a) -- [scalar] (b),
+            (b) -- [scalar, half left, looseness=1.5] (c),
+            (b) -- [scalar, half right, looseness=1.5] (c),
+            (c) -- [scalar] (d),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{戴森方程的图形表示：将自能修正无穷求和。}
+\label{fig:dyson}
+\end{figure}
+\end{remark}
+
+%------ 四点函数 ------
+
+\subsection{四点函数的逐阶计算}
+
+四点函数描述了粒子之间的散射过程，是粒子物理中最基本的可观测量。
+
+\begin{example}[四点函数的树图贡献（$\lambda^1$ 阶）]
+在树图水平，四点函数来自于一个顶点：
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a1) {$p_1$};
+        \vertex[above right=1.5cm of a1] (b);
+        \vertex[below right=1.5cm of a1] (c);
+        \vertex[right=1.5cm of b] (d1) {$p_3$};
+        \vertex[right=1.5cm of c] (d2) {$p_4$};
+        \vertex[left=1.5cm of a1] (e) {$p_2$};
+        \diagram* {
+            (a1) -- [scalar] (b),
+            (e) -- [scalar] (b),
+            (b) -- [scalar] (d1),
+            (b) -- [scalar] (d2),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{$\phi^4$ 理论中四点函数的树图贡献。}
+\label{fig:phi4_4point_tree}
+\end{figure}
+
+在动量空间中，四点函数为：
+\begin{equation}
+    G^{(4)}_{\rm tree}(p_1, p_2, p_3, p_4) = -\lambda \cdot (2\pi)^d \delta^{(d)}(p_1 + p_2 + p_3 + p_4).
+\end{equation}
+这个结果表明，在树图水平，四个粒子通过一个四点顶点相互作用。动量守恒由 $\delta$ 函数保证。
+\end{example}
+
+\begin{example}[四点函数的单圈修正（$\lambda^2$ 阶）]
+在 $\lambda^2$ 阶，四点函数有三个单圈修正，分别对应于 \textbf{Mandelstam 变量}的三个通道：
+\begin{itemize}
+    \item $s$ 通道：$s = (p_1 + p_2)^2$，粒子 1 和 2 合并再分裂
+    \item $t$ 通道：$t = (p_1 - p_3)^2$，粒子 1 和 3 交换
+    \item $u$ 通道：$u = (p_1 - p_4)^2$，粒子 1 和 4 交换
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[b]{0.3\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    \begin{feynman}
+        \vertex (a1) {$p_1$};
+        \vertex[below right=1cm of a1] (b);
+        \vertex[above right=1cm of a1] (c);
+        \vertex[below right=1cm of c] (d);
+        \vertex[right=1cm of d] (e) {$p_3$};
+        \vertex[right=1cm of b] (f) {$p_4$};
+        \vertex[left=1cm of a1] (g) {$p_2$};
+        \diagram* {
+            (a1) -- [scalar] (b),
+            (a1) -- [scalar] (c),
+            (b) -- [scalar, half left, looseness=1.5] (c),
+            (b) -- [scalar, half right, looseness=1.5] (c),
+            (b) -- [scalar] (f),
+            (c) -- [scalar] (e),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{$s$ 通道}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    \begin{feynman}
+        \vertex (a1) {$p_1$};
+        \vertex[below right=1cm of a1] (b);
+        \vertex[above right=1cm of a1] (c);
+        \vertex[below right=1cm of c] (d);
+        \vertex[right=1cm of d] (e) {$p_4$};
+        \vertex[right=1cm of b] (f) {$p_3$};
+        \vertex[left=1cm of a1] (g) {$p_2$};
+        \diagram* {
+            (a1) -- [scalar] (b),
+            (a1) -- [scalar] (c),
+            (b) -- [scalar, half left, looseness=1.5] (c),
+            (b) -- [scalar, half right, looseness=1.5] (c),
+            (b) -- [scalar] (f),
+            (c) -- [scalar] (e),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{$t$ 通道}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+\centering
+\begin{tikzpicture}[scale=0.8]
+    \begin{feynman}
+        \vertex (a1) {$p_1$};
+        \vertex[below right=1cm of a1] (b);
+        \vertex[above right=1cm of a1] (c);
+        \vertex[below right=1cm of c] (d);
+        \vertex[right=1cm of d] (e) {$p_4$};
+        \vertex[right=1cm of b] (f) {$p_2$};
+        \vertex[left=1cm of a1] (g) {$p_3$};
+        \diagram* {
+            (a1) -- [scalar] (b),
+            (a1) -- [scalar] (c),
+            (b) -- [scalar, half left, looseness=1.5] (c),
+            (b) -- [scalar, half right, looseness=1.5] (c),
+            (b) -- [scalar] (f),
+            (c) -- [scalar] (e),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\caption{$u$ 通道}
+\end{subfigure}
+\caption{$\phi^4$ 理论中四点函数的单圈修正。三个通道分别对应于不同的动量分配。}
+\label{fig:phi4_4point_loop}
+\end{figure}
+
+每个通道的贡献为（以 $s$ 通道为例）：
+\begin{equation}
+    \mathcal{A}_s = \frac{\lambda^2}{2} \int \frac{d^d k}{(2\pi)^d} \frac{1}{k^2 + m^2} \frac{1}{(p_1 + p_2 - k)^2 + m^2},
+\end{equation}
+
+\textbf{详细计算步骤}：
+\begin{enumerate}
+    \item 两个顶点各贡献 $-\lambda$，总因子 $(-\lambda)^2 = \lambda^2$
+    \item 两条内部传播子：$1/(k^2+m^2)$ 和 $1/((p_1+p_2-k)^2+m^2)$
+    \item 对称性因子 $S = 2$，贡献 $1/2$
+    \item 对圈动量 $k$ 积分，动量守恒约束了另一条内部线的动量
+\end{enumerate}
+
+总散射振幅为三个通道之和：
+\begin{equation}
+    \mathcal{A} = \mathcal{A}_s + \mathcal{A}_t + \mathcal{A}_u.
+\end{equation}
+\end{example}
+
+\begin{remark}[Mandelstam 变量]
+Mandelstam 变量 $s, t, u$ 是描述 $2 \to 2$ 散射的洛伦兹不变量：
+\begin{equation}
+    s = (p_1+p_2)^2, \quad t = (p_1-p_3)^2, \quad u = (p_1-p_4)^2,
+\end{equation}
+它们满足约束 $s + t + u = \sum_{i=1}^4 p_i^2 = 4m^2$（在质壳条件下）。
+这三个变量分别对应于三个不同的物理过程：$s$ 通道是"合并-分裂"过程，$t$ 和 $u$ 通道是"交换"过程。
+\end{remark}
+
+%------ 发散与重整化 ------
+
+\subsection{$\phi^4$ 理论中的发散与重整化}
+
+\begin{note}[发散的物理意义]
+在 $\phi^4$ 理论中，我们遇到了两类紫外发散：
+\begin{itemize}
+    \item \textbf{两点函数的发散}（自能发散 $\Sigma$）：对应于质量的重整化。物理质量 $m_{\rm phys}$ 与裸质量 $m_0$ 不同，因为量子修正（虚粒子的产生和湮灭）会改变粒子的"有效质量"。
+    \item \textbf{四点函数的发散}（顶点发散）：对应于耦合常数的重整化。物理耦合 $\lambda_{\rm phys}$ 与裸耦合 $\lambda_0$ 不同。
+\end{itemize}
+这些发散并不意味着理论失败，而是表明裸参数不是物理量——我们需要通过重整化来定义物理参数。
+\end{note}
+
+\begin{example}[质量重整化的具体计算]
+在单圈水平，两点函数为：
+\begin{equation}
+    G^{(2)}(p) = \frac{1}{p^2 + m_0^2 - \Sigma(p)},
+\end{equation}
+其中 $m_0$ 是裸质量，$\Sigma(p)$ 是自能。物理质量由传播子的极点确定：
+\begin{equation}
+    p^2 + m_{\rm phys}^2 - \Sigma(-m_{\rm phys}^2) = 0.
+\end{equation}
+
+使用动量截断正规化（$\Lambda$ 为截断）：
+\begin{equation}
+    \Sigma = \frac{\lambda}{2} \int_0^\Lambda \frac{d^4 k}{(2\pi)^4} \frac{1}{k^2 + m^2} \sim \frac{\lambda}{32\pi^2}\left(\Lambda^2 - m^2 \ln\frac{\Lambda^2}{m^2} + \cdots\right).
+\end{equation}
+
+重整化条件为：$m_{\rm phys}^2 = m_0^2 - \Sigma$。通过选择适当的裸质量 $m_0$（依赖于 $\Lambda$），可以使得物理质量 $m_{\rm phys}$ 有限且与截断无关。
+\end{example}
+
+\begin{property}[耦合常数的重整化]
+类似地，四点函数的发散需要重整化耦合常数。定义裸耦合：
+\begin{equation}
+    \lambda_0 = \lambda_{\rm phys} + \delta\lambda,
+\end{equation}
+其中 $\delta\lambda$ 吸收了圈图中的发散部分。重整化后的散射振幅在所有阶都是有限的。
+\end{property}
+
+\begin{remark}[ $\phi^4$ 理论的"平庸性"]
+在 4 维中，$\phi^4$ 理论有一个深刻的问题：当截断 $\Lambda \to \infty$ 时，重整化后的耦合常数趋于零（$\lambda_{\rm phys} \to 0$）。这被称为"量子平庸性"（quantum triviality），意味着 $\phi^4$ 理论在严格意义上只能作为有效场论（在有限截断下有效），而不能作为基本理论。这一事实并不影响它作为学习 QFT 计算方法的优秀范例。
+\end{remark}
+
+\section{微扰展开与费曼图的应用}
+
+微扰展开是量子场论中最重要的计算方法之一。当耦合常数较小时，我们可以将关联函数按耦合常数的幂次展开，每一项对应于一组费曼图。
+
+\begin{definition}[微扰展开]
+\textbf{微扰展开}（perturbative expansion）：将关联函数按耦合常数 $\lambda$ 展开为无穷级数：
+\begin{equation}
+    \langle \phi(x_1) \cdots \phi(x_n) \rangle = \sum_{V=0}^{\infty} \frac{(-\lambda)^V}{V!} \int d^d y_1 \cdots d^d y_V \, \langle \phi(x_1) \cdots \phi(x_n) \phi(y_1)^4 \cdots \phi(y_V)^4 \rangle_0.
+\end{equation}
+其中 $\langle \cdots \rangle_0$ 表示自由场的关联函数，$V$ 是顶点数。
+\end{definition}
+
+\begin{note}[微扰展开的有效性]
+微扰展开的有效性依赖于耦合常数 $\lambda$ 的大小：
+\begin{itemize}
+    \item $\lambda \ll 1$：微扰展开收敛很快，低阶图主导
+    \item $\lambda \sim 1$：微扰展开不可靠，需要非微扰方法
+    \item $\lambda \gg 1$：微扰展开完全失效，需要格点场论等非微扰方法
+\end{itemize}
+在 AdS/CFT 对偶中，强耦合（$\lambda \gg 1$）的 CFT 可以用经典引力理论描述，这正是全息原理的威力所在。
+\end{note}
+
+\begin{property}[费曼图的拓扑分类]
+费曼图可以按拓扑性质分类：
+\begin{itemize}
+    \item \textbf{树图}（tree diagrams）：没有圈，对应于经典极限（$\hbar \to 0$）
+    \item \textbf{单圈图}（one-loop diagrams）：有一个圈，对应于一阶量子修正
+    \item \textbf{多圈图}（multi-loop diagrams）：有多个圈，对应于高阶量子修正
+\end{itemize}
+圈数 $L$ 与顶点数 $V$ 和内部线数 $I$ 的关系为：$L = I - V + 1$（欧拉公式）。
+\end{property}
+
+\begin{remark}[微扰论与非微扰效应]
+微扰展开只能捕获理论的"微扰"部分，而一些重要的物理效应（如瞬子、禁闭、手征对称性破缺）是非微扰的，不能用有限阶费曼图描述。这些非微扰效应在 AdS/CFT 中对应于引力理论中的非平凡经典解（如黑洞、D-膜）。
+\end{remark}
+
+\section{重整化}
+
+重整化是量子场论中最深刻的概念之一。它不仅仅是一种"消除无穷大"的技术手段，更揭示了物理规律的尺度依赖性。本节将从紫外发散的起源出发，系统介绍正规化、重整化和重整化群的物理思想，并指出它们与 AdS/CFT 对偶的深刻联系。
+
+%------ 紫外发散的起源 ------
+
+\subsection{紫外发散的起源}
+
+在量子场论中，圈图计算通常会导致发散（divergence）。当圈动量积分趋于无穷大时，积分不收敛，称为紫外发散（UV divergence）。
+
+\begin{note}[紫外发散的物理意义]
+紫外发散的出现并不意味着量子场论的失败，而是有深刻的物理原因：
+\begin{itemize}
+    \item \textbf{有效理论的观点}：我们使用的拉格朗日量只是低能有效理论，在高能尺度（$\sim \Lambda$）下需要修正。紫外发散反映了我们对高能物理的无知。
+    \item \textbf{点粒子的假设}：将粒子视为点粒子（零尺寸）导致了高能区间的过度贡献。在弦理论中，弦的有限尺寸自然地截断了紫外发散。
+    \item \textbf{重整化的力量}：尽管存在紫外发散，通过重整化可以系统地将发散吸收到有限个裸参数中，从而得到有限的物理预言。
+\end{itemize}
+\end{note}
+
+\begin{example}[$\phi^4$ 理论中的紫外发散]
+考虑 $\phi^4$ 理论中的自能图（单圈修正）：
+\begin{equation}
+    \Sigma = \frac{\lambda}{2}\int \frac{d^4 k}{(2\pi)^4}\frac{1}{k^2+m^2}.
+\end{equation}
+使用球坐标，在 $k \to \infty$ 时：
+\begin{equation}
+    \Sigma \sim \frac{\lambda}{2}\cdot\frac{2\pi^2}{(2\pi)^4}\int_0^\Lambda \frac{k^3 dk}{k^2+m^2} \sim \frac{\lambda}{16\pi^2}\left[\frac{\Lambda^2}{2} - \frac{m^2}{2}\ln\frac{\Lambda^2}{m^2} + \text{有限项}\right].
+\end{equation}
+这里出现了两种发散：\textbf{二次发散} $\Lambda^2$ 和 \textbf{对数发散} $\ln\Lambda$。二次发散对应于质量重整化，对数发散出现在四维中与耦合常数重整化相关。
+\end{example}
+
+\begin{remark}[幂次计数与发散度]
+一个费曼图的发散度可以通过 \textbf{幂次计数}（power counting）确定。对于 $\phi^4$ 理论在 $d$ 维中：
+\begin{equation}
+    D = d L - 2I,
+\end{equation}
+其中 $D$ 是发散度，$L$ 是圈数，$I$ 是内部传播子数。利用拓扑关系 $L = I - V + 1$（$V$ 为顶点数），可得：
+\begin{equation}
+    D = d - \frac{d-2}{2}E - (d-4)\frac{V}{1},
+\end{equation}
+其中 $E$ 是外部线数。在 $d=4$ 时，$D = 4 - E$。因此：
+\begin{itemize}
+    \item $E = 2$（两点函数）：$D = 2$（二次发散，质量重整化）
+    \item $E = 4$（四点函数）：$D = 0$（对数发散，耦合常数重整化）
+    \item $E \geq 6$：$D < 0$（收敛，不需要重整化）
+\end{itemize}
+当 $D \geq 0$ 时，理论是 \textbf{可重整的}（renormalizable）；当 $D < 0$ 对所有 $E$ 时，理论是 \textbf{超可重整的}（super-renormalizable）。
+\end{remark}
+
+%------ 正规化 ------
+
+\subsection{正规化}
+
+在重整化之前，需要先将发散积分"正规化"为有限形式。正规化方法有很多种，各有优缺点。
+
+\begin{definition}[正规化]
+\textbf{正规化}（regularization）：引入辅助参数使发散积分暂时有限的方法。正规化后的积分依赖于正规化参数，但最终的物理结果与正规化方案无关。
+\end{definition}
+
+\begin{example}[动量截断正规化]
+\textbf{动量截断}（momentum cutoff）：将积分上限设为 $\Lambda$：
+\begin{equation}
+    \int \frac{d^4 k}{(2\pi)^4} f(k) \to \int_0^\Lambda \frac{d^4 k}{(2\pi)^4} f(k).
+\end{equation}
+优点：物理直观（$\Lambda$ 对应于最短距离 $\sim 1/\Lambda$）。
+缺点：破坏洛伦兹不变性和规范不变性。
+\end{example}
+
+\begin{example}[维数正规化]
+\textbf{维数正规化}（dimensional regularization）：将时空维度从 $d=4$ 连续延拓到 $d = 4 - \epsilon$：
+\begin{equation}
+    \int \frac{d^4 k}{(2\pi)^4} \to \mu^{4-d}\int \frac{d^d k}{(2\pi)^d},
+\end{equation}
+其中 $\mu$ 是引入的任意质量尺度（维数正规化尺度），保证积分量纲正确。
+
+\textbf{核心公式}：维数正规化中的常用积分公式：
+\begin{equation}
+    \int \frac{d^d k}{(2\pi)^d}\frac{1}{(k^2+\Delta)^n} = \frac{1}{(4\pi)^{d/2}}\frac{\Gamma(n-d/2)}{\Gamma(n)}\frac{1}{\Delta^{n-d/2}}.
+\end{equation}
+
+优点：保持洛伦兹不变性和规范不变性。
+缺点：物理直观不如截断方法；需要小心处理 $\gamma_5$（手征反常）。
+
+在维数正规化下，$\phi^4$ 理论的自能变为：
+\begin{equation}
+    \Sigma = \frac{\lambda}{2}\mu^\epsilon\int\frac{d^d k}{(2\pi)^d}\frac{1}{k^2+m^2} = \frac{\lambda}{2}\mu^\epsilon\frac{\Gamma(1-d/2)}{(4\pi)^{d/2}}\frac{1}{(m^2)^{1-d/2}}.
+\end{equation}
+当 $d \to 4$ 时，$\Gamma(1-d/2) = \Gamma(-1+\epsilon/2)$ 发散为 $-2/\epsilon + \cdots$，产生 $1/\epsilon$ 极点。
+\end{example}
+
+\begin{remark}[Pauli--Villars 正规化]
+\textbf{Pauli--Villars 正规化}：引入大质量辅助场 $M \gg m$ 来抵消高能行为：
+\begin{equation}
+    \frac{1}{k^2+m^2} \to \frac{1}{k^2+m^2} - \frac{1}{k^2+M^2}.
+\end{equation}
+当 $M \to \infty$ 时恢复原理论。这种方法保持洛伦兹不变性，但可能破坏手征对称性。
+\end{remark}
+
+%------ 重整化程序 ------
+
+\subsection{重整化程序}
+
+正规化之后，下一步是通过重新定义参数来消除发散，这就是重整化。
+
+\begin{definition}[裸参数与物理参数]
+\textbf{裸参数}（bare parameters）：拉格朗日量中出现的参数（$m_0, \lambda_0, \phi_0$），它们是"裸"的、不可直接测量的。\textbf{物理参数}（physical/renormalized parameters）：$m_R, \lambda_R, \phi_R$，它们是重整化后的、对应实验可观测量的参数。
+\end{definition}
+
+\begin{example}[$\phi^4$ 理论的重整化——抵消项方法]
+将裸场和裸参数用重整化参数和抵消项（counterterms）表示：
+\begin{align}
+    \phi_0 &= Z_\phi^{1/2}\phi_R, \\
+    m_0^2 &= m_R^2 + \delta m^2, \\
+    \lambda_0 &= \lambda_R + \delta\lambda.
+\end{align}
+其中 $Z_\phi = 1 + \delta Z$ 是波函数重整化常数，$\delta m^2$ 和 $\delta\lambda$ 是抵消项。
+
+代入拉格朗日量：
+\begin{equation}
+    \mathcal{L} = \underbrace{\frac{1}{2}(\partial\phi_R)^2 - \frac{1}{2}m_R^2\phi_R^2 - \frac{\lambda_R}{4!}\phi_R^4}_{\text{重整化拉格朗日量}} \underbrace{- \frac{\delta Z}{2}(\partial\phi_R)^2 + \frac{\delta m^2}{2}\phi_R^2 - \frac{\delta\lambda}{4!}\phi_R^4}_{\text{抵消项}}.
+\end{equation}
+抵消项提供了新的"抵消顶点"（counterterm vertices），它们精确地抵消了圈图中的发散部分。
+\end{example}
+
+\begin{figure}[htbp]
+\centering
+裸传播子\quad $=$\quad
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a);
+        \vertex[right=2cm of a] (b);
+        \diagram* {
+            (a) -- [scalar] (b),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\hspace{0.3cm}$+$\hspace{0.3cm}
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a);
+        \vertex[right=1cm of a] (b);
+        \vertex[right=1cm of b] (c);
+        \diagram* {
+            (a) -- [scalar] (b),
+            (b) -- [scalar, half left, looseness=1.5] (c),
+            (b) -- [scalar, half right, looseness=1.5] (c),
+            (c) -- [scalar] (d),
+        };
+    \end{feynman}
+\end{tikzpicture}
+\hspace{0.3cm}$+$\hspace{0.3cm}
+\begin{tikzpicture}
+    \begin{feynman}
+        \vertex (a);
+        \vertex[right=2cm of a] (b);
+        \diagram* {
+            (a) -- [scalar] (b),
+        };
+    \end{feynman}
+    \draw[red, thick] (0.9,0.3) -- (-0.1,-0.3);
+    \draw[red, thick] (-0.1,0.3) -- (0.9,-0.3);
+\end{tikzpicture}
+\caption{重整化的图形表示：裸传播子 = 物理传播子 + 自能修正 + 抵消项。红色叉号表示抵消项顶点。}
+\label{fig:renormalization}
+\end{figure}
+
+\begin{theorem}[重整化条件]
+抵消项由 \textbf{重整化条件} 确定。常用的方案有：
+
+\textbf{(1) 在壳重整化}（on-shell scheme）：要求传播子在物理质量处有极点且留数为 1：
+\begin{align}
+    \Sigma(p^2 = -m_R^2) &= 0, \\
+    \left.\frac{d\Sigma}{dp^2}\right|_{p^2=-m_R^2} &= 0.
+\end{align}
+
+\textbf{(2) $\overline{\rm MS}$ 方案}（modified minimal subtraction）：只减去 $1/\epsilon$ 极点及相关的常数 $\ln(4\pi) - \gamma_E$（其中 $\gamma_E$ 是 Euler 常数）。这是粒子物理中最常用的方案，因为它保持了过程的简单性。
+\end{theorem}
+
+%------ 重整化群 ------
+
+\subsection{重整化群与 $\beta$ 函数}
+
+重整化引入了一个任意的质量尺度 $\mu$（维数正规化尺度或重整化点）。物理可观测量不依赖于 $\mu$ 的选择，这一要求导出了 \textbf{重整化群方程}（RGE）。
+
+\begin{theorem}[Callan--Symanzik 方程]
+$n$ 点关联函数 $G^{(n)}$ 满足 Callan--Symanzik 方程：
+\begin{equation}
+    \left[\mu\frac{\partial}{\partial\mu} + \beta(g)\frac{\partial}{\partial g} + n\gamma(g)\right]G^{(n)}(p_i; g, \mu) = 0,
+\end{equation}
+其中：
+\begin{itemize}
+    \item $\beta(g) = \mu\dfrac{dg}{d\mu}$ 是 \textbf{$\beta$ 函数}，描述耦合常数随尺度的变化
+    \item $\gamma(g) = \dfrac{1}{2}\mu\dfrac{d\ln Z_\phi}{d\mu}$ 是 \textbf{反常量纲}（anomalous dimension），描述场的标度行为的修正
+\end{itemize}
+\end{theorem}
+
+\begin{proof}[ $\beta$ 函数的推导（$\phi^4$ 理论，单圈）]
+在 $\phi^4$ 理论中，单圈 $\beta$ 函数可以通过以下步骤推导：
+
+\textbf{第一步}：在维数正规化下，裸耦合与重整化耦合的关系为：
+\begin{equation}
+    \lambda_0 = \mu^\epsilon\left(\lambda_R + \frac{3\lambda_R^2}{16\pi^2}\frac{1}{\epsilon} + \cdots\right).
+\end{equation}
+因子 $3$ 来自于 $\phi^4$ 理论中四点函数的三个通道（$s, t, u$）。
+
+\textbf{第二步}：裸耦合不依赖于 $\mu$，因此 $\mu\dfrac{d\lambda_0}{d\mu} = 0$。
+
+\textbf{第三步}：对上式求 $\mu$ 的导数：
+\begin{equation}
+    0 = \epsilon\mu^\epsilon\left(\lambda_R + \cdots\right) + \mu^\epsilon\left(\frac{d\lambda_R}{d\mu} + \frac{6\lambda_R}{16\pi^2}\frac{1}{\epsilon}\frac{d\lambda_R}{d\mu} + \cdots\right).
+\end{equation}
+
+\textbf{第四步}：令 $\epsilon \to 0$，解出 $\beta$ 函数：
+\begin{equation}
+    \beta(\lambda) = \mu\frac{d\lambda}{d\mu} = \frac{3\lambda^2}{16\pi^2} + \mathcal{O}(\lambda^3).
+\end{equation}
+
+由于 $\beta(\lambda) > 0$，$\phi^4$ 理论的耦合常数随能量增大而增大——在高能下理论变得强耦合。
+\end{proof}
+
+\begin{property}[跑动耦合常数]
+$\beta$ 函数决定了耦合常数的"跑动"（running）。将 RGE 积分：
+\begin{equation}
+    \frac{1}{\lambda(\mu)} = \frac{1}{\lambda(\mu_0)} - \frac{3}{16\pi^2}\ln\frac{\mu}{\mu_0}.
+\end{equation}
+这表明：
+\begin{itemize}
+    \item $\beta > 0$（如 $\phi^4$ 理论）：$\lambda(\mu)$ 随 $\mu$ 增大而增大，高能下强耦合
+    \item $\beta < 0$（如 QCD）：$\lambda(\mu)$ 随 $\mu$ 增大而减小，高能下弱耦合（渐近自由）
+    \item $\beta = 0$（如 QED 的 $\beta$ 函数为正但很小）：耦合变化缓慢
+\end{itemize}
+\end{property}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % Axes
+    \draw[->] (0,0) -- (4.5,0) node[right] {$\ln(\mu/\mu_0)$};
+    \draw[->] (0,0) -- (0,3.5) node[above] {$\lambda(\mu)$};
+    % QCD-like (asymptotically free)
+    \draw[thick, blue] (0.3,3) .. controls (1,2.2) and (2,1.5) .. (4,0.8);
+    \node[blue, right] at (4,0.8) {$\beta < 0$（QCD）};
+    % phi^4 theory
+    \draw[thick, red] (0.3,0.5) .. controls (1,0.8) and (2,1.5) .. (3.2,3);
+    \node[red, right] at (3.2,3) {$\beta > 0$（$\phi^4$）};
+    % Fixed point
+    \filldraw (2,1.5) circle (1.5pt) node[above right] {不动点};
+    % Labels
+    \node at (0.5,-0.5) {低能};
+    \node at (3.5,-0.5) {高能};
+\end{tikzpicture}
+\caption{跑动耦合常数的示意图。$\beta < 0$（如 QCD）时耦合在高能下减小（渐近自由）；$\beta > 0$（如 $\phi^4$ 理论）时耦合在高能下增大。}
+\label{fig:running_coupling}
+\end{figure}
+
+\begin{remark}[Wilson 重整化群]
+Kenneth Wilson 提出了重整化群的物理图像：逐步"积掉"高能自由度，观察低能有效理论如何变化。
+
+具体来说，将场分解为低能模（$|k| < \Lambda/b$）和高能模（$\Lambda/b < |k| < \Lambda$），对高能模做路径积分：
+\begin{equation}
+    e^{-S_{\rm eff}[\phi_<]} = \int\mathcal{D}\phi_>\, e^{-S[\phi_<+\phi_>]}.
+\end{equation}
+这导致了有效作用量中参数的"流动"，正是 $\beta$ 函数所描述的。
+
+Wilson 的观点深刻地揭示了重整化的物理本质：它不是简单地"消除无穷大"，而是描述了物理规律在不同能量尺度上的变化。
+\end{remark}
+
+%------ 渐近自由 ------
+
+\begin{note}[渐近自由]
+\textbf{渐近自由}（asymptotic freedom）：当 $\beta(g) < 0$ 时，耦合常数在高能下变小。
+
+1973 年，Gross、Wilczek 和 Politzer 独立发现非阿贝尔规范理论（如 QCD）具有渐近自由的性质 \cite{Gross1973,Politzer1973}。QCD 的单圈 $\beta$ 函数为：
+\begin{equation}
+    \beta(g_s) = -\frac{g_s^3}{16\pi^2}\left(11 - \frac{2}{3}N_f\right),
+\end{equation}
+其中 $g_s$ 是强耦合常数，$N_f$ 是夸克味数。当 $N_f \leq 16$ 时 $\beta < 0$，理论渐近自由。
+
+渐近自由的物理后果：
+\begin{itemize}
+    \item \textbf{高能}：夸克和胶子行为接近自由粒子（微扰 QCD 可靠）
+    \item \textbf{低能}：耦合变强，导致 \textbf{色禁闭}（quark confinement）
+\end{itemize}
+这一发现获得了 2004 年 Nobel 物理学奖。
+\end{note}
+
+%------ 可重整性与有效场论 ------
+
+\subsection{可重整性与有效场论}
+
+\begin{definition}[可重整与不可重整]
+一个理论的 \textbf{可重整性}（renormalizability）指的是：是否只需要有限个抵消项就能消除所有阶的发散。
+\begin{itemize}
+    \item \textbf{可重整理论}（renormalizable）：如 $\phi^4$ 理论、QED、QCD——只有有限种发散图，需要有限个抵消项
+    \item \textbf{不可重整理论}（non-renormalizable）：如广义相对论、费米弱相互作用——每一阶都需要新的抵消项
+    \item \textbf{渐近安全理论}（asymptotically safe）：尽管不可重整，但在 UV 有非高斯不动点，使得理论在高能下仍然有意义
+\end{itemize}
+\end{definition}
+
+\begin{remark}[有效场论的观点]
+从 Wilson 的角度来看，"不可重整"并不意味着理论无用，而只是表明它是一个 \textbf{有效场论}（effective field theory, EFT）——在某个能量尺度 $\Lambda$ 以下有效。高能效应被"编码"在低能耦合常数中。
+
+例如，费米弱相互作用理论（四费米子耦合）的截断尺度 $\Lambda \sim M_W \sim 100$ GeV（$W$ 玻色子质量），在这个尺度以下它是优秀的有效理论。
+
+这一观点深刻地改变了我们对理论物理的理解：我们不需要一个"万有理论"，只需要在每个能量尺度上使用正确的有效理论。
+\end{remark}
+
+%------ 量子反常 ------
+
+\subsection{量子反常}
+
+\begin{definition}[量子反常]
+\textbf{量子反常}（quantum anomaly）：经典对称性在量子水平上被破坏的现象。反常的出现是因为路径积分测度 $\mathcal{D}\phi$ 不保持经典对称性。
+\end{definition}
+
+\begin{example}[三角形反常]
+\textbf{三角形反常}（triangle anomaly / ABJ anomaly）：考虑一个费米子三角形图（三个轴矢量流的关联函数），在经典水平上手征对称性 $j_5^\mu = \bar{\psi}\gamma^\mu\gamma_5\psi$ 是守恒的，但量子修正导致：
+\begin{equation}
+    \partial_\mu j_5^\mu = \frac{e^2}{16\pi^2}F_{\mu\nu}\tilde{F}^{\mu\nu},
+\end{equation}
+其中 $\tilde{F}^{\mu\nu} = \frac{1}{2}\epsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}$ 是对偶场强张量。
+
+这一反常有重要的物理后果：它解释了 $\pi^0 \to 2\gamma$ 衰变，也保证了 QCD 中 $U(1)_A$ 对称性的破缺。
+\end{example}
+
+\begin{remark}[共形反常与 AdS/CFT]
+\textbf{共形反常}（conformal anomaly / trace anomaly）：在偶数维 CFT 中，应力张量的迹不为零：
+\begin{equation}
+    \langle T^\mu{}_\mu \rangle = a \cdot E_d + c \cdot W^2 + \cdots
+\end{equation}
+其中 $E_d$ 是 Euler 密度，$W^2$ 是 Weyl 张量的平方，$a$ 和 $c$ 是中心荷。
+
+在 AdS/CFT 中，共形反常可以通过全息重整化（holographic renormalization）从引力侧计算 \cite{Henningson1998}。具体来说，AdS 空间的体积发散对应于 CFT 的紫外发散，通过在边界附近引入抵消项（counterterm action），可以得到有限的 Brown-York 应力张量 \cite{Balasubramanian1999}。
+
+这一联系是 AdS/CFT 对偶最精妙的应用之一：引力中的几何操作（截断 + 抵消）精确地对应于场论中的重整化。
+\end{remark}
+
+\section{配分函数与 AdS/CFT}
+
+\begin{theorem}[AdS/CFT 对偶中的配分函数]
+在 AdS/CFT 对偶中，CFT 的配分函数与引力理论的配分函数等价：
+\begin{equation}
+    Z_{\rm CFT}[J] = Z_{\rm gravity}[\phi \to J \text{ at boundary}].
+\end{equation}
+
+这个等价性意味着：
+\begin{itemize}
+    \item CFT 的关联函数可以通过计算引力理论的经典解得到
+    \item CFT 的有效作用量对应于引力理论的 on-shell 作用量
+    \item CFT 的重整化群流对应于引力理论的径向演化
+\end{itemize}
+\end{theorem}
+
+\begin{note}[配分函数的统一视角]
+配分函数是贯穿整个理论物理的核心概念：
+\begin{itemize}
+    \item \textbf{统计力学}：配分函数 $Z = \Tr e^{-\beta H}$ 包含了所有热力学信息
+    \item \textbf{量子场论}：配分函数 $Z[J]$ 是所有关联函数的生成泛函
+    \item \textbf{AdS/CFT}：$Z_{\rm CFT} = Z_{\rm gravity}$ 将引力理论与量子场论联系起来
+\end{itemize}
+这种统一性表明，配分函数是理解自然界最深刻的工具之一。
+\end{note}
+
+\section{小结}
+
+在本节中，我们介绍了量子场论中配分函数的核心地位：
+\begin{itemize}
+    \item 量子场论的基本对象是场算符，作用量决定了系统的动力学
+    \item 路径积分量子化通过对所有场构型求和来表述量子理论
+    \item 配分函数是所有关联函数的生成泛函
+    \item 连通关联函数和 1PI 关联函数可以通过生成泛函的泛函微分得到
+    \item 有效作用量包含了所有量子修正的贡献
+    \item 费曼图是计算关联函数的图形方法
+    \item 重整化是处理发散的系统方法
+\end{itemize}
+
+%=============================================================================

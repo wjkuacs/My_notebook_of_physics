@@ -1,0 +1,519 @@
+% chapter05.tex - 联络与协变导数
+\chapter{联络与协变导数 (Connection and Covariant Derivative)}
+\label{chap:connection}
+
+\section{为什么需要联络？}
+
+\begin{note}[物理动机]
+在平坦的欧几里得空间或闵可夫斯基时空中，我们习惯用偏导数 $\pd_\mu$ 来求导。但在弯曲流形上，偏导数有一个致命的问题：\textbf{偏导数不产生张量}。具体而言，一个向量场 $V^\mu$ 的偏导数 $\pd_\nu V^\mu$ 在坐标变换下并不按照张量的方式变换——它多出了一项二阶导数。这意味着 $\pd_\nu V^\mu$ 不是一个物理上有意义的量。
+
+为什么偏导数会失效？因为在弯曲空间中，不同点处的切空间是\textbf{不同的}向量空间。要对一个向量场"求导"，我们需要比较它在相邻两点处的值——但这两个值属于不同的空间！我们需要一个额外的结构来"连接"不同点的切空间，使得比较成为可能。这个结构就是\textbf{联络} (connection)。
+
+在广义相对论中，联络直接导致引力效应：Christoffel 符号 $\Gamma^\lambda{}_{\mu\nu}$（联络的分量）在测地线方程中扮演了"引力加速度"的角色。事实上，牛顿极限下 $\Gamma^i{}_{00} \approx \pd_i \Phi$（其中 $\Phi$ 是牛顿引力势），这清楚地表明联络与引力场的等价性 \cite{Carroll1997,ConnectionsDG2013}。
+\end{note}
+
+\section{仿射联络的定义}
+
+\begin{definition}[仿射联络（Koszul 联络）]
+流形 $M$ 上的一个\textbf{仿射联络} (affine connection) $\nabla$ 是一个双线性映射 $\nabla: \mathfrak{X}(M) \times \mathfrak{X}(M) \to \mathfrak{X}(M)$，记作 $(X, Y) \mapsto \nabla_X Y$（读作"$X$ 方向上 $Y$ 的协变导数"），满足以下公理：
+
+\begin{enumerate}
+    \item \textbf{对第一个变量的 $C^\infty$-线性}：
+    \begin{equation}
+        \nabla_{fX + gY} Z = f \nabla_X Z + g \nabla_Y Z, \quad \forall f,g \in C^\infty(M)
+    \end{equation}
+    \item \textbf{对第二个变量的 $\mathbb{R}$-线性}：
+    \begin{equation}
+        \nabla_X (aY + bZ) = a \nabla_X Y + b \nabla_X Z, \quad \forall a,b \in \mathbb{R}
+    \end{equation}
+    \item \textbf{Leibniz 法则}（积的导数规则）：
+    \begin{equation}
+        \nabla_X (f Y) = X(f) Y + f \nabla_X Y, \quad \forall f \in C^\infty(M)
+    \end{equation}
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[公理的物理直觉]
+\begin{itemize}
+    \item 第一条公理说：协变导数在"求导方向"上是线性的——你可以线性组合方向，结果也线性组合。
+    \item 第二条公理说：协变导数在"被求导的对象"上是线性叠加的。
+    \item 第三条公理是微积分中乘积法则 $(fg)' = f'g + fg'$ 的几何推广——当被求导的向量场被光滑函数 $f$ 缩放时，协变导数有"缩放率的贡献"$X(f)Y$ 加上"缩放后的原始导数"$f\nabla_X Y$。
+\end{itemize}
+\end{remark}
+
+在函数上的作用（自然的延伸）：$\nabla_X f = X(f) = X^\mu \pd_\mu f$。这就是说，协变导数在函数上的作用就是普通的方向导数——对函数而言，不需要"修正项"。
+
+\section{Christoffel 符号：联络的分量表示}
+
+在选定了坐标基 $\{\pd_\mu\}$ 之后，联络完全由一组 $n^3$ 个函数确定——这就是 Christoffel 符号。
+
+\begin{definition}[Christoffel 符号]
+在坐标基 $\{\pd_\mu\}$ 下，联络的\textbf{Christoffel 符号}（或联络系数）$\Gamma^\lambda{}_{\mu\nu}$ 定义为：
+\begin{equation}
+    \nabla_{\pd_\mu} \pd_\nu = \Gamma^\lambda{}_{\mu\nu} \pd_\lambda.
+\end{equation}
+注意 $\Gamma^\lambda{}_{\mu\nu}$ 的指标位置：上方指标 $\lambda$ 是结果向量的分量指标，下方的 $\mu$（第一个）是"求导方向"的指标，$\nu$（第二个）是"被求导基向量"的指标。
+\end{definition}
+
+\begin{remark}[Christoffel 符号不是张量！]
+这一点至关重要，必须反复强调：虽然 $\Gamma^\lambda{}_{\mu\nu}$ 带有指标，但它\textbf{不是}张量。在坐标变换 $x \mapsto \tilde{x}$ 下，Christoffel 符号的变换规则为：
+\begin{equation}
+    \tilde{\Gamma}^\lambda{}_{\mu\nu} = \frac{\pd \tilde{x}^\lambda}{\pd x^\rho} \frac{\pd x^\sigma}{\pd \tilde{x}^\mu} \frac{\pd x^\tau}{\pd \tilde{x}^\nu} \Gamma^\rho{}_{\sigma\tau}
+    - \frac{\pd \tilde{x}^\lambda}{\pd x^\rho} \frac{\pd^2 x^\rho}{\pd \tilde{x}^\mu \pd \tilde{x}^\nu}.
+\end{equation}
+注意第二项（非齐次项）！如果 $\Gamma^\lambda{}_{\mu\nu}$ 是张量，就不该有这一项。正是这个非齐次项使得 $\pd_\nu V^\mu + \Gamma^\mu{}_{\nu\rho} V^\rho$ 成为张量——两项的非齐次变换相互抵消。
+\end{remark}
+
+\medskip
+\noindent\textbf{推导 Christoffel 符号的变换律。}\quad
+设两套坐标 $x^\mu$ 和 $\tilde{x}^\mu$。在 $\tilde{x}$-坐标系中 Christoffel 符号的定义为：
+\begin{equation}
+    \nabla_{\pd_{\tilde{\mu}}} \pd_{\tilde{\nu}} = \tilde{\Gamma}^\lambda{}_{\mu\nu} \pd_{\tilde{\lambda}}.
+\end{equation}
+利用链式法则将 $\tilde{x}$-坐标的基向量用 $x$-坐标的基向量表示：
+\begin{equation}
+    \pd_{\tilde{\mu}} = \frac{\pd x^\rho}{\pd \tilde{x}^\mu}\,\pd_\rho, \qquad
+    \pd_{\tilde{\nu}} = \frac{\pd x^\sigma}{\pd \tilde{x}^\nu}\,\pd_\sigma.
+\end{equation}
+代入协变导数的定义，并利用其对第一个变量的 $C^\infty$-线性以及 Leibniz 法则：
+\begin{align}
+    \nabla_{\pd_{\tilde{\mu}}} \pd_{\tilde{\nu}} 
+    &= \nabla_{\frac{\pd x^\rho}{\pd \tilde{x}^\mu}\pd_\rho}\!\left(\frac{\pd x^\sigma}{\pd \tilde{x}^\nu}\,\pd_\sigma\right) \nonumber\\
+    &= \frac{\pd x^\rho}{\pd \tilde{x}^\mu} \left[ \pd_\rho\!\left(\frac{\pd x^\sigma}{\pd \tilde{x}^\nu}\right)\pd_\sigma 
+        + \frac{\pd x^\sigma}{\pd \tilde{x}^\nu}\,\nabla_{\pd_\rho}\pd_\sigma \right] \nonumber\\
+    &= \frac{\pd x^\rho}{\pd \tilde{x}^\mu}\left[ \frac{\pd^2 x^\sigma}{\pd x^\rho\pd\tilde{x}^\nu}\,\pd_\sigma 
+        + \frac{\pd x^\sigma}{\pd \tilde{x}^\nu}\,\Gamma^\tau{}_{\rho\sigma}\,\pd_\tau \right].
+\end{align}
+将求和指标重命名，并利用 $\pd_\sigma = \frac{\pd\tilde{x}^\lambda}{\pd x^\sigma}\,\pd_{\tilde{\lambda}}$，得到：
+\begin{align}
+    \nabla_{\pd_{\tilde{\mu}}} \pd_{\tilde{\nu}} 
+    &= \left[ \frac{\pd x^\rho}{\pd \tilde{x}^\mu}\frac{\pd^2 x^\sigma}{\pd x^\rho\pd\tilde{x}^\nu}
+        + \frac{\pd x^\rho}{\pd \tilde{x}^\mu}\frac{\pd x^\sigma}{\pd \tilde{x}^\nu}\,\Gamma^\tau{}_{\rho\sigma} \right] \pd_\sigma \nonumber\\
+    &= \left[ \frac{\pd x^\rho}{\pd \tilde{x}^\mu}\frac{\pd^2 x^\sigma}{\pd x^\rho\pd\tilde{x}^\nu}
+        + \frac{\pd x^\rho}{\pd \tilde{x}^\mu}\frac{\pd x^\sigma}{\pd \tilde{x}^\nu}\,\Gamma^\tau{}_{\rho\sigma} \right] 
+        \frac{\pd\tilde{x}^\lambda}{\pd x^\sigma}\,\pd_{\tilde{\lambda}} \nonumber\\
+    &= \left[ \frac{\pd\tilde{x}^\lambda}{\pd x^\tau}\frac{\pd x^\rho}{\pd\tilde{x}^\mu}\frac{\pd x^\sigma}{\pd\tilde{x}^\nu}\,\Gamma^\tau{}_{\rho\sigma}
+        + \frac{\pd\tilde{x}^\lambda}{\pd x^\sigma}\frac{\pd x^\rho}{\pd\tilde{x}^\mu}\frac{\pd^2 x^\sigma}{\pd x^\rho\pd\tilde{x}^\nu} \right] \pd_{\tilde{\lambda}}.
+\end{align}
+注意到 $\frac{\pd\tilde{x}^\lambda}{\pd x^\sigma}\frac{\pd x^\rho}{\pd\tilde{x}^\mu}\frac{\pd^2 x^\sigma}{\pd x^\rho\pd\tilde{x}^\nu}
+= -\frac{\pd\tilde{x}^\lambda}{\pd x^\rho}\frac{\pd^2 x^\rho}{\pd\tilde{x}^\mu\pd\tilde{x}^\nu}$（利用 $\frac{\pd\tilde{x}^\lambda}{\pd x^\sigma}\frac{\pd x^\sigma}{\pd\tilde{x}^\nu} = \delta^\lambda_\nu$ 对 $\tilde{x}^\mu$ 求导），最终得到经典的变换律：
+\begin{equation}
+    \boxed{\tilde{\Gamma}^\lambda{}_{\mu\nu} = \frac{\pd\tilde{x}^\lambda}{\pd x^\rho}\frac{\pd x^\sigma}{\pd\tilde{x}^\mu}\frac{\pd x^\tau}{\pd\tilde{x}^\nu}\,\Gamma^\rho{}_{\sigma\tau}
+    - \frac{\pd\tilde{x}^\lambda}{\pd x^\rho}\frac{\pd^2 x^\rho}{\pd\tilde{x}^\mu\pd\tilde{x}^\nu}}.
+\end{equation}
+第一项是张量变换的形式，第二项 $- \frac{\pd\tilde{x}^\lambda}{\pd x^\rho}\frac{\pd^2 x^\rho}{\pd\tilde{x}^\mu\pd\tilde{x}^\nu}$ 是\textbf{非齐次项}。正是这一项的出现说明 Christoffel 符号不是张量——但正是它的存在，使得协变导数 $\nabla_\mu V^\nu$ 成为一个真正的张量。
+
+在 $n$ 维流形上，Christoffel 符号有 $n^3$ 个独立分量（在最一般的、没有添加额外条件的情况下）。
+
+\section{协变导数：向量场与一般张量场}
+
+\subsection{向量场的协变导数}
+
+\begin{definition}[协变导数]
+向量场 $Y = Y^\nu \pd_\nu$ 沿 $X = X^\mu \pd_\mu$ 方向的协变导数为：
+\begin{equation}
+    \nabla_X Y = X^\mu (\pd_\mu Y^\lambda + \Gamma^\lambda{}_{\mu\nu} Y^\nu) \pd_\lambda.
+\end{equation}
+
+其分量形式记作：
+\begin{equation}
+    \nabla_\mu Y^\lambda \equiv Y^\lambda{}_{;\mu} = \pd_\mu Y^\lambda + \Gamma^\lambda{}_{\mu\nu} Y^\nu.
+\end{equation}
+其中分号 $;$ 是协变导数的标准简写。
+\end{definition}
+
+关键是理解：协变导数 = 普通偏导数 + 联络修正项。修正项 $\Gamma^\lambda{}_{\mu\nu} Y^\nu$ 补偿了偏导数在弯曲空间中不产生张量的问题。
+
+\subsection{余向量场的协变导数}
+
+余向量场 $\omega = \omega_\mu \dd x^\mu$ 的协变导数由对向量场的要求自然确定。关键条件是：协变导数应该与缩并（自然配对）可交换。这给出：
+\begin{equation}
+    \nabla_\mu \omega_\nu \equiv \omega_{\nu;\mu} = \pd_\mu \omega_\nu - \Gamma^\lambda{}_{\mu\nu} \omega_\lambda.
+\end{equation}
+
+注意：\textbf{余向量的协变导数中联络项的符号是负的}——这是协变导数的核心规则之一。直观记忆：上指标（逆变）加 $\Gamma$，下指标（协变）减 $\Gamma$。
+
+\subsection{一般 $(r,s)$ 型张量的协变导数}
+
+\begin{property}[张量的协变导数]
+对于一般的 $(r,s)$ 型张量场 $T$，其协变导数为：
+\begin{equation}
+    \begin{aligned}
+    \nabla_\rho T^{\mu_1\cdots\mu_r}{}_{\nu_1\cdots\nu_s}
+    &= \pd_\rho T^{\mu_1\cdots\mu_r}{}_{\nu_1\cdots\nu_s} \\
+    &\quad + \Gamma^{\mu_1}{}_{\rho\sigma} T^{\sigma\mu_2\cdots\mu_r}{}_{\nu_1\cdots\nu_s} + \cdots + \Gamma^{\mu_r}{}_{\rho\sigma} T^{\mu_1\cdots\sigma}{}_{\nu_1\cdots\nu_s} \\
+    &\quad - \Gamma^\sigma{}_{\rho\nu_1} T^{\mu_1\cdots\mu_r}{}_{\sigma\nu_2\cdots\nu_s} - \cdots - \Gamma^\sigma{}_{\rho\nu_s} T^{\mu_1\cdots\mu_r}{}_{\nu_1\cdots\sigma}.
+    \end{aligned}
+\end{equation}
+\textbf{规则}：对每个上指标加一项 $+\Gamma^{\mu_i}{}_{\rho\sigma} T^{\cdots\sigma\cdots}$；对每个下指标减一项 $-\Gamma^\sigma{}_{\rho\nu_j} T^{\cdots}_{\cdots\sigma\cdots}$。
+\end{property}
+
+\medskip
+\noindent\textbf{算例：$S^2$ 上向量场的协变导数。}\quad
+以单位球面 $S^2$ 为例，度规为 $\dd s^2 = \dd\theta^2 + \sin^2\theta\,\dd\phi^2$。
+Christoffel 符号为 $\Gamma^\theta{}_{\phi\phi} = -\sin\theta\cos\theta$，$\Gamma^\phi{}_{\theta\phi} = \Gamma^\phi{}_{\phi\theta} = \cot\theta$，其余为零。
+
+考虑一个具体的向量场 $V = V^\theta\,\pd_\theta + V^\phi\,\pd_\phi$。其协变导数的分量为：
+\begin{align}
+    \nabla_\theta V^\theta &= \pd_\theta V^\theta + \Gamma^\theta{}_{\theta\theta}V^\theta + \Gamma^\theta{}_{\theta\phi}V^\phi = \pd_\theta V^\theta, \\
+    \nabla_\theta V^\phi &= \pd_\theta V^\phi + \Gamma^\phi{}_{\theta\theta}V^\theta + \Gamma^\phi{}_{\theta\phi}V^\phi = \pd_\theta V^\phi + \cot\theta\,V^\phi, \\
+    \nabla_\phi V^\theta &= \pd_\phi V^\theta + \Gamma^\theta{}_{\phi\theta}V^\theta + \Gamma^\theta{}_{\phi\phi}V^\phi = \pd_\phi V^\theta - \sin\theta\cos\theta\,V^\phi, \\
+    \nabla_\phi V^\phi &= \pd_\phi V^\phi + \Gamma^\phi{}_{\phi\theta}V^\theta + \Gamma^\phi{}_{\phi\phi}V^\phi = \pd_\phi V^\phi + \cot\theta\,V^\theta.
+\end{align}
+
+以赤道上沿经线方向的向量场 $V = \pd_\theta$（即 $V^\theta = 1$, $V^\phi = 0$）为例：
+\begin{align}
+    \nabla_\theta V^\theta &= 0, \qquad \nabla_\theta V^\phi = 0, \\
+    \nabla_\phi V^\theta &= -\sin\theta\cos\theta, \qquad \nabla_\phi V^\phi = \cot\theta.
+\end{align}
+$\nabla_\phi V^\theta$ 非零表明：沿 $\phi$ 方向移动时，即使 $V$ 的分量为常数，协变导数也会因基向量的旋转而产生“视加速度”。在赤道处 $\theta = \pi/2$，有 $\nabla_\phi V^\theta = 0$，$\nabla_\phi V^\phi = 0$——赤道附近的二阶近似下，坐标表现为局部平坦，协变导数退化为偏导数。
+
+再以余向量场 $\omega = \omega_\theta\,\dd\theta + \omega_\phi\,\dd\phi$ 为例验证规则“下指标减 $\Gamma$”：
+\begin{equation}
+    \nabla_\theta \omega_\phi = \pd_\theta\omega_\phi - \Gamma^\lambda{}_{\theta\phi}\,\omega_\lambda 
+    = \pd_\theta\omega_\phi - \cot\theta\,\omega_\phi.
+\end{equation}
+这正是球面上标架形式计算的标准结果。
+
+一个特别重要的协变导数是度规的协变导数 $\nabla_\rho g_{\mu\nu}$：
+
+\begin{equation}
+    \nabla_\rho g_{\mu\nu} = \pd_\rho g_{\mu\nu} - \Gamma^\lambda{}_{\rho\mu} g_{\lambda\nu} - \Gamma^\lambda{}_{\rho\nu} g_{\mu\lambda}.
+\end{equation}
+
+\section{挠率与无挠联络}
+
+\begin{definition}[挠率张量]
+联络 $\nabla$ 的\textbf{挠率张量} (torsion tensor) $T$ 是一个 $(1,2)$ 型张量，定义为：
+\begin{equation}
+    T(X, Y) = \nabla_X Y - \nabla_Y X - [X, Y],
+\end{equation}
+其中 $[X, Y]$ 是向量场的李括号。在坐标基下：
+\begin{equation}
+    T^\lambda{}_{\mu\nu} = \Gamma^\lambda{}_{\mu\nu} - \Gamma^\lambda{}_{\nu\mu} = 2 \Gamma^\lambda{}_{[\mu\nu]}.
+\end{equation}
+\end{definition}
+
+\begin{definition}[无挠联络]
+若挠率张量 $T = 0$（即 $\Gamma^\lambda{}_{\mu\nu} = \Gamma^\lambda{}_{\nu\mu}$），则称 $\nabla$ 是\textbf{无挠的} (torsion-free) 或\textbf{对称的}。
+
+无挠条件等价于：$\nabla_X Y - \nabla_Y X = [X, Y]$ 对任意向量场 $X, Y$ 成立。或者等价地：$\nabla_a \nabla_b f = \nabla_b \nabla_a f$ 对任意光滑函数 $f$ 成立（协变 Hessian 是对称的）。
+\end{definition}
+
+\section{Levi-Civita 联络：唯一的度规相容无挠联络}
+
+在广义相对论中，我们几乎只用一种特殊的联络——Levi-Civita 联络。它由两个自然条件唯一确定。
+
+\begin{theorem}[Levi-Civita 联络 —— 黎曼几何的基本定理]
+设 $(M, g)$ 是一个（伪）黎曼流形。则存在\textbf{唯一的}无挠联络 $\nabla$ 满足\textbf{度规相容性}：
+\begin{equation}
+    \nabla_X g = 0, \quad \forall X \in \mathfrak{X}(M).
+\end{equation}
+在坐标分量下：$\nabla_\rho g_{\mu\nu} = 0$。
+
+这个唯一的联络称为 \textbf{Levi-Civita 联络}，其 Christoffel 符号由度规完全决定：
+\begin{equation}
+    \boxed{\Gamma^\lambda{}_{\mu\nu} = \frac{1}{2} g^{\lambda\rho} \left( \pd_\mu g_{\nu\rho} + \pd_\nu g_{\mu\rho} - \pd_\rho g_{\mu\nu} \right)}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}[推导概要]
+从度规相容性 $\nabla_\rho g_{\mu\nu} = 0$ 出发，写出三个循环指标的方程：
+\begin{align}
+    \pd_\rho g_{\mu\nu} &= \Gamma^\lambda{}_{\rho\mu} g_{\lambda\nu} + \Gamma^\lambda{}_{\rho\nu} g_{\mu\lambda}, \\
+    \pd_\mu g_{\nu\rho} &= \Gamma^\lambda{}_{\mu\nu} g_{\lambda\rho} + \Gamma^\lambda{}_{\mu\rho} g_{\nu\lambda}, \\
+    \pd_\nu g_{\rho\mu} &= \Gamma^\lambda{}_{\nu\rho} g_{\lambda\mu} + \Gamma^\lambda{}_{\nu\mu} g_{\rho\lambda}.
+\end{align}
+将第二个加第三个减第一个，利用无挠条件 $\Gamma^\lambda{}_{\mu\nu} = \Gamma^\lambda{}_{\nu\mu}$，整理后即得 Levi-Civita 公式。
+\end{proof}
+
+\begin{note}[物理意义]
+Levi-Civita 联络的两个条件有清晰的物理诠释：
+\begin{itemize}
+    \item \textbf{度规相容性} $\nabla g = 0$：平行移动保内积——一个向量的"长度"在平行移动中不变。在物理上，这意味着当你搬运一把尺子时，它的长度不会因为你所在的时空位置而改变。
+    \item \textbf{无挠性} $T=0$：时空的"平行四边形"是闭合的——平行移动不引入多余的"扭转"。无挠性使得协变 Hesse 矩阵是对称的。
+\end{itemize}
+这两个条件在广义相对论中是标准的——几乎所有的计算都使用 Levi-Civita 联络。但在更一般的理论中（如 Einstein-Cartan 理论、超引力），可以引入非零的挠率 \cite{Wald1984}。
+\end{note}
+
+\medskip
+\noindent\textbf{验证 $\nabla_\rho g_{\mu\nu} = 0$。}\quad
+将 Levi-Civita 公式直接代入协变度规导数的定义：
+\begin{equation}
+    \nabla_\rho g_{\mu\nu} = \pd_\rho g_{\mu\nu} - \Gamma^\lambda{}_{\rho\mu}\, g_{\lambda\nu} - \Gamma^\lambda{}_{\rho\nu}\, g_{\mu\lambda}.
+\end{equation}
+利用公式 $\Gamma^\lambda{}_{\rho\mu} = \frac12 g^{\lambda\sigma}(\pd_\rho g_{\mu\sigma} + \pd_\mu g_{\rho\sigma} - \pd_\sigma g_{\rho\mu})$，第二项为：
+\begin{align}
+    \Gamma^\lambda{}_{\rho\mu}\, g_{\lambda\nu} 
+    &= \frac12 g^{\lambda\sigma} g_{\lambda\nu}\,(\pd_\rho g_{\mu\sigma} + \pd_\mu g_{\rho\sigma} - \pd_\sigma g_{\rho\mu}) \\
+    &= \frac12 \delta^\sigma_\nu\,(\pd_\rho g_{\mu\sigma} + \pd_\mu g_{\rho\sigma} - \pd_\sigma g_{\rho\mu}) \\
+    &= \frac12 (\pd_\rho g_{\mu\nu} + \pd_\mu g_{\rho\nu} - \pd_\nu g_{\rho\mu}).
+\end{align}
+同理，第三项：
+\begin{equation}
+    \Gamma^\lambda{}_{\rho\nu}\, g_{\mu\lambda} = \frac12 (\pd_\rho g_{\nu\mu} + \pd_\nu g_{\rho\mu} - \pd_\mu g_{\rho\nu}).
+\end{equation}
+代入 $\nabla_\rho g_{\mu\nu}$：
+\begin{align}
+    \nabla_\rho g_{\mu\nu} 
+    &= \pd_\rho g_{\mu\nu} 
+       - \frac12(\pd_\rho g_{\mu\nu} + \pd_\mu g_{\rho\nu} - \pd_\nu g_{\rho\mu})
+       - \frac12(\pd_\rho g_{\nu\mu} + \pd_\nu g_{\rho\mu} - \pd_\mu g_{\rho\nu}) \\
+    &= \pd_\rho g_{\mu\nu} 
+       - \frac12\pd_\rho g_{\mu\nu} - \frac12\pd_\mu g_{\rho\nu} + \frac12\pd_\nu g_{\rho\mu}
+       - \frac12\pd_\rho g_{\nu\mu} - \frac12\pd_\nu g_{\rho\mu} + \frac12\pd_\mu g_{\rho\nu} \\
+    &= \pd_\rho g_{\mu\nu} - \pd_\rho g_{\mu\nu} = 0.
+\end{align}
+这里用到了度规的对称性 $g_{\mu\nu} = g_{\nu\mu}$。这就完整验证了 Levi-Civita 联络与度规的相容性。
+
+球面度规为 $\dd s^2 = \dd\theta^2 + \sin^2\theta \, \dd\phi^2$（即 $g_{\theta\theta} = 1$, $g_{\phi\phi} = \sin^2\theta$, $g_{\theta\phi} = 0$）。度规的逆为 $g^{\theta\theta}=1$, $g^{\phi\phi}=\sin^{-2}\theta$。非零的 Christoffel 符号为：
+\begin{equation}
+    \Gamma^\theta{}_{\phi\phi} = -\sin\theta\cos\theta, \quad
+    \Gamma^\phi{}_{\theta\phi} = \Gamma^\phi{}_{\phi\theta} = \cot\theta.
+\end{equation}
+
+在笛卡尔坐标中，$\eta_{\mu\nu} = \operatorname{diag}(-1,+1,+1,+1)$ 是常数，故 $\Gamma^\lambda{}_{\mu\nu} = 0$——所有 Christoffel 符号都为零。在惯性系中，协变导数退化为普通偏导数。
+
+\section{平行移动：沿曲线的"不变"}
+
+\begin{definition}[平行移动]
+设 $\gamma: I \to M$ 是一条曲线，$V$ 是沿 $\gamma$ 定义的向量场。$V$ 称为沿 $\gamma$ \textbf{平行移动的} (parallel transported)，如果：
+\begin{equation}
+    \nabla_{\dot\gamma} V = 0,
+\end{equation}
+其中 $\dot\gamma$ 是 $\gamma$ 的切向量。在坐标下，设 $x^\mu(\lambda)$ 为 $\gamma$ 的坐标表示，则平行移动方程为：
+\begin{equation}
+    \frac{\dd V^\mu}{\dd\lambda} + \Gamma^\mu{}_{\nu\rho} \dot\gamma^\nu V^\rho = 0.
+\end{equation}
+\end{definition}
+
+平行移动是弯曲空间中对"恒定"向量的定义。在平坦空间中，平行移动就是"向量保持分量不变"。在弯曲空间中，向量的分量必须变化以补偿基向量的变化。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.6]
+    % Sphere
+    \shade[ball color=blue!10,opacity=0.5] (0,0) circle (1.8);
+    \draw (0,0) circle (1.8);
+    
+    % Great circle (equator-like)
+    \draw[thick] (-1.8,0) arc (180:360:1.8 and 0.4);
+    \draw[thick,dashed] (-1.8,0) arc (180:0:1.8 and 0.4);
+    
+    % Points
+    \fill[red] (-1.5,0.3) circle (0.06) node[above left] {$p$};
+    \fill[red] (1.5,-0.3) circle (0.06) node[below right] {$q$};
+    
+    % Tangent vector at p
+    \draw[->,red,very thick] (-1.5,0.3) -- (-0.9,0.7) node[midway,above,font=\small] {$V_p$};
+    
+    % Parallel transport arrow
+    \draw[->,orange,thick,dashed] (-1.2,0.45) .. controls (0,0.8) and (0.8,0.2) .. (1.3,-0.1);
+    \node[orange] at (0,0.85) {平行移动};
+    
+    % Tangent vector at q
+    \draw[->,red,very thick] (1.5,-0.3) -- (1.1,-1.0) node[midway,right,font=\small] {$V_q$};
+    
+    % Path
+    \draw[thick,blue] (-1.5,0.3) .. controls (-0.8,0.6) and (0.5,0.1) .. (1.5,-0.3);
+    \node[blue] at (0,0.5) {$\gamma$};
+    
+    \node at (0,-2.1) {平行移动：$\nabla_{\dot\gamma} V = 0$};
+\end{tikzpicture}
+\caption{球面上的平行移动。向量 $V_p$ 沿大圆弧 $\gamma$ 平行移动——在每个点上，$V$ 的变化仅由基向量的"扭转"所必需，而 $V$ 自身的"方向相对于流形"保持不变。平行移动方程 $\nabla_{\dot\gamma} V = 0$ 定义了弯曲空间中"恒定向量"的概念。}
+\label{fig:parallel_transport}
+\end{figure}
+
+% --- Cone parallel transport figure ---
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.4]
+    % Cone outline (3D-ish)
+    \draw[fill=green!5] (-1.2,-1.5) -- (1.2,-1.5) -- (0,1.2) -- cycle;
+    \draw[thick] (-1.2,-1.5) -- (0,1.2) -- (1.2,-1.5);
+    
+    % Cone surface shading
+    \fill[green!10,opacity=0.4] (-1.2,-1.5) -- (0,1.2) -- (1.2,-1.5) -- cycle;
+    \draw[thick] (-1.2,-1.5) -- (0,1.2) -- (1.2,-1.5) -- cycle;
+    
+    % Ellipse base
+    \draw[thick] (-0.6,-1.2) ellipse (1.0 and 0.35);
+    \draw[dashed] (0.6,-1.2) arc (0:180:1.0 and 0.35);
+    
+    % Circular loop around the apex (showing parallel transport path)
+    \draw[thick,blue] plot[smooth] coordinates {
+        (-0.95,-1.3) (-0.85,-0.7) (-0.4,-0.2) (0.4,-0.2) (0.85,-0.7) (0.95,-1.3)
+    };
+    
+    % Parallel transported vectors along loop
+    % Start position (bottom left)
+    \fill[red] (-0.95,-1.3) circle (0.05) node[below left] {$p$};
+    \draw[->,red,very thick] (-0.95,-1.3) -- (-0.7,-1.15) node[midway,above left,font=\small] {$V_p$};
+    
+    % Vectors at intermediate points showing rotation
+    \draw[->,red,very thick] (-0.4,-0.25) -- (-0.15,-0.4) node[above right,font=\tiny] {$V$};
+    \draw[->,red,very thick] (0.4,-0.25) -- (0.65,-0.1) node[above right,font=\tiny] {$V$};
+    \draw[->,red,very thick] (0.95,-1.3) -- (0.75,-1.5); % At return point — rotated!
+    
+    % Return point
+    \fill[red] (0.95,-1.3) circle (0.05) node[below right] {$q=p$};
+    
+    % Label the deficit angle
+    \draw[->,orange,thick,dashed] (0.2,0.7) to[out=-30,in=90] (0.7,-0.6);
+    \node[orange,font=\small] at (0.8,0.8) {亏损角 $\delta=2\pi(1-\alpha)$};
+    
+    % Cosmic string note
+    \node at (0,-1.9) {绕顶点一周后：$V$ 旋转了 $\delta$};
+    \node[font=\footnotesize,text width=10cm,align=center] at (0,-2.2) 
+        {在 GR 中，宇宙弦 (cosmic string) 的时空是圆锥几何；
+         亏损角 $\delta = 8\pi G\mu$（$\mu$ 为弦的线能量密度）};
+\end{tikzpicture}
+\caption{圆锥面上的平行移动。在除去顶点的圆锥面上，度规为 $\dd s^2 = \dd r^2 + \alpha^2 r^2 \dd\phi^2$（$0<\alpha<1$）。沿围绕顶点的闭合回路平行移动一个向量后，向量旋转了亏损角 $\delta = 2\pi(1-\alpha)$——这是曲率集中在顶点（奇点）的体现。在广义相对论中，宇宙弦（cosmic string）的时空正是这种圆锥几何\cite{Vilenkin1985}，弦的线能量密度 $\mu$ 通过 $\delta = 8\pi G\mu$ 与亏损角相联系。}
+\label{fig:cone_parallel_transport}
+\end{figure}
+
+\subsection{平行移动的基本性质}
+
+\begin{property}[平行移动的性质]
+\begin{enumerate}
+    \item \textbf{线性性}：平行移动是切空间之间的线性同构 $P_{\gamma}: T_{\gamma(0)}M \to T_{\gamma(1)}M$
+    \item \textbf{度规相容性}：若 $\nabla g = 0$，则平行移动保内积：$\langle P_\gamma u, P_\gamma v \rangle = \langle u, v \rangle$
+    \item \textbf{路径依赖性}：在弯曲空间中，平行移动的结果依赖于路径——这是曲率的标志
+\end{enumerate}
+\end{property}
+
+\section{协变导数的进一步讨论}
+
+\subsection{协变导数的交换子与曲率}
+
+协变导数与普通偏导数的一个关键区别是：协变导数\textbf{不交换}。两个协变导数的交换子 $[\nabla_\mu, \nabla_\nu]$ 作用在向量场上，其结果由黎曼曲率张量给出（将在第 \ref{chap:curvature} 章详细讨论）：
+\begin{equation}
+    [\nabla_\mu, \nabla_\nu] V^\rho = R^\rho{}_{\sigma\mu\nu} V^\sigma - T^\lambda{}_{\mu\nu} \nabla_\lambda V^\rho.
+\end{equation}
+对无挠联络，第二项消失。
+
+\subsection{协变导数的 Leibniz 法则}
+
+协变导数在张量积和缩并上的作用遵循标准的 Leibniz（乘积）法则：
+\begin{align}
+    \nabla_X (T \otimes S) &= (\nabla_X T) \otimes S + T \otimes (\nabla_X S), \\
+    \nabla_X (\operatorname{tr} T) &= \operatorname{tr} (\nabla_X T).
+\end{align}
+第二个等式意味着：协变导数和缩并\textbf{可交换}——这是一个极其有用的技术性质。
+
+\subsection{散度与 Laplacian}
+
+利用度规和协变导数，我们可以定义向量场的散度：
+\begin{equation}
+    \nabla_\mu V^\mu = \pd_\mu V^\mu + \Gamma^\mu{}_{\mu\lambda} V^\lambda
+    = \frac{1}{\sqrt{|g|}} \pd_\mu \left( \sqrt{|g|} \, V^\mu \right).
+\end{equation}
+第二个等式给出了散度的紧凑计算公式（使用了 $\Gamma^\mu{}_{\mu\lambda} = \pd_\lambda \ln\sqrt{|g|}$ 的性质）。
+
+标量函数的 Laplace--Beltrami 算子为：
+\begin{equation}
+    \nabla^2 f = g^{\mu\nu} \nabla_\mu \nabla_\nu f = \frac{1}{\sqrt{|g|}} \pd_\mu \left( \sqrt{|g|} \, g^{\mu\nu} \pd_\nu f \right).
+\end{equation}
+
+\begin{note}[物理意义：第一部分总结]
+联络与协变导数是微分几何通往广义相对论的桥梁。有了协变导数，我们能够在弯曲时空中：
+\begin{itemize}
+    \item \textbf{定义导数}：物理定律作为微分方程需要导数——协变导数提供了与坐标无关的导数
+    \item \textbf{定义"静止"}：平行移动告诉我们什么是"不变"的向量
+    \item \textbf{测量曲率}：协变导数的不可交换性 $[\nabla_\mu, \nabla_\nu] \neq 0$ 直接定义了曲率张量（第 \ref{chap:curvature} 章）
+\end{itemize}
+在物理上，一旦有了 Levi-Civita 联络，我们就有了描述引力所需的所有几何工具。
+\end{note}
+
+\section{算例}
+
+\subsection{例1：Christoffel 符号计算——$S^2$ 球面}
+
+球面度规 $g_{\theta\theta}=1$, $g_{\phi\phi}=\sin^2\theta$, $g_{\theta\phi}=0$。逆度规 $g^{\theta\theta}=1$, $g^{\phi\phi}=1/\sin^2\theta$。由 Levi-Civita 公式计算 8 个 Christoffel 符号，非零的仅有：
+\begin{equation}
+    \Gamma^\theta{}_{\phi\phi} = -\frac{1}{2}g^{\theta\theta}\pd_\theta g_{\phi\phi} = -\sin\theta\cos\theta, \quad
+    \Gamma^\phi{}_{\theta\phi} = \Gamma^\phi{}_{\phi\theta} = \frac{1}{2}g^{\phi\phi}\pd_\theta g_{\phi\phi} = \cot\theta.
+\end{equation}
+其余 6 个为零。验证：在赤道 $\theta = \pi/2$ 处，$\Gamma^\theta{}_{\phi\phi} = 0$，$\Gamma^\phi{}_{\theta\phi} = 0$——赤道附近的坐标在二阶近似下是局部的"平坦"坐标。
+
+\subsection{例2：双曲平面（Poincaré 半平面）}
+
+Poincaré 上半平面模型 $\mathbb{H}^2 = \{(x,y) \in \mathbb{R}^2 \mid y > 0\}$ 的度规为：
+\begin{equation}
+    \dd s^2 = \frac{\dd x^2 + \dd y^2}{y^2}, \qquad 
+    g_{xx} = g_{yy} = \frac{1}{y^2},\; g_{xy} = 0.
+\end{equation}
+逆度规：$g^{xx} = g^{yy} = y^2$，$g^{xy} = 0$。
+
+利用 Levi-Civita 公式逐项计算：
+\begin{itemize}
+    \item \textbf{上指标 $x$：}
+    \begin{align}
+        \Gamma^x{}_{xx} &= \frac12 y^2(\pd_x g_{xx} + \pd_x g_{xx} - \pd_x g_{xx}) = 0, \\
+        \Gamma^x{}_{xy} &= \frac12 y^2(\pd_x g_{yy} + \pd_y g_{xx} - \pd_x g_{xy}) 
+                          = \frac12 y^2\!\left(0 + \pd_y\!\left(\frac{1}{y^2}\right) - 0\right) 
+                          = \frac12 y^2(-2/y^3) = -\frac{1}{y}, \\
+        \Gamma^x{}_{yy} &= \frac12 y^2(\pd_y g_{yy} + \pd_y g_{yy} - \pd_x g_{xy}) = 0.
+    \end{align}
+    \item \textbf{上指标 $y$：}
+    \begin{align}
+        \Gamma^y{}_{xx} &= \frac12 y^2(\pd_x g_{xy} + \pd_x g_{xy} - \pd_y g_{xx}) 
+                          = -\frac12 y^2 \pd_y\!\left(\frac{1}{y^2}\right) 
+                          = \frac{1}{y}, \\
+        \Gamma^y{}_{xy} &= \frac12 y^2(\pd_x g_{yy} + \pd_y g_{xy} - \pd_x g_{yy}) = 0, \\
+        \Gamma^y{}_{yy} &= \frac12 y^2(\pd_y g_{yy} + \pd_y g_{yy} - \pd_y g_{yy}) 
+                          = \frac12 y^2 \pd_y\!\left(\frac{1}{y^2}\right) = -\frac{1}{y}.
+    \end{align}
+\end{itemize}
+
+非零的 Christoffel 符号为：
+\begin{equation}
+    \boxed{\Gamma^x{}_{xy} = \Gamma^x{}_{yx} = -\frac{1}{y}, \quad
+           \Gamma^y{}_{xx} = \frac{1}{y}, \quad
+           \Gamma^y{}_{yy} = -\frac{1}{y}}.
+\end{equation}
+
+\textbf{验证：} 测地线方程 $\ddot{x}^\mu + \Gamma^\mu{}_{\nu\rho}\dot{x}^\nu\dot{x}^\rho = 0$ 给出：
+\begin{align}
+    \ddot{x} - \frac{2}{y}\dot{x}\dot{y} &= 0, \\
+    \ddot{y} + \frac{1}{y}\dot{x}^2 - \frac{1}{y}\dot{y}^2 &= 0.
+\end{align}
+已知 $\mathbb{H}^2$ 的测地线是半圆（与实轴正交的圆弧）或竖直线；可验证这些曲线满足上述方程。
+
+\subsection{例3：极坐标 $(\mathbb{R}^2, \dd s^2 = \dd r^2 + r^2 \dd\theta^2)$ 的联络}
+
+极坐标下的度规：$g_{rr}=1$, $g_{\theta\theta}=r^2$, $g_{r\theta}=0$。
+逆度规：$g^{rr}=1$, $g^{\theta\theta}=1/r^2$。
+
+唯一的非零 Christoffel 符号为：
+\begin{equation}
+    \Gamma^r{}_{\theta\theta} = -\frac12 g^{rr}\pd_r g_{\theta\theta} = -\frac12 \cdot 1 \cdot 2r = -r, \qquad
+    \Gamma^\theta{}_{r\theta} = \Gamma^\theta{}_{\theta r} = \frac12 g^{\theta\theta}\pd_r g_{\theta\theta} = \frac{1}{2r^2}\cdot 2r = \frac{1}{r}.
+\end{equation}
+
+现在证明 $\nabla_r(\pd_\theta) = \frac{1}{r}\pd_\theta$。由 Christoffel 符号的定义：
+\begin{equation}
+    \nabla_{\pd_r}\pd_\theta = \Gamma^\lambda{}_{r\theta}\,\pd_\lambda 
+    = \Gamma^r{}_{r\theta}\,\pd_r + \Gamma^\theta{}_{r\theta}\,\pd_\theta 
+    = 0 \cdot \pd_r + \frac{1}{r}\,\pd_\theta = \frac{1}{r}\pd_\theta.
+\end{equation}
+这一结果有清晰的几何含义：$\pd_\theta$ 是角度方向上的基向量，其长度为 $r$（因为 $|\pd_\theta| = \sqrt{g_{\theta\theta}} = r$）。沿径向移动时，基向量 $\pd_\theta$ 的长度随 $r$ 线性增长，因此协变导数 $\nabla_r(\pd_\theta)$ 正比于 $\pd_\theta$ 本身，比例系数为 $1/r$。等价地，单位基向量 $\hat{e}_\theta = \frac{1}{r}\pd_\theta$ 是真正平行移动的：$\nabla_r \hat{e}_\theta = 0$。
+
+类似地可验证 $\nabla_\theta(\pd_r) = \frac{1}{r}\pd_\theta$（注意 $\Gamma^r{}_{\theta r}=0$ 但 $\Gamma^\theta{}_{\theta r} = 1/r$）：
+\begin{equation}
+    \nabla_{\pd_\theta}\pd_r = \Gamma^\lambda{}_{\theta r}\,\pd_\lambda = \Gamma^r{}_{\theta r}\,\pd_r + \Gamma^\theta{}_{\theta r}\,\pd_\theta = \frac{1}{r}\pd_\theta.
+\end{equation}
+这表明 $\pd_r$ 沿 $\theta$ 方向协变求导时会产生 $\pd_\theta$ 分量——因为基向量 $\pd_r$ 在绕原点旋转时会改变方向。
+
+\subsection{例4：圆锥几何与宇宙弦}
+
+在除去顶点的圆锥面上，度规为 $\dd s^2 = \dd r^2 + \alpha^2 r^2 \dd\phi^2$（$0<\alpha<1$）。Christoffel 符号：$\Gamma^\phi{}_{r\phi}=1/r$, $\Gamma^r{}_{\phi\phi}=-\alpha^2 r$。沿绕顶点的闭合回路平行移动一个向量后，向量旋转了一个固定的亏损角 $\delta = 2\pi(1-\alpha)$——这正是曲率集中在顶点（奇点）的体现。在广义相对论中，宇宙弦 (cosmic string) 的时空几何正是这种圆锥几何，其亏损角与弦的线密度成正比。
+
+\subsection{例5：施瓦西时空中的静态观测者}
+
+设观测者在 $r = \text{const}$ 处静止，四速度 $u^\mu = ((1-2M/r)^{-1/2}, 0, 0, 0)$。沿此世界线平行移动一个空间向量 $V^\mu = (0, V^r, 0, 0)$。平行移动方程 $\dd V^\mu/\dd\tau + \Gamma^\mu{}_{\nu\rho} u^\nu V^\rho = 0$ 给出：
+\begin{equation}
+    \frac{\dd V^r}{\dd\tau} + \Gamma^r{}_{00} u^0 V^0 + \Gamma^r{}_{0r} u^0 V^r = 0.
+\end{equation}
+由于 $V^0=0$ 且 $\Gamma^r{}_{0r}=0$（在静态时空中），得到 $\dd V^r/\dd\tau = 0$——径向向量的分量在施瓦西时空中沿静态观测者世界线保持不变。
+

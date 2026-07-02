@@ -1,0 +1,284 @@
+% chapter15.tex - AdS/CFT与量子引力
+\chapter{AdS/CFT对偶与量子引力}
+\label{chap:AdSCFT}
+
+\section{量子引力的核心问题}
+
+\begin{note}[物理动机]
+量子引力是理论物理中最深远的未解决问题之一。它的根本困难在于：广义相对论和量子力学基于互不相容的数学框架。广义相对论是几何的、确定性的经典场论；量子力学是代数的、概率性的线性理论。将两者直接量化（即将度规视为量子场）会遇到不可重整化的紫外发散——微扰量子广义相对论在 Planck 能量以上丧失了预测能力。
+
+AdS/CFT 对偶为这一困境提供了全新的出路：\textbf{不直接量化引力，而是用一个没有引力的量子场论来定义量子引力}。这正是全息原理的具体实现——引力系统等价于其边界上的非引力系统。在这个框架下，时空几何和引力本身变为\textbf{涌现}（emergent）的现象，而非基本的自由度 \cite{Maldacena1997,Witten1998,Maldacena2003}。
+\end{note}
+
+量子引力面临的核心问题包括：
+\begin{enumerate}
+    \item \textbf{黑洞信息悖论}：黑洞蒸发过程中信息是否丢失？量子幺正性如何与经典黑洞热力学相容？
+    \item \textbf{时空奇点}：在 Planck 尺度上，时空的经典概念是否完全崩溃？量子效应如何抹平奇点？
+    \item \textbf{全息原理}：引力系统的自由度是否本质上就是低维的？黑洞熵的面积律 $S = A/4G$ 暗示了什么？
+    \item \textbf{时空的涌现}：时空几何是基本的还是从更底层的量子自由度中涌现的？
+    \item \textbf{非微扰定义}：是否存在不依赖微扰展开的量子引力的完整定义？
+\end{enumerate}
+
+AdS/CFT 对偶对以上每一个问题都提供了原则性的答案或深刻的洞察。本章将从量子引力的视角出发，系统介绍这一对偶及其核心应用。主要参考文献包括 \cite{Maldacena1997,Witten1998,Gubser1998,Aharony1999,Nastase2007,Maldacena2003,Hubeny2015,Rangamani2016,Erdmenger2018}。
+
+\section{AdS/CFT 对偶的表述}
+
+\subsection{Maldacena 的发现与对偶的三种形式}
+
+1997 年，Maldacena 提出 IIB 型超弦理论中 $N$ 张重合 D3-膜的低能极限存在两种等价描述 \cite{Maldacena1997}：开弦描述给出 $d=4$、$\mathcal{N}=4$ 超对称 $SU(N)$ Yang-Mills 理论（一个共形场论）；闭弦描述给出 $\mathrm{AdS}_5 \times S^5$ 上的 IIB 型超引力。
+
+\begin{theorem}[AdS/CFT 对偶（三种形式）]
+    \begin{enumerate}
+        \item \textbf{最强形式}：IIB 型超弦在 $\mathrm{AdS}_5 \times S^5$ 上精确等价于 $d=4$、$\mathcal{N}=4$ $SU(N)$ SYM，对所有 $N$ 和 $g_{\text{YM}}$ 成立。
+        \item \textbf{强形式}：取 $N \to \infty$ 且 $\lambda = g_{\text{YM}}^2 N$ 固定（平面极限），对偶为经典弦论在 $\mathrm{AdS}_5 \times S^5$ 上等价于大 $N$ 规范论的平面图求和。
+        \item \textbf{弱形式（最常用）}：进一步取 $\lambda \to \infty$，对偶退化为 $d+1$ 维\textbf{经典引力}等价于 $d$ 维\textbf{强耦合大 $N$ 共形场论}。这正是量子引力最有用的极限：
+        \begin{equation}
+            \boxed{\text{经典引力} \;\Longleftrightarrow\; \text{强耦合大 $N$ CFT}}.
+        \end{equation}
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}[为什么这对量子引力重要]
+    弱形式虽然只涉及经典引力，但它告诉我们：\textbf{即使引力量子效应（$1/N$ 修正）和有限弦长效应（$1/\lambda$ 修正）都不可忽略，边界 CFT 仍然是有明确定义的}。因此，边界上普通的量子场论为全体量子引力（包括所有弦修正和非微扰效应）提供了一个\textbf{非微扰的完整定义}。在这个意义上：\textbf{AdS/CFT 对偶是一个量子引力的定义}，而非仅仅是一个对偶关系。
+\end{remark}
+
+\subsection{参数对应与全息字典}
+
+对偶两边的基本参数对应：
+\begin{align}
+    \frac{L^4}{\alpha'^2} &= 2\lambda = 2g_{\text{YM}}^2 N, \\
+    \frac{L^4}{G_N} &= \frac{2N^2}{\pi}.
+\end{align}
+其中 $L$ 是 AdS 半径，$\alpha'$ 是弦张力倒数，$G_N$ 是 $d+1$ 维 Newton 常数。当 $N \to \infty$（大 $N$ 极限），体引力的量子涨落被抑制（$G_N \propto 1/N^2$）；当 $\lambda \to \infty$，弦的有限长度效应被抑制（$\alpha' \ll L^2$），引力退化为局域场论。
+
+\section{AdS 时空的几何结构}
+
+全息对偶的体时空是反德西特空间。从量子引力的角度看，AdS 时空最关键的几何性质是：\textbf{它具有一个类时的共形边界，信息可以从边界流入和流出体时空}——这使得引力的全息描述成为可能。
+
+\begin{definition}[AdS$_{d+1}$ 的 Poincaré 度规]
+    在 Poincaré 坐标下，AdS$_{d+1}$ 度规为：
+    \begin{equation}
+        \boxed{\dd s^2 = \frac{L^2}{z^2}\left(\dd z^2 + \eta_{\mu\nu}\dd x^\mu \dd x^\nu\right)},
+    \end{equation}
+    其中 $z \in (0,\infty)$ 为全息径向坐标，$z \to 0$ 对应共形边界（CFT 所在处），$z \to \infty$ 对应 Poincaré 视界。度规在 $z \to 0$ 处有一个二阶极点，提取共形因子 $L^2/z^2$ 后，边界度规为 $d$ 维 Minkowski 度规。
+\end{definition}
+
+\begin{theorem}[等距群-共形群对应]
+    $\mathrm{AdS}_{d+1}$ 的等距群 $SO(2,d)$ 与其 $d$ 维共形边界的共形群精确同构。这是一切全息对偶的几何基础：\textbf{体时空的对称性 = 边界理论的对称性}。
+\end{theorem}
+
+\begin{remark}[UV/IR 对应：量子引力中的标度-几何对偶]
+    全息对偶中最深刻的几何事实之一是\textbf{UV/IR 对应}：边界理论中短距离（高能、紫外）的物理对应于体时空中靠近边界（$z$ 小）的区域；长距离（低能、红外）的物理对应于体时空深处（$z$ 大）的区域。用公式表达：
+    \begin{equation}
+        z \sim \frac{1}{E_{\text{CFT}}}.
+    \end{equation}
+    这意味着：\textbf{边界量子场论的能标对应于体时空的几何深度}。在量子引力中，这一对偶意味着 Planck 尺度的几何可能由边界理论的远红外物理描述——这是一个令人震惊的颠倒。
+\end{remark}
+
+\section{GKPW 关系：量子引力的全息定义}
+
+\subsection{配分函数的等价性}
+
+Gubser、Klebanov、Polyakov \cite{Gubser1998} 和 Witten \cite{Witten1998} 给出了 AdS/CFT 对偶的精确数学表述：
+
+\begin{theorem}[GKPW 关系]
+    $d$ 维 CFT 的配分函数（生成泛函）等于 $d+1$ 维 AdS 中量子引力的配分函数，其边界条件由源 $\phi_0$ 确定：
+    \begin{equation}
+        \boxed{Z_{\text{CFT}}[\phi_0] = \int_{\phi \to \phi_0} \mathcal{D}\phi \, e^{i S_{\text{gravity}}[\phi]} \underset{N \to \infty}{\approx} e^{i S_{\text{on-shell}}[\phi_0]}}.
+    \end{equation}
+    在经典引力极限（$N \to \infty, \lambda \to \infty$）下，路径积分由经典鞍点主导，退化为壳上作用量的指数。
+\end{theorem}
+
+\begin{note}[GKPW 关系作为量子引力的定义]
+    GKPW 关系的真正威力在于：右侧的体引力路径积分原则上包含了所有量子引力效应——引力子的圈图、非微扰的时空拓扑涨落、甚至 wormhole 构型。如果我们不知道如何直接计算这个路径积分（实际上我们确实不知道），我们可以转而使用左侧——一个\textbf{完全良定义的、没有引力的量子场论}——来\textbf{定义}它。
+
+    这正是 AdS/CFT 作为量子引力框架的本质：不直接构建量子引力，而是通过一个已知的量子场论来\textbf{非微扰地定义}量子引力。
+\end{note}
+
+\subsection{边界渐近行为与全息字典}
+
+在 AdS$_{d+1}$ 中，质量 $m$ 的标量场 $\phi(z,x)$ 在 $z \to 0$ 处具有渐近展开：
+\begin{equation}
+    \phi(z,x) \sim \phi_0(x) \, z^{d-\Delta} + \langle\mathcal{O}(x)\rangle \, z^{\Delta},
+\end{equation}
+其中共形维数 $\Delta$ 由质量-维数关系确定：
+\begin{equation}
+    \boxed{m^2 L^2 = \Delta(\Delta - d)}.
+\end{equation}
+
+$\phi_0(x)$ 是 CFT 中耦合于算符 $\mathcal{O}$ 的\textbf{源}，而 $\langle\mathcal{O}(x)\rangle$ 是该算符的\textbf{真空期望值}。这是全息字典的核心规则：\textbf{体场在边界处的"慢衰减"模式对应源，"快衰减"模式对应响应}。
+
+\section{全息纠缠熵与时空的涌现}
+
+量子引力中最激进的思想或许是：\textbf{时空几何本身不是基本的——它从量子纠缠中涌现}。支持这一观点的最有力证据来自全息纠缠熵的研究 \cite{Rangamani2016}。
+
+\subsection{Ryu-Takayanagi 公式}
+
+\begin{theorem}[Ryu-Takayanagi 公式（2006）]
+    在静态全息时空中，边界 CFT 的空间子区域 $A$ 的纠缠熵等于体时空中\textbf{极小曲面} $\gamma_A$ 的面积（以 $4G_N$ 为单位），该曲面锚定在 $\partial A$ 上且与 $A$ 同伦：
+    \begin{equation}
+        \boxed{S_A = \frac{\operatorname{Area}(\gamma_A)}{4G_N^{(d+1)}}}, \qquad \partial\gamma_A = \partial A.
+    \end{equation}
+\end{theorem}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    \draw[very thick] (-3,0) -- (3,0);
+    \node at (3.3,0) {$\partial\mathrm{AdS}$ (边界CFT)};
+    \draw[red, very thick] (-1.2,0) -- (1.2,0);
+    \node[red] at (0,0.15) {$A$};
+    \fill[red] (-1.2,0) circle (0.05) node[below] {$\partial A$};
+    \fill[red] (1.2,0) circle (0.05) node[below] {$\partial A$};
+    \draw[green!50!black, very thick] (-1.2,0) .. controls (-0.8,-1.0) and (0.8,-1.0) .. (1.2,0);
+    \node[green!50!black] at (0,-1.1) {$\gamma_A$（极小曲面）};
+    \draw[->] (0,0) -- (0,-1.8) node[below] {$z$（体深度）};
+    \draw[dashed, gray] (-1.2,0) -- (-1.2,-1.3);
+    \draw[dashed, gray] (1.2,0) -- (1.2,-1.3);
+    \node at (-2.5,-1.2) {$S_A = \dfrac{\mathrm{Area}(\gamma_A)}{4G_N}$};
+\end{tikzpicture}
+\caption{Ryu-Takayanagi 极小曲面。边界子区域 $A$ 的纠缠熵 $S_A$ 由深入体时空的极小曲面 $\gamma_A$ 的面积决定。这一公式将量子信息（纠缠熵）与时空几何（极小曲面面积）精确联系起来——纠缠是几何的"原料"。}
+\label{fig:RT_surface}
+\end{figure}
+
+\begin{remark}[RT 公式的革命性意义]
+    RT 公式值得反复品味，因为它将三个看似无关的领域联系在一起：
+    \begin{itemize}
+        \item \textbf{量子信息}：纠缠熵是量子力学中衡量纠缠的基本量
+        \item \textbf{广义相对论}：极小曲面是微分几何中的经典概念
+        \item \textbf{黑洞热力学}：面积除以 $4G$ 正是 Bekenstein-Hawking 熵公式
+    \end{itemize}
+    RT 公式暗示：\textbf{黑洞熵只是纠缠熵的一个特例}——视界是锚定在黑洞自身上的"极小曲面"。这也意味着：时空几何（由 Einstein 方程描述）的动力学可能完全由边界量子态的纠缠结构决定。
+\end{remark}
+
+\subsection{从纠缠到 Einstein 方程}
+
+2014 年，van Raamsdonk、Jacobson 等人基于 RT 公式提出了一个惊人的假设：Einstein 方程可以从纠缠熵的物理中推导出来。基本思路是：在 AdS/CFT 框架下，边界 CFT 的纠缠熵满足强次可加性等量子信息不等式；将这些不等式翻译到体时空的几何语言中，竟然导出了线性化的 Einstein 方程。
+
+更一般地，考虑边界上一个微小变形的纠缠熵变化 $\delta S_A$。RT 公式将其与 $\delta(\text{Area})$ 联系起来，而极小曲面的面积变分涉及体时空的曲率。Faulkner 等人（2014）证明：
+\begin{equation}
+    \delta S_A = \frac{1}{4G_N} \int_{\gamma_A} \delta g^{\mu\nu} \, G_{\mu\nu} \, \dd V + \cdots,
+\end{equation}
+即爱因斯坦张量自然地出现在纠缠熵的一阶变分中。纠缠熵满足的量子信息约束条件恰好等价于 Einstein 方程在线性阶的成立。这一结果深刻表明：\textbf{时空的引力动力学可能完全由边界量子态的纠缠结构编码}。
+
+\section{黑洞信息悖论与岛公式}
+
+\subsection{信息悖论的历史}
+
+1974-1976 年，Hawking 证明黑洞会发射热辐射并最终完全蒸发 \cite{Hawking1974}。如果初始物质处于纯量子态，黑洞形成后最终只剩下热辐射——一个混合态。这违反了量子力学的幺正性原理（纯态只能演化为纯态）。这就是困扰理论物理四十余年的\textbf{黑洞信息悖论}。
+
+AdS/CFT 对偶原则上保证幺正性：边界 CFT 的 Hamilton 演化是幺正的，因此体时空中一切过程——包括黑洞形成和蒸发——必须也是幺正的。但在 2019 年之前，无人能具体展示信息如何从黑洞中逃逸。
+
+\subsection{量子极端曲面与岛公式}
+
+2019-2020 年，Penington、Almheiri、Engelhardt、Marolf、Maxfield 等人取得了重大突破：他们发现了计算蒸发黑洞辐射熵的正确方法。
+
+\begin{theorem}[量子极端曲面公式（岛公式）]
+    在包含引力的系统中，辐射的纠缠熵由广义的 RT 公式给出：
+    \begin{equation}
+        \boxed{S_{\text{rad}} = \min_X \left\{\operatorname{ext}_X\left[\frac{\operatorname{Area}(X)}{4G_N} + S_{\text{bulk}}(\Sigma_X)\right]\right\}},
+    \end{equation}
+    其中 $X$ 是体时空中的一个曲面（称为\textbf{量子极端曲面}），而 $S_{\text{bulk}}(\Sigma_X)$ 是体量子场在区域 $\Sigma_X$ 中的纠缠熵。后一项包含了 Hawking 辐射中量子关联的贡献。
+
+    关键的物理图像：在蒸发早期，极小曲面 $X$ 是\textbf{平凡曲面}（退化为边界截断），辐射熵由体量子场的熵主导，随辐射增加而增长。在蒸发后期（Page 时间之后），一个新的量子极端曲面出现在黑洞视界内部——即\textbf{岛}（island）——其面积贡献使总辐射熵开始下降。
+\end{theorem}
+
+\begin{remark}[Page 曲线与信息恢复]
+    岛公式成功地再现了蒸发黑洞的 \textbf{Page 曲线}：
+    \begin{itemize}
+        \item $t < t_{\text{Page}}$：辐射熵从零线性增长至 $\sim$ 黑洞初始熵的一半。
+        \item $t = t_{\text{Page}}$：Page 时间，辐射熵达到峰值，拐弯后开始下降。
+        \item $t > t_{\text{Page}}$：辐射熵单调递减至零，意味着信息开始从黑洞中逸出——幺正性得以保持。
+    \end{itemize}
+    岛公式的关键发现是：在蒸发后期，黑洞内部出现了\textbf{纠缠岛}——辐射与岛内的量子态纠缠，导致辐射的熵降低。计算中必须将岛的贡献包含在内才能得到正确（幺正的）结果。这一发现标志着黑洞信息问题的实质性突破。
+\end{remark}
+
+\section{ER = EPR：纠缠就是几何}
+
+\begin{theorem}[ER = EPR 猜想（Maldacena \& Susskind, 2013）]
+    两个量子系统之间的\textbf{Einstein-Podolsky-Rosen (EPR) 纠缠}在几何上对偶于连接它们的\textbf{Einstein-Rosen (ER) 桥}（虫洞）：
+    \begin{equation}
+        \boxed{\text{纠缠} \;\Longleftrightarrow\; \text{时空连通性}}.
+    \end{equation}
+\end{theorem}
+
+\subsection{猜想的证据}
+
+ER = EPR 猜想并非凭空想象，它有多个层次的证据支持：
+
+\begin{enumerate}
+    \item \textbf{热场二重态与永恒 AdS 黑洞}：边界 CFT 的\textbf{热场二重态}（thermofield double state）是两个 CFT 之间的最大纠缠纯态。其对偶的体几何恰好是一个永恒 AdS-Schwarzschild 黑洞——它的两个渐近 AdS 区域通过一个不可穿越的 Einstein-Rosen 桥（虫洞）连接。纠缠越强，虫洞越长。
+    
+    \item \textbf{RT 公式的极限情况}：当 $A$ 是整个边界空间时，$S_A$ 是边界 CFT 的整体纠缠熵。RT 公式将其对偶于穿越整个体时空的极小曲面面积。当纠缠熵非零时，体时空的两个区域被"缝合"在一起——这正是虫洞的几何图像。
+    
+    \item \textbf{防火墙悖论的消解}：AMPS (2012) 提出的防火墙悖论声称：黑洞视界附近必须有一个高能"防火墙"才能满足量子力学的约束。ER = EPR 提供了一个优雅的解决方案：黑洞内部与早期 Hawking 辐射之间存在大量的纠缠（EPR），按照猜想，这对应于连接黑洞与辐射的虫洞（ER）。信息通过虫洞逃逸，无需引入任何奇异的防火墙。
+\end{enumerate}
+
+\begin{note}[量子引力的图像：时空作为纠缠的编织]
+    如果 ER = EPR 猜想成立——越来越多的证据指向这一点——那么它将彻底改变我们对时空的理解：
+    \begin{itemize}
+        \item 经典时空中两个点之间的\textbf{连通性}是底层量子\textbf{纠缠}的宏观表现
+        \item Einstein 方程 $G_{\mu\nu} = 8\pi G T_{\mu\nu}$ 可以理解为纠缠结构对物质分布的响应
+        \item 量子引力中时空拓扑的涨落（包括虫洞的产生和湮灭）对偶于量子态的纠缠结构变化
+        \item 时空的\textbf{涌现}意味着：在 Planck 尺度，时空概念分解为纯粹的量子信息结构
+    \end{itemize}
+\end{note}
+
+\section{张量网络与纠缠构建时空}
+
+\begin{definition}[MERA 张量网络]
+    \textbf{多尺度纠缠重整化假设}（MERA）是一种用于表示量子多体系统基态的变分张量网络。它具有逐层构建的分层结构：每一层由\textbf{解纠缠器}（disentangler，消除局域冗余纠缠）和\textbf{等距映射}（isometry，进行粗粒化）组成。
+\end{definition}
+
+Swingle (2012) 发现 MERA 的结构与 AdS 时空的离散化有着精确的对应：
+\begin{itemize}
+    \item 网络的\textbf{层数} $\leftrightarrow$ AdS 的径向方向 $z$（标度方向，对应重整化群流）
+    \item 每层的\textbf{空间节点数} $\leftrightarrow$ AdS 切片上的"空间体积"（越深层节点越少，对应越小的边界区域）
+    \item 解纠缠器移除的\textbf{局域纠缠} $\leftrightarrow$ AdS 几何中的空间梯度
+    \item 切割网络连接边界子区域的\textbf{最少键数} $\leftrightarrow$ 极小曲面 $\gamma_A$ 的"面积"
+\end{itemize}
+
+\begin{remark}[涌现时空的微观机制]
+    张量网络模型提供了时空涌现的一个\textbf{具体微观实现}：
+    \begin{enumerate}
+        \item 边界上的量子态由张量网络编码
+        \item 网络内部的连接结构定义了离散的几何
+        \item 不同区域的纠缠决定了空间中的"距离"
+        \item 粗粒化操作（沿网络向上走）定义了从 UV 到 IR 的重整化群流——即从边界进入体时空深处的运动
+        \item 在连续极限下，网络的几何逼近 AdS 时空——Einstein 方程从张量网络的纠缠优化条件中涌现
+    \end{enumerate}
+    这为"时空从量子纠缠中涌现"提供了一个\textbf{构造性的原理证明}。
+\end{remark}
+
+\section{总结：AdS/CFT 对偶的量子引力遗产}
+
+AdS/CFT 对偶已经深刻重塑了我们对量子引力的理解。以下是几条核心遗产：
+
+\begin{enumerate}
+    \item \textbf{量子引力的非微扰定义}：AdS/CFT 提供了第一个量子引力（在负宇宙学常数下）的完整非微扰定义。边界 CFT 是一个完全良定的量子场论，它定义了全体量子引力——包括所有的 Planck 尺度效应。
+    
+    \item \textbf{黑洞信息的幺正性}：对偶保证幺正性：CFT 的演化是幺正的，因此体时空中的黑洞蒸发也必须是幺正的。岛公式提供了信息恢复的具体计算机制。
+    
+    \item \textbf{时空的涌现}：几何不再是基本的。RT 公式和 ER = EPR 猜想表明：时空几何、连通性和引力本身是底层量子纠缠的集体涌现现象。Einstein 方程可能源自量子信息的约束。
+    
+    \item \textbf{全息原理的实现}：引力系统在体时空中的全部信息被"全息编码"在边界上——这是一个精确的数学陈述，而非仅仅是启发性的类比。
+    
+    \item \textbf{量子信息作为引力的语言}：量子信息概念——纠缠、量子纠错编码、复杂度——已经成为量子引力研究的标准工具。体时空的重构、黑洞内部的描述、虫洞的物理都需要量子信息的语言。
+\end{enumerate}
+
+\begin{remark}[展望]
+    尽管 AdS/CFT 取得了巨大成功，但我们的宇宙并非 AdS 时空——它具有正的宇宙学常数（de Sitter 空间）。dS/CFT 对偶和更一般的全息对偶仍是开放问题。然而，AdS/CFT 提供的概念框架——全息原理、时空涌现、纠缠几何对偶、量子极端曲面——已经被证明是极其强大的引导原则。无论最终的量子引力理论是什么，全息的思想将几乎肯定是其中的核心部分 \cite{Aharony1999,Hubeny2015,Maldacena2003}。
+\end{remark}
+
+\begin{note}[进一步阅读]
+    \begin{itemize}
+        \item \cite{Maldacena1997}：AdS/CFT 的原始发现论文。
+        \item \cite{Witten1998,Gubser1998}：GKPW 关系的原始论文。
+        \item \cite{Aharony1999}：200 页经典综述，入门首选。
+        \item \cite{Maldacena2003}：Maldacena 的 TASI 讲义，极佳的教学材料。
+        \item \cite{Nastase2007}：面向初学者的 AdS/CFT 导论。
+        \item \cite{Hubeny2015}：现代综述，涵盖纠缠熵和体时空重构。
+        \item \cite{Rangamani2016}：全息纠缠熵的全面教科书。
+        \item \cite{Erdmenger2018}：TASI 2017 讲义。
+    \end{itemize}
+\end{note}

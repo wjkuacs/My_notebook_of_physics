@@ -1,0 +1,173 @@
+% appendixA.tex - 数学预备知识
+\chapter{数学预备知识 (Mathematical Prerequisites)}
+
+本附录汇集了阅读本文所需的数学基础知识，供读者快速查阅。建议读者在阅读正文遇到不熟悉的数学概念时回到此处参考。
+
+\section{集合论与映射}
+
+\subsection{集合与运算}
+
+一个\textbf{集合}（set）是确定对象的汇集。$x \in A$ 表示 $x$ 是集合 $A$ 的元素。基本运算：
+\begin{itemize}
+    \item \textbf{并集}：$A \cup B = \{x \mid x \in A \text{ 或 } x \in B\}$
+    \item \textbf{交集}：$A \cap B = \{x \mid x \in A \text{ 且 } x \in B\}$
+    \item \textbf{差集}：$A \setminus B = \{x \mid x \in A \text{ 且 } x \notin B\}$
+    \item \textbf{补集}：$A^c = X \setminus A$（相对于全集 $X$）
+    \item \textbf{幂集}：$\mathcal{P}(A) = \{S \mid S \subseteq A\}$（$A$ 的所有子集构成的集合）
+\end{itemize}
+
+\subsection{映射}
+
+设 $X$ 和 $Y$ 是两个集合。一个\textbf{映射}（map 或 function）$f: X \to Y$ 将 $X$ 中的每个元素 $x$ 对应到 $Y$ 中的唯一元素 $f(x)$。$X$ 称为定义域，$Y$ 称为值域。
+
+\begin{itemize}
+    \item \textbf{单射} (injection)：若 $f(x_1) = f(x_2) \Rightarrow x_1 = x_2$（不同元素的像不同）
+    \item \textbf{满射} (surjection)：若 $\forall y \in Y \; \exists x \in X$ 使得 $f(x) = y$（$Y$ 的每个元素都被"打到"）
+    \item \textbf{双射} (bijection)：既是单射又是满射（一一对应）
+\end{itemize}
+
+\subsection{笛卡尔积}
+
+两个集合 $X$ 和 $Y$ 的\textbf{笛卡尔积}为：
+\begin{equation}
+    X \times Y = \{(x, y) \mid x \in X, \; y \in Y\}.
+\end{equation}
+$\mathbb{R}^n = \underbrace{\mathbb{R} \times \cdots \times \mathbb{R}}_{n \text{ 个}}$。
+
+\section{线性代数回顾}
+
+\subsection{向量空间}
+
+一个（实）\textbf{向量空间}（vector space）$V$ 是一个集合，其元素称为向量，满足：
+\begin{enumerate}
+    \item 向量加法（交换群结构）：$u + v = v + u$，$(u+v)+w = u+(v+w)$，存在零向量 $\mathbf{0}$，每个 $v$ 有加法逆元 $-v$
+    \item 标量乘法：$a(v+u) = av + au$，$(a+b)v = av + bv$，$(ab)v = a(bv)$，$1 \cdot v = v$
+\end{enumerate}
+
+\subsection{基与维数}
+
+向量空间 $V$ 的一组\textbf{基}（basis）是一族线性无关的向量 $\{e_1, \ldots, e_n\}$，使得 $V$ 中的任何向量都可以唯一地表示为它们的线性组合：
+\begin{equation}
+    v = \sum_{i=1}^n v^i e_i.
+\end{equation}
+基向量的个数 $n$ 称为 $V$ 的\textbf{维数}（dimension），记作 $\dim V = n$。
+
+\subsection{对偶空间}
+
+向量空间 $V$ 的\textbf{对偶空间}（dual space）$V^*$ 是 $V$ 上全体线性泛函的集合：
+\begin{equation}
+    V^* = \{\omega: V \to \mathbb{R} \mid \omega(av + bw) = a\omega(v) + b\omega(w)\}.
+\end{equation}
+$\dim V^* = \dim V = n$。给定 $V$ 的基 $\{e_i\}$，其对偶基 $\{f^j\}$ 由 $f^j(e_i) = \delta^j_i$ 定义。
+
+\subsection{多重线性映射与张量}
+
+一个 $(r,s)$ 型张量是一个多重线性映射：
+\begin{equation}
+    T: \underbrace{V^* \times \cdots \times V^*}_{r} \times \underbrace{V \times \cdots \times V}_{s} \to \mathbb{R}.
+\end{equation}
+$r$ 是逆变阶数，$s$ 是协变阶数。
+
+\subsection{矩阵}
+
+一个 $m \times n$ 矩阵 $A = (A^i_j)$ 表示线性映射 $\mathbb{R}^n \to \mathbb{R}^m$。矩阵乘法：$(AB)^i_k = A^i_j B^j_k$（Einstein 求和）。逆矩阵 $A^{-1}$ 满足 $A A^{-1} = A^{-1} A = I$。行列式 $\det A \neq 0$ 是矩阵可逆的充要条件。
+
+\section{群论基础}
+
+\subsection{群的定义}
+
+一个\textbf{群}（group）$(G, \cdot)$ 是一个集合 $G$ 配备二元运算 $\cdot$，满足：
+\begin{enumerate}
+    \item \textbf{封闭性}：$\forall g, h \in G: g \cdot h \in G$
+    \item \textbf{结合性}：$(g \cdot h) \cdot k = g \cdot (h \cdot k)$
+    \item \textbf{单位元}：$\exists e \in G: e \cdot g = g \cdot e = g, \; \forall g \in G$
+    \item \textbf{逆元}：$\forall g \in G \; \exists g^{-1} \in G: g \cdot g^{-1} = g^{-1} \cdot g = e$
+\end{enumerate}
+
+\subsection{李群}
+
+\textbf{李群}（Lie group）是同时具有光滑流形结构的群，使得群乘法和取逆运算都是光滑映射。李群在物理学中无处不在：
+\begin{itemize}
+    \item $SO(3)$：三维旋转群
+    \item $SO(3,1)$：Lorentz 群（狭义相对论的对称群）
+    \item $SO(2,d)$：AdS 等距群，与 $d$ 维共形群同构
+    \item $SU(N)$：规范理论中的规范群
+    \item $GL(n,\mathbb{R})$：一般线性群（所有可逆 $n \times n$ 实矩阵）
+\end{itemize}
+
+\subsection{Lie 代数}
+
+李群 $G$ 在单位元处的切空间构成其\textbf{李代数}（Lie algebra）$\mathfrak{g}$。李代数的元素（生成元 $T_a$）满足：
+\begin{equation}
+    [T_a, T_b] = f_{ab}{}^c T_c,
+\end{equation}
+其中 $f_{ab}{}^c$ 是结构常数（structure constants），$[\cdot,\cdot]$ 是李括号（矩阵交换子 $[X,Y] = XY - YX$）。
+
+例如 Lorentz 代数 $\mathfrak{so}(3,1)$ 有 6 个生成元：3 个旋转 $J_i$ 和 3 个 boost $K_i$，满足：
+\begin{equation}
+    [J_i, J_j] = \varepsilon_{ijk} J_k, \quad [J_i, K_j] = \varepsilon_{ijk} K_k, \quad [K_i, K_j] = -\varepsilon_{ijk} J_k.
+\end{equation}
+
+\section{拓扑学基本概念}
+
+\subsection{拓扑空间}
+
+一个\textbf{拓扑空间} $(X, \mathcal{T})$ 是一个集合 $X$ 及其子集族 $\mathcal{T}$（开集族），满足：
+\begin{enumerate}
+    \item[(O1)] $\varnothing, X \in \mathcal{T}$
+    \item[(O2)] 任意并的封闭性：任意多个开集的并仍为开集
+    \item[(O3)] 有限交的封闭性：有限多个开集的交仍为开集
+\end{enumerate}
+
+\subsection{连续性与同胚}
+
+映射 $f: X \to Y$（两个拓扑空间之间）是\textbf{连续的}，如果对 $Y$ 中每个开集 $V$，其逆像 $f^{-1}(V)$ 是 $X$ 中的开集。
+
+一个双射 $f: X \to Y$ 称为\textbf{同胚}（homeomorphism），如果 $f$ 和 $f^{-1}$ 都是连续的。同胚的两个拓扑空间在拓扑意义上"相同"。
+
+\subsection{紧致性与连通性}
+
+\begin{itemize}
+    \item \textbf{紧致性}：$X$ 是紧致的，如果 $X$ 的任意开覆盖都有有限子覆盖。在 $\mathbb{R}^n$ 中，紧致等价于有界闭集（Heine-Borel 定理）。
+    \item \textbf{连通性}：$X$ 是连通的，如果它不能表示为两个不相交非空开集的并。
+    \item \textbf{Hausdorff}：$X$ 是 Hausdorff 的，如果任意两个不同点存在不相交的开邻域。
+\end{itemize}
+
+\section{光滑映射与隐函数定理}
+
+\subsection{光滑函数}
+
+函数 $f: \mathbb{R}^n \to \mathbb{R}$ 在点 $x_0$ 处是 $C^k$ 的，如果它的直到 $k$ 阶偏导数在 $x_0$ 处存在且连续。$C^\infty$ 函数（所有阶导数存在）称为\textbf{光滑的}。
+
+\subsection{微分同胚}
+
+映射 $F: U \to V$（$U, V \subseteq \mathbb{R}^n$ 为开集）是\textbf{微分同胚}（diffeomorphism），如果 $F$ 是双射且 $F$ 和 $F^{-1}$ 都是光滑的。
+
+\subsection{逆函数定理}
+
+设 $F: \mathbb{R}^n \to \mathbb{R}^n$ 是光滑映射。若在点 $x_0$ 处 Jacobi 矩阵 $DF(x_0)$ 可逆（$\det DF(x_0) \neq 0$），则存在 $x_0$ 的邻域 $U$ 使得 $F|_U: U \to F(U)$ 是一个微分同胚，且
+\begin{equation}
+    D(F^{-1})(F(x_0)) = [DF(x_0)]^{-1}.
+\end{equation}
+
+\subsection{隐函数定理}
+
+设 $F: \mathbb{R}^{n+m} \to \mathbb{R}^m$ 是光滑映射，在点 $(x_0, y_0)$ 处 $F(x_0, y_0) = 0$。若偏导数矩阵 $D_y F(x_0, y_0)$（$m \times m$）可逆，则存在邻域 $U \ni x_0$ 和唯一光滑函数 $g: U \to \mathbb{R}^m$ 使得 $g(x_0) = y_0$ 且 $F(x, g(x)) = 0$ 对所有 $x \in U$ 成立。
+
+这是微分几何中证明子流形存在性和构造坐标卡的基本工具。
+
+\subsection{正则值与浸入/嵌入}
+
+光滑映射 $F: M \to N$ 在点 $p \in M$ 处是\textbf{浸入}（immersion），如果其微分 $\dd F_p: T_pM \to T_{F(p)}N$ 是单射。若还是同胚到像，则为\textbf{嵌入}（embedding）。
+
+$y \in N$ 是 $F$ 的\textbf{正则值}（regular value），如果对所有 $x \in F^{-1}(y)$，$\dd F_x$ 是满射。正则值的原像是 $M$ 的子流形（这是构造子流形的常用方法）。
+
+\section{群在流形上的作用}
+
+李群 $G$ 在流形 $M$ 上的一个（左）\textbf{作用}是一个光滑映射 $\phi: G \times M \to M$，记作 $\phi(g, p) = g \cdot p$，满足：
+\begin{enumerate}
+    \item $e \cdot p = p$（单位元作用为恒等）
+    \item $g \cdot (h \cdot p) = (gh) \cdot p$（与群乘法相容）
+\end{enumerate}
+
+在广义相对论中，Killing 向量场生成的就是等距群（isometry group）在时空流形上的作用。在 AdS/CFT 中，等距群 $SO(2,d)$ 在 AdS$_{d+1}$ 上的作用对应边界上共形群的作用。

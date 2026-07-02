@@ -1,0 +1,90 @@
+\documentclass[lang=cn,10pt,chinese]{elegantbook}
+
+\title{微分几何与广义相对论}
+
+\author{真田信繁}
+\institute{Your Institute}
+\date{\today}
+\bioinfo{主题}{微分几何与广义相对论}
+
+\extrainfo{从流形到爱因斯坦场方程}
+
+\setcounter{tocdepth}{3}
+
+% 额外的宏包
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,backgrounds,positioning,calc,3d,patterns}
+\usepackage{subcaption}
+\usepackage{physics}
+\usepackage{braket}
+\usepackage{cancel}
+\tikzset{every picture/.style={line width=0.75pt}}
+
+% 参考文献资源 (elegantbook.cls 自动加载 reference.bib)
+\ExecuteBibliographyOptions{sorting=none}
+
+% 自定义命令
+\newcommand{\M}{\mathcal{M}}           % 流形
+\newcommand{\T}{\mathcal{T}}           % 切丛
+\newcommand{\Tstar}{\mathcal{T}^*}     % 余切丛
+\newcommand{\Lag}{\mathcal{L}}         % 拉格朗日量
+\newcommand{\Ham}{\mathcal{H}}         % 哈密顿量
+\newcommand{\Riem}{\mathrm{Riem}}      % 黎曼曲率张量
+\newcommand{\Ric}{\mathrm{Ric}}        % 里奇张量
+\newcommand{\Rcal}{R}                  % 标量曲率
+\newcommand{\g}{\mathrm{g}}            % 度规
+% \dd is already defined by physics package
+\newcommand{\pd}{\partial}             % 偏导数
+\newcommand{\Lie}{\mathcal{L}}         % 李导数
+\newcommand{\diag}{\operatorname{diag}} % 对角矩阵
+\newcommand{\Order}{\mathcal{O}}       % 量级符号
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+%=============================================================================
+% 第一部分：微分几何基础
+%=============================================================================
+
+\input{chap/chapter01.tex}  % 引言
+\input{chap/chapter02.tex}  % 拓扑空间与流形
+\input{chap/chapter03.tex}  % 张量与张量代数
+\input{chap/chapter04.tex}  % 微分形式与外微分
+\input{chap/chapter05.tex}  % 联络与协变导数
+\input{chap/chapter06.tex}  % 黎曼曲率张量
+\input{chap/chapter07.tex}  % 测地线方程
+
+%=============================================================================
+% 第二部分：广义相对论
+%=============================================================================
+
+\input{chap/chapter08.tex}  % 狭义相对论回顾
+\input{chap/chapter09.tex}  % 等效原理与广义协变性
+\input{chap/chapter10.tex}  % 爱因斯坦场方程
+\input{chap/chapter11.tex}  % 施瓦西解与黑洞
+\input{chap/chapter12.tex}  % 引力波
+\input{chap/chapter13.tex}  % 宇宙学基础
+\input{chap/chapter14.tex}  % 数值相对论简介
+
+%=============================================================================
+% 第三部分：前沿专题
+%=============================================================================
+
+\input{chap/chapter15.tex}  % AdS/CFT 对偶
+
+%=============================================================================
+% 附录
+%=============================================================================
+
+\appendix
+\input{chap/appendixA.tex}  % 数学预备知识
+\input{chap/appendixB.tex}  % 符号约定与单位制
+
+\printbibliography[heading=bibintoc, title={参考文献}]
+
+\end{document}

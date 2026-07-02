@@ -1,0 +1,25 @@
+{
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "20250408.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "20250408.bbl"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "JHEP.bst"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "RelativeRef.bib"
+      }
+   ],
+   "spec_version" : 1,
+   "texlive_version" : "2025",
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

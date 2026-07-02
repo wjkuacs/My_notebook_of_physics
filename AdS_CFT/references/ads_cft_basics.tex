@@ -1,0 +1,140 @@
+% AdS/CFT 基础知识总结
+% 基于 Natsuume "AdS/CFT Duality User Guide" 整理
+
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+
+\title{AdS/CFT 基础知识总结}
+\author{整理自 Natsuume (2014)}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{AdS/CFT 对偶的基本陈述}
+
+AdS/CFT 对偶是 Maldacena 于 1997 年提出的猜想，它建立了以下等价关系：
+
+\begin{equation}
+    \fbox{\parbox{0.8\textwidth}{%
+        强耦合 4 维规范理论 $=$ 5 维 AdS 时空中的引力理论
+    }}
+\end{equation}
+
+更具体地说，最著名的例子是：
+
+\begin{equation}
+    \text{Type IIB 弦理论在 AdS$_5 \times S^5$ 上} \longleftrightarrow
+    \text{$\mathcal{N}=4$ 超对称杨-米尔斯理论在 4 维}
+\end{equation}
+
+参数对应关系：
+\begin{equation}
+    \frac{L^4}{\alpha'^2} = 4\pi g_s N = 2 g_{\rm YM}^2 N = 2\lambda
+\end{equation}
+
+其中：
+\begin{itemize}
+    \item $L$：AdS 半径
+    \item $\alpha'$：弦张力倒数
+    \item $g_s$：弦耦合常数
+    \item $g_{\rm YM}$：杨-米尔斯耦合常数
+    \item $\lambda = g_{\rm YM}^2 N$：'t Hooft 耦合常数
+    \item $N$：$SU(N)$ 规范群的颜色数
+\end{itemize}
+
+\section{核心公式：GKPW 关系}
+
+Gubser-Klebanov-Polyakov 和 Witten 提出的配分函数等价关系：
+\begin{equation}
+    Z_{\text{CFT}}[J] = Z_{\text{gravity}}[\phi_0 = J]
+\end{equation}
+
+其中左边是 CFT 的生成泛函，右边是以 $J$ 为边界条件的引力配分函数。
+
+对于关联函数：
+\begin{equation}
+    \langle \mathcal{O}(x_1) \cdots \mathcal{O}(x_n) \rangle_{\text{CFT}}
+    = \left. \frac{\delta^n Z_{\text{gravity}}}{\delta \phi_0(x_1) \cdots \delta \phi_0(x_n)} \right|_{\phi_0 = 0}
+\end{equation}
+
+\section{AdS 空间的基本性质}
+
+\subsection{AdS 度规}
+
+庞加莱坐标（Poincaré coordinates）：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left( -dt^2 + d\vec{x}^2 + dz^2 \right)
+\end{equation}
+
+全局坐标（global coordinates）：
+\begin{equation}
+    ds^2 = L^2 \left( -\cosh^2\rho \, d\tau^2 + d\rho^2 + \sinh^2\rho \, d\Omega_{d-1}^2 \right)
+\end{equation}
+
+\subsection{AdS 的基本参数}
+
+AdS 空间的里奇标量：
+\begin{equation}
+    R = -\frac{d(d+1)}{L^2}
+\end{equation}
+
+AdS 的曲率半径 $L$ 与牛顿常数 $G_N$ 的关系：
+\begin{equation}
+    G_N = \frac{\pi L^8}{2 N^2}
+\end{equation}
+
+\section{黑洞热力学}
+
+\subsection{AdS-Schwarzschild 黑洞}
+
+度规：
+\begin{equation}
+    ds^2 = -f(r) dt^2 + \frac{dr^2}{f(r)} + r^2 d\Omega_{d-1}^2
+\end{equation}
+其中 $f(r) = 1 + \frac{r^2}{L^2} - \frac{\omega_{d-1} M}{r^{d-2}}$。
+
+\subsection{霍金温度和熵}
+
+霍金温度：
+\begin{equation}
+    T = \frac{d r_h}{4\pi L^2} + \frac{(d-2) L^2}{4\pi r_h}
+\end{equation}
+
+贝肯斯坦-霍金熵：
+\begin{equation}
+    S = \frac{A}{4G_N} = \frac{\omega_{d-1} r_h^{d-1}}{4G_N}
+\end{equation}
+
+\section{霍金-佩奇相变}
+
+在 AdS 空间中，热 AdS 和 AdS 黑洞之间发生相变。自由能差：
+\begin{equation}
+    \Delta F = F_{\text{BH}} - F_{\text{thermal AdS}}
+\end{equation}
+
+临界温度：
+\begin{equation}
+    T_c = \frac{d-1}{2\pi L}
+\end{equation}
+
+这对应于边界 CFT 中的禁闭/解禁闭相变。
+
+\section{Ryu-Takayanagi 公式}
+
+对于边界区域 $A$，纠缠熵：
+\begin{equation}
+    S_A = \frac{\text{Area}(\gamma_A)}{4G_N}
+\end{equation}
+其中 $\gamma_A$ 是以 $A$ 为边界的极小曲面。
+
+\section{流体动力学与 AdS/CFT}
+
+剪切粘滞系数：
+\begin{equation}
+    \frac{\eta}{s} = \frac{1}{4\pi}
+\end{equation}
+这是 KSS 界（Kovtun-Son-Starinets bound），AdS/CFT 预言的最小值。
+
+\end{document}

@@ -1,0 +1,789 @@
+%=============================================================================
+
+应力张量（stress-energy tensor）$T_{\mu\nu}(x)$ 是理论物理中最基本的算符之一。它描述了能量和动量在时空中的分布，是连接引力与量子场论的桥梁。在广义相对论中，应力张量是爱因斯坦场方程的源项；在量子场论中，它是守恒流的推广；在共形场论中，它的迹与共形异常密切相关；在 AdS/CFT 对偶中，它对应于体空间中的度规扰动\cite{Balasubramanian1999}。本节将系统地介绍应力张量的定义、性质和物理意义。
+
+\section{应力张量的物理图像}
+
+在介绍数学定义之前，我们先建立应力张量的物理直觉。
+
+\subsection{从连续力学到场论}
+
+在连续介质力学中，应力张量描述了介质内部的应力状态。考虑一个流体元，我们需要知道：
+\begin{itemize}
+    \item 这个流体元包含多少能量？→ $T_{00}$：能量密度
+    \item 能量在如何流动？→ $T_{0i}$：能量流密度（或动量密度）
+    \item 流体内部的应力如何？→ $T_{ij}$：动量流密度，即应力
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % 绘制立方体
+    \draw[thick] (0,0) -- (2,0) -- (2,2) -- (0,2) -- cycle;
+    \draw[thick] (0.5,0.5) -- (2.5,0.5) -- (2.5,2.5) -- (0.5,2.5) -- cycle;
+    \draw[thick] (0,0) -- (0.5,0.5);
+    \draw[thick] (2,0) -- (2.5,0.5);
+    \draw[thick] (0,2) -- (0.5,2.5);
+    \draw[thick] (2,2) -- (2.5,2.5);
+    
+    % 标注 T_00
+    \fill[red] (1,1) circle (0.08);
+    \node at (1,1.5) {$T_{00}$};
+    \node at (1,1.2) {\footnotesize 能量密度};
+    
+    % 标注 T_0i
+    \draw[->, blue, thick] (1,1) -- (1.8,1);
+    \node at (1.8,1.3) {$T_{0x}$};
+    \node at (1.8,0.8) {\footnotesize 能量流};
+    
+    % 标注 T_ij
+    \draw[->, green!60!black, thick] (1,1) -- (1,1.8);
+    \node at (1.3,1.8) {$T_{xy}$};
+    \node at (1.3,1.5) {\footnotesize 剪应力};
+\end{tikzpicture}
+\caption{应力张量分量的物理意义。$T_{00}$ 是能量密度，$T_{0i}$ 描述能量流动，$T_{ij}$ 描述应力状态。}
+\label{fig:stress_tensor_components}
+\end{figure}
+
+\subsection{从力学到场论的推广}
+
+在场论中，应力张量是能量-动量四矢量 $P^\mu$ 的流密度。考虑一个超曲面 $\Sigma$，通过它的能量-动量流为：
+\begin{equation}
+    P^\mu = \int_\Sigma d^3x \, T^{0\mu}.
+\end{equation}
+这表明应力张量是"能量-动量的密度和流"的统一描述。
+
+\subsection{应力张量守恒的物理图像}
+
+应力张量的守恒可以用直观的物理图像理解。考虑一个区域 $\Omega$，其内部的能量-动量只能通过边界流入或流出。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3]
+    % 绘制区域
+    \draw[thick, fill=blue!5] (0,0) rectangle (4,3);
+    \node at (2,2.7) {\footnotesize 区域 $\Omega$};
+    
+    % 入射动量流
+    \draw[->, red, very thick] (-0.5,1.5) -- (0,1.5);
+    \node at (-0.5,1.9) {\footnotesize 入射动量流};
+    
+    % 出射动量流
+    \draw[->, red, very thick] (4,1.5) -- (4.5,1.5);
+    \node at (4.5,1.9) {\footnotesize 出射动量流};
+    
+    % 上方能量流出
+    \draw[->, blue, very thick] (2,3) -- (2,3.5);
+    \node at (2,3.8) {\footnotesize 能量流出};
+    
+    % 下方能量流入
+    \draw[->, blue, very thick] (2,0.5) -- (2,0);
+    \node at (2,-0.3) {\footnotesize 能量流入};
+    
+    % 标注守恒
+    \node at (2,1.5) {\large $\frac{dP}{dt} + \oint \vec{T} \cdot d\vec{S} = 0$};
+\end{tikzpicture}
+\caption{应力张量守恒的物理图像。区域内的能量-动量变化率等于通过边界流入的动量流。}
+\label{fig:stress_conservation}
+\end{figure}
+
+\begin{note}[守恒律的直观理解]
+应力张量的守恒方程 $\partial^\mu T_{\mu\nu} = 0$ 的物理含义是：能量和动量不能凭空产生或消失，只能从一个地方流到另一个地方。这类似于流体力学中的连续性方程：流体的密度变化率等于流入的流量。
+\end{note}
+
+\section{经典应力张量}
+
+\subsection{应力张量的定义}
+
+在定义应力张量之前，我们先说明其物理动机。在广义相对论中，爱因斯坦场方程将时空几何与能量-动量分布联系起来：
+\begin{equation}
+    R_{\mu\nu} - \frac{1}{2} g_{\mu\nu} R + \Lambda g_{\mu\nu} = 8\pi G_N T_{\mu\nu}.
+\end{equation}
+因此，应力张量自然地出现在引力理论中。在量子场论中，即使没有引力，我们仍然可以通过对度规变分来定义应力张量，这是因为应力张量是庞加莱对称性的守恒流。
+
+\begin{definition}[应力张量]
+对于场 $\phi$ 的理论，应力张量定义为作用量对度规的变分：
+\begin{equation}
+    T_{\mu\nu}(x) = -\frac{2}{\sqrt{-g}} \frac{\delta S}{\delta g^{\mu\nu}(x)}.
+\end{equation}
+这个定义在弯曲时空和闵可夫斯基时空中都适用。在闵可夫斯基时空中，我们取 $g_{\mu\nu} = \eta_{\mu\nu}$。
+\end{definition}
+
+\begin{note}[为什么是对度规变分？]
+应力张量定义为作用量对度规的变分，这不是偶然的。物理上，度规决定了时空的几何，而应力张量描述了能量-动量的分布。在广义相对论中，爱因斯坦方程将两者联系起来。因此，应力张量自然地出现在引力理论中。在量子场论中，即使没有引力，我们仍然可以通过对度规变分来定义应力张量，这是因为应力张量是庞加莱对称性的守恒流。
+\end{note}
+
+\subsection{标量场的应力张量}
+
+\begin{example}[标量场的应力张量]
+考虑标量场 $\phi$，作用量为：
+\begin{equation}
+    S = \int d^d x \sqrt{-g} \left[\frac{1}{2} g^{\mu\nu} \partial_\mu \phi \partial_\nu \phi - V(\phi)\right].
+\end{equation}
+
+对度规 $g^{\mu\nu}$ 求变分：
+\begin{equation}
+    \delta S = \int d^d x \sqrt{-g} \left[\frac{1}{2} \delta g^{\mu\nu} \partial_\mu \phi \partial_\nu \phi + \left(\frac{1}{2} g^{\mu\nu} \partial_\mu \phi \partial_\nu \phi - V\right) \frac{\delta \sqrt{-g}}{\sqrt{-g}}\right].
+\end{equation}
+
+利用 $\delta \sqrt{-g} = -\frac{1}{2} \sqrt{-g} g_{\mu\nu} \delta g^{\mu\nu}$，得到：
+\begin{equation}
+    \delta S = \int d^d x \sqrt{-g} \left[\frac{1}{2} \partial_\mu \phi \partial_\nu \phi - \frac{1}{2} g_{\mu\nu} \left(\frac{1}{2} g^{\rho\sigma} \partial_\rho \phi \partial_\sigma \phi - V\right)\right] \delta g^{\mu\nu}.
+\end{equation}
+
+因此应力张量为：
+\begin{equation}
+    T_{\mu\nu} = \partial_\mu \phi \partial_\nu \phi - g_{\mu\nu} \left[\frac{1}{2} g^{\rho\sigma} \partial_\rho \phi \partial_\sigma \phi - V(\phi)\right].
+\end{equation}
+
+在闵可夫斯基时空中，$g_{\mu\nu} = \eta_{\mu\nu}$，$\mathcal{L} = \frac{1}{2}(\partial_\mu \phi)^2 - V(\phi)$，所以：
+\begin{equation}
+    T_{\mu\nu} = \partial_\mu \phi \partial_\nu \phi - \eta_{\mu\nu} \mathcal{L}.
+\end{equation}
+\end{example}
+
+\begin{note}[标量场应力张量的物理意义]
+标量场的应力张量 $T_{\mu\nu} = \partial_\mu \phi \partial_\nu \phi - \eta_{\mu\nu} \mathcal{L}$ 有清晰的物理解释：
+\begin{itemize}
+    \item $T_{00} = \frac{1}{2}\dot{\phi}^2 + \frac{1}{2}(\nabla\phi)^2 + V(\phi)$：能量密度，包含动能、梯度能和势能
+    \item $T_{0i} = \dot{\phi} \partial_i \phi$：能量流密度，描述能量如何在空间中流动
+    \item $T_{ij} = \partial_i \phi \partial_j \phi - \delta_{ij} \mathcal{L}$：应力，描述场的"压力"
+\end{itemize}
+\end{note}
+
+\subsection{电磁场的应力张量}
+
+\begin{example}[电磁场的应力张量]
+电磁场的作用量为：
+\begin{equation}
+    S = -\frac{1}{4} \int d^d x \sqrt{-g} g^{\mu\rho} g^{\nu\sigma} F_{\mu\nu} F_{\rho\sigma}.
+\end{equation}
+
+对度规求变分，注意 $F_{\mu\nu}$ 不依赖于度规：
+\begin{equation}
+    \delta S = -\frac{1}{4} \int d^d x \sqrt{-g} \left[2 \delta g^{\mu\rho} g^{\nu\sigma} F_{\mu\nu} F_{\rho\sigma} - g^{\mu\rho} g^{\nu\sigma} F_{\mu\nu} F_{\rho\sigma} g_{\alpha\beta} \delta g^{\alpha\beta}\right].
+\end{equation}
+
+整理得：
+\begin{equation}
+    \delta S = -\frac{1}{2} \int d^d x \sqrt{-g} \left[F_{\mu\rho} F_\nu^{~\rho} - \frac{1}{4} g_{\mu\nu} F_{\rho\sigma} F^{\rho\sigma}\right] \delta g^{\mu\nu}.
+\end{equation}
+
+因此电磁场的应力张量为：
+\begin{equation}
+    T_{\mu\nu} = F_{\mu\rho} F_\nu^{~\rho} - \frac{1}{4} g_{\mu\nu} F_{\rho\sigma} F^{\rho\sigma}.
+\end{equation}
+\end{example}
+
+\begin{note}[电磁场应力张量的性质]
+电磁场的应力张量具有几个重要性质：
+\begin{itemize}
+    \item \textbf{无迹性}：$T_\mu^{~\mu} = 0$，这反映了电磁场的共形不变性
+    \item \textbf{对称性}：$T_{\mu\nu} = T_{\nu\mu}$，这是由电磁场张量的对称性保证的
+    \item \textbf{正能量密度}：$T_{00} = \frac{1}{2}(E^2 + B^2) \geq 0$，这保证了能量的正定性
+\end{itemize}
+\end{note}
+
+\section{守恒律与对称性}
+
+\subsection{从 Noether 定理到能量-动量守恒}
+
+Noether 定理告诉我们，每一个连续对称性都对应一个守恒律。时空平移对称性对应能量-动量守恒。下面我们从 Noether 定理出发，推导应力张量的守恒律。
+
+\begin{theorem}[能量-动量守恒]
+应力张量满足守恒方程：
+\begin{equation}
+    \partial^\mu T_{\mu\nu} = 0.
+\end{equation}
+这个方程表达了能量-动量守恒：能量和动量不能凭空产生或消失，只能从一个地方流到另一个地方。这是物理学中最基本的守恒律之一。
+\end{theorem}
+
+\begin{proof}[能量-动量守恒的推导]
+考虑场论的作用量 $S[\phi, g]$，其中 $\phi$ 是场，$g$ 是度规。在无穷小坐标变换 $x^\mu \to x^\mu + \epsilon^\mu$ 下，场的变化为：
+\begin{equation}
+    \delta \phi = -\epsilon^\mu \partial_\mu \phi, \qquad \delta g_{\mu\nu} = -\epsilon^\rho \partial_\rho g_{\mu\nu} - g_{\mu\rho} \partial_\nu \epsilon^\rho - g_{\nu\rho} \partial_\mu \epsilon^\rho.
+\end{equation}
+
+作用量的变化为零（对称性）：
+\begin{equation}
+    \delta S = \int d^d x \left[\frac{\delta S}{\delta \phi} \delta \phi + \frac{\delta S}{\delta g^{\mu\nu}} \delta g^{\mu\nu}\right] = 0.
+\end{equation}
+
+利用运动方程 $\frac{\delta S}{\delta \phi} = 0$，得到：
+\begin{equation}
+    \delta S = -\frac{1}{2} \int d^d x \sqrt{-g} T_{\mu\nu} \delta g^{\mu\nu} = 0.
+\end{equation}
+
+将 $\delta g^{\mu\nu}$ 的表达式代入，经过分部积分，得到：
+\begin{equation}
+    \int d^d x \sqrt{-g} \epsilon^\nu \nabla^\mu T_{\mu\nu} = 0.
+\end{equation}
+
+由于 $\epsilon^\nu$ 是任意的，我们得到守恒方程：
+\begin{equation}
+    \nabla^\mu T_{\mu\nu} = 0.
+\end{equation}
+
+在平直时空中，$\nabla^\mu \to \partial^\mu$，因此 $\partial^\mu T_{\mu\nu} = 0$。
+\end{proof}
+
+\begin{note}[守恒律的物理意义]
+守恒方程的积分形式为：
+\begin{equation}
+    \frac{d}{dt} \int d^3x \, T_{00} = -\int d^3x \, \partial_i T_{0i}.
+\end{equation}
+左边是总能量的时间变化率，右边是通过边界流入的能量。这表明：能量可以从一个地方流到另一个地方，但总能量守恒。
+\end{note}
+
+\subsection{角动量守恒}
+
+应力张量的对称性 $T_{\mu\nu} = T_{\nu\mu}$ 保证了角动量守恒。角动量密度定义为：
+\begin{equation}
+    M^{\mu\nu\rho} = x^\nu T^{\mu\rho} - x^\rho T^{\mu\nu}.
+\end{equation}
+
+\begin{theorem}[角动量守恒]
+利用 $\partial^\mu T_{\mu\nu} = 0$ 和 $T_{\mu\nu} = T_{\nu\mu}$，可以验证：
+\begin{equation}
+    \partial_\mu M^{\mu\nu\rho} = 0,
+\end{equation}
+即角动量守恒。
+\end{theorem}
+
+\begin{proof}[角动量守恒的推导]
+计算散度：
+\begin{equation}
+    \partial_\mu M^{\mu\nu\rho} = \partial_\mu (x^\nu T^{\mu\rho} - x^\rho T^{\mu\nu}).
+\end{equation}
+
+利用乘积法则：
+\begin{equation}
+    \partial_\mu (x^\nu T^{\mu\rho}) = (\partial_\mu x^\nu) T^{\mu\rho} + x^\nu (\partial_\mu T^{\mu\rho}) = \delta_\mu^\nu T^{\mu\rho} + x^\nu (\partial_\mu T^{\mu\rho}).
+\end{equation}
+
+由于 $\partial_\mu T^{\mu\rho} = 0$，第一项为 $T^{\nu\rho}$。类似地，第二项为 $T^{\rho\nu}$。因此：
+\begin{equation}
+    \partial_\mu M^{\mu\nu\rho} = T^{\nu\rho} - T^{\rho\nu} = 0,
+\end{equation}
+其中最后一步利用了应力张量的对称性 $T_{\mu\nu} = T_{\nu\mu}$。
+\end{proof}
+
+\begin{note}[对称性与守恒律的对应]
+根据 Noether 定理，每一个连续对称性都对应一个守恒律：
+\begin{itemize}
+    \item 时间平移对称性 $\to$ 能量守恒（$T_{00}$ 的积分）
+    \item 空间平移对称性 $\to$ 动量守恒（$T_{0i}$ 的积分）
+    \item 旋转对称性 $\to$ 角动量守恒（$M^{\mu\nu\rho}$ 的积分）
+\end{itemize}
+应力张量统一描述了这些守恒律。
+\end{note}
+
+\section{应力张量的量子性质}
+
+在量子场论中，应力张量被提升为算符 $\hat{T}_{\mu\nu}(x)$。
+
+\subsection{量子应力张量的基本性质}
+
+\begin{property}[量子应力张量的性质]
+应力张量是厄米算符：$\hat{T}_{\mu\nu}^\dagger = \hat{T}_{\mu\nu}$。在类空间隔处，应力张量与其他算符对易：
+\begin{equation}
+    [\hat{T}_{\mu\nu}(x), \hat{T}_{\rho\sigma}(y)] = 0 \quad \text{for} \quad (x-y)^2 > 0.
+\end{equation}
+这是因果性（causality）的要求：类空间隔处的测量不能相互影响。
+\end{property}
+
+在真空中，应力张量的期望值为零：
+\begin{equation}
+    \langle 0 | \hat{T}_{\mu\nu}(x) | 0 \rangle = 0,
+\end{equation}
+这是因为在闵可夫斯基时空中，真空是庞加莱不变的。
+
+\subsection{应力张量的 OPE}
+
+应力张量的算符乘积展开（OPE）包含重要的物理信息。例如，应力张量与自身的 OPE 为：
+\begin{equation}
+    T_{\mu\nu}(x) T_{\rho\sigma}(0) \sim \frac{c/2}{x^{2d}} I_{\mu\nu,\rho\sigma} + \frac{A}{x^{d}} T_{\mu\nu}(0) + \cdots
+\end{equation}
+其中 $c$ 是中心荷（central charge），$A$ 是常数。
+
+\begin{note}[中心荷的物理意义]
+中心荷 $c$ 度量了理论的"自由度"，是 CFT 中最重要的参数之一。在 2 维 CFT 中，中心荷直接对应于理论的自由度数。例如，自由标量场的 $c = 1$，自由费米子的 $c = 1/2$。在 AdS/CFT 对偶中，中心荷与引力常数相关：$c \sim L^{d-1}/G_N$。
+\end{note}
+
+\section{应力张量与共形对称性}
+
+在共形场论中，应力张量具有特殊的性质。
+
+\subsection{共形代数的生成元}
+
+应力张量是共形代数的生成元。具体来说，通过对应力张量在空间上积分，我们可以得到共形代数的所有生成元：
+\begin{itemize}
+    \item 平移生成元：$P_\mu = \int d^{d-1}x \, T_{0\mu}$
+    \item 旋转生成元：$M_{\mu\nu} = \int d^{d-1}x \, (x_\mu T_{0\nu} - x_\nu T_{0\mu})$
+    \item 标度变换生成元：$D = \int d^{d-1}x \, x^\mu T_{0\mu}$
+    \item 特殊共形变换生成元：$K_\mu = \int d^{d-1}x \, (2x_\mu x^\nu T_{0\nu} - x^2 T_{0\mu})$
+\end{itemize}
+
+\begin{note}[应力张量作为"生成元密度"]
+这解释了为什么应力张量在 CFT 中如此重要：它是共形代数的"生成元密度"。通过对应力张量在空间上积分，我们可以得到共形代数的所有生成元。这使得应力张量成为 CFT 中最核心的算符。
+\end{note}
+
+\subsection{共形异常}
+
+在量子水平上，应力张量的迹不为零，这被称为共形异常（conformal anomaly）：
+\begin{equation}
+    \langle T_\mu^{~\mu} \rangle = \frac{(-1)^{d/2}}{2} A E_d + \sum_i B_i I_i.
+\end{equation}
+共形异常反映了量子涨落破坏了经典共形对称性：即使经典理论是共形不变的，量子效应也会导致应力张量的迹不为零。
+
+\begin{theorem}[共形异常的推导]
+考虑共形场论在弯曲背景上的有效作用量 $W[g]$。在 Weyl 变换 $g_{\mu\nu} \to e^{2\sigma} g_{\mu\nu}$ 下，有效作用量的变化为：
+\begin{equation}
+    \delta_\sigma W = \int d^d x \sqrt{g} \, \sigma(x) \langle T_\mu^{~\mu} \rangle.
+\end{equation}
+
+在经典水平上，如果理论是共形不变的，则 $\delta_\sigma W = 0$，从而 $\langle T_\mu^{~\mu} \rangle = 0$。但在量子水平上，正规化和重整化过程会破坏共形不变性，导致：
+\begin{equation}
+    \langle T_\mu^{~\mu} \rangle = \frac{(-1)^{d/2}}{2} A E_d + \sum_i B_i I_i,
+\end{equation}
+其中 $E_d$ 是 Euler 密度，$I_i$ 是 Weyl 张量的不变量。在 $d=4$ 时：
+\begin{equation}
+    E_4 = R_{\mu\nu\rho\sigma} R^{\mu\nu\rho\sigma} - 4 R_{\mu\nu} R^{\mu\nu} + R^2, \qquad I_1 = C_{\mu\nu\rho\sigma} C^{\mu\nu\rho\sigma}.
+\end{equation}
+\end{theorem}
+
+\begin{remark}[共形异常的物理意义]
+共形异常反映了量子效应如何破坏经典对称性。即使经典理论是共形不变的，量子涨落也会导致应力张量的迹不为零。这是量子场论中"反常"现象的一个重要例子。
+\end{remark}
+
+\begin{note}[$a$-异常系数与 $a$-定理]
+$a$-异常系数 $A$ 是 CFT 的重要参数。在 4 维中，$a$-异常系数沿着重整化群流单调递减（$a$-定理）\cite{Komargodski2011}：
+\begin{equation}
+    a_{\rm UV} > a_{\rm IR}.
+\end{equation}
+例如，自由标量场的 $a = 1/360$，自由费米子的 $a = 11/720$。$a$-定理告诉我们，在重整化群流中，系统的"自由度"单调递减。
+\end{note}
+
+\section{Ward 恒等式}
+
+应力张量的守恒律和共形对称性导致了一系列重要的 Ward 恒等式。
+
+\subsection{平移 Ward 恒等式}
+
+\begin{theorem}[平移 Ward 恒等式]
+考虑无穷小坐标变换 $\tilde{x}^\mu = x^\mu + \epsilon^\mu(x)$，度规的变化为 $\tilde{g}_{\mu\nu} = g_{\mu\nu} - \nabla_\mu \epsilon_\nu - \nabla_\nu \epsilon_\mu$。物理不应改变，这导致守恒方程：
+\begin{equation}
+    \nabla_\mu \langle T^{\mu\nu}(x) \rangle_g = 0,
+\end{equation}
+以及关联函数的 Ward 恒等式：
+\begin{equation}
+    \sum_{i=1}^n \epsilon^\mu(x_i) \frac{\partial}{\partial x_i^\mu} \langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g = -\int dx \sqrt{g} \, \epsilon_\nu(x) \langle \nabla_\mu T^{\mu\nu}(x) \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g.
+\end{equation}
+\end{theorem}
+
+\begin{proof}[平移 Ward 恒等式的推导]
+考虑关联函数 $\langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g$。在无穷小坐标变换 $x^\mu \to x^\mu + \epsilon^\mu(x)$ 下，关联函数的变化为：
+\begin{equation}
+    \delta \langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g = -\sum_{i=1}^n \epsilon^\mu(x_i) \frac{\partial}{\partial x_i^\mu} \langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g.
+\end{equation}
+
+另一方面，根据应力张量的定义，关联函数的变化也可以表示为：
+\begin{equation}
+    \delta \langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g = \int dx \sqrt{g} \, \epsilon_\nu(x) \langle \nabla_\mu T^{\mu\nu}(x) \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g.
+\end{equation}
+
+比较两个表达式，得到 Ward 恒等式。
+\end{proof}
+
+\subsection{Weyl Ward 恒等式}
+
+\begin{theorem}[Weyl Ward 恒等式]
+考虑无穷小 Weyl 变换 $\Omega = 1 + \omega$，对应度规变化 $\delta g_{\mu\nu} = 2\omega g_{\mu\nu}$。对于共形维数为 $\Delta_i$ 的算符，Weyl Ward 恒等式为：
+\begin{equation}
+    \sum_{i=1}^n \Delta_i \, \omega(x_i) \langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g = -\int dx \sqrt{g} \, \omega(x) g_{\mu\nu} \langle T^{\mu\nu}(x) \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g.
+\end{equation}
+这个恒等式表明，应力张量的迹 $T_\mu^{~\mu}$ 描述了关联函数在 Weyl 变换下的响应。
+\end{theorem}
+
+\begin{proof}[Weyl Ward 恒等式的推导]
+在 Weyl 变换 $g_{\mu\nu} \to e^{2\omega} g_{\mu\nu} \approx (1+2\omega) g_{\mu\nu}$ 下，关联函数的变化为：
+\begin{equation}
+    \delta_\omega \langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g = -\sum_{i=1}^n \Delta_i \, \omega(x_i) \langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g.
+\end{equation}
+
+另一方面，根据应力张量的定义：
+\begin{equation}
+    \delta_\omega \langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g = \int dx \sqrt{g} \, \omega(x) g_{\mu\nu} \langle T^{\mu\nu}(x) \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle_g.
+\end{equation}
+
+比较两个表达式，得到 Weyl Ward 恒等式。
+\end{proof}
+
+\subsection{共形 Ward 恒等式}
+
+\begin{theorem}[共形 Ward 恒等式]
+对于共形变换，应力张量的守恒导致更精细的约束。考虑以原点为中心、半径为 $r$ 的球面 $\partial B$，共形 Ward 恒等式为：
+\begin{equation}
+    \int_{\partial B} dS_\mu \epsilon_\nu \langle T^{\mu\nu}(x) \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle = -\sum_{x_i \in B} \left[\epsilon^\mu(x_i) \frac{\partial}{\partial x_i^\mu} + \frac{\Delta_i}{d} \nabla_\alpha \epsilon^\alpha(x_i)\right] \langle \mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n) \rangle.
+\end{equation}
+这个恒等式将应力张量的通量与算符在共形变换下的响应联系起来。
+\end{theorem}
+
+\begin{remark}[共形 Ward 恒等式的物理意义]
+共形 Ward 恒等式是共形场论中最重要的约束之一。它表明，应力张量的通量完全由算符在共形变换下的响应决定。这使得我们可以通过研究应力张量的关联函数来确定共形场论的性质。
+\end{remark}
+
+\section{应力张量的关联函数}
+
+应力张量的关联函数包含 CFT 的重要信息。
+
+\subsection{两点函数}
+
+\begin{theorem}[应力张量的两点函数]
+应力张量的两点函数由共形对称性完全确定：
+\begin{equation}
+    \langle T_{\mu\nu}(x) T_{\rho\sigma}(y) \rangle = C_T \frac{I_{\mu\nu,\rho\sigma}(x-y)}{|x-y|^{2d}},
+\end{equation}
+其中 $C_T$ 是应力张量的中心荷，$I_{\mu\nu,\rho\sigma}$ 是共形不变张量：
+\begin{equation}
+    I_{\mu\nu,\rho\sigma}(x) = \frac{1}{2} \left[I_{\mu\rho}(x) I_{\nu\sigma}(x) + I_{\mu\sigma}(x) I_{\nu\rho}(x)\right] - \frac{1}{d} \delta_{\mu\nu} \delta_{\rho\sigma},
+\end{equation}
+其中 $I_{\mu\nu}(x) = \delta_{\mu\nu} - 2x_\mu x_\nu / x^2$。
+\end{theorem}
+
+\begin{proof}[两点函数的推导]
+应力张量的两点函数由共形对称性确定。在共形变换下，应力张量的变换规律为：
+\begin{equation}
+    T_{\mu\nu}(x) \to \left|\frac{\partial x'}{\partial x}\right|^{2\Delta/d} \frac{\partial x^\rho}{\partial x'^\mu} \frac{\partial x^\sigma}{\partial x'^\nu} T_{\rho\sigma}(x'),
+\end{equation}
+其中 $\Delta = d$ 是应力张量的共形维数。
+
+两点函数必须满足共形不变性：
+\begin{equation}
+    \langle T_{\mu\nu}(x) T_{\rho\sigma}(y) \rangle = \left|\frac{\partial x'}{\partial x}\right|^{2\Delta/d} \left|\frac{\partial y'}{\partial y}\right|^{2\Delta/d} \frac{\partial x^\alpha}{\partial x'^\mu} \frac{\partial x^\beta}{\partial x'^\nu} \frac{\partial y^\gamma}{\partial y'^\rho} \frac{\partial y^\delta}{\partial y'^\sigma} \langle T_{\alpha\beta}(x') T_{\gamma\delta}(y') \rangle.
+\end{equation}
+
+唯一满足这个约束的张量结构是 $I_{\mu\nu,\rho\sigma}(x-y) / |x-y|^{2d}$，因此两点函数的形式完全确定。
+\end{proof}
+
+\begin{note}[中心荷 $C_T$ 的物理意义]
+中心荷 $C_T$ 度量了 CFT 的"自由度"，是 CFT 中最重要的参数之一。在 AdS/CFT 对偶中，中心荷与引力常数相关：
+\begin{equation}
+    C_T = \frac{d L^{d-1}}{16\pi G_N} \frac{\Gamma(d+1)}{\pi^{d/2} \Gamma(d/2)}.
+\end{equation}
+对于 $\mathcal{N}=4$ 超对称杨-米尔斯理论，$C_T = N_c^2 / 2$，与大 $N_c$ 极限下的结果一致。
+\end{note}
+
+\subsection{应力张量与标量算符的两点函数}
+
+应力张量与标量算符的两点函数为零：
+\begin{equation}
+    \langle T_{\mu\nu}(x) \mathcal{O}(y) \rangle = 0,
+\end{equation}
+这是由共形对称性和守恒律共同保证的。
+
+\begin{remark}[两点函数为零的原因]
+应力张量与标量算符的两点函数为零，这是因为应力张量是无迹守恒张量，而标量算符是标量。在共形变换下，它们的变换规律不同，因此两点函数必须为零。这也可以从 Ward 恒等式直接推导出来。
+\end{remark}
+
+\subsection{三点函数}
+
+\begin{theorem}[应力张量的三点函数]
+应力张量与两个标量算符的三点函数由共形对称性确定：
+\begin{equation}
+    \langle \mathcal{O}(x_1) \mathcal{O}(x_2) T^{\mu\nu}(x_3) \rangle = C_{\mathcal{O}\mathcal{O}T} \frac{H^{\mu\nu}(x_1, x_2, x_3)}{|x_{12}|^{2\Delta - d + 2} |x_{13}|^{d-2} |x_{23}|^{d-2}},
+\end{equation}
+其中 $\Delta$ 是标量算符的共形维数，$C_{\mathcal{O}\mathcal{O}T}$ 是三点函数系数，$H^{\mu\nu}$ 定义为：
+\begin{equation}
+    H^{\mu\nu} = V^\mu V^\nu - \frac{1}{d} V_\alpha V^\alpha \delta^{\mu\nu}, \qquad V^\mu = \frac{x_{13}^\mu}{x_{13}^2} - \frac{x_{23}^\mu}{x_{23}^2}.
+\end{equation}
+
+利用 Ward 恒等式可以确定三点函数系数与标量算符维数的关系：
+\begin{equation}
+    C_{\mathcal{O}\mathcal{O}T} = -\frac{d\Delta}{d-1} \frac{1}{S_d},
+\end{equation}
+其中 $S_d = 2\pi^{d/2} / \Gamma(d/2)$ 是 $(d-1)$ 维单位球面的面积。
+\end{theorem}
+
+\begin{proof}[三点函数系数的推导]
+利用 Ward 恒等式，我们可以确定三点函数系数 $C_{\mathcal{O}\mathcal{O}T}$。考虑应力张量与两个标量算符的三点函数，对 $x_3$ 求散度：
+\begin{equation}
+    \partial_\mu^{x_3} \langle \mathcal{O}(x_1) \mathcal{O}(x_2) T^{\mu\nu}(x_3) \rangle = -\sum_{i=1}^2 \delta^d(x_{3i}) \partial^\nu_{x_i} \langle \mathcal{O}(x_1) \mathcal{O}(x_2) \rangle.
+\end{equation}
+
+将三点函数的表达式代入左边，计算散度。右边是两点函数的导数，包含 $\delta$ 函数。比较两边，可以确定 $C_{\mathcal{O}\mathcal{O}T}$ 与 $\Delta$ 的关系：
+\begin{equation}
+    C_{\mathcal{O}\mathcal{O}T} = -\frac{d\Delta}{d-1} \frac{1}{S_d}.
+\end{equation}
+\end{proof}
+
+\begin{note}[OPE 结构]
+应力张量与标量算符的 OPE 为：
+\begin{equation}
+    T_{\mu\nu}(x) \mathcal{O}(0) \sim C_{\mathcal{O}\mathcal{O}T} \frac{H_{\mu\nu}(x)}{|x|^{2\Delta - d + 2}} \mathcal{O}(0) + \cdots
+\end{equation}
+这个 OPE 反映了应力张量如何"探测"标量算符的性质。物理上，应力张量的插入可以看作是对时空几何的微扰，它会影响其他算符的行为。
+\end{note}
+
+\section{应力张量与 AdS/CFT}
+
+在 AdS/CFT 对偶中，应力张量扮演着核心角色。它是连接边界 CFT 与体空间引力理论的关键桥梁\cite{Balasubramanian1999}。
+
+\subsection{度规扰动与应力张量的对应}
+
+在 AdS/CFT 的字典中，边界 CFT 的应力张量算符 $T_{\mu\nu}$ 对应于体空间 AdS 中的度规扰动 $h_{\mu\nu}$。具体来说，考虑 AdS 度规的渐近展开：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left(dz^2 + g_{\mu\nu}(x, z) dx^\mu dx^\nu\right),
+\end{equation}
+其中 $g_{\mu\nu}(x, z)$ 在边界 $z \to 0$ 附近的展开为\cite{deHaro2000}：
+\begin{equation}
+    g_{\mu\nu}(x, z) = g_{\mu\nu}^{(0)}(x) + z^2 g_{\mu\nu}^{(2)}(x) + \cdots + z^d g_{\mu\nu}^{(d)}(x) + h_{\mu\nu}(x) z^d \log z + \cdots
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.4]
+    % AdS 边界
+    \draw[thick] (-3,0) -- (3,0);
+    \node at (3.3,0) {\footnotesize AdS 边界};
+    
+    % AdS 体空间
+    \draw[thick, dashed] (-3,0) .. controls (-2,-2) and (2,-2) .. (3,0);
+    \node at (0,-2.3) {\footnotesize AdS 体空间};
+    
+    % 度规扰动
+    \draw[->, red, very thick] (0,0) -- (0,-1.5);
+    \node at (0.5,-0.8) {\footnotesize $h_{\mu\nu}$};
+    
+    % 边界度规
+    \draw[->, blue, very thick] (-2,0) -- (-1,0);
+    \node at (-1.5,0.3) {\footnotesize $g_{\mu\nu}^{(0)}$};
+    
+    % 应力张量
+    \draw[->, green!60!black, very thick] (2,0) -- (1,0);
+    \node at (1.5,0.3) {\footnotesize $\langle T_{\mu\nu} \rangle$};
+    
+    % 对应关系
+    \node at (0,-2.8) {\footnotesize $h_{\mu\nu} \leftrightarrow \langle T_{\mu\nu} \rangle$};
+\end{tikzpicture}
+\caption{AdS/CFT 中度规扰动与应力张量的对应关系。边界 CFT 的应力张量对应于体空间中的度规扰动。}
+\label{fig:holographic_stress}
+\end{figure}
+
+\begin{note}[边界展开的物理意义]
+边界度规 $g_{\mu\nu}^{(0)}(x)$ 是 CFT 的背景度规，而 $g_{\mu\nu}^{(d)}(x)$ 与应力张量的期望值相关。物理上，这可以理解为：边界 CFT 中的能量-动量分布会弯曲体空间的几何。能量密度越大，体空间的曲率越大。
+\end{note}
+
+\subsection{GKPW 关系与应力张量}
+
+GKPW 关系告诉我们，边界 CFT 的生成泛函等于体空间中的引力配分函数：
+\begin{equation}
+    Z_{\rm CFT}[g^{(0)}] = Z_{\rm gravity}[g \to g^{(0)} \text{ at boundary}].
+\end{equation}
+
+应力张量的期望值可以通过对边界度规求泛函导数得到：
+\begin{equation}
+    \langle T_{\mu\nu}(x) \rangle = \frac{2}{\sqrt{g^{(0)}}} \frac{\delta W}{\delta g^{(0)\mu\nu}(x)},
+\end{equation}
+其中 $W = \log Z_{\rm CFT}$ 是 CFT 的生成泛函。
+
+在体空间中，这等价于：
+\begin{equation}
+    \langle T_{\mu\nu}(x) \rangle = \frac{2}{\sqrt{g^{(0)}}} \frac{\delta S_{\rm ren}}{\delta g^{(0)\mu\nu}(x)},
+\end{equation}
+其中 $S_{\rm ren}$ 是重整化的引力作用量。
+
+\subsection{Brown-York 应力张量}
+
+Brown-York 应力张量是定义在时空边界上的应力张量\cite{Brown1993}。对于具有边界的时空区域，引力作用量为：
+\begin{equation}
+    S = \frac{1}{16\pi G_N} \int_M d^{d+1}x \sqrt{-g} (R - 2\Lambda) + \frac{1}{8\pi G_N} \int_{\partial M} d^d x \sqrt{-h} K,
+\end{equation}
+其中 $K$ 是边界的外曲率，$h_{\mu\nu}$ 是边界上的诱导度规。
+
+\begin{definition}[Brown-York 应力张量]
+Brown-York 应力张量定义为：
+\begin{equation}
+    T^{ij}_{\rm BY} = \frac{2}{\sqrt{h}} \frac{\delta S}{\delta h_{ij}} = \frac{1}{8\pi G_N} \left(K^{ij} - K h^{ij}\right).
+\end{equation}
+\end{definition}
+
+\begin{proof}[Brown-York 应力张量的推导]
+考虑引力作用量的边界项：
+\begin{equation}
+    S_{\rm bdry} = \frac{1}{8\pi G_N} \int_{\partial M} d^d x \sqrt{-h} K.
+\end{equation}
+
+对边界度规 $h_{ij}$ 求变分。外曲率 $K_{ij}$ 定义为：
+\begin{equation}
+    K_{ij} = \frac{1}{2} \mathcal{L}_n h_{ij} = \frac{1}{2} \left(\nabla_i n_j + \nabla_j n_i\right),
+\end{equation}
+其中 $n^\mu$ 是边界的单位法向量。
+
+对 $h_{ij}$ 求变分：
+\begin{equation}
+    \delta (\sqrt{-h} K) = \sqrt{-h} \left[\frac{1}{2} h^{ij} K \delta h_{ij} + \delta K\right].
+\end{equation}
+
+计算 $\delta K$：
+\begin{equation}
+    \delta K = \delta (h^{ij} K_{ij}) = -h^{ik} h^{jl} K_{ij} \delta h_{kl} + h^{ij} \delta K_{ij}.
+\end{equation}
+
+经过详细的计算（需要考虑法向量的变化），得到：
+\begin{equation}
+    \frac{\delta S_{\rm bdry}}{\delta h_{ij}} = \frac{1}{8\pi G_N} \sqrt{-h} \left(K^{ij} - K h^{ij}\right).
+\end{equation}
+
+因此 Brown-York 应力张量为：
+\begin{equation}
+    T^{ij}_{\rm BY} = \frac{1}{8\pi G_N} \left(K^{ij} - K h^{ij}\right).
+\end{equation}
+\end{proof}
+
+在 AdS/CFT 中，边界 CFT 的应力张量与 Brown-York 应力张量的关系为：
+\begin{equation}
+    \langle T_{\mu\nu} \rangle = \lim_{z \to 0} \frac{1}{z^{d-2}} T^{\rm BY}_{\mu\nu}.
+\end{equation}
+
+\subsection{全息应力张量的计算}
+
+考虑 AdS-Schwarzschild 黑洞背景\cite{deHaro2000}：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left(-f(z) dt^2 + \frac{dz^2}{f(z)} + d\vec{x}^2\right),
+\end{equation}
+其中 $f(z) = 1 - (z/z_h)^d$。
+
+\begin{example}[全息应力张量的计算]
+对于 AdS-Schwarzschild 黑洞，外曲率为：
+\begin{equation}
+    K_{ij} = \frac{1}{2} \frac{z}{L} \partial_z g_{ij} = \frac{1}{2} \frac{z}{L} \partial_z \left(\frac{L^2}{z^2} g_{ij}^{(0)}\right) = -\frac{L}{z^2} g_{ij}^{(0)} + \frac{L}{2} g_{ij}^{(2)} + \cdots
+\end{equation}
+
+迹为：
+\begin{equation}
+    K = h^{ij} K_{ij} = -\frac{d L}{z} + \cdots
+\end{equation}
+
+因此 Brown-York 应力张量为：
+\begin{equation}
+    T^{\rm BY}_{\mu\nu} = \frac{1}{8\pi G_N} \left(K_{\mu\nu} - K h_{\mu\nu}\right) = \frac{1}{8\pi G_N} \left[\frac{(d-1) L}{z^2} g_{\mu\nu}^{(0)} + \cdots\right].
+\end{equation}
+
+取极限 $z \to 0$ 并乘以 $z^{d-2}$，得到：
+\begin{equation}
+    \langle T_{\mu\nu} \rangle = \frac{(d-1) r_h^d}{16\pi G_N L} \text{diag}(1, 1/d, 1/d, \ldots).
+\end{equation}
+\end{example}
+
+能量密度为：
+\begin{equation}
+    \epsilon = \langle T_{00} \rangle = \frac{(d-1) r_h^d}{16\pi G_N L}.
+\end{equation}
+
+\begin{note}[与热力学的一致性]
+这与通过热力学方法得到的结果一致\cite{Balasubramanian1999}。在 AdS/CFT 中，黑洞对应于边界 CFT 的热态，应力张量的期望值给出了热态的能量密度。这验证了 AdS/CFT 对偶在热力学层面的正确性。
+\end{note}
+
+\subsection{应力张量与共形异常}
+
+在偶数维边界 CFT 中，应力张量的迹不为零，这对应于体空间中的全息共形异常\cite{Henningson1998}。具体来说，对于 $d=4$ 的边界 CFT：
+\begin{equation}
+    \langle T_\mu^{~\mu} \rangle = \frac{L^3}{16\pi G_N} \left(\frac{1}{2} R_{\mu\nu}^{(0)} R^{(0)\mu\nu} - \frac{1}{6} R^{(0)2}\right),
+\end{equation}
+其中 $R_{\mu\nu}^{(0)}$ 是边界度规的曲率。
+
+\begin{proof}[全息共形异常的推导]
+考虑 AdS 的渐近展开，边界度规为 $g_{\mu\nu}^{(0)}$。在 Fefferman-Graham 坐标下，AdS 度规为：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left(dz^2 + g_{\mu\nu}(x, z) dx^\mu dx^\nu\right),
+\end{equation}
+其中 $g_{\mu\nu}(x, z) = g_{\mu\nu}^{(0)}(x) + z^2 g_{\mu\nu}^{(2)}(x) + z^4 g_{\mu\nu}^{(4)}(x) + \cdots$
+
+代入 Einstein 方程 $R_{\mu\nu} - \frac{1}{2} g_{\mu\nu} R + \Lambda g_{\mu\nu} = 0$，逐阶求解：
+\begin{itemize}
+    \item $O(z^0)$ 阶：$g_{\mu\nu}^{(2)} = -\frac{1}{d-2} \left(R_{\mu\nu}^{(0)} - \frac{1}{2(d-1)} R^{(0)} g_{\mu\nu}^{(0)}\right)$
+    \item $O(z^2)$ 阶：$g_{\mu\nu}^{(4)}$ 由 $g_{\mu\nu}^{(0)}$ 和 $g_{\mu\nu}^{(2)}$ 的曲率确定
+\end{itemize}
+
+对于 $d=4$，$g_{\mu\nu}^{(4)}$ 的迹包含共形异常的信息。计算 Brown-York 应力张量的迹：
+\begin{equation}
+    \langle T_\mu^{~\mu} \rangle = \frac{L^3}{16\pi G_N} \left(\frac{1}{2} R_{\mu\nu}^{(0)} R^{(0)\mu\nu} - \frac{1}{6} R^{(0)2}\right).
+\end{equation}
+\end{proof}
+
+这个结果与 CFT 中的共形异常公式一致，其中 $a$-异常系数为\cite{Henningson1998}：
+\begin{equation}
+    a = \frac{\pi^2 L^3}{8 G_N}.
+\end{equation}
+
+\begin{remark}[全息共形异常的意义]
+全息共形异常是 AdS/CFT 对偶的一个重要预言。它表明，边界 CFT 的共形异常可以通过体空间的引力理论来计算。这为理解共形异常的物理意义提供了新的视角。
+\end{remark}
+
+\section{应力张量与流体动力学}
+
+在流体动力学中，应力张量描述了流体的应力状态。
+
+\subsection{理想流体}
+
+\begin{definition}[理想流体的应力张量]
+对于理想流体，应力张量为：
+\begin{equation}
+    T^{\mu\nu} = (\epsilon + P)u^\mu u^\nu + P \eta^{\mu\nu},
+\end{equation}
+其中 $\epsilon$ 是能量密度，$P$ 是压强，$u^\mu$ 是四速度。
+\end{definition}
+
+\begin{note}[理想流体的物理意义]
+理想流体的应力张量有清晰的物理解释：
+\begin{itemize}
+    \item $(\epsilon + P)u^\mu u^\nu$：对流项，描述能量和动量随流体的流动
+    \item $P \eta^{\mu\nu}$：压强项，描述流体内部的各向同性压力
+\end{itemize}
+在流体静止系中，$T^{00} = \epsilon$，$T^{ij} = P \delta^{ij}$，这正是理想流体的状态方程。
+\end{note}
+
+\subsection{粘滞流体}
+
+\begin{definition}[粘滞流体的应力张量]
+对于粘滞流体，应力张量包含粘滞项：
+\begin{equation}
+    T^{\mu\nu} = (\epsilon + P)u^\mu u^\nu + P \eta^{\mu\nu} - \eta \sigma^{\mu\nu} - \zeta \theta \Delta^{\mu\nu},
+\end{equation}
+其中 $\eta$ 是剪切粘滞系数，$\zeta$ 是体积粘滞系数，$\sigma^{\mu\nu}$ 是剪切张量，$\theta$ 是膨胀率。
+\end{definition}
+
+\begin{property}[粘滞系数的物理意义]
+粘滞系数描述了流体的耗散性质：
+\begin{itemize}
+    \item $\eta$：剪切粘滞系数，描述流体抵抗剪切变形的能力
+    \item $\zeta$：体积粘滞系数，描述流体抵抗体积变化的能力
+    \item $\sigma^{\mu\nu}$：剪切张量，定义为 $\sigma^{\mu\nu} = \Delta^{\mu\alpha} \Delta^{\nu\beta} (\partial_\alpha u_\beta + \partial_\beta u_\alpha) - \frac{2}{d-1} \Delta^{\mu\nu} \partial_\alpha u^\alpha$
+    \item $\theta$：膨胀率，定义为 $\theta = \partial_\mu u^\mu$
+\end{itemize}
+其中 $\Delta^{\mu\nu} = \eta^{\mu\nu} + u^\mu u^\nu$ 是投影算符。
+\end{property}
+
+\begin{remark}[AdS/CFT 的著名预言]
+在 AdS/CFT 对偶中，黑洞的扰动对应于边界 CFT 的流体动力学模式。剪切粘滞系数 $\eta/s = 1/(4\pi)$ 是 AdS/CFT 的著名预言，其中 $s$ 是熵密度。这个结果表明黑洞是一个"完美流体"，其粘滞系数达到最小可能值。
+\end{remark}
+
+\section{小结}
+
+在本节中，我们介绍了应力张量的基本概念：
+\begin{itemize}
+    \item 应力张量描述了能量和动量在时空中的分布，定义为作用量对度规的变分
+    \item 守恒方程 $\partial^\mu T_{\mu\nu} = 0$ 表达了能量-动量守恒，可以从 Noether 定理推导
+    \item 在量子场论中，应力张量是厄米算符，满足因果性要求
+    \item 在共形场论中，应力张量是共形代数的生成元密度
+    \item 共形异常导致应力张量的迹不为零，$a$-异常系数沿 RG 流单调递减
+    \item Ward 恒等式将守恒律与关联函数的对称性联系起来
+    \item 应力张量的两点函数由中心荷 $C_T$ 参数化，三点函数由共形对称性完全确定
+    \item 在 AdS/CFT 中，应力张量对应于体空间的度规扰动\cite{Balasubramanian1999}
+    \item Brown-York 应力张量提供了从体空间计算边界应力张量的方法\cite{Brown1993}
+    \item 全息共形异常可以通过体空间的引力理论计算\cite{Henningson1998}
+    \item 在流体动力学中，应力张量描述了流体的应力状态
+\end{itemize}
+
+%=============================================================================

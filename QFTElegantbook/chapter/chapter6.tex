@@ -1,0 +1,141 @@
+\chapter{\protect\hyperlink{:}{统计物理与量子场论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+统计物理与量子场论之间存在着深刻的联系。本章我们将看到，量子场论中的路径积分表述与统计物理中的配分函数有着惊人的相似性，这种联系不仅提供了计算量子场论的新方法，也揭示了物理理论的统一性。
+
+\section{\protect\hyperlink{:}{经典统计物理回顾}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+在进入量子场论的路径积分表述之前，我们先回顾一下经典统计物理的基本概念。
+
+\subsection{\protect\hyperlink{:}{正则系综与配分函数}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+对于一个处于热平衡的系统，其温度为 $T$，正则系综的配分函数定义为
+\begin{equation}
+    Z = \sum_n e^{-\beta E_n}
+\end{equation}
+
+其中 $\beta = \frac{1}{k_B T}$ 是逆温度，$E_n$ 是系统第 $n$ 个能级的能量。配函数是统计物理中最基本的量，知道了配分函数，就可以计算所有热力学量：
+
+\begin{itemize}
+    \item 自由能：$F = -\frac{1}{\beta}\ln Z$
+    \item 内能：$U = -\frac{\partial}{\partial\beta}\ln Z$
+    \item 熵：$S = k_B\left(\ln Z - \beta\frac{\partial}{\partial\beta}\ln Z\right)$
+    \item 压强：$P = \frac{1}{\beta}\frac{\partial}{\partial V}\ln Z$
+\end{itemize}
+
+\subsection{\protect\hyperlink{:}{路径积分与配分函数的联系}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+现在我们来揭示路径积分与配分函数之间的深刻联系。考虑一个量子力学系统，其哈密顿量为 $\hat{H}$。在虚时间 $\tau = it$ 下，时间演化算符变为
+\begin{equation}
+    e^{-\hat{H}\tau/\hbar}
+\end{equation}
+
+这与统计物理中的玻尔兹曼因子 $e^{-\beta E}$ 具有完全相同的形式！因此，我们可以将配分函数写成路径积分的形式：
+\begin{equation}
+    Z = \text{Tr}\left(e^{-\beta\hat{H}}\right) = \int \mathcal{D}\phi \, e^{-S_E[\phi]/\hbar}
+\end{equation}
+
+其中 $S_E[\phi]$ 是欧几里得作用量，定义为
+\begin{equation}
+    S_E[\phi] = \int_0^{\beta\hbar} d\tau \int d^3x \, \mathcal{L}_E(\phi, \partial_\mu\phi)
+\end{equation}
+
+这里的关键点是：
+\begin{enumerate}
+    \item 时间 $\tau$ 的取值范围是 $[0, \beta\hbar]$，而不是 $[0, \infty)$
+    \item 场 $\phi$ 满足周期性边界条件：$\phi(0, \vec{x}) = \phi(\beta\hbar, \vec{x})$
+    \item 作用量是欧几里得的，即度规从闵可夫斯基度规 $\eta_{\mu\nu} = \text{diag}(1,-1,-1,-1)$ 变为欧几里得度规 $\delta_{\mu\nu} = \text{diag}(1,1,1,1)$
+\end{enumerate}
+
+\section{\protect\hyperlink{:}{欧几里得空间中的量子场论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+通过上述对应关系，我们可以将闵可夫斯基时空中的量子场论转化为欧几里得空间中的统计场论。这种转化不仅在数学上更方便，而且在物理上也提供了新的视角。
+
+\subsection{\protect\hyperlink{:}{从闵可夫斯基到欧几里得}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+在闵可夫斯基时空中，自由标量场的作用量为
+\begin{equation}
+    S_M = \int d^4x \left[\frac{1}{2}(\partial_\mu\phi)^2 - \frac{1}{2}m^2\phi^2\right]
+\end{equation}
+
+通过Wick转动 $t \to -i\tau$，我们得到欧几里得作用量
+\begin{equation}
+    S_E = \int d^4x_E \left[\frac{1}{2}(\partial_\mu\phi)^2 + \frac{1}{2}m^2\phi^2\right]
+\end{equation}
+
+注意两个重要变化：
+\begin{enumerate}
+    \item 动能项的符号从负变为正
+    \item 质量项的符号从负变为正
+\end{enumerate}
+
+这使得欧几里得作用量是正定的，因此路径积分 $\int \mathcal{D}\phi \, e^{-S_E}$ 是收敛的，这与统计物理中的配分函数完全一致。
+
+\subsection{\protect\hyperlink{:}{欧几里得关联函数}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+在欧几里得空间中，关联函数定义为
+\begin{equation}
+    \langle\phi(x_1)\phi(x_2)\cdots\phi(x_n)\rangle_E = \frac{1}{Z}\int \mathcal{D}\phi \, \phi(x_1)\phi(x_2)\cdots\phi(x_n) \, e^{-S_E[\phi]}
+\end{equation}
+
+这与统计物理中的期望值完全相同。欧几里得关联函数与闵可夫斯基关联函数之间的关系为
+\begin{equation}
+    \langle\phi(x_1)\phi(x_2)\cdots\phi(x_n)\rangle_M = \langle\phi(x_1^E)\phi(x_2^E)\cdots\phi(x_n^E)\rangle_E \Big|_{\tau = it}
+\end{equation}
+
+\section{\protect\hyperlink{:}{统计场论的应用}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+统计场论在凝聚态物理和粒子物理中都有广泛的应用。
+
+\subsection{\protect\hyperlink{:}{临界现象与相变}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+在临界点附近，系统的关联长度发散，此时微观细节不再重要，系统的普适性类由对称性和维数决定。统计场论提供了描述临界现象的自然框架。
+
+考虑 $\phi^4$ 理论的欧几里得版本
+\begin{equation}
+    S_E = \int d^d x \left[\frac{1}{2}(\nabla\phi)^2 + \frac{1}{2}r\phi^2 + \frac{1}{4!}u\phi^4\right]
+\end{equation}
+
+其中 $r \propto (T - T_c)$ 是约化温度，$u$ 是耦合常数。这个理论描述了 $d$ 维空间中的 Ising 普适性类。
+
+\subsection{\protect\hyperlink{:}{有限温度量子场论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+在有限温度下，量子场论需要使用虚时形式。配分函数为
+\begin{equation}
+    Z(\beta) = \int \mathcal{D}\phi \, e^{-S_E[\phi]}
+\end{equation}
+
+其中场满足周期性边界条件（对于玻色子）或反周期性边界条件（对于费米子）：
+\begin{align}
+    \phi(0, \vec{x}) &= \phi(\beta, \vec{x}) \quad \text{(玻色子)} \\
+    \psi(0, \vec{x}) &= -\psi(\beta, \vec{x}) \quad \text{(费米子)}
+\end{align}
+
+\begin{example}[热力学势的计算]
+    考虑自由标量场的热力学势。在动量空间中，配分函数为
+    \begin{equation*}
+        \ln Z = -\sum_{\vec{p}} \left[\frac{\beta\omega_{\vec{p}}}{2} + \ln\left(1 - e^{-\beta\omega_{\vec{p}}}\right)\right]
+    \end{equation*}
+
+    其中 $\omega_{\vec{p}} = \sqrt{\vec{p}^2 + m^2}$ 是粒子的能量。第一项是零点能贡献（需要正规化），第二项是热激发贡献。
+
+    由此可以计算热力学量，如能量密度
+    \begin{equation*}
+        \frac{U}{V} = \int \frac{d^3p}{(2\pi)^3} \frac{\omega_{\vec{p}}}{e^{\beta\omega_{\vec{p}}} - 1}
+    \end{equation*}
+
+    这就是著名的玻色-爱因斯坦分布。
+\end{example}
+
+\begin{remark}
+    统计物理与量子场论的联系不仅仅是数学上的类比，它揭示了物理理论的深层统一性。路径积分表述使得我们可以用统一的语言描述量子力学、量子场论和统计物理，这是现代理论物理的重要成就之一。
+\end{remark}

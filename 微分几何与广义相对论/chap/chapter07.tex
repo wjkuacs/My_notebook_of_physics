@@ -1,0 +1,481 @@
+% chapter07.tex - 测地线方程
+\chapter{测地线方程 (Geodesic Equation)}
+\label{chap:geodesic}
+
+\section{测地线的物理意义}
+
+\begin{note}[物理动机]
+在经典力学中，不受外力作用的粒子沿直线匀速运动（牛顿第一定律）。在广义相对论中，自由粒子（不受非引力作用）——包括光子——仍然沿"直线"运动，但这里的"直线"被重新定义为\textbf{测地线} (geodesic)：弯曲时空中两点之间的"最短"路径。
+
+测地线在物理上有两层基本含义：
+\begin{enumerate}
+    \item \textbf{运动学}：测地线是自由粒子在弯曲时空中的世界线——地球绕太阳的运动轨迹在四维时空中是一条测地线
+    \item \textbf{几何学}：测地线是弯曲时空中两点之间极值化（极大或极小）固有时间的路径——在类时的情况下，测地线极大化固有时（这是"孪生子佯谬"中旅行者比留守者年轻的原因）
+\end{enumerate}
+
+在局部惯性系中（等效原理生效的区域），测地线方程约化为 $\dd^2 x^\mu/\dd\tau^2 = 0$——这就是狭义相对论中自由粒子的运动方程 \cite{Carroll1997}。
+\end{note}
+
+\begin{example}[S$^2$ 上的大圆是测地线]
+为了具体理解测地线的物理意义，考虑二维球面 $S^2$，度规为
+\begin{equation}
+    \dd s^2 = \dd\theta^2 + \sin^2\theta \, \dd\phi^2.
+\end{equation}
+采用 Lagrangian 方法（详见第 \ref{sec:variational} 节），令
+\begin{equation}
+    L = \frac{1}{2}\bigl(\dot\theta^2 + \sin^2\theta \, \dot\phi^2\bigr),
+\end{equation}
+其中 $\dot{}=\dd/\dd\lambda$。Euler--Lagrange 方程给出：
+\begin{align}
+    \frac{\dd}{\dd\lambda}(\dot\theta) - \sin\theta\cos\theta \, \dot\phi^2 &= 0, \label{eq:s2_euler_theta}\\
+    \frac{\dd}{\dd\lambda}(\sin^2\theta \, \dot\phi) &= 0. \label{eq:s2_euler_phi}
+\end{align}
+方程 (\ref{eq:s2_euler_phi}) 表明 $\sin^2\theta \, \dot\phi = \ell$ 是守恒量（角动量）。代入 (\ref{eq:s2_euler_theta}) 消去 $\dot\phi$：
+\begin{equation}
+    \ddot\theta = \frac{\ell^2 \cos\theta}{\sin^3\theta}.
+\end{equation}
+特解 $\theta = \pi/2$（赤道）满足 $\ddot\theta = 0$，此时 $\dot\phi = \ell$（常数），即 $\phi = \ell\lambda + \phi_0$——这正是赤道大圆。类似地，任意经线（$\phi = \text{const}$，$\theta = \lambda$）也满足方程。实际上，球面上的所有\textbf{大圆}（great circles）都是测地线。这正是飞机从北京飞往纽约沿大圆航线飞行（而非纬线）的原因——大圆是球面上两点间的最短路径。
+\end{example}
+
+\section{测地线方程的推导：协变导数方式}
+\label{sec:covariant_derivation}
+
+\begin{definition}[测地线——协变导数定义]
+一条光滑曲线 $\gamma: I \to M$（$I \subseteq \mathbb{R}$ 为开区间）称为\textbf{测地线} (geodesic)，若其切向量场 $\dot\gamma(\lambda)$ 沿曲线自身方向的协变导数为零：
+\begin{equation}
+    \boxed{\nabla_{\dot\gamma} \dot\gamma = 0},
+\end{equation}
+即切向量沿自身方向是"平行移动的"——曲线不"转弯"，切向量的变化完全由空间的弯曲所必需。
+\end{definition}
+
+在坐标基下，设曲线由 $x^\mu(\lambda)$ 参数化，则 $\dot\gamma = \frac{\dd x^\mu}{\dd\lambda} \pd_\mu$。代入协变导数公式：
+\begin{equation}
+    \nabla_{\dot\gamma} \dot\gamma
+    = \frac{\dd x^\nu}{\dd\lambda} \nabla_{\pd_\nu} \left( \frac{\dd x^\mu}{\dd\lambda} \pd_\mu \right)
+    = \frac{\dd^2 x^\mu}{\dd\lambda^2} \pd_\mu + \frac{\dd x^\nu}{\dd\lambda} \frac{\dd x^\mu}{\dd\lambda} \Gamma^\rho{}_{\nu\mu} \pd_\rho.
+\end{equation}
+设其为零，得到：
+
+\begin{theorem}[测地线方程 —— 坐标形式]
+\textbf{测地线方程}在坐标下的分量为：
+\begin{equation}
+    \boxed{\frac{\dd^2 x^\mu}{\dd\lambda^2} + \Gamma^\mu{}_{\nu\rho} \frac{\dd x^\nu}{\dd\lambda} \frac{\dd x^\rho}{\dd\lambda} = 0},
+\end{equation}
+其中 $\lambda$ 是曲线的\textbf{仿射参数} (affine parameter)。
+\end{theorem}
+
+这个方程的结构非常有启发性：
+\begin{itemize}
+    \item 第一项：$\dd^2 x^\mu/\dd\lambda^2$ 是"加速度"（在坐标意义下）
+    \item 第二项：$\Gamma^\mu{}_{\nu\rho} \dot x^\nu \dot x^\rho$ 是"引力加速度"——由时空的弯曲（Christoffel 符号）产生
+    \item 在平坦时空（$\Gamma^\mu{}_{\nu\rho} = 0$）中，方程退化为 $\dd^2 x^\mu/\dd\lambda^2 = 0$——匀速直线运动
+\end{itemize}
+
+\begin{note}[物理意义]
+测地线方程明确地展示了"引力 = 几何"：方程中根本没有"力"的项——粒子的加速度完全由 Christoffel 符号（即度规的导数）决定。当你看到一个苹果从树上落下，你不是在看苹果受到引力，而是在看苹果沿弯曲时空中的测地线运动。苹果没有"受力"——它是在"自由运动"。
+\end{note}
+
+\section{变分推导：测地线作为极值路径}
+\label{sec:variational}
+
+测地线也可以从变分原理推导，这更接近物理学家的思维方式。本节给出完整的变分推导，并与协变导数方式对比，证明两者给出完全相同的方程。
+
+\begin{theorem}[测地线的变分原理]
+在（伪）黎曼流形 $(M, g)$ 上，连接两点 $p, q \in M$ 的光滑曲线 $\gamma$ 是测地线，当且仅当它使以下\textbf{长度泛函}取极值：
+\begin{equation}
+    S[\gamma] = \int_{\lambda_0}^{\lambda_1} \sqrt{\left|g_{\mu\nu} \frac{\dd x^\mu}{\dd\lambda} \frac{\dd x^\nu}{\dd\lambda}\right|} \, \dd\lambda.
+\end{equation}
+或者，更方便地，使\textbf{能量泛函}取极值：
+\begin{equation}
+    E[\gamma] = \frac{1}{2} \int_{\lambda_0}^{\lambda_1} g_{\mu\nu} \frac{\dd x^\mu}{\dd\lambda} \frac{\dd x^\nu}{\dd\lambda} \, \dd\lambda.
+\end{equation}
+长度泛函和能量泛函的极值曲线是相同的（仅参数化方式不同）。
+\end{theorem}
+
+\begin{proof}[变分推导测地线方程——完整计算]
+考虑能量泛函 $E[x^\mu] = \frac{1}{2} \int g_{\mu\nu}(x) \, \dot x^\mu \dot x^\nu \dd\lambda$，其中 Lagrangian 为
+\begin{equation}
+    L(x, \dot x) = \frac{1}{2} g_{\mu\nu}(x) \, \dot x^\mu \dot x^\nu.
+\end{equation}
+变分 $\delta E = 0$ 给出 Euler--Lagrange 方程：
+\begin{equation}
+    \frac{\dd}{\dd\lambda} \left( \frac{\pd L}{\pd \dot x^\mu} \right) - \frac{\pd L}{\pd x^\mu} = 0.
+\end{equation}
+逐项计算：
+\begin{align}
+    \frac{\pd L}{\pd \dot x^\mu} &= g_{\mu\nu} \dot x^\nu, \\
+    \frac{\dd}{\dd\lambda} \frac{\pd L}{\pd \dot x^\mu} &= g_{\mu\nu} \ddot x^\nu + \pd_\rho g_{\mu\nu} \, \dot x^\rho \dot x^\nu, \\
+    \frac{\pd L}{\pd x^\mu} &= \frac{1}{2} \pd_\mu g_{\nu\rho} \, \dot x^\nu \dot x^\rho.
+\end{align}
+代入 Euler--Lagrange 方程：
+\begin{equation}
+    g_{\mu\nu} \ddot x^\nu + \pd_\rho g_{\mu\nu} \, \dot x^\rho \dot x^\nu - \frac{1}{2} \pd_\mu g_{\nu\rho} \, \dot x^\nu \dot x^\rho = 0.
+\end{equation}
+将第二项中哑指标重新标记：$\pd_\rho g_{\mu\nu} \dot x^\rho \dot x^\nu = \frac{1}{2}(\pd_\nu g_{\mu\rho} + \pd_\rho g_{\mu\nu}) \dot x^\nu \dot x^\rho$，则方程化为：
+\begin{equation}
+    g_{\mu\nu} \ddot x^\nu + \frac{1}{2}\bigl(\pd_\rho g_{\mu\nu} + \pd_\nu g_{\mu\rho} - \pd_\mu g_{\nu\rho}\bigr) \dot x^\nu \dot x^\rho = 0.
+\end{equation}
+两边乘以逆度规 $g^{\sigma\mu}$，利用 $g^{\sigma\mu} g_{\mu\nu} = \delta^\sigma_\nu$：
+\begin{equation}
+    \ddot x^\sigma + \frac{1}{2} g^{\sigma\mu}\bigl(\pd_\rho g_{\mu\nu} + \pd_\nu g_{\mu\rho} - \pd_\mu g_{\nu\rho}\bigr) \dot x^\nu \dot x^\rho = 0.
+\end{equation}
+括号中恰好是 Christoffel 符号 $\Gamma^\sigma{}_{\nu\rho}$（参见第 \ref{chap:connection} 章）。因此：
+\begin{equation}
+    \boxed{\ddot x^\mu + \Gamma^\mu{}_{\nu\rho} \dot x^\nu \dot x^\rho = 0}.
+\end{equation}
+这与协变导数方式得到的方程完全一致。变分方法直接给出 Christoffel 符号的度规表达式，而协变导数方法从几何平行移动的概念出发——两者殊途同归。
+\end{proof}
+
+\begin{proof}[S$^2$ 度规的 Euler--Lagrange 显式计算]
+以二维球面为例演示完整变分计算。度规为
+\begin{equation}
+    g_{ij} = \begin{pmatrix} 1 & 0 \\ 0 & \sin^2\theta \end{pmatrix}, \quad (x^1, x^2) = (\theta, \phi).
+\end{equation}
+Lagrangian：
+\begin{equation}
+    L = \frac{1}{2}\bigl(\dot\theta^2 + \sin^2\theta \, \dot\phi^2\bigr).
+\end{equation}
+对 $\theta$ 的 Euler--Lagrange 方程：
+\begin{align}
+    \frac{\pd L}{\pd \dot\theta} &= \dot\theta, \quad
+    \frac{\dd}{\dd\lambda}\frac{\pd L}{\pd \dot\theta} = \ddot\theta, \\
+    \frac{\pd L}{\pd \theta} &= \sin\theta\cos\theta \, \dot\phi^2.
+\end{align}
+因此：
+\begin{equation}
+    \ddot\theta - \sin\theta\cos\theta \, \dot\phi^2 = 0.
+\end{equation}
+对 $\phi$ 的 Euler--Lagrange 方程：
+\begin{align}
+    \frac{\pd L}{\pd \dot\phi} &= \sin^2\theta \, \dot\phi, \quad
+    \frac{\dd}{\dd\lambda}\frac{\pd L}{\pd \dot\phi} = 2\sin\theta\cos\theta \, \dot\theta \dot\phi + \sin^2\theta \, \ddot\phi, \\
+    \frac{\pd L}{\pd \phi} &= 0.
+\end{align}
+因此：
+\begin{equation}
+    \ddot\phi + 2\cot\theta \, \dot\theta \dot\phi = 0.
+\end{equation}
+这两个方程可以验证等价于利用 Christoffel 符号 $\Gamma^\theta_{\phi\phi} = -\sin\theta\cos\theta$, $\Gamma^\phi_{\theta\phi} = \cot\theta$ 写出的测地线方程：
+\begin{align}
+    \ddot\theta + \Gamma^\theta_{\phi\phi} \, \dot\phi^2 &= 0, \\
+    \ddot\phi + 2\Gamma^\phi_{\theta\phi} \, \dot\theta \dot\phi &= 0.
+\end{align}
+验证大圆：赤道 $\theta = \pi/2$, $\phi = \lambda$（此时 $\dot\theta = 0$, $\dot\phi = 1$, $\ddot\theta = \ddot\phi = 0$）显然满足方程。
+\end{proof}
+
+\begin{note}[两种推导方式的对比]
+总结测地线方程的两种推导路径：
+\begin{center}
+\begin{tabular}{p{0.45\textwidth}|p{0.45\textwidth}}
+\hline
+\textbf{协变导数方式} & \textbf{变分方式} \\
+\hline
+出发点：切向量沿自身平行移动 & 出发点：路径长度/能量取极值 \\
+$\nabla_{\dot\gamma}\dot\gamma = 0$ & $\delta\!\int L\,\dd\lambda = 0$ \\
+几何直观：曲线"不转弯" & 物理直观：最小作用量原理 \\
+Christoffel 符号来自联络定义 & Christoffel 符号来自度规导数 \\
+适用于任意联络（不必是 Levi-Civita） & 仅适用于 Levi-Civita 联络 \\
+\hline
+\end{tabular}
+\end{center}
+在广义相对论中，两种方式等价，因为物理时空使用的是 Levi-Civita 联络（由度规唯一确定）。物理学家通常偏爱变分方法，因为它直接产生守恒量和运动常数。
+\end{note}
+
+\section{仿射参数与测地线的参数化}
+
+\begin{definition}[仿射参数]
+参数 $\lambda$ 称为测地线的\textbf{仿射参数} (affine parameter)，如果测地线方程以标准形式 $\ddot x^\mu + \Gamma^\mu{}_{\nu\rho} \dot x^\nu \dot x^\rho = 0$ 成立。仿射参数可以重新缩放：如果 $\lambda$ 是仿射参数，则 $\tilde\lambda = a\lambda + b$（$a,b$ 为常数，$a \neq 0$）也是仿射参数。
+\end{definition}
+
+\begin{note}[物理参数化]
+在物理中，自然选择仿射参数为：
+\begin{itemize}
+    \item \textbf{类时测地线}：$\lambda = \tau$（固有时间）：$\dd\tau^2 = -g_{\mu\nu} \dd x^\mu \dd x^\nu$
+    \item \textbf{类光测地线}：固有时间为零，需选择任意仿射参数（如 $\lambda = t$ 或沿光线的某种自然参数）
+\end{itemize}
+对于类时测地线，四速度 $u^\mu = \dd x^\mu/\dd\tau$ 自动满足归一化条件 $g_{\mu\nu} u^\mu u^\nu = -1$，且 $\nabla_u u = 0$ 正是测地线条件。
+\end{note}
+
+\section{测地线偏差方程与 Jacobi 场}
+
+两个相邻自由粒子的相对加速度——即潮汐力——是引力区别于匀加速参考系的本质特征。
+
+\begin{definition}[Jacobi 场]
+设 $\gamma_s(\lambda)$ 是一族由参数 $s$ 标记的测地线，其中 $s=0$ 对应于参考测地线 $\gamma_0$。沿 $\gamma_0$ 的\textbf{分离向量}（separation vector）$\xi^\mu$ 定义为：
+\begin{equation}
+    \xi^\mu(\lambda) = \left. \frac{\pd x^\mu(s, \lambda)}{\pd s} \right|_{s=0}.
+\end{equation}
+$\xi^\mu$ 连接了参考测地线与相邻测地线上具有相同仿射参数 $\lambda$ 的点。
+\end{definition}
+
+\begin{theorem}[测地线偏差方程 / Jacobi 方程]
+沿参考测地线 $\gamma_0$ 的分离向量 $\xi^\mu$ 满足\textbf{测地线偏差方程} (geodesic deviation equation)：
+\begin{equation}
+    \boxed{\frac{D^2 \xi^\mu}{\dd\lambda^2} + R^\mu{}_{\nu\rho\sigma} \dot\gamma^\nu \xi^\rho \dot\gamma^\sigma = 0},
+\end{equation}
+其中 $D/\dd\lambda = \dot\gamma^\nu \nabla_\nu$ 是沿 $\gamma_0$ 的协变导数。$\xi^\mu$ 的全体构成沿 $\gamma_0$ 的 \textbf{Jacobi 场}。
+\end{theorem}
+
+\begin{note}[物理意义：潮汐力]
+测地线偏差方程是理解潮汐力的钥匙：
+\begin{itemize}
+    \item 左边的 $\frac{D^2 \xi^\mu}{\dd\lambda^2}$ 是两粒子之间的\textbf{相对加速度}
+    \item 右边的 $R^\mu{}_{\nu\rho\sigma} \dot\gamma^\nu \xi^\rho \dot\gamma^\sigma$ 是\textbf{潮汐力张量}——它正比于黎曼曲率
+    \item 在平坦时空中（$R^\mu{}_{\nu\rho\sigma} = 0$），$\frac{D^2 \xi^\mu}{\dd\lambda^2} = 0$——相邻测地线保持恒定分离（或线性发散）
+    \item 在弯曲时空中，曲率导致测地线的\textbf{汇聚} (convergence) 或\textbf{发散} (divergence)
+\end{itemize}
+在地球表面，竖直方向的两个自由下落粒子之间的潮汐加速度为 $a_{\text{tidal}} \sim R^i{}_{0j0} \xi^j \sim \frac{GM}{r^3} \xi$——这正是牛顿潮汐公式的广义相对论版本。
+\end{note}
+
+\begin{note}[牛顿极限下的测地线偏差方程]
+在弱场、低速极限下，测地线偏差方程可以约化为牛顿引力中的潮汐加速度公式。取牛顿极限：
+\begin{equation}
+    g_{00} \approx -(1 + 2\Phi), \quad g_{ij} \approx \delta_{ij}, \quad \Phi \ll 1, \quad v \ll 1,
+\end{equation}
+其中 $\Phi$ 是牛顿引力势。仅保留 $\Gamma^i_{00}$ 项（因为 $\dot x^0 \gg \dot x^i$），四速度近似为 $u^\mu \approx (1, 0, 0, 0)$。考虑沿类时测地线的空间分离向量 $\xi^i$（取 $\xi^0 = 0$，因为我们可以选择分离向量垂直于四速度），测地线偏差方程的空间分量退化为：
+\begin{equation}
+    \frac{\dd^2 \xi^i}{\dd t^2} + R^i{}_{0j0} \, \xi^j = 0.
+\end{equation}
+在牛顿极限下，黎曼曲率分量为：
+\begin{equation}
+    R^i{}_{0j0} \approx \pd_i \pd_j \Phi = \frac{\pd^2 \Phi}{\pd x^i \pd x^j}.
+\end{equation}
+因此：
+\begin{equation}
+    \boxed{\frac{\dd^2 \xi^i}{\dd t^2} = -\frac{\pd^2 \Phi}{\pd x^i \pd x^j} \, \xi^j}.
+\end{equation}
+这就是\textbf{牛顿潮汐方程}：两粒子间的相对加速度正比于引力势的二阶导数（潮汐张量）。在地球引力场中，$\Phi = -GM/r$，沿径向的潮汐加速度为：
+\begin{equation}
+    a_{\text{tidal}}^r = -\frac{\pd^2 \Phi}{\pd r^2} \xi^r = \frac{2GM}{r^3} \xi^r,
+\end{equation}
+而沿横向为 $a_{\text{tidal}}^\perp = -GM/r^3 \, \xi^\perp$。这正是牛顿框架下月球引力在地球上产生海洋潮汐的原因——朝向月球和背离月球的两侧水面都被"拉起"，相对加速度正比于 $1/r^3$。广义相对论的测地线偏差方程是这一经典公式的协变推广。
+\end{note}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % Draw a sphere-like positively curved surface
+    \shade[ball color=blue!10] (0,0) circle (2.0);
+    \draw[gray!30] (0,0) circle (2.0);
+
+    % Draw lat/long grid to suggest sphere
+    \foreach \a in {-1.5,-1.0,...,1.5} {
+        \draw[gray!40, thin] (-2, \a) arc[start angle=180, end angle=360, x radius=2, y radius={0.5*sqrt(4-\a*\a)}];
+    }
+
+    % Reference geodesic gamma_0 (great circle - equator-like)
+    \draw[red, very thick] (-2.0, 0) arc[start angle=180, end angle=360, x radius=2, y radius=1.2];
+    \node[red] at (1.2, -1.0) {$\gamma_0$};
+
+    % Adjacent geodesic gamma_s (another great circle starting nearby)
+    \draw[red, thick, dashed] (-1.9, 0.3) arc[start angle=165, end angle=345, x radius=2.05, y radius=1.25];
+
+    % Separation vectors at two points
+    \draw[->, teal, very thick] (-1.0, -0.6) -- (-0.9, -0.15);
+    \node[teal] at (-0.65, -0.35) {$\xi(\lambda_1)$};
+
+    \draw[->, teal, very thick] (1.2, -0.6) -- (1.1, -0.1);
+    \node[teal] at (1.45, -0.3) {$\xi(\lambda_2)$};
+
+    % Annotation of convergence
+    \node[text width=4cm, align=center] at (0, -2.5)
+        {正曲率曲面上相邻测地线\textbf{汇聚}：\\$\frac{D^2\xi^\mu}{\dd\lambda^2} = -R^\mu{}_{\nu\rho\sigma}\dot\gamma^\nu \xi^\rho \dot\gamma^\sigma$};
+
+    % Arrows showing convergence
+    \draw[->, orange, thick] (-0.8, -1.5) -- (-0.3, -1.2);
+    \draw[->, orange, thick] (0.8, -1.5) -- (0.3, -1.2);
+    \node[orange] at (0, -1.6) {汇聚};
+\end{tikzpicture}
+\caption{正曲率曲面上的测地线偏差。两条初始"平行"的大圆测地线 $\gamma_0$ 和 $\gamma_s$（红色）在正曲率（如球面）上必然汇聚——分离向量 $\xi^\mu$ 减小。这正是广义相对论中潮汐力的几何图像：曲率使自由下落粒子加速靠近或远离。在负曲率曲面上，测地线则发散。}
+\label{fig:geodesic_deviation_sphere}
+\end{figure}
+
+\section{测地线的完备性与奇点}
+
+\begin{definition}[测地完备性]
+一条测地线 $\gamma(\lambda)$ 称为\textbf{完备的} (complete)，如果它可以被扩展到所有仿射参数值 $\lambda \in (-\infty, +\infty)$。如果存在有限的仿射参数值，使得测地线无法再扩展（例如到达时空奇点），则称该测地线为\textbf{不完备的} (incomplete)。
+\end{definition}
+
+\begin{remark}[物理意义]
+测地不完备性是时空奇点的数学标志。彭罗斯和霍金的奇点定理正是基于以下逻辑：在满足某些物理条件（如正能量条件）的时空中，类时或类光测地线必须是不完备的——即存在有限固有时间内到达的奇点。黑洞内部的 $r=0$ 奇点就是一个测地不完备的实例：任何进入施瓦西黑洞的粒子在有限固有时间内必定到达奇点。
+\end{remark}
+
+\section{共轭点与比较定理}
+
+\begin{definition}[共轭点]
+沿测地线 $\gamma$ 的两点 $p = \gamma(\lambda_1)$ 和 $q = \gamma(\lambda_2)$ 称为\textbf{共轭的} (conjugate)，如果存在非零的 Jacobi 场 $\xi^\mu$（即满足偏差方程的解）在两点处都为零：$\xi^\mu(\lambda_1) = \xi^\mu(\lambda_2) = 0$。
+\end{definition}
+
+共轭点标志着测地线不再是两点之间的最短路径——过了共轭点，存在更短的路径连接原点。
+
+在球面 $S^2$ 上，从北极出发的经线是测地线。任意两条不同的经线在北极和南极相交——北极和南极是经线上所有点的共轭点对。从北极到南极之外的任何点，大圆（经线）是最短路径；但一旦过了南极，有更短的大圆可以绕过球面的另一侧。
+
+\section{测地线在广义相对论中的角色}
+
+总结测地线在广义相对论中所扮演的多重角色：
+
+\begin{enumerate}
+    \item \textbf{自由粒子的运动方程}：不受非引力作用的粒子沿类时（有质量）或类光（无质量）测地线运动
+    \item \textbf{光的传播}：在几何光学极限下，光子沿类光测地线（光线）传播
+    \item \textbf{因果结构}：类时测地线定义了可能的因果世界线；类光测地线定义了光锥的边界
+    \item \textbf{奇点探测}：测地不完备性是时空奇点的定义
+    \item \textbf{全局结构}：测地线的整体行为揭示了时空的大尺度因果结构
+\end{enumerate}
+
+\begin{note}[物理意义：第一部分总结]
+至此，我们完成了微分几何基础（第一部分）的构建：
+\begin{itemize}
+    \item \textbf{第 \ref{chap:manifold}--\ref{chap:forms} 章}：建立了流形、张量和微分形式的语言——这是描述弯曲时空的"词汇"
+    \item \textbf{第 \ref{chap:connection} 章}：引入联络与协变导数——弯曲时空上的"求导"工具
+    \item \textbf{第 \ref{chap:curvature} 章}：定义曲率——弯曲时空的"引力强度"
+    \item \textbf{第 \ref{chap:geodesic} 章}：推导测地线——自由粒子如何响应时空弯曲
+\end{itemize}
+有了这些工具，我们现在可以进入第二部分：广义相对论。爱因斯坦场方程将曲率（$G_{\mu\nu}$）与物质（$T_{\mu\nu}$）联系起来，而测地线方程描述了物质如何响应曲率——这正是惠勒所说的："时空告诉物质如何运动，物质告诉时空如何弯曲。" \cite{Misner1973}
+\end{note}
+
+\section{算例：测地线的求解与应用}
+\label{sec:examples}
+
+本节通过三个具体的算例展示测地线方程的实际求解过程。
+
+\subsection{例一：$\mathbb{R}^2$ 极坐标中的测地线}
+
+问题：在 $\mathbb{R}^2$ 中取极坐标 $(r, \phi)$，度规为 $\dd s^2 = \dd r^2 + r^2 \dd\phi^2$。利用 Christoffel 符号求解测地线方程，验证测地线是直线。
+
+\textbf{Step 1：计算 Christoffel 符号。} 由度规 $g_{rr} = 1$, $g_{\phi\phi} = r^2$, $g_{r\phi} = 0$，非零 Christoffel 符号为：
+\begin{equation}
+    \Gamma^r_{\phi\phi} = -r, \qquad \Gamma^\phi_{r\phi} = \Gamma^\phi_{\phi r} = \frac{1}{r}.
+\end{equation}
+所有其他分量为零。
+
+\textbf{Step 2：写出测地线方程。}
+\begin{align}
+    \ddot r - r \dot\phi^2 &= 0, \label{eq:polar_r}\\
+    \ddot\phi + \frac{2}{r} \dot r \dot\phi &= 0. \label{eq:polar_phi}
+\end{align}
+
+\textbf{Step 3：求解。} 方程 (\ref{eq:polar_phi}) 可重写为 $\frac{\dd}{\dd\lambda}(r^2 \dot\phi) = 0$，因此：
+\begin{equation}
+    r^2 \dot\phi = L = \text{常数}.
+\end{equation}
+将 $\dot\phi = L/r^2$ 代入 (\ref{eq:polar_r})：
+\begin{equation}
+    \ddot r - \frac{L^2}{r^3} = 0.
+\end{equation}
+这等价于 $\frac{\dd}{\dd\lambda}\bigl(\frac{1}{2}\dot r^2 + \frac{L^2}{2r^2}\bigr) = 0$，即"能量"守恒：
+\begin{equation}
+    \frac{1}{2}\dot r^2 + \frac{L^2}{2r^2} = E = \text{常数}.
+\end{equation}
+
+\textbf{Step 4：验证是直线。} 在 Cartesian 坐标 $(x, y) = (r\cos\phi, r\sin\phi)$ 中，直线方程为 $ax + by + c = 0$，即 $ar\cos\phi + br\sin\phi + c = 0$。在极坐标中这就是 $r(\phi) = d / \cos(\phi - \phi_0)$（其中 $d$, $\phi_0$ 是常数）。可以验证这满足上述测地线方程。特别地，对于径向直线 $\phi = \text{const}$，有 $\dot\phi = 0$, $L = 0$，则 $\ddot r = 0$，即 $r = a\lambda + b$——匀速直线运动。
+
+\textbf{结论：} 尽管极坐标中的测地线方程出现了"惯性力"$-r\dot\phi^2$（离心项）和 Coriolis 项 $\frac{2}{r}\dot r\dot\phi$，但它们恰好抵消，使得物理轨迹是 Cartesian 坐标中的直线。这完美展示了广义协变性：物理定律（自由粒子沿直线运动）在任意坐标系中的形式不同，但物理内容相同。
+
+\subsection{例二：Schwarzschild 时空中的径向测地线}
+
+问题：在 Schwarzschild 度规中求解径向（$\dd\theta = \dd\phi = 0$）类时测地线。
+
+Schwarzschild 度规：
+\begin{equation}
+    \dd s^2 = -\left(1 - \frac{2M}{r}\right)\dd t^2 + \left(1 - \frac{2M}{r}\right)^{-1}\dd r^2 + r^2(\dd\theta^2 + \sin^2\theta \,\dd\phi^2).
+\end{equation}
+
+\textbf{Step 1：Lagrangian。} 对于径向运动，取 $\theta = \pi/2$, $\phi = \text{const}$：
+\begin{equation}
+    L = \frac{1}{2}\left[-\left(1 - \frac{2M}{r}\right)\dot t^2 + \left(1 - \frac{2M}{r}\right)^{-1}\dot r^2\right].
+\end{equation}
+
+\textbf{Step 2：运动常数。} Lagrangian 不显含 $t$，因此：
+\begin{equation}
+    \frac{\pd L}{\pd \dot t} = -\left(1 - \frac{2M}{r}\right)\dot t = -E = \text{常数},
+\end{equation}
+即：
+\begin{equation}
+    \dot t = \frac{E}{1 - 2M/r},
+\end{equation}
+其中 $E$ 是单位质量的能量（守恒）。对于类时测地线，取 $\lambda = \tau$（固有时间），则 $g_{\mu\nu} \dot x^\mu \dot x^\nu = -1$（即 $L = -1/2$）：
+\begin{equation}
+    -\left(1 - \frac{2M}{r}\right)\dot t^2 + \left(1 - \frac{2M}{r}\right)^{-1}\dot r^2 = -1.
+\end{equation}
+
+\textbf{Step 3：有效势形式。} 代入 $\dot t = E/(1 - 2M/r)$：
+\begin{equation}
+    -\frac{E^2}{1 - 2M/r} + \frac{\dot r^2}{1 - 2M/r} = -1,
+\end{equation}
+整理得到：
+\begin{equation}
+    \boxed{\frac{1}{2}\left(\frac{\dd r}{\dd\tau}\right)^2 - \frac{M}{r} = \frac{E^2 - 1}{2}}.
+\end{equation}
+
+\textbf{Step 4：物理分析。} 这个方程与牛顿力学中单位质量粒子的能量守恒方程形式完全相同，其中 $-M/r$ 是 Newton 引力势。但区别在于：
+\begin{itemize}
+    \item $E$ 是广义相对论中的守恒能量（包含引力红移效应）
+    \item $\tau$ 是固有时间（而非坐标时间 $t$）
+\end{itemize}
+
+\textbf{特解：从静止自由下落。} 若粒子在 $r = r_0$ 处从静止开始下落，则 $E = \sqrt{1 - 2M/r_0}$（因为 $\dot r(r_0) = 0$）。取 $r_0 \to \infty$ 则 $E = 1$，方程简化为：
+\begin{equation}
+    \frac{\dd r}{\dd\tau} = -\sqrt{\frac{2M}{r}}.
+\end{equation}
+积分得到：
+\begin{equation}
+    \tau(r) = \frac{2}{3\sqrt{2M}}\left(r_0^{3/2} - r^{3/2}\right).
+\end{equation}
+粒子在\textbf{有限固有时间}内到达 $r = 2M$（视界）和 $r = 0$（奇点）——这是 Schwarzschild 时空测地不完备性的体现。
+
+\subsection{例三：S$^2$ 上 Jacobi 方程的求解——简谐振子}
+
+问题：在二维球面 $S^2$ 上，考虑沿赤道大圆 $\gamma_0$（$\theta = \pi/2$, $\phi = \lambda$）的 Jacobi 场，证明分离向量 $\xi^\theta$ 满足简谐振子方程。
+
+\textbf{Step 1：赤道测地线。} $\gamma_0$ 的参数化为：
+\begin{equation}
+    \theta(\lambda) = \frac{\pi}{2}, \quad \phi(\lambda) = \lambda,
+\end{equation}
+切向量为 $\dot\gamma = (0, 1)$。
+
+\textbf{Step 2：黎曼曲率。} $S^2$ 的非零黎曼曲率分量为（取 $R = 2$ 的球面）：
+\begin{equation}
+    R^\theta{}_{\phi\theta\phi} = \sin^2\theta, \quad R^\phi{}_{\theta\phi\theta} = -1.
+\end{equation}
+在赤道 $\theta = \pi/2$ 处：
+\begin{equation}
+    R^\theta{}_{\phi\theta\phi} = 1.
+\end{equation}
+因此沿 $\gamma_0$（注意指标位置）：
+\begin{equation}
+    R^\theta{}_{\phi\theta\phi} \, \dot\gamma^\phi \, \dot\gamma^\phi = 1 \cdot 1 \cdot 1 = 1.
+\end{equation}
+
+\textbf{Step 3：Jacobi 方程。} 对于分离向量分量 $\xi^\theta(\lambda)$，偏差方程为：
+\begin{equation}
+    \frac{D^2 \xi^\theta}{\dd\lambda^2} + R^\theta{}_{\mu\nu\rho} \, \dot\gamma^\mu \xi^\nu \dot\gamma^\rho = 0.
+\end{equation}
+由于 $\dot\gamma^\theta = 0$, $\dot\gamma^\phi = 1$，且考虑纯 $\theta$ 方向的分离（$\xi^\phi = 0$, $\xi^\theta \neq 0$），非零贡献来自 $\nu = \theta$, $\mu = \rho = \phi$：
+\begin{equation}
+    R^\theta{}_{\phi\theta\phi} \, \dot\gamma^\phi \, \xi^\theta \, \dot\gamma^\phi = 1 \cdot \xi^\theta.
+\end{equation}
+沿赤道大圆，$D/\dd\lambda = \dd/\dd\lambda$（因为 $\Gamma$ 在赤道上为零），因此：
+\begin{equation}
+    \boxed{\frac{\dd^2 \xi^\theta}{\dd\lambda^2} + \xi^\theta = 0}.
+\end{equation}
+
+\textbf{Step 4：物理意义。} 这正是\textbf{简谐振子方程}，角频率 $\omega = 1$。解为：
+\begin{equation}
+    \xi^\theta(\lambda) = A \cos\lambda + B \sin\lambda.
+\end{equation}
+分离向量以角度周期 $2\pi$ 振荡——相邻大圆在 $\lambda = \pi/2$ 处分离最大，在 $\lambda = \pi$（对跖点）处汇聚为零。这正是 $S^2$ 上所有经线汇聚于南极的几何事实。
+
+推广到半径为 $a$ 的球面（$R = 2/a^2$），Jacobi 方程为：
+\begin{equation}
+    \frac{\dd^2 \xi^\theta}{\dd\lambda^2} + \frac{1}{a^2} \xi^\theta = 0,
+\end{equation}
+角频率 $\omega = 1/a$——曲率越大，汇聚越快。这体现了\textbf{曲率驱动测地线汇聚}的基本原理：在正曲率时空区域，相邻测地线以正比于曲率的频率振荡汇聚；在负曲率区域，分离向量指数增长（$\xi \propto e^{\lambda\sqrt{|\mathcal{R}|}}$）——测地线发散。
+
+\begin{note}[算例总结]
+三个算例展示了测地线理论的递进结构：
+\begin{enumerate}
+    \item $\mathbb{R}^2$ 极坐标：演示了如何用 Christoffel 符号求解平坦空间的测地线，验证了广义协变性；
+    \item Schwarzschild 径向下落：展示了如何利用运动常数（能量守恒）将测地线方程约化为有效势问题，揭示测地不完备性；
+    \item S$^2$ Jacobi 方程：展示了曲率如何驱动测地线汇聚/发散——这是潮汐力的几何本质。
+\end{enumerate}
+\end{note}

@@ -1,0 +1,702 @@
+%=============================================================================
+
+在上一节中，我们介绍了 AdS/CFT 对偶的基本框架，其中最核心的关系是 $Z_{\rm CFT} = Z_{\rm gravity}$。现在我们自然要问：右边的引力配分函数具体如何计算？这就是本节要回答的问题。引力配分函数计算的是体空间 AdS 中的路径积分，它对应于边界 CFT 的生成泛函，是连接引力理论与量子场论的桥梁。
+
+\section{从洛伦兹到欧几里得}
+
+\subsection{Wick 转动的物理动机}
+
+在量子力学中，路径积分的被积函数是 $e^{iS}$，这是一个振荡的函数，积分不收敛。为了得到良定义的结果，我们需要做 Wick 转动，将时间变为虚时间，使得被积函数变为 $e^{-S_E}$，这是一个衰减的函数，积分收敛。
+
+从数学上看，Wick 转动对应于在复时间平面上的解析延拓。考虑复时间 $t \in \mathbb{C}$，洛伦兹号差对应于实轴 $t \in \mathbb{R}$，而欧几里得号差对应于虚轴 $t = -i\tau$，其中 $\tau \in \mathbb{R}$。这个转动将振荡因子 $e^{iS}$ 变为衰减因子 $e^{-S_E}$，使得路径积分收敛。
+
+\begin{definition}[Wick 转动]
+Wick 转动是将洛伦兹号差的时空通过替换 $t \to -i\tau$ 变为欧几里得号差的操作。在这个替换下：
+\begin{itemize}
+    \item 闵可夫斯基度规 $ds^2 = -dt^2 + d\vec{x}^2$ 变为欧几里得度规 $ds^2 = d\tau^2 + d\vec{x}^2$
+    \item 作用量 $S$ 变为欧几里得作用量 $S_E$
+    \item 路径积分 $e^{iS}$ 变为 $e^{-S_E}$
+\end{itemize}
+\end{definition}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % 坐标轴
+    \draw[->] (-2.5,0) -- (2.5,0) node[right] {$\mathrm{Re}(t)$};
+    \draw[->] (0,-2.5) -- (0,2.5) node[above] {$\mathrm{Im}(t)$};
+    
+    % 原点
+    \fill (0,0) circle (1.5pt);
+    \node[below left] at (0,0) {$O$};
+    
+    % 实轴（洛伦兹）
+    \draw[thick, blue] (-2.2,0) -- (2.2,0);
+    \node[below, blue] at (1.5,-0.1) {洛伦兹路径};
+    
+    % 虚轴（欧几里得）
+    \draw[thick, red, dashed] (0,0) -- (0,2.2);
+    \node[left, red] at (0,1.5) {欧几里得路径};
+    
+    % 弧线（解析延拓）
+    \draw[thick, purple, ->] (1.8,0) arc (0:90:1.8);
+    \node[purple, right] at (0.9,1.3) {Wick 转动};
+    
+    % 角度标注
+    \draw[thin] (0.8,0) arc (0:90:0.8);
+    \node at (0.4,0.4) {$\frac{\pi}{2}$};
+    
+    % 备注
+    \node[below] at (0,-2.3) {$t = -i\tau$};
+\end{tikzpicture}
+\caption{Wick 转动在复时间平面上的表示。从实轴到虚轴的转动将洛伦兹号差变为欧几里得号差。}
+\label{fig:wick_rotation}
+\end{figure}
+
+\begin{note}[Wick 转动在 AdS/CFT 中的核心地位]
+Wick 转动不仅是一个使路径积分收敛的数学技巧，它在 AdS/CFT 对偶\cite{Maldacena1997}中具有核心地位。欧几里得号差下的引力配分函数 $Z_{\rm gravity}[\phi_0]$ 通过对偶关系等于边界 CFT 在边界条件 $\phi_0$ 下的配分函数 $Z_{\rm CFT}[\phi_0]$。Witten\cite{Witten1998} 首先系统地利用这一对应关系，将欧几里得 AdS 中的经典引力计算映射到边界 CFT 的关联函数。没有 Wick 转动带来的收敛性，整个全息计算程序将无法启动。
+\end{note}
+
+\subsection{Wick 转动的详细推导}
+
+\begin{proof}[Wick 转动的推导]
+考虑自由粒子的路径积分：
+\begin{equation}
+    K(x_f, t_f; x_i, t_i) = \int \mathcal{D}x \, e^{iS[x]},
+\end{equation}
+其中作用量为：
+\begin{equation}
+    S[x] = \int_{t_i}^{t_f} dt \, \frac{1}{2} m \dot{x}^2.
+\end{equation}
+
+做 Wick 转动 $t = -i\tau$，则 $dt = -id\tau$，$\dot{x} = \frac{dx}{dt} = i\frac{dx}{d\tau}$。代入作用量：
+\begin{align}
+    S[x] &= \int_{\tau_i}^{\tau_f} (-id\tau) \cdot \frac{1}{2} m \left(i\frac{dx}{d\tau}\right)^2 \notag \\
+         &= \int_{\tau_i}^{\tau_f} (-id\tau) \cdot \frac{1}{2} m \left(-\frac{dx}{d\tau}\right)^2 \notag \\
+         &= i \int_{\tau_i}^{\tau_f} d\tau \, \frac{1}{2} m \left(\frac{dx}{d\tau}\right)^2.
+\end{align}
+
+定义欧几里得作用量：
+\begin{equation}
+    S_E[x] = \int_{\tau_i}^{\tau_f} d\tau \, \frac{1}{2} m \left(\frac{dx}{d\tau}\right)^2,
+\end{equation}
+则 $S = iS_E$。路径积分变为：
+\begin{equation}
+    K(x_f, t_f; x_i, t_i) = \int \mathcal{D}x \, e^{-S_E[x]}.
+\end{equation}
+
+\textbf{收敛性分析}：在洛伦兹号差下，$e^{iS}$ 是振荡的，路径积分不收敛。在欧几里得号差下，$e^{-S_E}$ 是衰减的，路径积分收敛。这是因为 $S_E \geq 0$，所以 $e^{-S_E} \leq 1$。
+\end{proof}
+
+\subsection{AdS 空间的 Wick 转动}
+
+对于 AdS 空间，庞加莱度规变为：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left( d\tau^2 + dz^2 + \sum_{i=1}^{d-1} dx_i^2 \right),
+\end{equation}
+其中 $z > 0$ 是径向坐标，边界位于 $z \to 0$ 处。
+
+\begin{note}[欧几里得 AdS 的几何性质]
+欧几里得 AdS 空间有一个重要的几何性质：它的边界在 $z \to 0$ 处，而"中心"在 $z \to \infty$ 处。径向坐标 $z$ 可以被理解为"能量尺度"的倒数：边界对应于 UV（高能），中心对应于 IR（低能）。这个对应关系是 AdS/CFT 中重整化群流的几何实现。
+\end{note}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % AdS 边界
+    \draw[thick] (-3,0) -- (3,0);
+    \node[right] at (3,0) {边界 $z=0$};
+    
+    % AdS 内部（用渐变色表示）
+    \fill[blue!10] (-3,0) -- (-2,-2) -- (2,-2) -- (3,0) -- cycle;
+    
+    % 径向箭头
+    \draw[->, thick, red] (0,0) -- (0,-2);
+    \node[left, red] at (0,-1) {$z$};
+    
+    % 能量标度标注
+    \node[above] at (0,0.2) {UV};
+    \node[below] at (0,-2.2) {IR};
+    
+    % 边界点
+    \fill[black] (0,0) circle (2pt);
+    \node[above right] at (0,0) {$(x, \tau)$};
+    
+    % 内部点
+    \fill[blue] (0,-1.5) circle (2pt);
+    \node[right] at (0,-1.5) {体点};
+    
+    % RG 流箭头
+    \draw[->, thick, purple] (0.5,0) .. controls (0.5,-1) .. (0.5,-1.8);
+    \node[right, purple] at (0.5,-1) {RG 流};
+\end{tikzpicture}
+\caption{欧几里得 AdS 空间的几何结构。边界 $z=0$ 对应 UV，内部 $z \to \infty$ 对应 IR，径向方向实现重整化群流。}
+\label{fig:ads_boundary}
+\end{figure}
+
+\begin{remark}[径向坐标与能量尺度的对应]
+欧几里得 AdS 空间的径向坐标 $z$ 与边界 CFT 的能量尺度之间存在深刻对应关系。在 Fefferman-Graham 坐标展开\cite{deHaro2000}中，度规可以按 $z$ 的幂次展开，每一阶系数对应边界 CFT 中特定维度算符的期望值。这一对应关系是全息重整化程序的几何基础：边界附近的渐近展开本质上是对 CFT 中不同能标的物理贡献进行分离。正如 Skenderis\cite{Skenderis2002} 系统阐述的，径向截断 $z = \epsilon$ 对应于 CFT 中的一个紫外截断能标 $\Lambda \sim 1/\epsilon$。
+\end{remark}
+
+\section{正则化与发散}
+
+\subsection{发散的物理起源}
+
+\begin{note}[发散的物理本质]
+引力配分函数中的发散具有深刻的物理根源。在 AdS/CFT 对偶的框架下，体时空的红外（IR）发散精确地对应于边界 CFT 的紫外（UV）发散。这一对应关系可以通过以下直觉来理解：体中靠近边界 $z=0$ 的区域对应于 CFT 中的高能（UV）物理，而体中 $z \to \infty$ 的区域对应于 CFT 中的低能（IR）物理。因此，体中 $z \to 0$ 处的发散（来自积分下限）自然地对应于 CFT 中的 UV 发散。全息重整化\cite{Skenderis2002}的核心思想就是利用这一对应关系，通过在引力侧添加反项来消除发散，从而在 CFT 侧实现重整化。
+\end{note}
+
+\subsection{发散的物理起源}
+
+引力配分函数的计算面临一个技术困难：AdS 空间的体积是无限的，因此直接计算作用量会得到发散的结果。这类似于量子场论中的紫外发散，需要通过正则化来处理。
+
+\begin{definition}[正则化]
+正则化是引入一个截断 $z = \epsilon$，将积分区域限制在 $\epsilon \leq z < \infty$ 的范围内。这样，作用量变为有限的，但依赖于截断 $\epsilon$。
+\end{definition}
+
+爱因斯坦-希尔伯特作用量（Einstein-Hilbert action）加上吉布斯-霍金边界项（Gibbons-Hawking boundary term）\cite{Gibbons1977}的正则化形式为。Brown 和 York\cite{Brown1993} 在此基础上发展了引力系统的准局域（quasilocal）表述，为定义有限区域上的引力能量提供了严格框架：
+\begin{equation}
+    S_{\rm reg} = -\frac{1}{16\pi G_N} \int_{M} d^{d+1}x \sqrt{g} \left( R + \frac{d(d-1)}{L^2} \right) - \frac{1}{8\pi G_N} \int_{\partial M} d^d x \sqrt{h} \, K,
+\end{equation}
+其中 $G_N$ 是牛顿引力常数，$R$ 是里奇标量（对于 AdS 空间，$R = -d(d+1)/L^2$），$K$ 是外曲率的迹，$h$ 是边界上的诱导度规。
+
+\begin{note}[边界项在 AdS/CFT 中的特殊重要性]
+在一般的引力理论中，Gibbons-Hawking 边界项的作用是使变分原理良定。但在 AdS/CFT 对偶中，这个边界项具有额外的重要性：它是连接体引力与边界 CFT 的桥梁。边界上的外曲率 $K$ 包含了体度规在边界附近的法向导数信息，而这些信息正是定义 Brown-York 应力张量\cite{Brown1993}所必需的。没有这个边界项，我们就无法从引力作用量中提取边界 CFT 的物理信息\cite{Balasubramanian1999}。
+\end{note}
+
+\subsection{Gibbons-Hawking 边界项的推导}
+
+\begin{proof}[Gibbons-Hawking 边界项的必要性]
+考虑爱因斯坦-希尔伯特作用量的变分：
+\begin{equation}
+    S_{\rm EH} = -\frac{1}{16\pi G_N} \int_M d^{d+1}x \sqrt{g} \left( R + \frac{d(d-1)}{L^2} \right).
+\end{equation}
+
+对度规 $g_{\mu\nu}$ 做变分 $\delta g^{\mu\nu}$，里奇标量的变分为：
+\begin{equation}
+    \delta R = R_{\mu\nu} \delta g^{\mu\nu} + \nabla_\mu \nabla_\nu \delta g^{\mu\nu} - \Box (g_{\mu\nu} \delta g^{\mu\nu}).
+\end{equation}
+
+作用量的变分包含体项和边界项：
+\begin{align}
+    \delta S_{\rm EH} &= -\frac{1}{16\pi G_N} \int_M d^{d+1}x \sqrt{g} \left( R_{\mu\nu} - \frac{1}{2}g_{\mu\nu} R + \Lambda g_{\mu\nu} \right) \delta g^{\mu\nu} \notag \\
+    &\quad - \frac{1}{16\pi G_N} \int_{\partial M} d^d x \sqrt{h} \, n^\mu \left( \nabla_\nu \delta g_{\mu}^{\ \nu} - \nabla_\mu (g_{\alpha\beta} \delta g^{\alpha\beta}) \right).
+\end{align}
+
+边界项不为零，这意味着变分原理不确定。为了消除这个边界项，我们添加 Gibbons-Hawking 边界项：
+\begin{equation}
+    S_{\rm GH} = -\frac{1}{8\pi G_N} \int_{\partial M} d^d x \sqrt{h} \, K.
+\end{equation}
+
+外曲率 $K$ 的定义为：
+\begin{equation}
+    K = h^{\mu\nu} K_{\mu\nu} = h^{\mu\nu} \nabla_\mu n_\nu,
+\end{equation}
+其中 $n^\mu$ 是边界的外法向量。Gibbons-Hawking 边界项的变分恰好抵消了爱因斯坦-希尔伯特作用量中的边界项，使得总作用量的变分只包含体项。
+\end{proof}
+
+\begin{remark}[边界项的物理意义]
+Gibbons-Hawking 边界项的物理意义是：它保证了作用量在固定边界度规下的变分原理是良定义的。没有这个边界项，作用量的变分会包含边界上的法向导数项，使得变分问题不确定。这个边界项的物理意义是：它抵消了边界上的法向导数项，使得变分原理只依赖于边界上的度规。
+\end{remark}
+
+\begin{note}[准局域能量与 Brown-York 应力张量的物理意义]
+在经典广义相对论中，由于等价原理，引力能量不能用局域的张量密度来定义。Brown 和 York\cite{Brown1993} 提出了准局域能量的概念：通过将引力作用量对边界度规变分，得到一个有限区域边界上的应力张量，即 Brown-York 应力张量。这一构造的关键在于：(1) 引入 Gibbons-Hawking 边界项使变分原理良定；(2) 减去适当的参考背景以消除无穷远的发散贡献。在 AdS/CFT 对偶中，这个准局域应力张量自然地对应于边界 CFT 的能量-动量张量\cite{Balasubramanian1999}。
+\end{note}
+
+\subsection{正则化作用量的计算}
+
+对于庞加莱 AdS 空间，正则化作用量的计算如下：
+
+\begin{example}[正则化作用量的计算]
+在庞加莱坐标下，度规为：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left( d\tau^2 + dz^2 + d\vec{x}^2 \right).
+\end{equation}
+
+里奇标量为 $R = -d(d+1)/L^2$，体积元为 $\sqrt{g} = L^{d+1}/z^{d+1}$。体作用量为：
+\begin{align}
+    S_{\rm bulk} &= -\frac{1}{16\pi G_N} \int_M d^{d+1}x \sqrt{g} \left( R + \frac{d(d-1)}{L^2} \right) \notag \\
+    &= -\frac{1}{16\pi G_N} \int d^{d+1}x \frac{L^{d+1}}{z^{d+1}} \left( -\frac{d(d+1)}{L^2} + \frac{d(d-1)}{L^2} \right) \notag \\
+    &= \frac{d}{8\pi G_N L^2} \int d^{d+1}x \frac{L^{d+1}}{z^{d+1}}.
+\end{align}
+
+在截断 $z = \epsilon$ 处，边界上的外曲率为 $K = d/L$，边界作用量为：
+\begin{equation}
+    S_{\rm GH} = -\frac{1}{8\pi G_N} \int_{\partial M} d^d x \sqrt{h} \, K = -\frac{d}{8\pi G_N L} \int d^d x \frac{L^d}{\epsilon^d}.
+\end{equation}
+
+总作用量 $S_{\rm reg} = S_{\rm bulk} + S_{\rm GH}$ 在 $\epsilon \to 0$ 时发散。
+\end{example}
+
+\section{全息重整化}
+
+全息重整化是 AdS/CFT 对偶中最重要的技术工具之一，它系统地解决了引力作用量中的红外发散问题。Skenderis\cite{Skenderis2002} 的综述文章对这一程序给出了完整而清晰的阐述。
+
+\begin{remark}[全息重整化的基本步骤]
+全息重整化程序可以概括为以下步骤\cite{Skenderis2002}：
+\begin{enumerate}
+    \item 确定体时空的渐近结构，通常采用 Fefferman-Graham 坐标
+    \item 将引力作用量（包括 Gibbons-Hawking 边界项）在截断边界 $z = \epsilon$ 上正则化
+    \item 将正则化的作用量按 $\epsilon$ 的幂次展开，识别出所有发散项
+    \item 构造只依赖于边界几何的反项 $S_{\rm ct}$，精确地抵消所有发散
+    \item 取 $\epsilon \to 0$ 极限，得到有限的重整化作用量 $S_{\rm ren}$
+\end{enumerate}
+这一程序的物理本质是：引力体中的红外发散对应于边界 CFT 中的紫外发散，反项的添加对应于 CFT 中的重整化\cite{Henningson1998}。
+\end{remark}
+
+\subsection{发散的物理意义}
+
+正则化的作用量 $S_{\rm reg}$ 仍然包含发散项，这些发散项与截断 $\epsilon$ 的负幂次成正比。为了得到有限的结果，我们需要添加反项来消除这些发散。这个过程类似于量子场论中的重整化。
+
+\begin{definition}[全息重整化]
+全息重整化是通过添加反项 $S_{\rm ct}$ 来消除引力作用量中的发散。反项只依赖于边界几何，其形式为：
+\begin{equation}
+    S_{\rm ct} = \frac{1}{16\pi G_N} \int_{\partial M} d^d x \sqrt{h} \left( \frac{2(d-1)}{L} + \frac{L}{d-2} R[h] + \cdots \right).
+\end{equation}
+重整化的作用量为 $S_{\rm ren} = S_{\rm reg} + S_{\rm ct}$，它在截断 $\epsilon \to 0$ 时是有限的。
+\end{definition}
+
+\begin{remark}[Fefferman-Graham 展开与渐近结构]
+全息重整化的核心数学工具是 Fefferman-Graham 展开\cite{deHaro2000}。对于 $d+1$ 维的渐近 AdS 时空，可以选择特殊的坐标使得度规具有形式：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left( dz^2 + g_{ij}(x,z) dx^i dx^j \right),
+\end{equation}
+其中边界诱导度规可以按 $z$ 的幂次展开：
+\begin{equation}
+    g_{ij}(x,z) = g_{(0)ij} + z^2 g_{(2)ij} + \cdots + z^d g_{(d)ij} + h_{(d)ij} z^d \log z + \cdots
+\end{equation}
+这里 $g_{(0)ij}$ 是边界 CFT 的背景度规，$g_{(2)ij}, \ldots, g_{(d-2)ij}$ 由 $g_{(0)}$ 完全确定（通过运动方程），$g_{(d)ij}$ 正比于 CFT 的应力张量期望值，而 $h_{(d)ij}$ 在偶数维时与 Weyl 反常相关\cite{Henningson1998}。这一展开结构直接决定了反项的形式。
+\end{remark}
+
+\subsection{反项的详细推导}
+
+\begin{proof}[反项的推导]
+在 $\epsilon \to 0$ 的极限下，正则化作用量可以展开为：
+\begin{equation}
+    S_{\rm reg} = \frac{1}{\epsilon^{d-2}} a_{(0)} + \frac{1}{\epsilon^{d-4}} a_{(2)} + \cdots + \log\epsilon \, a_{(d)} + S_{\rm finite} + O(\epsilon).
+\end{equation}
+
+反项的形式为：
+\begin{equation}
+    S_{\rm ct} = -\frac{1}{\epsilon^{d-2}} a_{(0)} - \frac{1}{\epsilon^{d-4}} a_{(2)} - \cdots - \log\epsilon \, a_{(d)}.
+\end{equation}
+
+对于 $d=4$ 的情况，展开系数为：
+\begin{align}
+    a_{(0)} &= -\frac{3}{8\pi G_N L} \int_{\partial M} d^4 x \sqrt{h_0}, \\
+    a_{(2)} &= \frac{L}{16\pi G_N} \int_{\partial M} d^4 x \sqrt{h_0} \, R[h_0],
+\end{align}
+其中 $h_0$ 是边界上的诱导度规。因此，反项为：
+\begin{equation}
+    S_{\rm ct} = \frac{1}{16\pi G_N} \int_{\partial M} d^4 x \sqrt{h} \left( \frac{6}{L} + \frac{L}{2} R[h] \right).
+\end{equation}
+\end{proof}
+
+\begin{remark}[反项构造的系统方法]
+反项的构造并非随意的，而是有严格的系统方法\cite{Skenderis2002}。关键观察是：反项 $S_{\rm ct}$ 只依赖于边界上的诱导度规 $h_{ij}$ 及其内禀几何量（如 Ricci 标量 $R[h]$、Riemann 张量等），而不依赖于法向导数。具体而言：
+\begin{itemize}
+    \item 在 $d$ 为奇数时，反项是有限个边界几何不变量的线性组合
+    \item 在 $d$ 为偶数时，除了有限个反项外，还存在一个对数反项 $\sim \log\epsilon \int h_{(d)}$，它对应于边界 CFT 的 Weyl 反常\cite{Henningson1998}
+    \item 反项的系数由 Fefferman-Graham 展开的系数唯一确定
+\end{itemize}
+这一系统方法保证了全息重整化程序的唯一性和自洽性。
+\end{remark}
+
+\begin{proof}[壳作用量的评估]
+对于 AdS 爱因斯坦引力，壳作用量的评估是全息计算的核心步骤。考虑 $d+1$ 维 AdS 空间，体运动方程为 $R_{\mu\nu} = -\frac{d}{L^2} g_{\mu\nu}$，因此里奇标量为 $R = -\frac{d(d+1)}{L^2}$。
+
+体作用量变为：
+\begin{equation}
+    S_{\rm bulk} = \frac{1}{16\pi G_N} \frac{2d}{L^2} \int_M d^{d+1}x \sqrt{g}.
+\end{equation}
+
+利用 Fefferman-Graham 展开，体积元为 $\sqrt{g} = \frac{L^{d+1}}{z^{d+1}} \sqrt{\det g_{ij}(x,z)}$，对 $z$ 积分从 $\epsilon$ 到某个内边界。展开 $\sqrt{\det g_{ij}}$ 后，$z$ 积分产生 $\epsilon$ 的各阶幂次和对数项。Gibbons-Hawking 边界项在 $z=\epsilon$ 处为：
+\begin{equation}
+    S_{\rm GH} = -\frac{1}{8\pi G_N} \int_{z=\epsilon} d^d x \sqrt{h} \, K = -\frac{L}{8\pi G_N} \int d^d x \frac{\sqrt{\det g}}{z^d} \left( -\frac{d}{z} + \frac{1}{2} g^{ij} \partial_z g_{ij} + \cdots \right)\bigg|_{z=\epsilon}.
+\end{equation}
+
+两项合并后，$1/\epsilon$ 的各阶幂次项相消或被反项抵消，最终得到有限的重整化作用量 $S_{\rm ren}$。对于真空 AdS，$S_{\rm ren} = 0$（适当选择参考背景后），而对于 AdS 黑洞背景，$S_{\rm ren}$ 给出自由能 $F = T S_E$。
+\end{proof}
+
+\begin{remark}[全息重整化与 Wilson 重整化群的类比]
+全息重整化与 Wilson 的重整化群思想之间存在深刻的类比\cite{Skenderis2002}。在 Wilson 的框架中，我们逐步积分掉高能（UV）自由度，每次积分产生新的有效耦合常数。在全息重整化中，径向方向 $z$ 扮演了能量尺度的角色：从边界 $z=0$（UV）向体内部 $z>0$（IR）移动，等价于在 CFT 中逐步积分掉高能模式。反项的系数对应于 CFT 中的重整化耦合常数，而对数项对应于 $\beta$ 函数。这一对应关系为 AdS/CFT 中的重整化群流\cite{deHaro2000}提供了几何实现。
+\end{remark}
+
+\begin{note}[全息重整化的物理意义]
+全息重整化的物理意义是深刻的：边界理论中的发散可以被吸收到边界作用量的重新定义中，这与量子场论中的重整化思想一致。在量子场论中，紫外发散通过重整化被吸收到耦合常数的重新定义中；在 AdS/CFT 中，边界上的发散通过全息重整化被吸收到边界算符的系数中。
+\end{note}
+
+\begin{remark}[共形反常与全息重整化]
+在偶数维边界 CFT 中，共形对称性被量子效应破坏，产生共形反常（也称为 Weyl 反常）。在全息重整化的框架下，这一反常自然地从 Fefferman-Graham 展开\cite{deHaro2000}中出现：当边界维数 $d$ 为偶数时，展开中出现 $z^d \log z$ 项，其系数 $h_{(d)ij}$ 正比于 CFT 的共形反常。对数反项 $\sim \log\epsilon \int h_{(d)}$ 的存在使得重整化的作用量依赖于截断方案的选择，这一依赖性恰好编码了 CFT 中共形反常的信息\cite{Henningson1998}。这是全息重整化自洽性的一个非平凡检验。
+\end{remark}
+
+\subsection{全息重整化与 CFT 的对应}
+
+\begin{theorem}[全息重整化与 CFT 算符的对应]
+在 AdS/CFT 对偶中，全息重整化中的反项对应于边界 CFT 中的局部算符。具体来说：
+\begin{itemize}
+    \item 常数项 $\frac{2(d-1)}{L}$ 对应于真空能量密度
+    \item 里奇标量项 $\frac{L}{d-2} R[h]$ 对应于边界 CFT 中的应力张量算符
+    \item 高阶项对应于边界 CFT 中的高维算符
+\end{itemize}
+\end{theorem}
+
+\begin{remark}[重整化方案的独立性]
+物理可观测量（如应力张量的期望值）在重整化方案的选择下是不变的。这是因为不同的重整化方案只相差有限的反项，这些反项对应于边界 CFT 中的有限重整化。
+\end{remark}
+
+\section{Brown-York 应力张量}
+
+\subsection{应力张量的定义}
+
+有了重整化的作用量，我们可以定义 Brown-York 应力张量。Balasubramanian 和 Kraus\cite{Balasubramanian1999} 将 Brown 和 York\cite{Brown1993} 的准局域应力张量方法系统地应用于 AdS/CFT 对偶，证明了引力侧的应力张量精确地对应于边界 CFT 的能量-动量张量。
+
+\begin{definition}[Brown-York 应力张量]
+Brown-York 应力张量定义为：
+\begin{equation}
+    T^{ij}_{\rm BY} = \frac{2}{\sqrt{h}} \frac{\delta S_{\rm ren}}{\delta h_{ij}}.
+\end{equation}
+这个应力张量的物理意义是：它描述了边界上的能量-动量分布。在 AdS/CFT 对偶中，Brown-York 应力张量对应于边界 CFT 的应力张量。
+\end{definition}
+
+\subsection{应力张量的计算}
+
+\begin{proof}[Brown-York 应力张量的推导]
+Brown-York 应力张量可以通过对重整化作用量变分得到。首先，对于具有边界的引力系统，应力张量的定义为\cite{Brown1993}：
+\begin{equation}
+    T^{ij}_{\rm BY} = \frac{2}{\sqrt{h}} \frac{\delta S_{\rm ren}}{\delta h_{ij}} = \frac{1}{8\pi G_N} \left( K^{ij} - K h^{ij} - \frac{d-1}{L} h^{ij} - \frac{L}{d-2} \left( R^{ij} - \frac{1}{2} R h^{ij} \right) + \cdots \right),
+\end{equation}
+其中第一行来自 Gibbons-Hawking 项的变分，后面的项来自反项的贡献。这个表达式中 $K^{ij}$ 是外曲率，$R^{ij}$ 是边界诱导度规的 Ricci 曲率。
+
+Brown-York 应力张量的期望值可以通过计算体空间中的经典解得到。在 $\epsilon \to 0$ 的极限下\cite{Balasubramanian1999}：
+\begin{equation}
+    \langle T^{ij}_{\rm BY} \rangle = \lim_{z \to 0} \frac{1}{z^{d-2}} T^{ij}_{\rm BY}(z).
+\end{equation}
+
+对于 AdS-Schwarzschild 黑洞，度规为：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left( -f(z) dt^2 + \frac{dz^2}{f(z)} + d\vec{x}^2 \right),
+\end{equation}
+其中 $f(z) = 1 - \left(\frac{z}{z_h}\right)^d$，$z_h$ 是视界位置。
+
+边界上的诱导度规为 $h_{ij} = \frac{L^2}{\epsilon^2} \eta_{ij}$，外曲率的计算需要度规的法向导数。经过详细计算，应力张量为：
+\begin{equation}
+    \langle T^{ij}_{\rm BY} \rangle = \frac{d}{16\pi G_N} \frac{L^{d-1}}{z_h^d} \, \mathrm{diag}(1, \frac{1}{d-1}, \cdots, \frac{1}{d-1}).
+\end{equation}
+\end{proof}
+
+\begin{example}[应力张量的物理意义]
+应力张量的物理意义是：
+\begin{itemize}
+    \item $\langle T^{00} \rangle$ 是能量密度
+    \item $\langle T^{ii} \rangle$ 是压强
+    \item 能量密度与压强的关系满足 $\langle T^{00} \rangle = (d-1) \langle T^{ii} \rangle$
+\end{itemize}
+这与理想流体的状态方程一致。
+\end{example}
+
+\begin{note}[Weyl 反常与应力张量的迹]
+在偶数维边界 CFT 中，应力张量的迹不为零，而是由 Weyl 反常给出\cite{Henningson1998}：
+\begin{equation}
+    \langle T^i_{\ i} \rangle = a_{(d)}(x),
+\end{equation}
+其中 $a_{(d)}$ 是 Fefferman-Graham 展开中 $z^d \log z$ 项的系数。对于 $d=4$ 的 $\mathcal{N}=4$ SYM，Weyl 反常为：
+\begin{equation}
+    \langle T^i_{\ i} \rangle = \frac{N^2 - 1}{4} \left( \frac{1}{120} E_4 - \frac{1}{8} I_4 \right),
+\end{equation}
+其中 $E_4$ 是四维 Euler 密度，$I_4$ 是 Weyl 张量的平方。全息重整化自然地给出了这一反常结构，这是该方法自洽性的重要验证\cite{Skenderis2002}。
+\end{note}
+
+\section{黑洞热力学}
+
+\subsection{AdS-Schwarzschild 黑洞}
+
+在 AdS/CFT 对偶中，黑洞对应于边界 CFT 的热态。这个对应关系是通过计算引力配分函数得到的。具体来说，引力配分函数 $Z_{\rm gravity}$ 在固定边界度规 $h_{ij}$ 的条件下计算，而边界度规 $h_{ij}$ 对应于 CFT 的背景时空。当边界度规为 $S^3 \times S^1$（虚时间紧致化）时，引力路径积分中存在两种鞍点：热 AdS 和 AdS 黑洞，它们的竞争导致了霍金-佩奇相变\cite{Hawking1983}。全息重整化\cite{Skenderis2002}保证了在这一计算中所有发散都被系统地消除。
+
+\begin{definition}[AdS-Schwarzschild 黑洞]
+AdS-Schwarzschild 黑洞的度规为：
+\begin{equation}
+    ds^2 = -f(r) dt^2 + \frac{dr^2}{f(r)} + r^2 d\Omega_{d-1}^2,
+\end{equation}
+其中 $f(r) = 1 + \frac{r^2}{L^2} - \frac{\omega_{d-1} M}{r^{d-2}}$，$M$ 是黑洞质量，$\omega_{d-1}$ 是单位 $(d-1)$ 维球面的体积。
+\end{definition}
+
+\subsection{热力学量的推导}
+
+\begin{property}[黑洞的热力学量]
+黑洞的热力学量为：
+\begin{itemize}
+    \item \textbf{霍金温度}：$T = \frac{f'(r_h)}{4\pi} = \frac{d r_h}{4\pi L^2} + \frac{(d-2) L^2}{4\pi r_h}$
+    \item \textbf{贝肯斯坦-霍金熵}：$S = \frac{A}{4G_N} = \frac{\omega_{d-1} r_h^{d-1}}{4G_N}$
+    \item \textbf{自由能}：$F = M - TS = -\frac{\omega_{d-1} r_h^d}{16\pi G_N L^2}$
+\end{itemize}
+\end{property}
+
+\begin{proof}[霍金温度的推导]
+霍金温度可以通过欧几里得路径积分推导。在欧几里得号差下，黑洞度规为：
+\begin{equation}
+    ds^2 = f(r) d\tau^2 + \frac{dr^2}{f(r)} + r^2 d\Omega_{d-1}^2.
+\end{equation}
+
+为了避免在视界 $r = r_h$ 处出现锥形奇点，虚时间 $\tau$ 必须具有周期性 $\beta = 1/T$。在视界附近，令 $r = r_h + \rho^2/4r_h$，度规近似为：
+\begin{equation}
+    ds^2 \approx \frac{4r_h^2}{f'(r_h)} \left( d\rho^2 + \rho^2 \left(\frac{f'(r_h)}{2} d\tau\right)^2 \right).
+\end{equation}
+
+为了使度规在 $\rho = 0$ 处光滑，必须有：
+\begin{equation}
+    \frac{f'(r_h)}{2} \beta = 2\pi \quad \Rightarrow \quad \beta = \frac{4\pi}{f'(r_h)}.
+\end{equation}
+
+因此，霍金温度为：
+\begin{equation}
+    T = \frac{1}{\beta} = \frac{f'(r_h)}{4\pi} = \frac{d r_h}{4\pi L^2} + \frac{(d-2) L^2}{4\pi r_h}.
+\end{equation}
+\end{proof}
+
+\begin{proof}[自由能的推导]
+自由能可以通过计算欧几里得作用量得到。在鞍点近似下，配分函数为 $Z \approx e^{-S_E}$，其中 $S_E$ 是黑洞的欧几里得作用量。
+
+对于 AdS-Schwarzschild 黑洞，欧几里得作用量为：
+\begin{equation}
+    S_E = \frac{1}{16\pi G_N} \int_M d^{d+1}x \sqrt{g} \left( R + \frac{d(d-1)}{L^2} \right) + \frac{1}{8\pi G_N} \int_{\partial M} d^d x \sqrt{h} \, K.
+\end{equation}
+
+经过详细计算，作用量为：
+\begin{equation}
+    S_E = \frac{\omega_{d-1} r_h^d}{16\pi G_N L^2} \beta.
+\end{equation}
+
+自由能为：
+\begin{equation}
+    F = -\frac{1}{\beta} \ln Z = \frac{S_E}{\beta} = \frac{\omega_{d-1} r_h^d}{16\pi G_N L^2}.
+\end{equation}
+\end{proof}
+
+\begin{note}[黑洞热力学与边界 CFT]
+在高温极限 $r_h \gg L$ 下，$F \approx -\frac{\pi^2}{2} N^2 T^3 V$，其中 $V$ 是边界体积。这与 $\mathcal{N}=4$ SYM 在强耦合极限下的自由能一致。这验证了 AdS/CFT 对偶在热力学层面的正确性。
+\end{note}
+
+\begin{remark}[贝肯斯坦-霍金熵的全息解释]
+贝肯斯坦-霍金熵 $S = A/(4G_N)$ 在 AdS/CFT 对偶中获得了全新的解释。在边界 CFT 侧，熵对应于热态的微观态数目。对于 $\mathcal{N}=4$ SYM，$G_N \sim 1/N^2$，因此 $S \sim N^2$，这正是大 $N$ 规范理论中自由度数目的量级。Strominger 和 Vafa 最早利用这一思想，通过计数 D-膜的微观态成功地推导了特定极端黑洞的贝肯斯坦-霍金熵，为黑洞热力学的统计力学基础提供了第一个直接证据\cite{Aharony1999}。
+\end{remark}
+
+\section{霍金-佩奇相变}
+
+\subsection{相变的物理动机}
+
+在 AdS 空间中，热 AdS 和 AdS 黑洞之间发生相变，这称为霍金-佩奇相变（Hawking-Page transition）\cite{Hawking1983}。Witten 指出，这个相变在 AdS/CFT 对偶框架下具有深刻的物理意义\cite{Witten1998b}，它在边界 CFT 中对应于禁闭/解禁闭相变。
+
+\begin{theorem}[霍金-佩奇相变]
+当温度 $T > T_c$ 时，AdS 黑洞是稳定的状态；当 $T < T_c$ 时，热 AdS 是稳定的状态。临界温度为：
+\begin{equation}
+    T_c = \frac{d-1}{2\pi L}.
+\end{equation}
+在临界温度处，自由能是连续的，但其一阶导数（熵）不连续，因此这是一阶相变。
+\end{theorem}
+
+\begin{proof}[霍金-佩奇相变的证明]
+考虑两种热力学状态：
+\begin{enumerate}
+    \item 热 AdS：温度为 $T$ 的 AdS 空间，自由能为 $F_{\rm thermal} = 0$（参考点）
+    \item AdS 黑洞：温度为 $T$ 的黑洞，自由能为 $F_{\rm BH} = -\frac{\omega_{d-1} r_h^d}{16\pi G_N L^2}$
+\end{enumerate}
+
+临界温度 $T_c$ 由条件 $F_{\rm BH}(T_c) = F_{\rm thermal}(T_c) = 0$ 决定。这意味着 $r_h = L$，代入温度公式：
+\begin{equation}
+    T_c = \frac{d L}{4\pi L^2} + \frac{(d-2) L^2}{4\pi L^3} = \frac{d-1}{2\pi L}.
+\end{equation}
+
+当 $T > T_c$ 时，$r_h > L$，$F_{\rm BH} < 0$，黑洞更稳定。当 $T < T_c$ 时，$r_h < L$，$F_{\rm BH} > 0$，热 AdS 更稳定。
+\end{proof}
+
+\begin{note}[霍金-佩奇相变的全息意义]
+霍金-佩奇相变在 AdS/CFT 对偶中具有深刻的全息意义。在边界 $\mathcal{N}=4$ SYM 侧，热 AdS 对应于 CFT 在 $S^3 \times S^1$ 上的热态，其中 $S^1$ 的周长为 $\beta = 1/T$。当温度低于临界温度时，系统的自由能为零（适当归一化后），这对应于禁闭相：规范不变算符的关联函数以幂律衰减。当温度高于临界温度时，系统跃迁到解禁闭相，自由能与 $N^2$ 成正比，反映了 $O(N^2)$ 个自由度的释放。这一相变的阶数在不同维度下可能不同：在 AdS$_5$ 中它是一阶相变，而在某些高维情况下可能存在更高阶的相变\cite{Witten1998b}。
+\end{note}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 坐标轴
+    \draw[->] (0,0) -- (7,0) node[right] {$T$};
+    \draw[->] (0,-3) -- (0,3) node[above] {$F$};
+    
+    % 热 AdS 自由能
+    \draw[thick, blue] (0.5,0) -- (4,0);
+    \node[blue, below] at (2,0) {热 AdS};
+    
+    % 黑洞自由能
+    \draw[thick, red, domain=2.5:6.5, samples=100] plot (\x, {0.05*(\x-5)^2 - 1.2});
+    \node[red, above] at (5.5,-0.5) {AdS 黑洞};
+    
+    % 临界温度
+    \draw[dashed] (4,0) -- (4,-3);
+    \node[below] at (4,-3) {$T_c$};
+    
+    % 相变点
+    \fill (4,0) circle (3pt);
+    \node[above right] at (4,0) {相变点};
+    
+    % 标注
+    \node[below] at (0,0) {$0$};
+    \node[left] at (0,1.5) {$F>0$};
+    \node[left] at (0,-1.5) {$F<0$};
+\end{tikzpicture}
+\caption{霍金-佩奇相变。当 $T < T_c$ 时，热 AdS 是稳定状态；当 $T > T_c$ 时，AdS 黑洞是稳定状态。}
+\label{fig:hawking_page}
+\end{figure}
+
+\subsection{相变的物理意义}
+
+\begin{note}[霍金-佩奇相变的物理意义]
+在边界 CFT 中，这个相变对应于禁闭/解禁闭相变（confinement/deconfinement transition）：
+\begin{itemize}
+    \item \textbf{禁闭相}（$T < T_c$）：夸克被束缚在强子内部，自由能与 $N^0$ 成正比
+    \item \textbf{解禁闭相}（$T > T_c$）：夸克可以自由运动，自由能与 $N^2$ 成正比
+\end{itemize}
+这个相变是理解 QCD 相图的重要工具。
+\end{note}
+
+\begin{remark}[欧几里得路径积分与时空拓扑]
+欧几里得引力路径积分的计算需要考虑所有满足给定边界条件的时空拓扑。在 AdS 空间的情况下，至少存在两种不同的拓扑：热 AdS（无黑洞，边界为 $S^3 \times S^1$）和 Schwarzschild-AdS 黑洞（边界同样为 $S^3 \times S^1$）。这两种拓扑在不同的温度范围内分别给出主导贡献，它们之间的竞争正是霍金-佩奇相变的起源。在更一般的设置中，还可能存在其他拓扑（如 Taub-NUT 解），它们的贡献可能在某些参数范围内变得重要。路径积分对拓扑的求和是量子引力中一个深刻的问题\cite{Hawking1983}。
+\end{remark}
+
+\begin{remark}[相变的阶数]
+霍金-佩奇相变是一阶相变，因为在临界温度处，熵（自由能的一阶导数）不连续。在更高维度的 AdS 空间中，可能存在更高阶的相变。
+\end{remark}
+
+\section{黑洞配分函数}
+
+\subsection{鞍点近似}
+
+黑洞的配分函数可以通过计算欧几里得路径积分得到：
+\begin{equation}
+    Z_{\rm BH} = \int \mathcal{D}g \, e^{-S_E[g]},
+\end{equation}
+其中积分是对所有以黑洞为背景的度规构型进行的。在鞍点近似下，配分函数为：
+\begin{equation}
+    Z_{\rm BH} \approx e^{-S_E[g_{\rm BH}]} = e^{S_{\rm BH}},
+\end{equation}
+其中 $S_E[g_{\rm BH}]$ 是黑洞的欧几里得作用量。
+
+\subsection{鞍点近似的详细推导}
+
+\begin{proof}[鞍点近似的推导]
+考虑路径积分：
+\begin{equation}
+    Z = \int \mathcal{D}\phi \, e^{-S_E[\phi]}.
+\end{equation}
+
+设 $\phi_0$ 是作用量的极值点，即 $\frac{\delta S_E}{\delta \phi}\bigg|_{\phi_0} = 0$。在 $\phi_0$ 附近展开：
+\begin{equation}
+    S_E[\phi] = S_E[\phi_0] + \frac{1}{2} \int dx \, dy \, \frac{\delta^2 S_E}{\delta\phi(x)\delta\phi(y)}\bigg|_{\phi_0} (\phi(x) - \phi_0(x))(\phi(y) - \phi_0(y)) + \cdots
+\end{equation}
+
+忽略高阶项，路径积分变为高斯积分：
+\begin{align}
+    Z &\approx e^{-S_E[\phi_0]} \int \mathcal{D}\phi \, \exp\left(-\frac{1}{2} \int dx \, dy \, \frac{\delta^2 S_E}{\delta\phi(x)\delta\phi(y)}\bigg|_{\phi_0} \delta\phi(x)\delta\phi(y)\right) \notag \\
+    &= e^{-S_E[\phi_0]} \left(\det \frac{\delta^2 S_E}{\delta\phi\delta\phi}\bigg|_{\phi_0}\right)^{-1/2}.
+\end{align}
+
+在经典极限（$\hbar \to 0$）下，行列式因子的贡献是次领头阶的，因此：
+\begin{equation}
+    Z \approx e^{-S_E[\phi_0]}.
+\end{equation}
+这就是鞍点近似。
+\end{proof}
+
+\begin{note}[系综等价性与黑洞稳定性]
+在黑洞热力学中，需要特别注意系综的选择。在正则系综（固定温度）中，Schwarzschild-AdS 黑洞在 $r_h > L$ 时是稳定的（比热为正），但在 $r_h < L$ 时不稳定（比热为负）。在微正则系综（固定能量）中，所有黑洞都是稳定的。在 AdS/CFT 对偶中，边界 CFT 通常定义在正则系综中（因为边界时空是紧致的，如 $S^3 \times S^1$），因此霍金-佩奇相变\cite{Hawking1983}自然地出现在正则系综中。系综的选择对应于边界条件的选择，这是全息配分函数计算中的一个微妙但重要的问题\cite{Skenderis2002}。
+\end{note}
+
+\begin{note}[大 $N$ 极限与鞍点近似的精度]
+在 AdS/CFT 对偶中，$G_N \sim 1/N^2$，因此 $\hbar_{\rm eff} \sim 1/N^2$。这意味着大 $N$ 极限对应于经典引力极限，鞍点近似的量子修正被 $1/N^2$ 压低。具体来说，配分函数可以展开为：
+\begin{equation}
+    \ln Z = N^2 \left( S_0 + \frac{1}{N^2} S_1 + \frac{1}{N^4} S_2 + \cdots \right),
+\end{equation}
+其中 $S_0$ 来自经典引力（鞍点），$S_1$ 来自一圈修正（引力子涨落），$S_2$ 来自二圈修正。当 $N \to \infty$ 时，只有 $S_0$ 保留，这正是经典引力计算的适用范围。这一展开与边界 CFT 中 't Hooft 的拓扑展开一致：平面图贡献 $O(N^2)$，非平面图贡献被 $1/N^2$ 压低\cite{Aharony1999}。
+\end{note}
+
+\subsection{配分函数的计算}
+
+对于 AdS-Schwarzschild 黑洞，配分函数为：
+\begin{equation}
+    \ln Z_{\rm BH} = \frac{\omega_{d-1} r_h^d}{16\pi G_N L^2} = \frac{\pi^2}{2} N^2 T^3 V,
+\end{equation}
+其中 $V$ 是边界体积。这个结果与 $\mathcal{N}=4$ SYM 在强耦合极限下的热力学一致，验证了 AdS/CFT 对偶在热力学层面的正确性。
+
+\begin{note}[配分函数作为热力学势]
+配分函数 $Z = e^{-\beta F}$ 是统计力学中最基本的热力学量。在 AdS/CFT 对偶中，引力配分函数通过对偶关系直接给出 CFT 的配分函数，从而可以通过对引力作用量的计算来提取 CFT 的全部热力学信息。这一对应关系的威力在于：引力侧的计算是经典的（在大 $N$ 极限下），而 CFT 侧的计算涉及强耦合量子场论。全息重整化\cite{Skenderis2002}保证了引力侧的计算给出有限的、物理上有意义的结果。
+\end{note}
+
+\begin{example}[配分函数与热力学量的关系]
+从配分函数可以推导出所有热力学量：
+\begin{align}
+    \text{自由能：} \quad F &= -T \ln Z = -\frac{\pi^2}{2} N^2 T^3 V, \\
+    \text{熵：} \quad S &= -\frac{\partial F}{\partial T} = \frac{3\pi^2}{2} N^2 T^2 V, \\
+    \text{能量：} \quad E &= F + TS = \frac{3\pi^2}{2} N^2 T^4 V.
+\end{align}
+这些结果与 $\mathcal{N}=4$ SYM 在强耦合极限下的结果一致\cite{Aharony1999}。
+\end{example}
+
+\section{全息热力学的物理意义}
+
+\subsection{引力与量子场论的对应}
+
+AdS/CFT 对偶\cite{Maldacena1997,Witten1998,Aharony1999}中的全息热力学揭示了引力与量子场论之间的深刻联系。黑洞的热力学性质（温度、熵、自由能）完全由边界 CFT 的热力学决定。这意味着引力理论中的热力学现象（如黑洞蒸发、霍金辐射）可以完全用边界 CFT 的语言来描述。
+
+\begin{note}[全息配分函数的完整字典]
+全息配分函数的计算建立了引力与 CFT 之间精确的定量对应关系。关键的对应包括：
+\begin{itemize}
+    \item 引力配分函数 $Z_{\rm gravity}[\phi_0|_{\partial} = \phi_0] = Z_{\rm CFT}[\phi_0]$
+    \item 体标量场的边界值 $\phi_0$ 对应 CFT 中的外源，标量场的质量 $m$ 决定对应算符的维数 $\Delta(\Delta - d) = L^2 m^2$
+    \item 重整化的壳作用量 $S_{\rm ren} = -\ln Z_{\rm CFT}$ 给出 CFT 的生成泛函
+    \item Brown-York 应力张量 $\langle T^{ij} \rangle = \frac{2}{\sqrt{h}} \frac{\delta S_{\rm ren}}{\delta h_{ij}}$ 对应 CFT 的能量-动量张量\cite{Balasubramanian1999}
+    \item 黑洞的欧几里得作用量 $S_E = F/T$ 给出 CFT 热态的自由能
+\end{itemize}
+这些对应关系构成了 AdS/CFT 对偶的完整计算框架，使得引力侧的经典计算可以精确地翻译为强耦合 CFT 的量子信息\cite{Skenderis2002}。
+\end{note}
+
+\subsection{强耦合系统的研究方法}
+
+全息热力学还提供了研究强耦合系统的新方法。在传统的量子场论中，计算强耦合系统的热力学性质是非常困难的。但在 AdS/CFT 对偶中，这些计算可以转化为经典引力的计算，大大简化了问题。
+
+\begin{example}[夸克-胶子等离子体]
+在重离子碰撞实验中，会产生夸克-胶子等离子体（QGP）。这是一个强耦合系统，传统的微扰方法不适用。通过 AdS/CFT 对偶，可以计算 QGP 的热力学性质，如粘滞系数、能量密度等。具体而言，全息计算给出的剪切粘滞系数与熵密度之比为 $\eta/s = 1/(4\pi)$，这是一个普适的下界（KSS 界），与 RHIC 和 LHC 的实验数据高度吻合\cite{Aharony1999}。此外，全息方法还可以计算喷注淬火参数、重夸克扩散系数等输运系数，为理解 QGP 的微观性质提供了独特的视角。
+\end{example}
+
+\begin{remark}[重整化群流与全息径向方向]
+全息配分函数的计算揭示了一个深刻的几何-物理对应：体时空的径向方向 $z$ 对应于边界 CFT 的重整化群（RG）流。边界 $z=0$ 对应于紫外（UV），体内部 $z \to \infty$ 对应于红外（IR）。当体时空不是纯 AdS 而是具有径向依赖的标量场时，这对应于边界 CFT 中存在非平凡的 RG 流\cite{deHaro2000}。全息重整化程序\cite{Skenderis2002}在这一背景下变得尤为重要：它不仅消除了作用量中的发散，还系统地追踪了 RG 流中耦合常数的演化。这一对应关系为理解强耦合系统的 RG 行为提供了强大的几何直觉。
+\end{remark}
+
+\begin{remark}[全息热力学的局限性]
+全息热力学虽然强大，但也有局限性：
+\begin{itemize}
+    \item 它只适用于强耦合极限
+    \item 它只适用于大 $N$ 极限
+    \item 它只适用于特定的规范理论（如 $\mathcal{N}=4$ SYM）
+\end{itemize}
+对于一般的 QCD，全息方法只能给出定性的结果。
+\end{remark}
+
+\subsection{未来研究方向}
+
+全息热力学的研究仍在继续。一些重要的研究方向包括：
+\begin{enumerate}
+    \item 非平衡态的全息描述
+    \item 有限 $N$ 效应的计算
+    \item 全息方法在凝聚态物理中的应用
+    \item 全息方法在量子信息中的应用
+\end{enumerate}
+
+这些研究将进一步加深我们对引力与量子场论之间关系的理解。
+
+\begin{remark}[全息配分函数计算的总结]
+本节系统地介绍了引力配分函数的计算方法：从 Wick 转动到欧几里得号差，从正则化到全息重整化，从 Brown-York 应力张量到黑洞热力学。每一步都有严格的数学基础和清晰的物理动机。这一计算框架的核心是 Skenderis\cite{Skenderis2002} 系统发展的全息重整化方法，它保证了引力配分函数的计算给出有限的、物理上有意义的结果。
+\end{remark}
+
+\begin{note}[全息方法的未来展望]
+全息配分函数的计算方法已经从最初的热力学量计算发展为一个广泛的研究纲领。在全息重整化\cite{Skenderis2002}的框架下，人们可以系统地计算边界 CFT 的各种物理量：从两点函数（对应于体中的传播子）到高点函数（对应于体中的相互作用顶点），从平衡态热力学到非平衡态动力学。Brown-York 应力张量\cite{Balasubramanian1999,Brown1993}的推广——如全息纠缠熵——进一步拓展了这一框架的适用范围。关键的未解决问题包括：如何在有限 $N$ 下系统地计算量子引力修正，以及如何将全息方法推广到非 AdS 时空。此外，如何在全息框架下理解量子引力中的信息悖论，以及如何利用全息对偶解决强耦合系统中的非微扰问题，都是当前研究的前沿方向\cite{Aharony1999}。
+\end{note}
+
+%=============================================================================

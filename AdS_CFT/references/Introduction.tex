@@ -1,0 +1,109 @@
+\section{Introduction}
+\label{ss:intro}
+
+
+Entanglement is one of the most important concepts that distinguish quantum physics from classical physics as the former allows a superposition of states, causing a nonlocal correlation between subsystems far apart from each other.
+A measure of quantum entanglement, known as entanglement entropy, has seen an unexpectedly wide range of applications in quantum information theory, condensed matter physics, general relativity, and even in high energy theory in recent years.
+The most substantial progress in the subject includes the holographic formula for entanglement entropy proposed by \textcite{Ryu:2006bv,Ryu:2006ef}, which has proved to be a profitable tool to explore various aspects of quantum entanglement in strongly coupled quantum field theories, being a source of inspirational ideas in defining quantum gravity from quantum many-body entangled states \cite{Swingle:2009bg,VanRaamsdonk:2009ar,Maldacena:2013xja}.
+
+The motivation for studying quantum entanglement varies depending on the area of research fields, and we are able only to make a partial list here.
+In quantum information theory, quantum entanglement is exploited as an invaluable resource for manipulating computational tasks that are impossible to achieve in classical information theory \cite{nielsen2010quantum,Preskill:1997tq,Vedral:2002zz,ohya2004quantum,Eisert:2006ts,Horodecki:2009zz}.
+In condensed matter physics, entanglement is recognized to characterize quantum phases of matter that cannot be distinguished by their symmetries \cite{Kitaev:2005dm,Levin:2006zz} and to diagnose quantum critical phenomena \cite{Vidal:2002rm,jin2004quantum,Calabrese:2004eu} and dynamics of strongly correlated quantum systems \cite{Calabrese:2005in,Calabrese:2007rg,eisler2007evolution}.
+In quantum field theory (QFT), entanglement holds an eminent role as nonlocal operators definable for any type of theories that serve as a good probe for a variety of phase transitions such as confinement/deconfinement transition \cite{Nishioka:2006gr,Klebanov:2007ws,Pakman:2008ui}.
+Moreover, the monotonic properties of entanglement measures have been successfully applied to derive nontrivial constraints on energy and entropy in recent studies \cite{Balakrishnan:2017bjg,Faulkner:2016mzt,Bousso:2015wca,Bousso:2014uxa,Bousso:2014sda}.
+
+In this review we will review recent developments of entanglement entropy from holographic and field theoretic viewpoints, highlighting its aspect as measures of degrees of freedom under renormalization group (RG) flows in QFTs.
+Seeking such a measure is a long-standing activity in theoretical physics. Zamolodchikov's $c$-theorem is one of the most beautiful outcomes proving the existence of the so-called $\CC$-function that monotonically decreases along any RG flow and agrees with the central charge of the conformal field theory (CFT) at fixed points of the flow in (1+1) dimensions \cite{Zamolodchikov:1986gt}.
+The $\CC$-function is of theoretical importance for it orders QFTs along RG flows in the theory space and imposes strong constraints on them to rule out their unusual behaviors.
+
+Attempts to extend the $\CC$-theorem to higher dimensions resulted in a conjecture by \textcite{Cardy:1988cwa} who employed a certain type of central charge for conformal anomalies as a measure of degrees of freedom in even spacetime dimensions.
+This conjecture named the $a$-theorem was given a proof in four dimensions more recently by \textcite{Komargodski:2011vj}.
+In odd dimensions, however, generalizing the $\CC$-theorem faced a significant obstacle as there are no conformal anomalies, hence no central charges.
+A major breakthrough was triggered by two novel conjectures.
+One is based on the observation that the universal finite part of the entanglement entropy for a spherical region obeys the $\CC$-theorem in a holographic setup in any dimensions \cite{Myers:2010xs,Myers:2010tj}.
+The other, now known as the $F$-theorem, states the monotonicity of the free energy on an Euclidean sphere under any RG flow in odd dimensions \cite{Jafferis:2011zi,Klebanov:2011gs}.
+These two conjectures were seemingly unrelated at first sight, but they turned out to be the same by showing the equivalence between the universal part of the sphere entanglement entropy and the sphere free energy for CFTs \cite{Casini:2011kv}.
+
+This intriguing connection not only unified the two conjectures, but also was the key to the proof of the $F$-theorem in three dimensions \cite{Casini:2012ei} that shows the monotonicity of the renormalized entanglement entropy interpolating the ultraviolet (UV) and infrared (IR) values of the sphere free energy \cite{Liu:2012eea} based on the strong subadditivity, one of the most stringent inequalities of entanglement entropy, without directly relying on the unitarity of QFT in contrast to the proofs of the $\CC$-theorems in two and four dimensions.
+
+Among the best applications of the $F$-theorem is to constrain the phase diagram of noncompact quantum electrodynamics (QED) coupled with $2N_f$ two-component fermions, which is in the conformal phase with a global symmetry $\SU (2N_f)$ for $N_f$ above a critical value $N_\text{crit}$, but is believed to flow for $N_f\le N_\text{crit}$ to the chiral symmetry broken phase that is described by $2N_f^2$ Nambu-Goldstone bosons and a free Maxwell field due to the spontaneous symmetry breaking to the subgroup $\SU (N_f)\times \SU (N_f) \times \U (1)$ at the IR fixed point.
+The analyses using the $F$-theorem by \textcite{Grover:2012sp,Giombi:2015haa} exclude the possibility of any RG flow from the conformal to the broken symmetry phase for $N_f \gtrapprox 4.4$, hence suggesting the upper bound $N_\text{crit} \le 4$ that can be used as a benchmark for the estimates by the other methods \cite{DiPietro:2015taa,Karthik:2015sgq,Gusynin:2016som,Karthik:2016ppr,Herbut:2016ide,DiPietro:2017kcd}.\footnote{A recent study of QED$_3$ with $N_f =1$ shows the global symmetry is enhanced to $\O(4)$ that indicates $N_\text{crit} \le 1$ \cite{Benini:2017dus}.
+We thank Igor Klebanov for pointing this out to us.
+}
+
+The same sort of argument with the quantum inequality of entanglement was extended more recently \cite{Casini:2017vbe,Lashkari:2017rcl} and yielded monotonic functions along RG flows in higher dimensions, which provides an alternative proof of the $a$-theorem in four dimensions \cite{Casini:2017vbe}.
+These monotonic functions are of particular interest in themselves as a $\CC$-function due to their UV finiteness in any dimensions.
+They certainly deserve further investigation regardless of their applications to proving the conjectures for the higher-dimensional $\CC$-theorem \cite{Myers:2010xs,Myers:2010tj,Klebanov:2011gs,Giombi:2014xxa}.
+
+
+
+
+
+\subsection{Outline}
+This review is intended to give a relatively self-contained exposition of the recent applications of the quantum entanglement inequalities to the dynamics of the RG flows in QFT.
+We try to streamline various approaches to the QFT entanglement so that the reader can be quickly acquainted with the modern techniques used in literatures.
+
+In Sec. \ref{ss:BasicEE}, we start with reviewing the fundamentals of bipartite entanglement in quantum mechanical (QM) systems. 
+After defining the notion of separable and entangled states, we introduce several measures of quantum entanglement, such as entanglement and R{\'e}nyi entropies to quantify how much entanglement a quantum state possesses for a given bipartition of the system.
+We discuss the relations between a few entanglement measures that we adopt in due course and summarize some of the most important inequalities they satisfy for later use in the QFT applications.
+
+From Secs. \ref{ss:RTapproach}-\ref{ss:CFT}, we consider the entanglement entropy associated with a subregion of a constant time slice in QFT, whose evaluation needs more sophisticated techniques than in quantum mechanics due to the continuity of spacetime.
+The real time formalism given in Sec. \ref{ss:RTapproach} is the most straightforward generalization of the quantum mechanical one where the spacetime is discretized on lattice and the entanglement entropy is calculated by taking the partial trace of the Hilbert space of the lattice system.
+This approach can be implemented easily for free field theories and is best suited for the numerical calculations.
+
+Section \ref{ss:Euclidean} takes an alternative approach that employs the so-called replica trick to reduce the calculation of the entanglement entropy to the partition function on a certain type of singular manifold in Euclidean QFT.
+In the Euclidean formalism, the Lorentz invariance of the theory is manifest in contrast to the real time approach, and one can resort to the conventional QFT methods for the entropy calculation to study the UV divergent structures of the entanglement entropy by using the effective action on a curved background.
+In Sec. \ref{ss:HeatKernel} we describe a way to fix a few coefficients of the UV divergent terms in the entanglement entropy by adapting the heat kernel method to a manifold with a singular locus of codimension-two.
+Several useful identities obtained there will be applied to the derivation of important formulas for entanglement entropy in later sections.
+
+Section \ref{ss:CFT} is concerned with the entanglement entropy in CFT, a class of QFTs invariant under the conformal symmetry that emerges at the fixed points of RG flows in the theory space of QFTs.
+The conformal symmetry will be exploited to extract the universal parts of the entanglement entropy free from the ambiguity caused by the renormalization scheme of the UV divergences.
+When the conformal anomalies exist, the case in even spacetime dimensions, we show the universal parts are characterized by the central charges and the shape of the codimension-two hypersurface surrounding the subregion to define the entanglement entropy in a time slice.
+
+
+Section \ref{ss:Holography} begins with the quick overview of the AdS/CFT correspondence, the equivalence between the classical gravitational theory on the ($d+1$)-dimensional anti-de Sitter (AdS) space and CFT with a large number of degrees of freedom living on the $d$-dimensional boundary of the AdS space.
+Given the AdS/CFT dictionary, we derive the holographic formulas of entanglement and R{\'e}nyi entropies and show they fulfill the characteristic properties of entanglement such as the strong subadditivity inequalities.
+An intriguing relation of the entanglement entropy across a sphere to thermal entropy is established by making a coordinate transformation to the AdS black hole geometry where the holographic formula turns out to evaluate the black hole entropy proportional to the area of horizon.
+
+
+In Sec. \ref{ss:RGflow} we explore the dynamics of RG flows in QFTs with the aid of quantum entanglement.
+We use the mixture of the techniques in field theory and holography developed in the previous sections.
+We first outline the motivation and current situation for the $\CC$-theorem that orders theories along RG flows in the space of QFTs.
+Then we show the quantum inequalities of entanglement, in conjugation with the Lorentz invariance, and provide strong constraints on the RG flows that are enough to prove the entropic $c$- and $F$-theorems in (1+1) and (2+1) dimensions, respectively.
+After briefly examining the implications for the dynamics of RG flows, the validity of the $F$-theorem is exemplified by explicit calculations of the entanglement entropy of a free massive scalar field in the large mass limit.
+We compare the large mass expansion with the numerical results and see the agreement, but will find the nonstationary behavior at the UV fixed point that questions the stationarity of entanglement entropy under the relevant perturbation.
+We comment on the apparent puzzle between the free scalar result and the conformal perturbation theory of entanglement entropy, and suggest a possible resolution by pointing out that the conformal symmetry is broken for a certain class of theories even at the UV fixed point.
+
+To gain further insight from different viewpoints, we consider a few examples of holographic RG flows and evaluate the holographic entanglement entropies.
+In an asymptotically AdS space describing a holographic gapped system, 
+we find a topology change of the Ryu-Takayanagi hypersurface for the holographic entanglement entropy, which is interpreted as a confinement/deconfinement phase transition and indicates the prominent role of entanglement entropy as an order parameter of quantum phase transitions.
+A small test of the $F$-theorem in the holographic RG models is carried out under the assumptions of the null energy condition as the bulk counterpart of the unitarity in QFT.
+We conclude this review with a comment on the exact results on entanglement entropy and its generalizations in supersymmetric field theories.
+
+
+\paragraph*{Conventions $:$}
+Throughout this review we use natural units $\hbar= c =  k_B  =1$ for the Planck constant, the speed of light and the Boltzmann constant,
+the mostly plus sign convention $(-,+,\cdots, +)$ for the Lorentzian metric in $((d-1) +1)$ dimensions, and the all plus sign convention $(+,+,\cdots, +)$ for the Euclidean metric in $d$ dimensions.
+The imaginary unit is denoted by the roman letter ``$\i$."
+The calligraphic letters $\CM$ and $\CB$ stand for a $d$-dimensional manifold for QFT and a $(d+1)$-dimensional manifold for gravitational theory, respectively.
+
+
+\subsection{References to related subjects}
+We assume the reader has background knowledge about the basics of QFT and general relativity.
+Some familiarity with conformal field theory in higher dimensions and QFT on a curved spacetime, covered by the standard textbooks \cite{DiFrancesco:1997nk} and \cite{Birrell:1982ix}, would also be helpful.
+
+The interested reader may refer to the other sources of literature listed for more comprehensive treatments of the subjects that we will or will not touch on in this review.
+
+An introductory account of quantum entanglement in finite-dimensional systems is given by \textcite{nielsen2010quantum} and \textcite{Preskill:1997tq} with the emphasis on the application to quantum information theory.
+The implementation of the real time approach is described for free lattice models by \textcite{peschel2009reduced} and for free field theories by \textcite{Casini:2009sr} that also  compares the approach with the Euclidean formalism.
+The UV divergent structures of entanglement entropy are discussed for lattice models by \textcite{eisert2010colloquium} and for QFT on a curved space by employing the heat kernel method by \textcite{Solodukhin:2011gn}.
+The condensed matter applications of entanglement being a probe of quantum critical phenomena and quantum quench dynamics are elaborated in the reviews by \textcite{Calabrese:2009qy,Calabrese:2016xau} by means of the CFT methods [see also \textcite{Laflorencie:2015eck}].
+An accessible approach to more rigorous mathematical aspects of the entanglement properties in QFT can be found in the recent review by \textcite{Witten:2018zxz}.
+The developments of the holographic method in the early days are summarized by \textcite{Nishioka:2009un} and more recent ones by \textcite{Takayanagi:2012kg}.
+The role of quantum entanglement in the black hole information problem was emphasized by \textcite{Harlow:2014yka}.
+Recent attempts to build up spacetime geometry from the entanglement structure in QFT can be found in \textcite{VanRaamsdonk:2016exw}.
+The exact results for the $F$-theorem in supersymmetric field theories are presented by \textcite{Pufu:2016zxm}.
+Finally, we recommend \textcite{Rangamani:2016dms} for a comprehensive overview of the entire subjects.
+
+
+\endinput

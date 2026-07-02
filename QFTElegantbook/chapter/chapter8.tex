@@ -1,0 +1,153 @@
+\chapter{\protect\hyperlink{:}{拓扑场论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+拓扑场论（Topological Field Theory, TFT）是一类特殊的量子场论，其物理可观测量只依赖于时空的拓扑性质，而不依赖于度规。拓扑场论在凝聚态物理、数学物理和弦论中都有重要应用。
+
+\section{\protect\hyperlink{:}{拓扑不变量}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+拓扑场论的核心特征是其可观测量是拓扑不变量。拓扑不变量是指在连续形变下保持不变的量。
+
+\subsection{\protect\hyperlink{:}{什么是拓扑不变量}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+考虑一个流形 $M$，如果我们将 $M$ 连续地形变（不撕裂、不粘合），某些量保持不变，这些量就是拓扑不变量。最简单的例子是欧拉示性数
+\begin{equation}
+    \chi(M) = V - E + F
+\end{equation}
+
+其中 $V$、$E$、$F$ 分别是多面体的顶点数、边数和面数。对于任何凸多面体，$\chi = 2$。
+
+另一个重要的拓扑不变量是亏格（genus），它描述了曲面的"洞"的数量。例如，球面的亏格为 $0$，环面的亏格为 $1$。
+
+\subsection{\protect\hyperlink{:}{拓扑场论的公理化定义}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+Atiyah 在 1988 年提出了拓扑场论的公理化定义。一个 $d$ 维拓扑场论是一个从 $d$ 维配边范畴到向量空间范畴的函子。
+
+具体来说，一个拓扑场论包括：
+\begin{enumerate}
+    \item 对每一个 $(d-1)$ 维闭流形 $\Sigma$，赋予一个向量空间 $Z(\Sigma)$
+    \item 对每一个 $d$ 维配边 $M$（即边界为 $\Sigma_1 \cup \Sigma_2$ 的流形），赋予一个线性映射 $Z(M): Z(\Sigma_1) \to Z(\Sigma_2)$
+\end{enumerate}
+
+并且满足：
+\begin{itemize}
+    \item $Z(\Sigma_1 \cup \Sigma_2) = Z(\Sigma_1) \otimes Z(\Sigma_2)$
+    \item $Z(\emptyset) = \mathbb{C}$
+    \item 配边的粘合对应线性映射的复合
+\end{itemize}
+
+\section{\protect\hyperlink{:}{Schwarz型拓扑场论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+拓扑场论可以分为两类：Schwarz型和Witten型。我们首先讨论Schwarz型。
+
+\subsection{\protect\hyperlink{:}{BF理论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+BF理论是最简单的拓扑场论之一。在 $d$ 维时空中，BF理论的作用量为
+\begin{equation}
+    S = \int_M \text{Tr}(B \wedge F)
+\end{equation}
+
+其中 $A$ 是规范场，$F = dA + A \wedge A$ 是场强，$B$ 是一个 $(d-2)$ 形式的辅助场。
+
+BF理论的关键性质是：
+\begin{enumerate}
+    \item 作用量不依赖于度规
+    \item 运动方程是 $F = 0$ 和 $d_A B = 0$
+    \item 配分函数计算的是流形的 Reidemeister-Ray-Singer 挠率
+\end{enumerate}
+
+\subsection{\protect\hyperlink{:}{Chern-Simons理论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+Chern-Simons理论是最重要的拓扑场论之一，它在凝聚态物理（量子霍尔效应、拓扑绝缘体）和数学（纽结不变量、3-流形不变量）中都有重要应用。
+
+Chern-Simons理论的作用量为
+\begin{equation}
+    S_{CS} = \frac{k}{4\pi} \int_M \text{Tr}\left(A \wedge dA + \frac{2}{3}A \wedge A \wedge A\right)
+\end{equation}
+
+其中 $k$ 是Chern-Simons level，必须是整数。
+
+Chern-Simons理论的重要性质：
+\begin{enumerate}
+    \item 作用量不依赖于度规
+    \item 规范变换下，作用量变化一个边界项
+    \item Wilson环的期望值给出Jones多项式（纽结不变量）
+\end{enumerate}
+
+\begin{example}[Wilson环与Jones多项式]
+    考虑一个纽结 $K$（即嵌入到 $S^3$ 中的圆），定义Wilson环算符
+    \begin{equation*}
+        W_R(K) = \text{Tr}_R \left[\mathcal{P} \exp\left(\oint_K A\right)\right]
+    \end{equation*}
+
+    其中 $R$ 是表示，$\mathcal{P}$ 是路径排序。在Chern-Simons理论中，Wilson环的期望值
+    \begin{equation*}
+        \langle W_R(K) \rangle = \frac{1}{Z} \int \mathcal{D}A \, W_R(K) \, e^{iS_{CS}}
+    \end{equation*}
+
+    给出了纽结 $K$ 的Jones多项式 $V_K(q)$，其中 $q = e^{2\pi i/(k+2)}$。
+\end{example}
+
+\section{\protect\hyperlink{:}{Witten型拓扑场论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+Witten型拓扑场论是通过"拓扑扭曲"（topological twist）从普通量子场论得到的。
+
+\subsection{\protect\hyperlink{:}{拓扑扭曲}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+拓扑扭曲的基本思想是：从一个具有超对称的量子场论出发，通过修改理论的自旋结构，得到一个新的理论，这个新理论的应力-能量张量是某个超荷的对易子
+\begin{equation}
+    T_{\mu\nu} = \{Q, G_{\mu\nu}\}
+\end{equation}
+
+其中 $Q$ 是某个超荷，$G_{\mu\nu}$ 是某个算符。这意味着在 $Q$-上同调类中，所有物理可观测量都是拓扑不变的。
+
+\subsection{\protect\hyperlink{:}{拓扑Yang-Mills理论}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+拓扑Yang-Mills理论是从 $\mathcal{N}=1$ 超对称Yang-Mills理论通过拓扑扭曲得到的。其作用量为
+\begin{equation}
+    S = \int d^4x \, \text{Tr}\left[\frac{1}{4}F_{\mu\nu}F^{\mu\nu} + \frac{1}{4}F_{\mu\nu}\tilde{F}^{\mu\nu} + \text{fermionic terms}\right]
+\end{equation}
+
+第二项是拓扑项，因为它可以写成全导数
+\begin{equation}
+    \frac{1}{4}\int d^4x \, \text{Tr}(F_{\mu\nu}\tilde{F}^{\mu\nu}) = \frac{1}{4}\int d^4x \, \partial_\mu K^\mu
+\end{equation}
+
+其中 $K^\mu$ 是Chern-Simons流。
+
+\section{\protect\hyperlink{:}{拓扑场论的应用}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+拓扑场论在现代物理中有广泛的应用。
+
+\subsection{\protect\hyperlink{:}{量子霍尔效应}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+量子霍尔效应可以用Chern-Simons理论来描述。在二维电子气体中，霍尔电导率是量子化的
+\begin{equation}
+    \sigma_{xy} = \frac{ne^2}{h}
+\end{equation}
+
+其中 $n$ 是整数。这个量子化可以从Chern-Simons理论的拓扑性质推导出来。
+
+\subsection{\protect\hyperlink{:}{拓扑绝缘体}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+拓扑绝缘体是一类特殊的绝缘体，其体态是绝缘的，但表面存在无能隙的边界态。拓扑绝缘体的分类可以用K-理论和拓扑场论来描述。
+
+\subsection{\protect\hyperlink{:}{纽结理论与量子计算}}
+\addtocontents{toc}{\protect\hypertarget{:}{}}
+
+Chern-Simons理论与纽结理论的联系在量子计算中有重要应用。拓扑量子计算利用任意子（anyon）的编织统计来实现量子门，而任意子的数学描述正是Chern-Simons理论。
+
+\begin{remark}
+    拓扑场论揭示了物理学与数学之间的深刻联系。它不仅提供了描述拓扑物态的理论框架，也为数学中的拓扑不变量提供了物理诠释。拓扑场论的思想已经渗透到凝聚态物理、高能物理和量子信息等多个领域。
+\end{remark}

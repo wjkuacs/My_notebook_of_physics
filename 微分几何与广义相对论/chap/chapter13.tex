@@ -1,0 +1,624 @@
+% chapter13.tex - 宇宙学基础
+\chapter{宇宙学基础 (Basics of Cosmology)}
+\label{chap:cosmology}
+
+现代宇宙学是广义相对论最宏伟的应用——将爱因斯坦场方程应用于整个宇宙，描述其起源、演化和最终命运。本章从宇宙学原理出发，导出 FLRW 度规和 Friedmann 方程，讨论宇宙的组成与热历史，最后介绍宇宙微波背景辐射、暗能量和早期暴胀等观测与理论的辉煌成就。
+
+\section{宇宙学原理}
+\label{sec:cosmological_principle}
+
+\subsection{均匀性与各向同性}
+
+现代宇宙学的基石是\textbf{宇宙学原理}，它是对大尺度宇宙结构的一个基本假设：
+
+\begin{definition}[宇宙学原理 (Cosmological Principle)]
+在足够大的尺度上（$\gtrsim 100\,\text{Mpc}$），宇宙是\textbf{空间均匀}（spatially homogeneous）和\textbf{各向同性}（isotropic）的。换言之，宇宙没有特殊的位置（均匀性），也没有特殊的方向（各向同性）。
+\label{def:cosmological_principle}
+\end{definition}
+
+\begin{note}[观测证据]
+宇宙学原理不是一个先验的哲学假设，而是有坚实的观测支持：
+\begin{itemize}
+    \item \textbf{星系巡天}：2dF、SDSS 等大规模星系红移巡天表明，在 $\sim 100\,\text{Mpc}$ 以上尺度，星系分布趋于均匀。
+    \item \textbf{宇宙微波背景辐射 (CMB)}：CMB 的温度涨落仅为 $\Delta T / T \sim 10^{-5}$，说明在最后散射面处宇宙是高度各向同性的。
+    \item \textbf{射电源计数}：不同方向的射电源分布统计一致，支持各向同性。
+\end{itemize}
+\end{note}
+
+严格的各向同性必然蕴含均匀性（观测者在每个位置都看到各向同性的宇宙，则宇宙必然是均匀的）。但均匀性不一定蕴含各向同性——例如均匀磁场中的宇宙可以是均匀但各向异性的。我们同时假设两者。
+
+\subsection{共动坐标与宇宙时}
+
+在均匀各向同性的宇宙中，存在一族特殊的观测者——\textbf{共动观测者}（comoving observers），他们相对于宇宙微波背景静止，看到的宇宙是各向同性的。这些观测者的世界线构成一个无旋的类时测地线汇，定义了\textbf{宇宙时} $t$——即每个共动观测者携带的固有时间。
+
+宇宙时 $t$ 使得我们可以在整个宇宙中定义统一的\textbf{同时面}：$t = \text{const}$ 的超曲面是均匀各向同性的空间切片。
+
+在共动坐标中，每个星系（忽略本动速度）的\textbf{共动坐标} $\vb*{x}$ 不随时间变化，而物理距离由\textbf{标度因子} $a(t)$ 缩放。
+
+\begin{definition}[标度因子与红移]
+设 $a(t)$ 为标度因子，取今天的值为 $a(t_0) = 1$。则宇宙红移 $z$ 定义为：
+\begin{equation}
+    \boxed{1 + z = \frac{a(t_0)}{a(t_{\text{em}})} = \frac{1}{a(t_{\text{em}})}}.
+    \label{eq:redshift}
+\end{equation}
+\end{definition}
+
+\section{FLRW 度规}
+\label{sec:FLRW}
+
+\subsection{度规的导出}
+
+从宇宙学原理出发，可以唯一地确定时空度规的形式。
+
+\begin{theorem}[FLRW 度规]
+满足均匀性和各向同性要求的最一般的四维时空度规是\textbf{Friedmann--Lemaître--Robertson--Walker (FLRW) 度规}：
+\begin{equation}
+    \boxed{\dd s^2 = -c^2 \dd t^2 + a^2(t) \left[ \frac{\dd r^2}{1 - k r^2} + r^2 (\dd\theta^2 + \sin^2\theta \,\dd\phi^2) \right]}.
+    \label{eq:FLRW}
+\end{equation}
+其中：
+\begin{itemize}
+    \item $a(t)$ 是\textbf{标度因子}（scale factor），描述宇宙的整体膨胀或收缩；
+    \item $k \in \{-1, 0, +1\}$ 是\textbf{空间曲率参数}，分别对应开放（双曲）、平坦（欧几里德）和闭合（球面）的三维空间；
+    \item $(r, \theta, \phi)$ 是共动球坐标。
+\end{itemize}
+\label{thm:FLRW}
+\end{theorem}
+
+\begin{proof}[导出思路]
+均匀性和各向同性要求空间部分是最大对称的三维空间。最大对称的三维黎曼流形的黎曼曲率必须取常曲率 $K$ 的形式：
+\begin{equation}
+    {}^{(3)}\!R_{ijkl} = K \left( {}^{(3)}\!g_{ik} \, {}^{(3)}\!g_{jl} - {}^{(3)}\!g_{il} \, {}^{(3)}\!g_{jk} \right).
+\end{equation}
+常曲率空间的三维度规在球坐标下可写为：
+\begin{equation}
+    \dd\ell^2 = \frac{\dd r^2}{1 - K r^2} + r^2 (\dd\theta^2 + \sin^2\theta \,\dd\phi^2).
+\end{equation}
+令 $K = k/a^2$，并将 $a(t)$ 吸收到空间度规中，得到 FLRW 度规 (\ref{eq:FLRW})。
+\end{proof}
+
+\subsection{Hubble 定律}
+
+从 FLRW 度规可以直接导出 Hubble 定律。
+
+\begin{definition}[Hubble 参数]
+Hubble 参数定义为标度因子的相对变化率：
+\begin{equation}
+    \boxed{H(t) \equiv \frac{\dot{a}(t)}{a(t)}},
+    \label{eq:Hubble_param}
+\end{equation}
+其中 $\dot{a} = \dd a/\dd t$。今天的 Hubble 参数记为 $H_0 = H(t_0)$，称为\textbf{Hubble 常数}。
+\end{definition}
+
+物理距离（proper distance）与共动距离的关系为 $d_{\text{phys}}(t) = a(t) \, r$。物理距离的变化率（即退行速度）为：
+\begin{equation}
+    v_{\text{rec}} = \dot{d}_{\text{phys}} = \dot{a} \, r = \frac{\dot{a}}{a} \, d_{\text{phys}} = H(t) \, d_{\text{phys}}.
+\end{equation}
+
+\begin{theorem}[Hubble 定律]
+\begin{equation}
+    \boxed{v = H_0 \, d}.
+    \label{eq:Hubble_law}
+\end{equation}
+退行速度与距离成正比。这是宇宙膨胀的直接观测表现。
+\end{theorem}
+
+\begin{note}[Hubble 常数的现代测量]
+Planck 卫星 (2018) 给出的值为 $H_0 = 67.4 \pm 0.5 \,\text{km}\,\text{s}^{-1}\,\text{Mpc}^{-1}$。而利用 SNe Ia 等局部距离阶梯测量的值为 $H_0 \approx 73.0 \pm 1.0 \,\text{km}\,\text{s}^{-1}\,\text{Mpc}^{-1}$。这一 $\sim 5\sigma$ 的差异被称为\textbf{Hubble 张力}（Hubble tension），是当前宇宙学中最引人注目的问题之一。
+\end{note}
+
+\subsection{粒子视界与宇宙学距离}
+
+在 FLRW 时空中，光沿类光测地线 $\dd s^2 = 0$ 传播。对径向传播 ($\dd\theta = \dd\phi = 0$)：
+\begin{equation}
+    c\,\dd t = a(t) \frac{\dd r}{\sqrt{1 - k r^2}}.
+\end{equation}
+
+\begin{definition}[粒子视界 (Particle Horizon)]
+从大爆炸 ($t=0$) 到时刻 $t$，光信号所能传播的最大共动距离为：
+\begin{equation}
+    \boxed{r_{\text{hor}}(t) = \int_0^t \frac{c\,\dd t'}{a(t')}}.
+    \label{eq:particle_horizon}
+\end{equation}
+对应的物理距离 $d_{\text{hor}}(t) = a(t) \, r_{\text{hor}}(t)$ 称为粒子视界，是因果联系所能达到的最大距离。
+\end{definition}
+
+\begin{definition}[角直径距离 (Angular Diameter Distance)]
+在弯曲时空中，物理尺度为 $D$ 的源的观测张角 $\delta\theta$ 与距离的关系定义了角直径距离：
+\begin{equation}
+    \boxed{d_A = \frac{D}{\delta\theta} = a(t_{\text{em}}) \, r = \frac{r}{1+z}}.
+    \label{eq:angular_diameter}
+\end{equation}
+注意 $d_A$ 在 $z \gtrsim 1$ 时随红移增加而减小——这是空间弯曲的显著效应。
+\end{definition}
+
+\section{Friedmann 方程}
+\label{sec:Friedmann}
+
+\subsection{从爱因斯坦场方程导出}
+
+将 FLRW 度规 (\ref{eq:FLRW}) 代入爱因斯坦场方程：
+\begin{equation}
+    G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4} T_{\mu\nu},
+\end{equation}
+其中宇宙学常数 $\Lambda$ 项可视为能量-动量张量的一部分。
+
+在共动坐标系中，均匀各向同性的宇宙流体处于静止状态，其能量-动量张量取理想流体形式：
+\begin{equation}
+    T^{\mu}{}_{\nu} = \diag(-\rho c^2, p, p, p),
+\end{equation}
+其中 $\rho(t)$ 是能量密度，$p(t)$ 是压强。
+
+计算 FLRW 度规的 Einstein 张量：非零分量为
+\begin{align}
+    G_{00} &= \frac{3}{c^2}\left(\frac{\dot{a}^2}{a^2} + \frac{k c^2}{a^2}\right), \\
+    G_{ij} &= -\frac{1}{c^2}\left(2\frac{\ddot{a}}{a} + \frac{\dot{a}^2}{a^2} + \frac{k c^2}{a^2}\right) g_{ij}.
+\end{align}
+
+代入场方程得到两个独立的方程：
+
+\begin{theorem}[Friedmann 方程]
+\textbf{第一 Friedmann 方程（能量方程）：}
+\begin{equation}
+    \boxed{H^2 = \left(\frac{\dot{a}}{a}\right)^2 = \frac{8\pi G}{3}\rho - \frac{k c^2}{a^2} + \frac{\Lambda c^2}{3}}.
+    \label{eq:Friedmann1}
+\end{equation}
+
+\textbf{第二 Friedmann 方程（加速度方程）：}
+\begin{equation}
+    \boxed{\frac{\ddot{a}}{a} = -\frac{4\pi G}{3}\left(\rho + \frac{3p}{c^2}\right) + \frac{\Lambda c^2}{3}}.
+    \label{eq:Friedmann2}
+\end{equation}
+\label{thm:Friedmann}
+\end{theorem}
+
+从能量-动量守恒 $\nabla^\mu T_{\mu\nu} = 0$ 可以得到\textbf{流体方程}（也等价于两个 Friedmann 方程的相容性条件）：
+\begin{equation}
+    \boxed{\dot{\rho} + 3\frac{\dot{a}}{a}\left(\rho + \frac{p}{c^2}\right) = 0}.
+    \label{eq:fluid}
+\end{equation}
+
+\begin{note}[$c=1$ 单位制]
+在许多文献中采用自然单位制 $c=1$，此时 Friedmann 方程写为：
+\begin{align}
+    H^2 &= \frac{8\pi G}{3}\rho - \frac{k}{a^2} + \frac{\Lambda}{3}, \\
+    \frac{\ddot{a}}{a} &= -\frac{4\pi G}{3}(\rho + 3p) + \frac{\Lambda}{3}.
+\end{align}
+本书保留 $c$ 以明确各物理量的量纲。
+\end{note}
+
+\subsection{临界密度与密度参数}
+
+\begin{definition}[临界密度]
+令 $k=0$ 且 $\Lambda=0$ 时，Friedmann 方程给出：
+\begin{equation}
+    \boxed{\rho_{\text{crit}} \equiv \frac{3H^2}{8\pi G}}.
+    \label{eq:critical_density}
+\end{equation}
+今天的临界密度为 $\rho_{\text{crit},0} = 1.878 \times 10^{-29} \, h^2 \,\text{g}\,\text{cm}^{-3}$，其中 $h = H_0 / (100\,\text{km}\,\text{s}^{-1}\,\text{Mpc}^{-1})$。
+\end{definition}
+
+\begin{definition}[密度参数]
+各种宇宙组分的密度参数定义为：
+\begin{equation}
+    \boxed{\Omega \equiv \frac{\rho}{\rho_{\text{crit}}}}, \quad
+    \Omega_k \equiv -\frac{k c^2}{a^2 H^2}, \quad
+    \Omega_\Lambda \equiv \frac{\Lambda c^2}{3 H^2}.
+    \label{eq:Omega}
+\end{equation}
+第一 Friedmann 方程于是写成紧凑形式：
+\begin{equation}
+    \boxed{\Omega + \Omega_k + \Omega_\Lambda = 1}.
+    \label{eq:Omega_sum}
+\end{equation}
+\end{definition}
+
+Planck 2018 给出的最佳拟合值为：
+\begin{equation}
+    \Omega_{m,0} = 0.315 \pm 0.007,\quad
+    \Omega_{\Lambda,0} = 0.685 \pm 0.007,\quad
+    \Omega_{k,0} = 0.001 \pm 0.002.
+\end{equation}
+
+\section{宇宙的组成与演化}
+\label{sec:components}
+
+\subsection{状态方程与标度因子演化}
+
+设宇宙流体的状态方程为 $p = w \rho c^2$，其中 $w$ 是\textbf{状态方程参数}。代入流体方程 (\ref{eq:fluid})：
+\begin{equation}
+    \dot{\rho} + 3\frac{\dot{a}}{a}\rho(1+w) = 0
+    \quad\Longrightarrow\quad
+    \boxed{\rho(a) = \rho_0 \, a^{-3(1+w)}}.
+    \label{eq:rho_evolution}
+\end{equation}
+
+三类最重要的宇宙组分：
+
+\begin{definition}[宇宙组分]
+\begin{itemize}
+    \item \textbf{辐射 (Radiation)}：$w = 1/3$，$\rho_r \propto a^{-4}$。额外的 $a^{-1}$ 因子来自光子波长的宇宙学红移导致的能量衰减。
+    \item \textbf{非相对论物质 (Matter)}：$w = 0$，$\rho_m \propto a^{-3}$。包括普通重子物质和冷暗物质（CDM）。压可忽略，能量密度仅因体积膨胀而稀释。
+    \item \textbf{宇宙学常数 (Cosmological Constant)}：$w = -1$，$\rho_\Lambda = \text{常数}$。能量密度不随宇宙膨胀而改变——这是暗能量的最简单模型。
+\end{itemize}
+\end{definition}
+
+\begin{note}[曲率项的有效状态方程]
+曲率项 $k/a^2$ 在 Friedmann 方程中的演化等价于 $w = -1/3$ 的流体：$\rho_k \propto a^{-2}$。
+\end{note}
+
+\subsection{单组分宇宙的解析解}
+
+当一种组分主导时，Friedmann 方程可精确求解。
+
+\subsubsection{平坦物质主导宇宙 ($\Omega_m = 1, k=0, \Lambda=0$)}
+
+由 $\rho \propto a^{-3}$ 和 Friedmann 方程：
+\begin{equation}
+    \left(\frac{\dot{a}}{a}\right)^2 \propto a^{-3}
+    \quad\Longrightarrow\quad
+    \boxed{a(t) = \left(\frac{t}{t_0}\right)^{2/3}}.
+    \label{eq:Einstein_deSitter}
+\end{equation}
+这被称为\textbf{Einstein--de Sitter 宇宙}。
+
+\subsubsection{平坦辐射主导宇宙}
+
+由 $\rho \propto a^{-4}$：
+\begin{equation}
+    \boxed{a(t) = \left(\frac{t}{t_0}\right)^{1/2}}.
+    \label{eq:radiation_era}
+\end{equation}
+
+\subsubsection{平坦 $\Lambda$ 主导宇宙（de Sitter 膨胀）}
+
+$\rho_\Lambda = \text{const}$，$H = \sqrt{\Lambda c^2 / 3} = \text{const}$：
+\begin{equation}
+    \boxed{a(t) = a_0 \, e^{H(t-t_0)}}.
+    \label{eq:deSitter}
+\end{equation}
+宇宙呈指数膨胀——这是暴胀和晚期加速膨胀的基础。
+
+\subsection{宇宙的热历史}
+
+\begin{table}[htbp]
+\centering
+\caption{标准 $\Lambda$CDM 宇宙学模型的主要事件}
+\label{tab:cosmic_history}
+\begin{tabular}{ccc}
+\toprule
+\textbf{事件} & \textbf{红移 $z$} & \textbf{宇宙年龄} \\
+\midrule
+Planck 标度 & $\infty$ & $10^{-43}\,\text{s}$ \\
+暴胀结束 & $\sim 10^{28}$ & $10^{-32}\,\text{s}$ \\
+电弱对称性破缺 & $\sim 10^{15}$ & $10^{-10}\,\text{s}$ \\
+QCD 相变 & $\sim 10^{12}$ & $10^{-5}\,\text{s}$ \\
+中微子退耦 & $\sim 6 \times 10^{9}$ & $1\,\text{s}$ \\
+原初核合成 (BBN) & $\sim 10^{9}$ & $3\,\text{min}$ \\
+物质-辐射相等 & $3400$ & $5 \times 10^{4}\,\text{yr}$ \\
+复合（CMB 释放） & $1090$ & $3.8 \times 10^{5}\,\text{yr}$ \\
+暗时代 & $20$--$1090$ & $10^{5}$--$10^{8}\,\text{yr}$ \\
+再电离 & $7$--$10$ & $5 \times 10^{8}\,\text{yr}$ \\
+$\Lambda$--物质相等 & $0.3$ & $7 \times 10^{9}\,\text{yr}$ \\
+今天 & $0$ & $1.38 \times 10^{10}\,\text{yr}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{宇宙微波背景辐射}
+\label{sec:CMB}
+
+\subsection{复合与最后散射面}
+
+在早期宇宙中，温度极高，物质完全电离。光子与自由电子通过 Thomson 散射紧密耦合，宇宙是不透明的。当温度降至约 $T \sim 3000\,\text{K}$（$z \sim 1090$），电子与质子结合形成中性氢原子——这一过程称为\textbf{复合}（recombination）。此后光子可以自由传播，宇宙变得透明。
+
+\begin{definition}[最后散射面 (Last Scattering Surface)]
+光子最后一次被散射的时刻对应的球面称为最后散射面。我们今天观测到的 CMB 光子来自这个球面。该球面的共动距离约为 $14\,\text{Gpc}$，对应的红移为 $z_* \approx 1090$。
+\end{definition}
+
+\subsection{CMB 的黑体谱}
+
+CMB 拥有宇宙中最完美的黑体谱。COBE/FIRAS 仪器测量的温度为：
+\begin{equation}
+    \boxed{T_0 = 2.72548 \pm 0.00057 \,\text{K}}.
+    \label{eq:CMB_T}
+\end{equation}
+黑体谱随红移演化为 $T(z) = T_0(1+z)$。
+
+\subsection{CMB 温度各向异性}
+
+虽然 CMB 高度各向同性，但存在微小的温度涨落：
+\begin{equation}
+    \boxed{\frac{\Delta T}{T} \sim 10^{-5}}.
+    \label{eq:CMB_anisotropy}
+\end{equation}
+
+将温度涨落展开为球谐函数：
+\begin{equation}
+    \frac{\Delta T}{T}(\theta, \phi) = \sum_{\ell=0}^{\infty} \sum_{m=-\ell}^{\ell} a_{\ell m} Y_{\ell m}(\theta, \phi).
+\end{equation}
+
+\textbf{角功率谱}定义为：
+\begin{equation}
+    C_\ell \equiv \frac{1}{2\ell+1} \sum_{m=-\ell}^{\ell} |a_{\ell m}|^2.
+\end{equation}
+
+\subsection{CMB 功率谱的物理}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % Axes
+    \draw[->,thick] (0,0) -- (10,0) node[right] {$\ell$ (多极矩)};
+    \draw[->,thick] (0,0) -- (0,5) node[above] {$\ell(\ell+1)C_\ell / 2\pi$ [$\mu\text{K}^2$]};
+
+    % Annotations on x-axis
+    \draw (1.0,0.1) -- (1.0,-0.1) node[below,font=\footnotesize] {2};
+    \draw (3.0,0.1) -- (3.0,-0.1) node[below,font=\footnotesize] {10};
+    \draw (5.5,0.1) -- (5.5,-0.1) node[below,font=\footnotesize] {100};
+    \draw (7.5,0.1) -- (7.5,-0.1) node[below,font=\footnotesize] {500};
+    \draw (9.0,0.1) -- (9.0,-0.1) node[below,font=\footnotesize] {1000};
+
+    % Acoustic peak envelope (schematic)
+    \draw[blue, thick, smooth, tension=0.6]
+        plot coordinates {
+            (0.2, 0.05)
+            (0.8, 0.4)
+            (1.2, 1.5)
+            (1.6, 3.8)   % First peak ~ l=220
+            (1.9, 2.5)
+            (2.5, 2.8)   % Second peak
+            (2.9, 1.2)
+            (3.5, 1.6)   % Third peak
+            (3.9, 0.7)
+            (5.0, 1.0)
+            (5.5, 0.5)
+            (7.0, 0.6)
+            (8.0, 0.2)
+            (10.0, 0.1)
+        };
+
+    % Labels
+    \node[red] at (1.6, 4.2) {\footnotesize 第一峰};
+    \node[red, ->] (1.6, 3.9) -- (1.6, 3.7);
+    \node[red] at (2.5, 3.1) {\footnotesize 第二峰};
+    \node[red] at (3.5, 1.9) {\footnotesize 第三峰};
+
+    % ISW rise
+    \fill[blue!15] (0,0) rectangle (0.8, 0.45);
+    \node[blue!70!black, font=\footnotesize] at (0.4, 0.6) {ISW};
+
+    % Damping tail
+    \fill[orange!15] (6.5,0) rectangle (10, 0.65);
+    \node[orange!70!black, font=\footnotesize] at (8.2, 0.8) {阻尼尾};
+
+    % Regions
+    \draw[gray, dashed] (3.0, 4.5) -- (3.0, 0);
+    \node[gray, font=\footnotesize] at (1.5, 4.5) {声学振荡};
+    \node[gray, font=\footnotesize] at (6.5, 4.5) {Silk 阻尼};
+
+    % Title
+    \node[font=\small\bfseries] at (5.0, 4.8) {CMB 温度角功率谱};
+\end{tikzpicture}
+\caption{CMB 温度角功率谱示意图。$\ell \sim 220$ 处的第一声学峰对应声视界在最后散射面处的投影角度，其位置精确测量了宇宙的空间曲率（平坦宇宙）。偶数峰与奇数峰的相对高度反映了重子密度。高 $\ell$ 处的阻尼尾来自 Silk 阻尼（光子扩散抹平小尺度涨落）。}
+\label{fig:CMB_power_spectrum}
+\end{figure}
+
+\begin{note}[CMB 的宇宙学信息]
+CMB 功率谱的精确测量（WMAP、Planck）能够同时约束六个 $\Lambda$CDM 参数：
+\begin{itemize}
+    \item 第一峰的位置 $\to$ 宇宙曲率 $\Omega_k \approx 0$（宇宙是平坦的）；
+    \item 第一峰与第二峰的相对高度 $\to$ 重子密度 $\Omega_b h^2$；
+    \item 第三峰的高度 $\to$ 暗物质密度 $\Omega_c h^2$；
+    \item 低 $\ell$ 处的 ISW 效应 $\to$ 暗能量证据；
+    \item 整体幅度 $\to$ 原初涨落幅度 $A_s$；
+    \item 峰的平滑程度 $\to$ 原初谱指数 $n_s$。
+\end{itemize}
+\end{note}
+
+\section{暗能量与宇宙加速膨胀}
+\label{sec:dark_energy}
+
+\subsection{超新星与加速膨胀的发现 (1998)}
+
+1998年，两个独立的超新星宇宙学团队——\textbf{Supernova Cosmology Project} 和 \textbf{High-$z$ Supernova Search Team}——通过观测遥远的 Ia 型超新星（SNe Ia），发现宇宙正在加速膨胀。这一发现被 \textit{Science} 杂志评为 1998 年的年度突破，并获得了 2011 年诺贝尔物理学奖。
+
+\begin{example}[SNe Ia 作为标准烛光]
+Ia 型超新星来自白矮星吸积物质达到 Chandrasekhar 极限后的热核爆炸，其峰值光度高度均匀（经 Phillips 关系矫正后弥散仅为 $\sim 0.15\,\text{mag}$），是极佳的\textbf{标准烛光}。通过测量其视亮度和红移，可以构建 Hubble 图（距离模数--红移关系），从而探测宇宙膨胀历史。
+\end{example}
+
+\textbf{观测结果：} 高红移 ($z \sim 0.5$) 的超新星系统性地比匀速膨胀宇宙的预期暗约 $0.25\,\text{mag}$，意味着它们比预期的更远——宇宙在过去膨胀得较慢，而现在正在加速。这要求存在一种具有负压的组分：\textbf{暗能量}。
+
+\begin{theorem}[加速膨胀的条件]
+由第二 Friedmann 方程 (\ref{eq:Friedmann2})，加速膨胀 $\ddot{a} > 0$ 要求：
+\begin{equation}
+    \rho + \frac{3p}{c^2} < 0
+    \quad\Longrightarrow\quad
+    \boxed{w < -\frac{1}{3}}.
+    \label{eq:acceleration_condition}
+\end{equation}
+\end{theorem}
+
+\subsection{暗能量的性质}
+
+\begin{definition}[暗能量状态方程]
+暗能量通常由状态方程参数 $w$ 表征：
+\begin{equation}
+    p_{\text{DE}} = w \,\rho_{\text{DE}} \,c^2.
+\end{equation}
+不同的 $w$ 值对应不同的暗能量模型：
+\begin{itemize}
+    \item $w = -1$：宇宙学常数 $\Lambda$（$\Lambda$CDM 模型）；
+    \item $w < -1$：\textbf{幽灵暗能量}（phantom dark energy），会导致大撕裂（Big Rip）；
+    \item $-1 < w < -1/3$：\textbf{精质}（quintessence），通常由缓慢滚动的标量场实现。
+\end{itemize}
+\end{definition}
+
+目前观测（Planck + SNe Ia + BAO）给出：
+\begin{equation}
+    \boxed{w = -1.028 \pm 0.031},
+\end{equation}
+与宇宙学常数的预言 $w = -1$ 完美一致。
+
+\begin{note}[宇宙学常数问题]
+将 $\Lambda$ 解释为真空能量密度 $\rho_{\text{vac}} = \Lambda c^2 / (8\pi G)$，量子场论对真空能的自然估计为 Planck 尺度 $\rho_{\text{vac}}^{\text{(QFT)}} \sim M_{\text{Pl}}^4 c^5 / \hbar^3 \sim 10^{113}\,\text{erg}\,\text{cm}^{-3}$，而观测值仅为 $\rho_{\text{vac}}^{\text{(obs)}} \approx 10^{-8}\,\text{erg}\,\text{cm}^{-3}$。理论与观测的 $\sim 10^{121}$ 倍差异是物理学中最大的数量级矛盾，被称为\textbf{宇宙学常数问题}。
+\end{note}
+
+\subsection{标度因子演化的 TikZ 图}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.1]
+    % Axes
+    \draw[->,thick] (0,0) -- (8,0) node[right] {宇宙时 $t$};
+    \draw[->,thick] (0,0) -- (0,5) node[above] {标度因子 $a(t)$};
+
+    % Mark t0
+    \draw[dashed, gray] (6.5,0) -- (6.5,5);
+    \node[gray] at (6.5, -0.4) {$t_0$ (今天)};
+
+    % Radiation dominated: a(t) ~ t^{1/2}
+    \draw[red, thick, domain=0:2, samples=50]
+        plot (\x, {0.6*sqrt(\x)}) node[right, red] {$\propto t^{1/2}$ 辐射主导};
+
+    % Matter dominated: a(t) ~ t^{2/3}
+    \draw[blue, thick, domain=2:4.5, samples=50]
+        plot (\x, {0.95*(\x/4.5)^(0.666)*3.5}) node[right, blue] {$\propto t^{2/3}$ 物质主导};
+
+    % Lambda dominated: exponential
+    \draw[green!50!black, thick, domain=4.5:7.5, samples=50]
+        plot (\x, {3.2*exp(0.25*(\x-4.5))}) node[right, green!50!black] {$\propto e^{Ht}$ $\Lambda$ 主导};
+
+    % Labels
+    \node[font=\footnotesize, red] at (1.0, 1.0) {辐射};
+    \node[font=\footnotesize, blue] at (3.3, 2.5) {物质};
+    \node[font=\footnotesize, green!50!black] at (6.0, 4.0) {暗能量};
+
+    % Title
+    \node[font=\small\bfseries] at (4.0, 4.8) {标度因子 $a(t)$ 的演化};
+\end{tikzpicture}
+\caption{标度因子在不同主导时期的时间演化。早期宇宙为辐射主导 ($a \propto t^{1/2}$)，随后进入物质主导 ($a \propto t^{2/3}$)，当前进入暗能量主导的加速膨胀阶段 ($a \propto e^{Ht}$)。今天的标度因子归一化为 $a(t_0) = 1$。}
+\label{fig:scale_factor}
+\end{figure}
+
+\section{早期宇宙与暴胀}
+\label{sec:inflation}
+
+\subsection{经典宇宙学的疑难}
+
+标准热大爆炸宇宙学虽然取得了巨大成功，但面临几个根本性疑难：
+
+\begin{enumerate}
+    \item \textbf{视界疑难 (Horizon Problem)}：CMB 天空中相隔 $> 2^\circ$ 的区域在标准大爆炸模型中没有因果联系，但它们的温度却精确相同（$\Delta T/T \sim 10^{-5}$）。为何因果不连通的区域能处于热平衡？
+
+    \item \textbf{平坦性疑难 (Flatness Problem)}：第一 Friedmann 方程可重写为 $|\Omega - 1| = |k|/(a^2 H^2)$。由于 $(aH)^{-1}$ 随时间增大（对于 $w > -1/3$ 的流体），$|\Omega - 1|$ 随时间增长。今天的 $|\Omega_0 - 1| \lesssim 0.01$ 意味着在 Planck 时刻 $|\Omega - 1| \lesssim 10^{-62}$——宇宙的初始条件需要极其精细的调节。
+
+    \item \textbf{磁单极子疑难 (Monopole Problem)}：大统一理论（GUT）预言了重磁单极子的产生，但未被观测到。
+\end{enumerate}
+
+\subsection{暴胀机制}
+
+\textbf{暴胀}（inflation）由 Guth (1981)、Linde (1982) 和 Albrecht \& Steinhardt (1982) 提出，假设极早期宇宙经历了一段指数加速膨胀阶段。
+
+\begin{definition}[暴胀]
+暴胀是宇宙在极早期 ($t \sim 10^{-36}$--$10^{-32}\,\text{s}$) 经历的一段准 de Sitter 指数膨胀阶段，标度因子暴胀了至少 $e^{60}$ 倍。暴胀由一个近似常数的真空能量驱动——通常由一个标量场（\textbf{暴胀子} inflaton $\phi$）的势能 $V(\phi)$ 提供。
+\end{definition}
+
+在暴胀期间，$H \approx \text{const}$，$a(t) \propto e^{Ht}$。暴胀同时解决了上述三个疑难：
+\begin{itemize}
+    \item 暴胀将因果关联的微小区域拉伸到整个可观测宇宙，解决了视界疑难；
+    \item 指数膨胀将空间曲率拉伸到几乎不可检测的水平，自然地预言 $\Omega_k \approx 0$；
+    \item 任何暴胀前存在的磁单极子被指数稀释到可忽略的密度。
+\end{itemize}
+
+更重要的是，暴胀期间暴胀子场的量子涨落被拉伸到超视界尺度，冻结成为经典密度扰动——这正是 CMB 各向异性和大尺度结构的\textbf{种子}。暴胀预言的原初扰动谱是近标度不变的（$n_s \approx 0.965$），与 Planck 观测高度一致。
+
+\begin{note}[暴胀的观测检验]
+Planck 卫星对 CMB 的精确测量给出：
+\begin{itemize}
+    \item 标量谱指数 $n_s = 0.9649 \pm 0.0042$（偏离精确标度不变 $n_s=1$ 约 $8\sigma$）；
+    \item 张量-标量比 $r < 0.036$（95\% CL），尚未探测到原初引力波。
+\end{itemize}
+这些观测正在精确检验具体的暴胀模型。
+\end{note}
+
+\section{算例}
+\label{sec:examples_cosmo}
+
+\subsection{Hubble 时间}
+
+Hubble 时间 $t_H \equiv 1/H_0$ 给出了宇宙年龄的数量级估计：
+\begin{align}
+    H_0 &= 67.4 \,\text{km}\,\text{s}^{-1}\,\text{Mpc}^{-1} \nonumber\\
+        &= 67.4 \times \frac{10^5\,\text{cm}}{3.086 \times 10^{24}\,\text{cm}} \nonumber\\
+        &= 2.18 \times 10^{-18} \,\text{s}^{-1}, \nonumber\\
+    t_H &= \frac{1}{H_0} = 4.59 \times 10^{17}\,\text{s} \approx 14.5 \,\text{Gyr}.
+\end{align}
+在 $\Lambda$CDM 模型中，宇宙的精确年龄为 $t_0 = 13.8\,\text{Gyr}$。
+
+\subsection{物质-辐射相等红移 $z_{\text{eq}}$}
+
+\begin{example}[计算 $z_{\text{eq}}$]
+今天的辐射密度主要由 CMB 光子（和近乎无质量的中微子）贡献：
+\begin{equation}
+    \rho_{r,0} = \frac{\pi^2}{15} \frac{(k_B T_0)^4}{\hbar^3 c^5} \approx 4.64 \times 10^{-34} \,\text{g}\,\text{cm}^{-3}.
+\end{equation}
+今天的物质密度为：
+\begin{equation}
+    \rho_{m,0} = \Omega_{m,0} \,\rho_{\text{crit},0} \approx 0.315 \times 1.878 \times 10^{-29} \,h^2 \approx 1.27 \times 10^{-30} \,\text{g}\,\text{cm}^{-3}.
+\end{equation}
+
+物质-辐射相等发生在 $\rho_m(z_{\text{eq}}) = \rho_r(z_{\text{eq}})$ 时。利用 $\rho_m \propto a^{-3} = (1+z)^3$ 和 $\rho_r \propto a^{-4} = (1+z)^4$：
+\begin{equation}
+    \rho_{m,0}(1+z_{\text{eq}})^3 = \rho_{r,0}(1+z_{\text{eq}})^4
+    \quad\Longrightarrow\quad
+    \boxed{1 + z_{\text{eq}} = \frac{\rho_{m,0}}{\rho_{r,0}} \approx 3400}.
+\end{equation}
+即 $z_{\text{eq}} \approx 3400$，对应宇宙年龄约 $5 \times 10^4$ 年。
+\end{example}
+
+\subsection{角直径距离}
+
+\begin{example}[$\Lambda$CDM 中的角直径距离]
+在平坦 $\Lambda$CDM 宇宙 ($\Omega_k = 0$) 中，角直径距离 (\ref{eq:angular_diameter}) 为：
+\begin{equation}
+    d_A(z) = \frac{c}{1+z} \int_0^z \frac{\dd z'}{H(z')},
+\end{equation}
+其中 $H(z) = H_0 \sqrt{\Omega_{m,0}(1+z)^3 + \Omega_{\Lambda,0} + \Omega_{r,0}(1+z)^4}$。
+
+对于 $z=1$ 的源，以 Planck 参数计算：
+\begin{align}
+    d_A(z=1) &\approx \frac{c}{2} \int_0^1 \frac{\dd z'}{H_0 \sqrt{0.315(1+z')^3 + 0.685}} \nonumber\\
+             &\approx \frac{1}{2} \times 1.2 \times \frac{c}{H_0} \approx 1730 \,\text{Mpc}.
+\end{align}
+注意在宇宙学中，角直径距离在 $z \sim 1.6$ 处达到最大值，然后随红移增加而减小——这是因为在高红移时，源在光发射时刻实际上更\"近\"（宇宙当时更小）。
+\end{example}
+
+\subsection{宇宙年龄积分}
+
+\begin{example}[$\Lambda$CDM 宇宙年龄]
+宇宙年龄由标度因子的积分给出：
+\begin{equation}
+    t_0 = \int_0^{t_0} \dd t = \int_0^1 \frac{\dd a}{a H(a)} = \int_0^\infty \frac{\dd z}{(1+z)H(z)}.
+\end{equation}
+代入 Planck 参数：
+\begin{align}
+    t_0 &= \frac{1}{H_0} \int_0^\infty \frac{\dd z}{(1+z)\sqrt{\Omega_{m,0}(1+z)^3 + \Omega_{\Lambda,0}}} \nonumber\\
+        &\approx \frac{1}{H_0} \times 0.96 \approx 13.8 \,\text{Gyr}.
+\end{align}
+\end{example}
+
+\section{结语}
+
+宇宙学是广义相对论最成功的应用领域之一。从 Einstein 1917 年引入宇宙学常数，到 Hubble 1929 年发现宇宙膨胀，再到 1998 年 SNe Ia 揭示的加速膨胀，以及 CMB 的精确测量——FLRW 宇宙学模型经受了越来越严格的观测检验。今天，$\Lambda$CDM 模型以仅六个参数精确描述了从大爆炸后几分钟到今天的宇宙演化。
+
+然而，重大谜题依然存在：暗物质的本质、暗能量的微观起源（宇宙学常数问题）、Hubble 张力、以及暴胀的详细物理机制。这些问题的解答可能将我们引向超越广义相对论和标准模型的新物理。
+
+\begin{flushright}
+    --- ``宇宙不仅比我们想象的更奇特，它比我们能够想象的更奇特。" \hspace{2em} J. B. S. Haldane
+\end{flushright}
+
+% References
+% \cite{Riess1998}: Riess et al., Observational Evidence from Supernovae for an Accelerating Universe, AJ 116, 1009 (1998)
+% \cite{Carroll1997}: Carroll, Press, & Turner, The Cosmological Constant, ARAA 30, 499 (1992)
+% \cite{Wald1984}: Wald, General Relativity, University of Chicago Press (1984)

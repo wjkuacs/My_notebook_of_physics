@@ -1,0 +1,184 @@
+% 朗道-金兹堡理论与相变
+% 基于 Natsuume (2014) 第12章整理
+
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+
+\title{朗道-金兹堡理论与相变}
+\author{整理自 Natsuume (2014) 第12章}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{相变的基本概念}
+
+\subsection{相变的定义}
+
+当控制参数（如温度）变化时，系统从一个宏观状态转变为另一个更稳定的状态。
+
+\subsection{相变的分类}
+
+\textbf{一阶相变}：自由能 $F$ 连续，但其一阶导数不连续。
+
+\textbf{二阶相变}：自由能及其一阶导数连续，但二阶导数不连续或发散。
+
+\section{朗道理论}
+
+\subsection{序参量}
+
+序参量 $m$ 是描述两个相之间差异的宏观变量。
+
+\subsection{伪自由能}
+
+对于具有 $Z_2$ 对称性（$m \to -m$）的系统，伪自由能密度：
+\begin{equation}
+    \mathcal{L}[m; T, H] = \mathcal{L}_0 + \frac{1}{2} a m^2 + \frac{1}{4} b m^4 + \cdots - m H
+\end{equation}
+
+其中：
+\begin{itemize}
+    \item $a = a_0 (T - T_c)$，$a_0 > 0$
+    \item $b > 0$
+\end{itemize}
+
+\subsection{自发对称性破缺}
+
+当 $T < T_c$ 时，$a < 0$，系统发生自发对称性破缺：
+\begin{equation}
+    m = \sqrt{-\frac{a}{b}} \propto (T_c - T)^{1/2}
+\end{equation}
+
+\subsection{临界指数}
+
+朗道理论给出的临界指数：
+\begin{align}
+    &\text{序参量：} & m &\propto (T_c - T)^{\beta}, \quad \beta = \frac{1}{2} \\
+    &\text{磁化率：} & \chi_T &\propto |T - T_c|^{-\gamma}, \quad \gamma = 1 \\
+    &\text{比热容：} & C &\propto |T - T_c|^{-\alpha}, \quad \alpha = 0 \\
+    &\text{临界等温线：} & m &\propto |H|^{1/\delta}, \quad \delta = 3
+\end{align}
+
+\section{一阶相变}
+
+\subsection{不具有 $Z_2$ 对称性的情况}
+
+当系统不具有 $m \to -m$ 对称性时，可以存在 $m^3$ 项：
+\begin{equation}
+    \mathcal{L}[m; T, H] = \frac{1}{2} a m^2 - \frac{1}{3} c m^3 + \frac{1}{4} b m^4 + \cdots - m H
+\end{equation}
+
+\subsection{一阶相变的特征}
+
+\begin{itemize}
+    \item 序参量在相变点不连续跳变
+    \item 存在潜热
+    \item 存在相变滞后
+    \item 存在亚稳态
+\end{itemize}
+
+\section{临界现象}
+
+\subsection{关联长度}
+
+在临界点附近，关联长度发散：
+\begin{equation}
+    \xi \propto |T - T_c|^{-\nu}
+\end{equation}
+
+\subsection{标度律}
+
+临界指数之间的关系：
+\begin{align}
+    &\alpha + 2\beta + \gamma = 2 \quad \text{(Rushbrooke)} \\
+    &\gamma = \beta(\delta - 1) \quad \text{(Widom)} \\
+    &\gamma = \nu(2 - \eta) \quad \text{(Fisher)} \\
+    &\nu d = 2 - \alpha \quad \text{(Josephson)}
+\end{align}
+
+\subsection{普适性}
+
+临界指数只依赖于：
+\begin{itemize}
+    \item 空间维度 $d$
+    \item 序参量的对称性
+    \item 相互作用的范围
+\end{itemize}
+
+不依赖于微观细节。
+
+\section{金兹堡-朗道理论}
+
+\subsection{空间非均匀情况}
+
+将朗道理论推广到空间非均匀情况：
+\begin{equation}
+    F[\psi, \mathbf{A}] = \int d^3x \left[ \alpha|\psi|^2 + \frac{\beta}{2}|\psi|^4
+    + \gamma|(\nabla - ie\mathbf{A})\psi|^2 + \frac{1}{2\mu_0}(\nabla \times \mathbf{A})^2 \right]
+\end{equation}
+
+\subsection{超导相变}
+
+当 $T < T_c$ 时，$\alpha < 0$，$\psi$ 获得非零期望值：
+\begin{equation}
+    |\psi| = \sqrt{-\frac{\alpha}{\beta}}
+\end{equation}
+
+\subsection{迈斯纳效应}
+
+超导体内部磁场为零：
+\begin{equation}
+    \mathbf{B} = 0
+\end{equation}
+
+穿透深度：
+\begin{equation}
+    \lambda_L = \sqrt{\frac{m}{2\mu_0 n_s e^2}}
+\end{equation}
+
+\section{相变的统计力学描述}
+
+\subsection{配分函数}
+
+\begin{equation}
+    Z = \int \mathcal{D}m \, e^{-\beta \mathcal{F}[m; T, H]}
+\end{equation}
+
+\subsection{平均场近似}
+
+忽略涨落，用鞍点近似：
+\begin{equation}
+    Z \simeq e^{-\beta F_{\text{on-shell}}(T, H)}
+\end{equation}
+
+\subsection{临界涨落}
+
+在临界点附近，涨落变得重要，平均场理论失效。需要重正化群方法。
+
+\section{相变的全息描述}
+
+\subsection{霍金-佩奇相变}
+
+在 AdS 空间中，热 AdS 和 AdS 黑洞之间的相变。
+
+自由能差：
+\begin{equation}
+    \Delta F = -\frac{1}{16\pi G_N L^3} \left( r_h^4 - r_h^2 L^2 + L^4 \right)
+\end{equation}
+
+临界条件：$r_h = L$。
+
+\subsection{全息超导体}
+
+在 AdS 空间中引入复标量场，当温度低于临界温度时，标量场凝聚。
+
+\subsection{全息相变的优势}
+
+\begin{itemize}
+    \item 可以研究强耦合系统
+    \item 可以计算输运系数
+    \item 可以研究实时动力学
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,231 @@
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{10}
+
+\bibitem{preskill}
+J.~Preskill, ``{Quantum computation}.''
+\newblock \url{http://theory.caltech.edu/~preskill/ph219/index.html}.
+
+\bibitem{Wilde:2011npi}
+M.~M. Wilde, ``{From Classical to Quantum Shannon Theory},''
+  \href{http://arxiv.org/abs/1106.1445}{{\ttfamily arXiv:1106.1445}}.
+
+\bibitem{Bell}
+J.~S. Bell, ``{On the Einstein Podolsky Rosen paradox},''
+  \href{http://dx.doi.org/10.1103/PhysicsPhysiqueFizika.1.195}{{\em Physics
+  Physique Fizika} {\bfseries 1} (1964) 195--200}.
+
+\bibitem{griffiths_schroeter_2018}
+D.~J. Griffiths and D.~F. Schroeter,
+  \href{http://dx.doi.org/10.1017/9781316995433}{{\em Introduction to Quantum
+  Mechanics}}.
+\newblock Cambridge University Press, 3~ed., 2018.
+
+\bibitem{Shor:1994jg}
+P.~W. Shor, ``{Polynomial time algorithms for prime factorization and discrete
+  logarithms on a quantum computer},''
+  \href{http://dx.doi.org/10.1137/S0097539795293172}{{\em SIAM J. Sci. Statist.
+  Comput.} {\bfseries 26} (1997) 1484},
+  \href{http://arxiv.org/abs/quant-ph/9508027}{{\ttfamily
+  arXiv:quant-ph/9508027}}.
+
+\bibitem{PhysRevLett.70.1895}
+C.~H. Bennett, G.~Brassard, C.~Cr\'epeau, R.~Jozsa, A.~Peres, and W.~K.
+  Wootters, ``Teleporting an unknown quantum state via dual classical and
+  einstein-podolsky-rosen channels,''
+  \href{http://dx.doi.org/10.1103/PhysRevLett.70.1895}{{\em Phys. Rev. Lett.}
+  {\bfseries 70} (1993) 1895--1899}.
+
+\bibitem{shannon}
+C.~E. {Shannon}, ``A mathematical theory of communication,''
+  \href{http://dx.doi.org/10.1002/j.1538-7305.1948.tb01338.x}{{\em The Bell
+  System Technical Journal} {\bfseries 27} no.~3, (1948) 379--423}.
+
+\bibitem{Preskill:2016htv}
+J.~Preskill, ``{Quantum Shannon Theory},''
+  \href{http://arxiv.org/abs/1604.07450}{{\ttfamily arXiv:1604.07450}}.
+
+\bibitem{nielsen_chuang_2010}
+M.~A. Nielsen and I.~L. Chuang,
+  \href{http://dx.doi.org/10.1017/CBO9780511976667}{{\em Quantum Computation
+  and Quantum Information: 10th Anniversary Edition}}.
+\newblock Cambridge University Press, 2010.
+
+\bibitem{Mathur:2009hf}
+S.~D. Mathur, ``{The Information paradox: A Pedagogical introduction},''
+  \href{http://dx.doi.org/10.1088/0264-9381/26/22/224001}{{\em Class. Quant.
+  Grav.} {\bfseries 26} (2009) 224001},
+  \href{http://arxiv.org/abs/0909.1038}{{\ttfamily arXiv:0909.1038}}.
+
+\bibitem{Polchinski:2016hrw}
+J.~Polchinski, \href{http://dx.doi.org/10.1142/9789813149441_0006}{``{The black
+  hole information problem},''} in {\em {Proceedings, Theoretical Advanced
+  Study Institute in Elementary Particle Physics: New Frontiers in Fields and
+  Strings (TASI 2015): Boulder, CO, USA, June 1-26, 2015}}, pp.~353--397.
+\newblock 2017.
+\newblock \href{http://arxiv.org/abs/1609.04036}{{\ttfamily arXiv:1609.04036}}.
+
+\bibitem{Harlow:2014yka}
+D.~Harlow, ``{Jerusalem lectures on black holes and quantum information},''
+  \href{http://dx.doi.org/10.1103/RevModPhys.88.015002}{{\em Rev. Mod. Phys.}
+  {\bfseries 88} (2016) 015002},
+\href{http://arxiv.org/abs/1409.1231}{{\ttfamily arXiv:1409.1231}}.
+%%CITATION = ARXIV:1409.1231;%%.
+
+\bibitem{bardeen1973}
+J.~M. Bardeen, B.~Carter, and S.~W. Hawking, ``The four laws of black hole
+  mechanics,'' {\em Comm. Math. Phys.} {\bfseries 31} no.~2, (1973) 161--170.
+
+\bibitem{Hawking:1974sw}
+S.~W. Hawking, ``{Particle creation by black holes},''
+\href{http://dx.doi.org/10.1007/BF02345020, 10.1007/BF01608497}{{\em Commun.
+  Math. Phys.} {\bfseries 43} (1975) 199--220}.
+%%CITATION = CMPHA,43,199;%%.
+
+\bibitem{Bekenstein:1980jp}
+J.~D. Bekenstein, ``{A Universal Upper Bound on the Entropy to Energy Ratio for
+  Bounded Systems},'' \href{http://dx.doi.org/10.1103/PhysRevD.23.287}{{\em
+  Phys. Rev. D} {\bfseries 23} (1981) 287}.
+
+\bibitem{Susskind:1993if}
+L.~Susskind, L.~Thorlacius, and J.~Uglum, ``{The Stretched horizon and black
+  hole complementarity},''
+  \href{http://dx.doi.org/10.1103/PhysRevD.48.3743}{{\em Phys. Rev. D}
+  {\bfseries 48} (1993) 3743--3761},
+  \href{http://arxiv.org/abs/hep-th/9306069}{{\ttfamily arXiv:hep-th/9306069}}.
+
+\bibitem{Almheiri:2012rt}
+A.~Almheiri, D.~Marolf, J.~Polchinski, and J.~Sully, ``{Black holes:
+  complementarity or firewalls?},''
+  \href{http://dx.doi.org/10.1007/JHEP02(2013)062}{{\em JHEP} {\bfseries 02}
+  (2013) 062},
+\href{http://arxiv.org/abs/1207.3123}{{\ttfamily arXiv:1207.3123}}.
+%%CITATION = ARXIV:1207.3123;%%.
+
+\bibitem{Almheiri:2013hfa}
+A.~Almheiri, D.~Marolf, J.~Polchinski, D.~Stanford, and J.~Sully, ``{An
+  apologia for firewalls},''
+  \href{http://dx.doi.org/10.1007/JHEP09(2013)018}{{\em JHEP} {\bfseries 09}
+  (2013) 018}, \href{http://arxiv.org/abs/1304.6483}{{\ttfamily
+  arXiv:1304.6483}}.
+
+\bibitem{Unruh:2017uaw}
+W.~G. Unruh and R.~M. Wald, ``{Information loss},''
+  \href{http://dx.doi.org/10.1088/1361-6633/aa778e}{{\em Rept. Prog. Phys.}
+  {\bfseries 80} (2017) 092002},
+  \href{http://arxiv.org/abs/1703.02140}{{\ttfamily arXiv:1703.02140}}.
+
+\bibitem{Giddings:2012gc}
+S.~B. Giddings, ``{Nonviolent nonlocality},''
+  \href{http://dx.doi.org/10.1103/PhysRevD.88.064023}{{\em Phys. Rev. D}
+  {\bfseries 88} (2013) 064023},
+  \href{http://arxiv.org/abs/1211.7070}{{\ttfamily arXiv:1211.7070}}.
+
+\bibitem{Raju:2020smc}
+S.~Raju, ``{Lessons from the Information Paradox},''
+  \href{http://arxiv.org/abs/2012.05770}{{\ttfamily arXiv:2012.05770
+  [hep-th]}}.
+
+\bibitem{Chen:2014jwq}
+P.~Chen, Y.~C. Ong, and D.-h. Yeom, ``{Black hole remnants and the information
+  loss paradox},'' \href{http://dx.doi.org/10.1016/j.physrep.2015.10.007}{{\em
+  Phys. Rept.} {\bfseries 603} (2015) 1},
+  \href{http://arxiv.org/abs/1412.8366}{{\ttfamily arXiv:1412.8366}}.
+
+\bibitem{Almheiri:2020cfm}
+A.~Almheiri, T.~Hartman, J.~Maldacena, E.~Shaghoulian, and A.~Tajdini, ``{The
+  entropy of Hawking radiation},''
+  \href{http://arxiv.org/abs/2006.06872}{{\ttfamily arXiv:2006.06872}}.
+
+\bibitem{Devitt_2013}
+S.~J. Devitt, W.~J. Munro, and K.~Nemoto, ``Quantum error correction for
+  beginners,'' \href{http://dx.doi.org/10.1088/0034-4885/76/7/076001}{{\em
+  Reports on Progress in Physics} {\bfseries 76} no.~7, (2013) 076001}.
+
+\bibitem{gottesman}
+D.~Gottesman, ``An introduction to quantum error correction and fault-tolerant
+  quantum computation,'' \href{http://arxiv.org/abs/0904.2557}{{\ttfamily
+  arXiv:0904.2557}}.
+
+\bibitem{PhysRevA.52.R2493}
+P.~W. Shor, ``Scheme for reducing decoherence in quantum computer memory,''
+  \href{http://dx.doi.org/10.1103/PhysRevA.52.R2493}{{\em Phys. Rev. A}
+  {\bfseries 52} (1995) R2493--R2496}.
+
+\bibitem{ohya1993quantum}
+M.~Ohya and D.~Petz, {\em Quantum Entropy and Its Use}.
+\newblock Texts and monographs in physics. Springer-Verlag, 1993.
+
+\bibitem{Penington:2019kki}
+G.~Penington, S.~H. Shenker, D.~Stanford, and Z.~Yang, ``{Replica wormholes and
+  the black hole interior},'' \href{http://arxiv.org/abs/1911.11977}{{\ttfamily
+  arXiv:1911.11977}}.
+
+\bibitem{Junge:2015lmb}
+M.~Junge, R.~Renner, D.~Sutter, M.~M. Wilde, and A.~Winter, ``{Universal
+  Recovery Maps and Approximate Sufficiency of Quantum Relative Entropy},''
+  \href{http://dx.doi.org/10.1007/s00023-018-0716-0}{{\em Annales Henri
+  Poincare} {\bfseries 19} no.~10, (2018) 2955--2978},
+  \href{http://arxiv.org/abs/1509.07127}{{\ttfamily arXiv:1509.07127}}.
+
+\bibitem{Maldacena:1997re}
+J.~M. Maldacena, ``{The large N limit of superconformal field theories and
+  supergravity},'' \href{http://dx.doi.org/10.1023/A:1026654312961,
+  10.4310/ATMP.1998.v2.n2.a1}{{\em Int. J. Theor. Phys.} {\bfseries 38} (1999)
+  1113--1133}, \href{http://arxiv.org/abs/hep-th/9711200}{{\ttfamily
+  arXiv:hep-th/9711200}}.
+[{\textit{Adv. Theor. Math. Phys.}} {\textbf{2}} (1998) 231].
+%%CITATION = HEP-TH/9711200;%%.
+
+\bibitem{Witten:1998qj}
+E.~Witten, ``{Anti-de Sitter space and holography},''
+  \href{http://dx.doi.org/10.4310/ATMP.1998.v2.n2.a2}{{\em Adv. Theor. Math.
+  Phys.} {\bfseries 2} (1998) 253--291},
+\href{http://arxiv.org/abs/hep-th/9802150}{{\ttfamily arXiv:hep-th/9802150}}.
+%%CITATION = HEP-TH/9802150;%%.
+
+\bibitem{Nastase:2007kj}
+H.~Nastase, ``{Introduction to AdS-CFT},''
+  \href{http://arxiv.org/abs/0712.0689}{{\ttfamily arXiv:0712.0689}}.
+
+\bibitem{Hubeny:2007xt}
+V.~E. Hubeny, M.~Rangamani, and T.~Takayanagi, ``{A covariant holographic
+  entanglement entropy proposal},''
+  \href{http://dx.doi.org/10.1088/1126-6708/2007/07/062}{{\em JHEP} {\bfseries
+  07} (2007) 062},
+\href{http://arxiv.org/abs/0705.0016}{{\ttfamily arXiv:0705.0016}}.
+%%CITATION = ARXIV:0705.0016;%%.
+
+\bibitem{Ryu:2006ef}
+S.~Ryu and T.~Takayanagi, ``{Aspects of holographic entanglement entropy},''
+  \href{http://dx.doi.org/10.1088/1126-6708/2006/08/045}{{\em JHEP} {\bfseries
+  08} (2006) 045},
+\href{http://arxiv.org/abs/hep-th/0605073}{{\ttfamily arXiv:hep-th/0605073}}.
+%%CITATION = HEP-TH/0605073;%%.
+
+\bibitem{Hamilton:2006az}
+A.~Hamilton, D.~N. Kabat, G.~Lifschytz, and D.~A. Lowe, ``{Holographic
+  representation of local bulk operators},''
+  \href{http://dx.doi.org/10.1103/PhysRevD.74.066009}{{\em Phys. Rev. D}
+  {\bfseries 74} (2006) 066009},
+  \href{http://arxiv.org/abs/hep-th/0606141}{{\ttfamily arXiv:hep-th/0606141}}.
+
+\bibitem{Cotler:2017erl}
+J.~Cotler, P.~Hayden, G.~Penington, G.~Salton, B.~Swingle, and M.~Walter,
+  ``{Entanglement Wedge Reconstruction via Universal Recovery Channels},''
+  \href{http://dx.doi.org/10.1103/PhysRevX.9.031011}{{\em Phys. Rev. X}
+  {\bfseries 9} no.~3, (2019) 031011},
+  \href{http://arxiv.org/abs/1704.05839}{{\ttfamily arXiv:1704.05839}}.
+
+\bibitem{Jafferis:2015del}
+D.~L. Jafferis, A.~Lewkowycz, J.~Maldacena, and S.~J. Suh, ``{Relative entropy
+  equals bulk relative entropy},''
+  \href{http://dx.doi.org/10.1007/JHEP06(2016)004}{{\em JHEP} {\bfseries 06}
+  (2016) 004}, \href{http://arxiv.org/abs/1512.06431}{{\ttfamily
+  arXiv:1512.06431}}.
+
+\bibitem{761271}
+C.~A. {Fuchs} and J.~{van de Graaf}, ``Cryptographic distinguishability
+  measures for quantum-mechanical states,''
+  \href{http://dx.doi.org/10.1109/18.761271}{{\em IEEE Transactions on
+  Information Theory} {\bfseries 45} no.~4, (1999) 1216--1227}.
+
+\end{thebibliography}\endgroup

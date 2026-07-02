@@ -1,0 +1,789 @@
+%=============================================================================
+
+\section{黑洞热力学}
+
+\begin{note}[物理动机]
+黑洞热力学是现代理论物理中最深刻的发现之一。Bekenstein 在 1973 年首先提出黑洞应当具有与视界面积成正比的熵 \cite{Bekenstein1973}，随后 Hawking 在 1975 年证明黑洞确实具有热辐射，其温度与表面引力成正比 \cite{Hawking1975}。这使得黑洞成为真正的热力学系统，其四定律与经典热力学的四定律之间存在精确的数学对应。在 AdS/CFT 对偶框架下，黑洞热力学为理解边界场论的有限温度行为提供了引力描述。
+\end{note}
+
+\subsection{AdS-Schwarzschild 黑洞}
+
+\begin{definition}[AdS-Schwarzschild 黑洞]\label{def:AdS-Schwarzschild}
+在 $d+1$ 维 AdS 空间中，AdS-Schwarzschild 黑洞的度规为：
+\begin{equation}\label{eq:AdS-Schwarzschild-metric}
+    ds^2 = -f(r) dt^2 + f(r)^{-1} dr^2 + r^2 d\Omega_{d-1}^2,
+\end{equation}
+其中黑因子（blackening factor）为：
+\begin{equation}\label{eq:blackening-factor}
+    f(r) = 1 + \frac{r^2}{L^2} - \frac{\mu}{r^{d-2}} = 1 + \frac{r^2}{L^2} - \frac{r_h^{d-2}}{r^{d-2}}.
+\end{equation}
+这里 $r_h$ 是视界半径，满足 $f(r_h)=0$；$L$ 是 AdS 半径；$\mu = r_h^{d-2}$ 与黑洞质量相关。
+\end{definition}
+
+begin{remark}[视界方程的物理意义]
+视界半径 $r_h$ 由 $f(r_h) = 0$ 确定，即
+\begin{equation}
+    1 + \frac{r_h^2}{L^2} = \frac{r_h^{d-2}}{r_h^{d-2}} \quad\Longrightarrow\quad \frac{r_h^{d-2}}{L^2} = r_h^{d-4}\left(\frac{r_h^2}{L^2} + 1\right)^{-1}.
+\end{equation}
+对于 $d=4$，上式简化为 $r_h^2/L^2 + 1 = \mu/r_h^2$。视界的存在性要求 $\mu > 0$，即黑洞必须具有正质量。
+end{remark}
+
+\begin{property}[AdS-Schwarzschild 黑洞的热力学量]\label{prop:BH-thermo-quantities}
+通过计算视界处的表面引力 $\kappa$ 和视界面积 $A$，可以得到黑洞的热力学量。
+\begin{enumerate}
+    \item \textbf{霍金温度}：由表面引力定义 $T = \kappa/(2\pi)$，其中 $\kappa = f'(r_h)/2$，计算得：
+    \begin{equation}\label{eq:Hawking-temperature}
+        T = \frac{f'(r_h)}{4\pi} = \frac{1}{4\pi}\left(\frac{d\, r_h}{L^2} + \frac{d-2}{r_h}\right) = \frac{r_h}{4pi L^2}\left(d + \frac{(d-2)L^2}{r_h^2}\right).
+    \end{equation}
+
+    \item \textbf{贝肯斯坦-霍金熵}：由面积律 $S = A/(4G_N)$：
+    \begin{equation}\label{eq:BH-entropy}
+        S = \frac{\omega_{d-1}\, r_h^{d-1}}{4 G_N},
+    \end{equation}
+    其中 $\omega_{d-1} = 2\pi^{d/2}/\Gamma(d/2)$ 是 $(d-1)$ 维单位球面的面积。
+
+    \item \textbf{黑洞质量}：由 AdS 空间的渐近对称性得到的守恒荷：
+    \begin{equation}\label{eq:BH-mass}
+        M = \frac{(d-1)\,\omega_{d-1}\, r_h^{d-2}}{16pi G_N}\left(1 + \frac{r_h^2}{L^2}\right).
+    \end{equation}
+\end{enumerate}
+\end{property}
+
+\begin{proof}[热力学第一定律的验证]
+现在验证 $dM = T\,dS$。对 \eqref{eq:BH-entropy} 式求微分：
+\begin{equation}
+    dS = \frac{(d-1)\,\omega_{d-1}\, r_h^{d-2}}{4 G_N}\, dr_h.
+\end{equation}
+对 \eqref{eq:BH-mass} 式求微分：
+\begin{equation}
+    dM = \frac{(d-1)\,\omega_{d-1}}{16pi G_N}\left[(d-2)r_h^{d-3}\left(1+\frac{r_h^2}{L^2}\right) + r_h^{d-2}\cdot\frac{2r_h}{L^2}\right] dr_h.
+\end{equation}
+整理括号内的项：
+\begin{equation}
+    dM = \frac{(d-1)\,\omega_{d-1}\, r_h^{d-3}}{16pi G_N}\left[(d-2) + \frac{d\, r_h^2}{L^2}\right] dr_h.
+\end{equation}
+另一方面，由 \eqref{eq:Hawking-temperature} 式：
+\begin{equation}
+    T\,dS = \frac{1}{4\pi}\left(\frac{d\, r_h}{L^2} + \frac{d-2}{r_h}\right)\cdot\frac{(d-1)\,\omega_{d-1}\, r_h^{d-2}}{4 G_N}\, dr_h.
+\end{equation}
+化简得：
+\begin{equation}
+    T\,dS = \frac{(d-1)\,\omega_{d-1}\, r_h^{d-3}}{16pi G_N}\left(\frac{d\, r_h^2}{L^2} + (d-2)\right) dr_h = dM.
+\end{equation}
+因此，$dM = T\,dS$ 成立，热力学第一定律在 AdS-Schwarzschild 黑洞上得到验证。
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2]
+    % 绘制坐标轴
+    \draw[thick, ->] (0,0) -- (5,0) node[right] {$r_h/L$};
+    \draw[thick, ->] (0,0) -- (0,4) node[above] {$T \cdot L$};
+
+    % 绘制温度曲线 (d=4 情况)
+    \draw[thick, blue, domain=0.3:4.5, samples=100]
+        plot (\x, {\x/(4*3.14159) + 1/(2*3.14159*\x)});
+
+    % 标注最小值点
+    \fill[red] (0.707, 0.225) circle (0.08);
+    \node at (1.5, 0.35) {$T_{\min} \approx \frac{\sqrt{2}}{2pi L}$};
+
+    % 标注高温极限
+    \draw[dashed, gray] (0,0) -- (4, 0.4);
+    \node at (3, 0.6) {高温极限 $T \sim r_h$};
+
+    % 标注低温极限
+    \draw[dashed, gray] (0.3, 0.6) -- (0, 1.5);
+    \node at (0.8, 1.8) {低温极限 $T \sim 1/r_h$};
+
+    % 标注大黑洞和小黑洞分支
+    \draw[<->, thick, orange] (0.707, 0.225) -- (0.4, 0.225);
+    \node[left, orange] at (0.4, 0.225) {小黑洞};
+    \draw[<->, thick, green!60!black] (0.707, 0.225) -- (2.5, 0.225);
+    \node[right, green!60!black] at (2.5, 0.225) {大黑洞};
+\end{tikzpicture}
+\caption{AdS 黑洞的霍金温度与视界半径的关系（$d=4$）。温度存在最小值 $T_{\min}$，将黑洞分为大黑洞（$r_h > L/\sqrt{2}$）和小黑洞（$r_h < L/\sqrt{2}$）两个分支。大黑洞在热力学上是稳定的，小黑洞则不稳定。}
+\label{fig:AdS_BH_temperature}
+\end{figure}
+
+\subsection{黑洞热力学四定律}
+
+\begin{note}[物理动机]
+经典热力学建立在平衡态系统的宏观性质之上，其核心是温度、内能、熵等概念及其相互关系。令人惊奇的是，黑洞作为纯引力对象，也满足一组与经典热力学完全平行的定律。这种对应关系不仅揭示了引力的热力学本质，也为量子引力理论提供了重要线索。在 AdS/CFT 中，这些定律直接映射为边界场论的热力学定律。
+\end{note}
+
+\begin{theorem}[黑洞热力学四定律]\label{thm:four-laws}
+黑洞热力学满足以下四条定律，它们与经典热力学的四定律精确对应：
+\begin{enumerate}
+    \item \textbf{第零定律}：稳态黑洞的表面引力 $\kappa$ 在视界上处处相等，对应于热力学平衡态下温度 $T$ 处处相等。
+    \item \textbf{第一定律}：黑洞参数的微小变化满足
+    \begin{equation}\label{eq:first-law}
+        dM = T\,dS + \Omega\,dJ + \Phi\,dQ,
+    \end{equation}
+    其中 $T = \kappa/(2\pi)$ 是霍金温度，$S = A/(4G_N)$ 是贝肯斯坦-霍金熵，$\Omega$ 是视界角速度，$J$ 是角动量，$\Phi$ 是电势，$Q$ 是电荷。
+    \item \textbf{第二定律}（面积定理）：在经典引力中，黑洞视界面积永不减少：
+    \begin{equation}
+        \delta A \geq 0,
+    \end{equation}
+    对应于热力学中孤立系统的熵永不减少。
+    \item \textbf{第三定律}（不可达性定理）：不能通过有限次物理操作将黑洞的表面引力 $\kappa$ 降为零（即不能得到极端黑洞），对应于不能通过有限次操作将系统温度降到绝对零度。
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[面积定理与霍金辐射的修正]
+面积定理在经典引力中严格成立。然而，考虑量子效应（霍金辐射）后，黑洞面积可以减小。这对应于广义第二定律（Generalized Second Law）：黑洞熵与外界物质熵之和不减少，
+\begin{equation}
+    \delta(S_{ext{BH}} + S_{ext{matter}}) \geq 0.
+\end{equation}
+这条广义第二定律由 Bekenstein 提出，是理解黑洞信息悖论的关键。
+\end{remark}
+
+\begin{definition}[Reissner-Nordstr\"om-AdS 黑洞]\label{def:RN-AdS}
+带电 AdS 黑洞的度规为：
+\begin{equation}
+    ds^2 = -f(r)\,dt^2 + f(r)^{-1}\,dr^2 + r^2\,d\Omega_{d-1}^2,
+\end{equation}
+其中黑因子为：
+\begin{equation}
+    f(r) = 1 + \frac{r^2}{L^2} - \frac{m}{r^{d-2}} + \frac{q^2}{r^{2(d-2)}}.
+\end{equation}
+这里 $m$ 与黑洞质量 $M$ 相关，$q$ 与电荷 $Q$ 相关。视界半径 $r_h$ 满足 $f(r_h) = 0$。该黑洞具有霍金温度：
+\begin{equation}
+    T = \frac{1}{4pi r_h}\left((d-2) + \frac{d\,r_h^2}{L^2} - \frac{(d-2)q^2}{r_h^{2(d-2)}}\right).
+\end{equation}
+\end{definition}
+
+\begin{proof}[带电黑洞第一定律的推导]
+对于 Reissner-Nordstr\"om-AdS 黑洞，需要验证完整的第一定律 $dM = T\,dS + \Phi\,dQ$。
+
+黑洞质量与电荷为：
+\begin{equation}
+    M = \frac{(d-1)\omega_{d-1}}{16pi G_N}\,m, \qquad Q = \frac{(d-2)\omega_{d-1}}{16pi G_N}\cdot 2q.
+\end{equation}
+视界电势为：
+\begin{equation}
+    \Phi = \frac{q}{r_h^{d-2}}.
+\end{equation}
+利用 $f(r_h) = 0$，即 $1 + r_h^2/L^2 - m/r_h^{d-2} + q^2/r_h^{2(d-2)} = 0$，可以将 $m$ 表示为 $r_h$ 和 $q$ 的函数。对 $m(r_h, q)$ 微分，并代入 $dS$ 和 $\Phi\,dQ$ 的表达式，经过直接计算可得：
+\begin{equation}
+    dM = T\,dS + \Phi\,dQ,
+\end{equation}
+其中温度 $T = f'(r_h)/(4\pi)$，熵 $S = \omega_{d-1}r_h^{d-1}/(4G_N)$。这验证了带电黑洞的第一定律。
+\end{proof}
+
+\subsection{Penrose 图与因果结构}
+
+\begin{definition}[Penrose 图]\label{def:Penrose}
+Penrose 图（又称 Carter-Penrose 图或因果图）是通过共形紧化将时空的全部因果结构表示在有限区域内的二维图。图中的每一点代表一个二维球面（或 $(d-1)$ 维球面），光锥的倾斜方向指示因果关系。
+\end{definition}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % 坐标轴
+    \draw[->, thick] (0,-2.5) -- (0,2.8) node[above] {$t^*$};
+    \draw[->, thick] (-2.8,0) -- (2.8,0) node[right] {$r^*$};
+
+    % 视界
+    \draw[thick, red] (-2,2) -- (2,-2) node[below right] {$r=r_h$};
+    \draw[thick, red] (-2,-2) -- (2,2) node[above right] {$r=r_h$};
+
+    % 奇点
+    \draw[thick, blue, decorate, decoration={snake, amplitude=1.5pt, segment length=5pt}]
+        (-1.5, 2.2) -- (1.5, 2.2) node[above] {奇点 $r=0$};
+
+    % 共形边界
+    \draw[thick, green!60!black, dashed] (-2.5, 2.5) -- (2.5, 2.5);
+    \node[above left, green!60!black] at (-2.5, 2.5) {AdS 边界 $r\to\infty$};
+
+    % 区域标注
+    \node at (0, 1) {\small I（外部）};
+    \node at (0, -1) {\small II（内部）};
+    \node at (-1.3, 0) {\small III'};
+    \node at (1.3, 0) {\small III};
+
+    % 光锥
+    \draw[->, gray, dashed] (0.5, 0) -- (1.2, 0.7);
+    \draw[->, gray, dashed] (0.5, 0) -- (1.2, -0.7);
+\end{tikzpicture}
+\caption{AdS-Schwarzschild 黑洞的 Penrose 图。区域 I 为黑洞外部，区域 II 为黑洞内部（$r < r_h$），红色对角线为事件视界。与渐近平坦时空不同，AdS 边界是类时的（timelike），这意味着边界上的观察者可以接收来自黑洞的信息。}
+\label{fig:Penrose-AdS}
+\end{figure}
+
+\begin{remark}[AdS 时空因果结构的特殊性]
+与渐近平坦时空不同，AdS 时空的共形边界是类时的（timelike），而渐近平坦时空的共形边界是类光的（null）。这意味着：(1) AdS 中的信息可以到达边界并返回，信息不会"逃逸到无穷远"；(2) AdS 中存在自然的边界条件，使得场方程的初值问题适定。这些特性使得 AdS/CFT 对偶在数学上自洽。
+\end{remark}
+
+\subsection{全息热力学}
+
+\begin{definition}[全息热力学]\label{def:holographic-thermo}
+在 AdS/CFT 对偶中，黑洞是边界 CFT 中热态的对偶描述。这个对应关系称为全息热力学。黑洞参数与 CFT 热力学量之间的映射为：
+\begin{equation}\label{eq:holographic-map}
+\boxed{
+    \begin{aligned}
+        ext{黑洞温度}\ T &\quad\longleftrightarrow\quad ext{CFT 温度}\ T, \\
+        ext{黑洞熵}\ S &\quad\longleftrightarrow\quad ext{CFT 热力学熵}\ S, \\
+        ext{黑洞质量}\ M &\quad\longleftrightarrow\quad ext{CFT 能量}\ E = \langle H \rangle, \\
+        ext{视界半径}\ r_h &\quad\longleftrightarrow\quad ext{能量标度}\ \sim T^{-1}.
+    \end{aligned}
+}
+\end{equation}
+\end{definition}
+
+\begin{property}[自由能与相变]\label{prop:free-energy}
+全息热力学的一个核心应用是通过计算引力侧的自由能来确定边界场论的热力学性质。自由能定义为：
+\begin{equation}\label{eq:free-energy}
+    F = M - TS.
+\end{equation}
+在 AdS/CFT 中，引力侧的自由能通过 Euclidean 路径积分计算：
+\begin{equation}
+    F = T \ln Z_{ext{grav}} = T \cdot \frac{I_{ext{on-shell}}}{\hbar},
+\end{equation}
+其中 $I_{ext{on-shell}}$ 是 Euclidean 作用量在经典解处的值。
+\end{property}
+
+\begin{example}[Hawking-Page 相变]\label{ex:Hawking-Page}
+在 AdS 空间中，存在 Hawking-Page 相变 \cite{Hawking1975}。当温度 $T$ 超过临界温度 $T_{\text{HP}}$ 时，热 AdS 空间（无黑洞）变为热力学不稳定的，系统相变为 AdS-Schwarzschild 黑洞。
+
+在 $d=4$（即 5 维 AdS）中，Hawking-Page 温度为：
+\begin{equation}
+    T_{ext{HP}} = \frac{3}{2pi L}.
+\end{equation}
+在 AdS/CFT 对偶中，这个相变对应于边界 CFT 中的禁闭/解禁闭相变（confinement/deconfinement transition）。温度低于 $T_{ext{HP}}$ 时，CFT 处于禁闭相；温度高于 $T_{ext{HP}}$ 时，CFT 处于解禁闭相，对偶描述为大黑洞。
+\end{example}
+
+\begin{theorem}[黑洞热容与稳定性]\label{thm:heat-capacity}
+AdS 黑洞的热容为：
+\begin{equation}
+    C = T\frac{\partial S}{\partial T} = T\frac{dS/dr_h}{dT/dr_h}.
+\end{equation}
+对于大黑洞（$r_h \gg L$），热容为正：
+\begin{equation}
+    C \approx \frac{(d-1)\omega_{d-1}\,r_h^{d-1}}{4G_N} > 0,
+\end{equation}
+因此大黑洞在热力学上是稳定的。对于小黑洞（$r_h \ll L$），热容为负，热力学不稳定。
+\end{theorem}
+
+\begin{proof}[热容的计算]
+由 \eqref{eq:BH-entropy} 式和 \eqref{eq:Hawking-temperature} 式：
+\begin{equation}
+    \frac{dS}{dr_h} = \frac{(d-1)\omega_{d-1}\,r_h^{d-2}}{4G_N},
+\end{equation}
+\begin{equation}
+    \frac{dT}{dr_h} = \frac{1}{4\pi}\left(\frac{d}{L^2} - \frac{d-2}{r_h^2}\right).
+\end{equation}
+因此：
+\begin{equation}
+    C = \frac{(d-1)\omega_{d-1}\,r_h^{d-2}}{4G_N}\cdot\frac{4\pi}{\frac{d}{L^2} - \frac{d-2}{r_h^2}} = \frac{(d-1)\omega_{d-1}\,r_h^{d-2}\cdot 4pi L^2 r_h^2}{4G_N\left(d\,r_h^2 - (d-2)L^2\right)}.
+\end{equation}
+当 $r_h > r_{\min} = L\sqrt{(d-2)/d}$ 时，$C > 0$（大黑洞）；当 $r_h < r_{\min}$ 时，$C < 0$（小黑洞）。临界点 $r_{\min}$ 对应温度的最小值。
+\end{proof}
+
+%=============================================================================
+
+\section{流体动力学}
+
+\begin{note}[物理动机]
+流体动力学是描述系统在长波长、低频极限下集体行为的有效理论。它不依赖于系统的微观细节，而仅依赖于少数几个守恒量（能量、动量、电荷等）及其对称性。在 AdS/CFT 对偶中，边界场论的流体动力学对应于黑洞视界附近微扰的低频行为。这一对应使得我们可以通过求解引力微扰方程来确定强耦合系统的输运系数 	te{Policastro2001}。
+\end{note}
+
+\subsection{理想流体与守恒律}
+
+\begin{definition}[理想流体]\label{def:ideal-fluid}
+流体动力学的基本出发点是守恒律。对于相对论性流体，能量-动量守恒和电荷守恒分别为：
+\begin{align}
+    \partial_\mu T^{\mu\nu} &= 0, \label{eq:T-conservation}\\
+    \partial_\mu J^{\mu} &= 0, \label{eq:J-conservation}
+\end{align}
+其中 $T^{\mu\nu}$ 是能量-动量张量，$J^{\mu}$ 是守恒流。
+
+在理想流体（零阶梯度展开）近似下，能量-动量张量具有最一般的形式：
+\begin{equation}\label{eq:ideal-fluid}
+    T^{\mu\nu} = (\epsilon + p)\, u^\mu u^\nu + p\, \eta^{\mu\nu},
+\end{equation}
+其中 $\epsilon$ 是能量密度，$p$ 是压强，$u^\mu$ 是四速度（满足 $u_\mu u^\mu = -1$），$\eta^{\mu\nu}$ 是 Minkowski 度规。
+\end{definition}
+
+\begin{remark}[理想流体近似的适用条件]
+理想流体近似要求系统的特征长度 $L_{\text{macro}}$ 远大于微观平均自由程 $\ell_{\text{mfp}}$，即
+\begin{equation}
+    \ell_{\text{mfp}} \ll L_{\text{macro}} \sim \frac{1}{\omega} \sim \frac{1}{k},
+\end{equation}
+其中 $\omega$ 和 $k$ 分别是扰动的频率和波数。用 Knudsen 数 $\text{Kn} = \ell_{\text{mfp}}/L_{\text{macro}}$ 表示，理想流体近似要求 $\text{Kn} \ll 1$。
+\end{remark}
+
+\begin{definition}[状态方程与热力学关系]\label{def:eos}
+流体动力学需要一个状态方程来闭合方程组。对于共形场论，状态方程由共形对称性完全确定：
+\begin{equation}\label{eq:conformal-eos}
+    \epsilon = (d-1)\,p,
+\end{equation}
+其中 $d$ 是时空维数。此外，热力学关系给出：
+\begin{equation}
+    \epsilon + p = T\,s, \qquad d\epsilon = T\,ds,
+\end{equation}
+其中 $s$ 是熵密度。对于 $\mathcal{N}=4$ SYM 理论（$d=4$），$\epsilon = 3p$。
+\end{definition}
+
+\subsection{粘滞流体与梯度展开}
+
+\begin{definition}[粘滞流体]\label{def:viscous-fluid}
+当考虑梯度修正时，能量-动量张量可以展开为梯度的级数：
+\begin{equation}\label{eq:T-mu-nu-expansion}
+    T^{\mu\nu} = T^{\mu\nu}_{ext{ideal}} + T^{\mu\nu}_{(1)} + T^{\mu\nu}_{(2)} + \cdots,
+\end{equation}
+其中一阶修正为：
+\begin{equation}\label{eq:T-first-order}
+    T^{\mu\nu}_{(1)} = -\eta\,\sigma^{\mu\nu} - \zeta\,\Delta^{\mu\nu}\,\partial_\lambda u^\lambda.
+\end{equation}
+这里 $\eta$ 是剪切粘滞系数，$\zeta$ 是体粘滞系数，$\sigma^{\mu\nu}$ 是剪切张量：
+\begin{equation}\label{eq:shear-tensor}
+    \sigma^{\mu\nu} = \Delta^{\mu\alpha}\Delta^{\nu\beta}\left(\partial_\alpha u_\beta + \partial_\beta u_\alpha\right) - \frac{2}{d-1}\,\Delta^{\mu\nu}\,\partial_\lambda u^\lambda,
+\end{equation}
+$\Delta^{\mu\nu} = \eta^{\mu\nu} + u^\mu u^\nu$ 是投影到流体静止系的投影算符。
+\end{definition}
+
+\begin{property}[输运系数的物理意义]\label{prop:transport-physical}
+各输运系数的物理意义如下：
+\begin{itemize}
+    \item \textbf{剪切粘滞系数} $\eta$：描述流体对剪切形变的抵抗。当流体层之间有相对运动时，粘滞力阻碍滑动，将宏观动能转化为热能。
+    \item \textbf{体粘滞系数} $\zeta$：描述流体对均匀压缩（体积变化）的抵抗。对于共形流体，$\zeta = 0$（因为共形对称性禁止体粘滞）。
+    \item \textbf{热导率} $\kappa$：描述热量的传导，由傅里叶定律 $\vec{q} = -\kappa\,\nabla T$ 给出。
+    \item \textbf{扩散系数} $D$：描述守恒荷的扩散，满足 Fick 定律 $\vec{J} = -D\,\nabla\mu$。
+\end{itemize}
+\end{property}
+
+\begin{remark}[体粘滞与共形对称性]
+对于共形场论（如 $\mathcal{N}=4$ SYM），共形对称性要求 $T^\mu_\mu = 0$。这意味着 $\zeta = 0$。物理上，体粘滞度量了系统偏离平衡的弛豫速率与压缩速率之间的竞争；在共形理论中，没有特征标度，因此不存在体粘滞。
+\end{remark}
+
+\subsection{从引力到 Navier-Stokes 方程}
+
+\begin{note}[物理动机]
+一个深刻的问题是：能否直接从 Einstein 方程推导出流体动力学方程？答案是肯定的。通过在黑洞视界附近对 Einstein 方程进行梯度展开，可以严格推导出 Navier-Stokes 方程。这一结果深刻地体现了引力与流体力学之间的对应关系。
+\end{note}
+
+\begin{theorem}[从 Einstein 方程到 Navier-Stokes 方程]\label{thm:Einstein-to-NS}
+考虑在 AdS 空间的共形边界上对 Einstein 方程进行低频、长波长展开。设 $u^\mu(x)$ 为边界上的流体四速度场，$T(x)$ 为温度场。通过求解体空间中的 Einstein 方程，并将解展开为边界梯度的级数，可以证明边界上的能量-动量张量满足：
+\begin{equation}\label{eq:NS-equation}
+    \partial_\mu T^{\mu\nu} = 0,
+\end{equation}
+其中 $T^{\mu\nu}$ 包含到一阶梯度的修正 \eqref{eq:T-first-order}。对于非相对论极限，上式退化为 Navier-Stokes 方程。
+\end{theorem}
+
+\begin{proof}[推导的主要步骤]
+考虑 $d+1$ 维 AdS 空间中的 Einstein 方程：
+\begin{equation}
+    R_{\mu\nu} - \frac{1}{2}g_{\mu\nu}R + \Lambda\,g_{\mu\nu} = 0, \qquad \Lambda = -\frac{d(d-1)}{2L^2}.
+\end{equation}
+推导步骤如下：
+
+\textbf{步骤一：} 选取 Fefferman-Graham 坐标，在边界附近将度规展开为：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2}\left(dz^2 + g_{\mu\nu}(x,z)\,dx^\mu dx^\nu\right),
+\end{equation}
+其中 $g_{\mu\nu}(x,z) = g_{\mu\nu}^{(0)} + z^2 g_{\mu\nu}^{(2)} + \cdots + z^d\left(g_{\mu\nu}^{(d)} + h_{\mu\nu}^{(d)}\ln z\right) + \cdots$。
+
+\textbf{步骤二：} 代入 Einstein 方程，逐阶求解。$g_{\mu\nu}^{(0)}$ 是边界度规，$g_{\mu\nu}^{(2)}, \ldots, g_{\mu\nu}^{(d-2)}$ 由 $g_{\mu\nu}^{(0)}$ 完全确定（代数约束），$g_{\mu\nu}^{(d)}$ 是自由数据，对应于边界场论的能量-动量张量：
+\begin{equation}
+    \langle T_{\mu\nu} \rangle = \frac{d\,L^{d-1}}{16pi G_N}\,g_{\mu\nu}^{(d)}.
+\end{equation}
+
+\textbf{步骤三：} 对黑洞微扰，将边界上的流体动力学变量 $(T(x), u^\mu(x))$ 编码为度规的慢变分量。在流体动力学极限下，约束方程 $\partial_\mu \langle T^{\mu\nu}\rangle = 0$ 自动满足，给出流体动力学方程。
+
+\textbf{步骤四：} 在非相对论极限下，取 $u^\mu \approx (1, v^i)$，$v^i \ll 1$，方程 \eqref{eq:NS-equation} 退化为：
+\begin{equation}\label{eq:Navier-Stokes}
+    \rho\left(\partial_t v^i + v^j\partial_j v^i\right) = -\partial^i p + \eta\,\nabla^2 v^i + \left(\zeta + \frac{\eta}{3}\right)\partial^i(\nabla\cdot\vec{v}),
+\end{equation}
+这就是相对论性 Navier-Stokes 方程的非相对论极限。
+\end{proof}
+
+\subsection{膜范式}
+
+\begin{definition}[膜范式]\label{def:membrane-paradigm}
+膜范式（membrane paradigm）是将黑洞视界视为粘滞流体膜的物理图像。在这个框架下，视界具有以下有效物理性质：
+\begin{itemize}
+    \item 视界是一个具有表面张力和粘滞性的二维膜
+    \item 视界上的流体满足 Navier-Stokes 方程
+    \item 表面引力 $\kappa$ 对应于温度，视界面积元 $dA$ 对应于熵元
+\end{itemize}
+\end{definition}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3]
+    % 黑洞
+    \fill[black!80] (0,0) circle (1.5);
+    \draw[thick, red] (0,0) circle (1.5);
+    \node[white] at (0,0) {\small 黑洞内部};
+
+    % 视界膜
+    \draw[thick, red, line width=2pt] (0,0) circle (1.5);
+    \node[red, right] at (1.6, 0.8) {视界（粘滞膜）};
+
+    % 流体元
+    \foreach \angle in {30, 75, 120, 165, 210, 255, 300, 345} {
+        \draw[->, thick, blue] (\angle:1.5) -- (\angle:2.2);
+        \node[blue, font=\tiny] at (\angle:2.5) {$u^a$};
+    }
+
+    % 表面引力梯度
+    \foreach \angle in {45, 135, 225, 315} {
+        \draw[->, thick, orange] (\angle:0.3) -- (\angle:1.0);
+    }
+    \node[orange, below] at (0,-1.8) {$\kappa$（表面引力）};
+
+    % 外部引力场
+    \foreach \r in {2.5, 3.0, 3.5} {
+        \draw[gray, dashed] (0,0) circle (\r);
+    }
+    \node[gray, above right] at (2.8, 2.8) {外部引力场};
+\end{tikzpicture}
+\caption{膜范式示意图。黑洞视界被视为一个粘滞流体膜，其上定义了有效温度和有效粘滞系数。视界上的流体元 $u^a$ 从外部向内运动（因表面引力），同时受到粘滞力的阻碍。这一图像在 AdS/CFT 中自然涌现为全息流体动力学的视界描述。}
+\label{fig:membrane-paradigm}
+\end{figure}
+
+\begin{theorem}[视界上的 Navier-Stokes 方程]\label{thm:horizon-NS}
+在膜范式下，黑洞视界上的流体满足不可压缩 Navier-Stokes 方程：
+\begin{equation}\label{eq:membrane-NS}
+    \sigma^{ab}\,\nabla_a u_b = \frac{1}{2\kappa}\left(\partial_a \kappa + u^b\,\nabla_b u_a\right),
+\end{equation}
+其中 $a,b$ 是视界上的内禀坐标，$u^a$ 是视界上的"表面速度"，$\kappa$ 是表面引力。在非相对论极限下，这退化为标准的 Navier-Stokes 方程。
+\end{theorem}
+
+\begin{remark}[膜范式与 AdS/CFT 的关系]
+膜范式最初由 Price 和 Thorne 等人在 1986 年提出，独立于 AdS/CFT。然而，AdS/CFT 对偶为膜范式提供了微观解释：视界上的粘滞流体正是边界 CFT 的全息对偶。视界的剪切粘滞系数恰好为 $\eta_{	ext{horizon}} = 1/(16\pi G_N)$，与 KSS 界一致。
+\end{remark}
+
+\begin{remark}[膜范式的深层意义]
+膜范式将黑洞视界视为粘滞流体膜，这一物理图像在 AdS/CFT 对偶中获得了微观解释 \	te{Bekenstein1973}。视界上的有效粘滞系数 $\eta_{	ext{horizon}} = 1/(16\pi G_N)$ 恰好等于 KSS 下界，这并非巧合：它反映了黑洞视界是自然界中"最完美"的流体。膜范式中的 Navier-Stokes 方程与边界 CFT 的流体动力学方程之间的对应，体现了引力与流体力学之间的深层统一性。这一观点由 Bekenstein 最早提出黑洞熵的概念 \	te{Bekenstein1973} 发展而来，如今已成为理解黑洞热力学的重要工具。
+\end{remark}
+
+\subsection{KSS 界}
+
+\begin{note}[物理动机]
+Kovtun、Son 和 Starinets 在 2005 年提出了关于剪切粘滞系数与熵密度之比的下界猜想 	te{Kovtun2005}，称为 KSS 界。这一猜想基于对大量引力对偶模型的计算，以及与实验数据的比较。KSS 界指出，所有满足因果性和平移不变性的量子流体都必须遵守这一下界。夸克-胶子等离子体的实验数据表明，QGP 的 $\eta/s$ 非常接近这一下界，使得 QGP 成为自然界中已知的"最完美流体"。
+\end{note}
+
+\begin{theorem}[KSS 界]\label{thm:KSS-bound}
+对于满足因果性、平移不变性和么正性的量子流体，剪切粘滞系数与熵密度之比满足下界 	te{Kovtun2005}：
+\begin{equation}\label{eq:KSS-bound}
+    \boxed{\frac{\eta}{s} \geq \frac{\hbar}{4pi k_B}.}
+\end{equation}
+在自然单位制（$\hbar = k_B = 1$）下，这简化为：
+\begin{equation}
+    \frac{\eta}{s} \geq \frac{1}{4\pi}.
+\end{equation}
+对于强耦合 $\mathcal{N}=4$ SYM 理论，这个下界被精确达到：
+\begin{equation}
+    \frac{\eta}{s} = \frac{1}{4\pi}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}[KSS 界的推导思路]
+我们通过 AdS/CFT 中的线性响应理论来推导 $\eta/s = 1/(4\pi)$ 的结果。推导基于准正规模（quasinormal modes）的计算。
+
+\textbf{步骤一：} 考虑 AdS-Schwarzschild 黑洞背景 \eqref{eq:AdS-Schwarzschild-metric} 上的张量微扰 $h_{xy}(t, r)$（剪切模）。线性化的 Einstein 方程给出：
+\begin{equation}\label{eq:perturbation-eqn}
+    \frac{1}{r^{d-1}}\frac{d}{dr}\left(r^{d-1}f(r)\frac{dh_{xy}}{dr}\right) + \frac{\omega^2 - k^2 f(r)}{f(r)^2}\,h_{xy} = 0.
+\end{equation}
+
+\textbf{步骤二：} 在视界 $r = r_h$ 处，物理边界条件要求只存在入射波（in-going boundary condition）：
+\begin{equation}
+    h_{xy} \sim (r - r_h)^{-i\omega/(4pi T)} \quad ext{as}\ r \to r_h.
+\end{equation}
+
+\textbf{步骤三：} 在边界 $r \to \infty$ 处，微扰的行为为 $h_{xy} \sim h^{(0)} + h^{(d)}/r^d + \cdots$。准正规模的频率由 $h^{(d)}$ 的极点确定。
+
+\textbf{步骤四：} 在低频极限 $\omega \to 0$, $k \to 0$ 下，对方程 \eqref{eq:perturbation-eqn} 进行梯度展开。设 $\omega = \omega_1 k + \omega_2 k^2 + \cdots$，解的色散关系为：
+\begin{equation}\label{eq:dispersion-shear}
+    \omega = -i\,D\,k^2 + \mathcal{O}(k^3),
+\end{equation}
+其中 $D = \eta/(\epsilon + p)$ 是动量扩散常数。
+
+\textbf{步骤五：} 直接求解微分方程，计算扩散常数。在 $d=4$ 的情况下，精确计算给出：
+\begin{equation}
+    D = \frac{1}{4pi T} = \frac{1}{4\pi}\cdot\frac{1}{T}.
+\end{equation}
+由于 $\epsilon + p = T\,s$，因此：
+\begin{equation}
+    \eta = D\cdot(\epsilon + p) = D\cdot T\,s = \frac{s}{4\pi}.
+\end{equation}
+即 $\eta/s = 1/(4\pi)$。对于一般 $d$，此结果同样成立。
+\end{proof}
+
+\begin{remark}[KSS 界的普适性]
+KSS 界在多种不同的引力模型中都被达到或非常接近，包括：
+\begin{itemize}
+    \item Schwarzschild-AdS 黑洞
+    \item RN-AdS 黑洞（非极端）
+    \item 带有 Gauss-Bonnet 修正的引力
+    \item 各种膜构造（brane constructions）
+\end{itemize}
+然而，KSS 界并非无条件成立。在具有高阶导数修正的引力理论中，$\eta/s$ 可以低于 $1/(4\pi)$。这表明 KSS 界的成立依赖于引力侧不出现超光速传播等病态行为。
+\end{remark}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.0]
+    % 坐标轴
+    \draw[thick, ->] (0,0) -- (6,0) node[right] {$\lambda = g_{\text{YM}}^2 N$};
+    \draw[thick, ->] (0,0) -- (0,4) node[above] {$\eta/s$};
+
+    % KSS 界
+    \draw[thick, red, dashed] (0, 1.0) -- (6, 1.0);
+    \node[red, right] at (6, 1.0) {$\frac{1}{4\pi}$};
+
+    % 强耦合点
+    \fill[blue] (5, 1.0) circle (0.1);
+    \node[blue, above] at (5, 1.2) {AdS/CFT（强耦合）};
+
+    % 弱耦合估计（避开发散区域）
+    \draw[thick, blue, domain=0.8:3, samples=50]
+        plot (\x, {3/\x});
+    \node[blue] at (1.5, 2.5) {弱耦合（微扰论）};
+
+    % QGP 实验
+    \draw[thick, green!60!black, fill=green!10] (4.2, 0.9) rectangle (5.8, 1.5);
+    \node[green!60!black, font=\small] at (5, 1.2) {QGP（RHIC/LHC）};
+
+    % 低温气体
+    \draw[->, thick, orange] (0.5, 3.5) -- (1, 2.8);
+    \node[orange] at (0.5, 3.8) {稀薄气体};
+\end{tikzpicture}
+\caption{$\eta/s$ 随耦合强度的变化。弱耦合极限下 $\eta/s$ 很大（$\propto 1/\alpha_s^2 \ln(1/\alpha_s)$），强耦合极限下达到 KSS 下界 $1/(4\pi)$。QGP 的实验值非常接近 KSS 界，表明它是强耦合的"完美流体" 	te{Kovtun2005}。}
+\label{fig:eta-s-bound}
+\end{figure}
+
+\subsection{准正规模与流体动力学模}
+
+\begin{definition}[准正规模]\label{def:QNM}
+准正规模（quasinormal modes, QNMs）是黑洞在有界条件下（入射波边界条件于视界，出射波或衰减条件于无穷远）的特征振荡模式。准正规模的频率 $\omega_n$ 一般是复数：
+\begin{equation}\label{eq:QNM-frequency}
+    \omega_n = \omega_R^{(n)} - i\,\omega_I^{(n)},
+\end{equation}
+其中 $\omega_R^{(n)}$ 是振荡频率，$\omega_I^{(n)} > 0$ 是衰减率。最低阶的准正规模（$n=0$）具有最长的寿命（最小的 $\omega_I$），主导黑洞扰动的长时间行为。
+\end{definition}
+
+\begin{note}[准正规模与全息对应]
+在 AdS/CFT 中，黑洞的准正规模对应于边界 CFT 的谱函数（spectral function）。流体动力学模（剪切模、声模）是准正规模在低频极限下的特殊情形。具体而言：
+\begin{itemize}
+    \item \textbf{扩散模}（diffusive mode）：$\omega = -iDk^2$，对应于守恒荷的扩散
+    \item \textbf{声模}（sound mode）：$\omega = \pm v_s k - i\Gamma k^2$，对应于声波的传播与衰减
+    \item \textbf{剪切模}（shear mode）：$\omega = -i(\eta/(\epsilon+p))k^2$，对应于动量的扩散
+\end{itemize}
+准正规模的虚部给出了流体动力学的弛豫速率，实部给出了传播速度。
+\end{note}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % 坐标轴
+    \draw[thick, ->] (-0.5,0) -- (4,0) node[right] {Re$(\omega)$};
+    \draw[thick, ->] (0,-0.5) -- (0,3) node[above] {Im$(\omega)$};
+
+    % 下半平面（物理区域）
+    \fill[blue!5] (0,0) rectangle (3.5, -1.5);
+    \node[blue, font=\small] at (2, -1.2) {物理区域};
+
+    % 流体动力学极点
+    \fill[red] (0, -0.3) circle (0.08);
+    \node[red, right] at (0.1, -0.3) {扩散模};
+    \fill[red] (1.5, -0.8) circle (0.06);
+    \node[red, above right] at (1.5, -0.8) {声模};
+    \fill[red] (-1.5, -0.8) circle (0.06);
+
+    % 高阶准正规模
+    \fill[gray] (0, -1.5) circle (0.05);
+    \fill[gray] (0.5, -2.0) circle (0.05);
+    \fill[gray] (-0.5, -2.0) circle (0.05);
+    \node[gray, below] at (0, -2.3) {高阶 QNMs};
+
+    % 标注
+    \node at (2, 2.5) {解析结构};
+    \draw[dashed, gray] (0,0) -- (3.5,0);
+\end{tikzpicture}
+\caption{全息流体动力学的准正规模结构。在复频率平面上，流体动力学模（扩散模和声模）是最近原点的极点，主导低频行为。高阶准正规模对应于非流体动力学的快模（fast modes），衰减更快。}
+\label{fig:QNM-structure}
+\end{figure}
+
+\begin{property}[声速与体粘滞]\label{prop:sound-speed}
+声模的色散关系为：
+\begin{equation}\label{eq:sound-mode}
+    \omega = \pm v_s\,k - i\,\Gamma_s\,k^2,
+\end{equation}
+其中声速 $v_s$ 和声衰减率 $\Gamma_s$ 分别为：
+\begin{equation}
+    v_s^2 = \frac{\partial p}{\partial \epsilon} = \frac{1}{d-1} \quad (ext{共形流体}),
+\end{equation}
+\begin{equation}
+    \Gamma_s = \frac{1}{2}\left(\frac{d-2}{d-1}\right)\frac{\eta}{\epsilon + p} + \frac{\zeta}{2(\epsilon+p)}.
+\end{equation}
+对于共形流体（$\zeta = 0$），衰减率简化为：
+\begin{equation}
+    \Gamma_s = \frac{d-2}{2(d-1)}\cdot\frac{\eta}{\epsilon+p}.
+\end{equation}
+\end{property}
+
+\subsection{二阶梯度修正}
+
+\begin{definition}[二阶输运系数]\label{def:second-order-transport}
+在二阶梯度展开中，能量-动量张量包含更多输运系数 	te{Baier2008}。对于共形流体，独立的二阶输运系数为：
+\begin{equation}\label{eq:second-order}
+    T^{\mu\nu}_{(2)} = \tau_\pi\,\overset{\circ}{\sigma^{\mu\nu}} + \kappa\left(R^{\langle\mu\nu\rangle} - 2u_\alpha u_\beta R^{\alpha\langle\mu\nu\rangle\beta}\right) + \lambda_1\,\sigma^{\langle\mu}_\lambda\,\sigma^{\nu\rangle\lambda} + \lambda_2\,\sigma^{\langle\mu}_\lambda\,\Omega^{\nu\rangle\lambda} + \lambda_3\,\Omega^{\langle\mu}_\lambda\,\Omega^{\nu\rangle\lambda},
+\end{equation}
+其中 $\overset{\circ}{\sigma^{\mu\nu}}$ 是剪切张量的共动时间导数，$\Omega^{\mu\nu} = \frac{1}{2}(\partial^\mu u^\nu - \partial^\nu u^\mu)$ 是涡度张量。二阶系数 $\tau_\pi, \kappa, \lambda_1, \lambda_2, \lambda_3$ 是独立的输运系数。
+\end{definition}
+
+\begin{property}[全息计算的二阶输运系数]\label{prop:second-order-holographic}
+通过 AdS/CFT 对偶计算，对于 $\mathcal{N}=4$ SYM 理论 	te{Baier2008}：
+\begin{equation}
+    \tau_pi = \frac{2-\ln 2}{2pi T}, \qquad \lambda_1 = \frac{\eta}{2pi T} = \frac{s}{8\pi^2 T}, \qquad \lambda_2 = -\frac{\eta\ln 2}{pi T}, \qquad \lambda_3 = 0.
+\end{equation}
+这里 $\tau_\pi$ 是弛豫时间，它决定了粘滞应力张量的响应时间。$\tau_\pi$ 的存在保证了因果性：没有超光速传播。
+\end{property}
+
+\begin{remark}[因果性与 Muller-Israel-Stewart 理论]
+一阶粘滞流体（Navier-Stokes 理论）在相对论性情况下存在超光速传播的问题。为了解决这一问题，Muller、Israel 和 Stewart 提出了二阶理论，引入弛豫时间 $\tau_\pi$。在这一框架下，Navier-Stokes 方程被替换为：
+\begin{equation}\label{eq:MIS}
+    \tau_\pi\,\overset{\circ}{\pi^{\mu\nu}} + \pi^{\mu\nu} = -\eta\,\sigma^{\mu\nu},
+\end{equation}
+其中 $\pi^{\mu\nu} = T^{\mu\nu}_{(1)}$ 是粘滞应力张量。这一方程是因果的（双曲型），保证了信息的亚光速传播。
+\end{remark}
+
+%=============================================================================
+
+\section{应用：夸克-胶子等离子体}
+
+\begin{note}[物理动机]
+夸克-胶子等离子体（Quark-Gluon Plasma, QGP）是在相对论重离子碰撞中产生的极端高温、高密度物质状态。在 RHIC（相对论重离子对撞机）和 LHC（大型强子对撞机）的实验中，QGP 的行为表现出极强的耦合效应，传统的微扰 QCD 方法失效。AdS/CFT 对偶为理解 QGP 的强耦合动力学提供了定量工具。
+\end{note}
+
+\subsection{QGP 的性质}
+
+\begin{definition}[夸克-胶子等离子体]\label{def:QGP}
+QGP 是在温度 $T > T_c \approx 155$ MeV（临界温度）下形成的解禁闭物质状态，其中夸克和胶子不再被束缚在强子内，而是在宏观尺度上自由运动。其主要性质包括：
+\begin{itemize}
+    \item \textbf{温度}：$T \sim 200ext{--}600$ MeV（RHIC/LHC 能量范围）
+    \item \textbf{能量密度}：$\epsilon \sim 1ext{--}5$ GeV/fm$^3$，约为核物质密度的 $10ext{--}30$ 倍
+    \item \textbf{强耦合常数}：$\alpha_s \sim 0.3ext{--}0.5$，表明系统处于强耦合区域
+    \item \textbf{自由度}：$N_c^2 - 1$ 个胶子 + $2N_f N_c$ 个夸克模式（$N_c = 3$, $N_f = 2ext{--}3$）
+\end{itemize}
+\end{definition}
+
+\begin{remark}[QGP 为何需要 AdS/CFT]
+QGP 是强耦合系统，标准的微扰 QCD 方法（按 $\alpha_s$ 展开）在 $\alpha_s \sim 0.3ext{--}0.5$ 时收敛性很差。格点 QCD 可以计算静态热力学量，但实时动力学（如输运系数）仍具有挑战性。AdS/CFT 对偶虽然严格来说适用于 $\mathcal{N}=4$ SYM（不是 QCD），但提供了强耦合动力学的定量计算，并与实验数据惊人地一致。
+\end{remark}
+
+\subsection{全息预言与实验比较}
+
+\begin{example}[剪切粘滞系数的全息预言]\label{ex:eta-s-QGP}
+AdS/CFT 对 QGP 最著名的预言是剪切粘滞系数与熵密度之比 te{Policastro2001,Kovtun2005}：
+\begin{equation}
+    \frac{\eta}{s} = \frac{1}{4\pi} \approx 0.08.
+\end{equation}
+RHIC 和 LHC 的实验数据（通过流体力学模拟拟合椭圆流 $v_2$）给出：
+\begin{equation}
+    \left(\frac{\eta}{s}\right)_{ext{QGP}} \approx 0.1ext{--}0.2,
+\end{equation}
+与 AdS/CFT 预言惊人地接近。这表明 QGP 确实是一种接近"最完美"的流体。
+\end{example}
+
+\begin{example}[喷注淬火参数]\label{ex:jet-quenching}
+AdS/CFT 可以计算高能部分子在 QGP 中的能量损失率（喷注淬火参数）$\hat{q}$：
+\begin{equation}
+    \hat{q} = \frac{\pi^{3/2}\,\Gamma(3/4)}{\Gamma(5/4)}\,\sqrt{\lambda}\,T^3,
+\end{equation}
+其中 $\lambda = g_{ext{YM}}^2 N_c$ 是 't Hooft 耦合常数。对于 $\mathcal{N}=4$ SYM，$\lambda \gg 1$。实验上，RHIC 和 LHC 的数据与这一预言量级一致。
+\end{example}
+
+\begin{example}[重夸克扩散系数]\label{ex:heavy-quark-D}
+重夸克在 QGP 中的扩散系数 $D$ 可以通过 AdS/CFT 计算。在强耦合极限下 	te{Policastro2001}：
+\begin{equation}
+    2pi T\,D = \frac{1}{\sqrt{\lambda}}\cdot C(\lambda),
+\end{equation}
+其中 $C(\lambda)$ 是依赖于耦合的函数，在强耦合极限下 $C \to 1$。对于有限 $\lambda$ 的 N$^4$LO 修正（$C \approx 1 + \mathcal{O}(1/\sqrt{\lambda})$），可以更精确地拟合实验数据。
+\end{example}
+
+\begin{table}[htbp]
+\centering
+\caption{AdS/CFT 对 QGP 的主要预言与实验比较}
+\label{tab:QGP-predictions}
+\begin{tabular}{lcc}
+\hline
+\textbf{物理量} & \textbf{AdS/CFT 预言} & \textbf{实验值} \\
+\hline
+$\eta/s$ & $1/(4\pi) \approx 0.08$ & $0.1ext{--}0.2$ \\
+$2pi T D$ & $\sim 1/\sqrt{\lambda}$ & $\sim 1ext{--}3$ \\
+$\hat{q}/T^3$ & $\sim \sqrt{\lambda}$ & $\sim 3ext{--}5$ \\
+$T_c/\sqrt{\sigma}$ & $\sim 0.2$ & $\sim 0.2$ \\
+\hline
+\end{tabular}
+\end{table}
+
+%=============================================================================
+
+\section{应用：全息超流体}
+
+\begin{note}[物理动机]
+超流体是宏观量子现象的典型例子，其中 $U(1)$ 对称性自发破缺导致无耗散的超流。在强耦合超导体（如高温超导体）中，传统的 BCS 理论不再适用。全息超流体模型通过在 AdS 黑洞背景中引入带电标量场来构造超流相变，为理解强耦合超流/超导提供了新的理论框架。
+\end{note}
+
+\subsection{全息超流体模型}
+
+\begin{definition}[全息超流体模型]\label{def:holographic-superfluid}
+全息超流体模型的引力作用量为：
+\begin{equation}\label{eq:holo-sf-action}
+    S = \int d^{d+1}x\,\sqrt{-g}\left[R + \frac{d(d-1)}{L^2} - \frac{1}{4}F_{\mu\nu}F^{\mu\nu} - |\nabla\psi - iA\psi|^2 - m^2|\psi|^2\right],
+\end{equation}
+其中 $A_\mu$ 是 $U(1)$ 规范场，$\psi$ 是带电复标量场。在 AdS 黑洞背景上，当温度低于临界温度 $T_c$ 时，标量场获得非零真空期望值 $\langle\psi\rangle \neq 0$，$U(1)$ 对称性自发破缺，系统进入超流相。
+\end{definition}
+
+\begin{property}[超流序参量与临界行为]\label{prop:superfluid-order}
+超流序参量为 $\langle O \rangle$，其中 $O$ 是与标量场 $\psi$ 对偶的边界算符。在临界温度附近，序参量的行为为：
+\begin{equation}
+    \langle O \rangle \propto (T_c - T)^{1/2}, \quad T \to T_c^-.
+\end{equation}
+临界指数 $1/2$ 是平均场值，与 Ginzburg-Landau 理论一致。这体现了全息超流体的平均场本质（大 $N$ 极限的特征）。
+\end{property}
+
+\begin{remark}[全息超流体的局限与展望]
+全息超流体模型虽然成功地捕捉了强耦合超流的基本特征（临界温度、超流密度、临界速度），但它有一些局限性：(1) 临界指数是平均场值，不同于真实超导体在 3 维的 Wilson-Fisher 值；(2) 模型中的对偶 CFT 不是 QCD；(3) 反应过程（如 Anderson-Bogoliubov 模）的详细行为可能与真实超导体不同。然而，全息超流体仍然是研究非费米液体和量子临界现象的重要工具。
+\end{remark}
+
+%=============================================================================
+
+\section{应用：全息量子临界点}
+
+\begin{note}[物理动机]
+量子临界点（Quantum Critical Point, QCP）是零温下量子相变发生的点。在 QCP 附近，系统表现出标度不变性和普适行为，形成"量子临界扇区"（quantum critical region）。在凝聚态物理中，许多非常规超导体和非费米液体的行为被认为与量子临界点有关。全息方法为描述量子临界点提供了有力工具。
+\end{note}
+
+\subsection{全息量子相变}
+
+\begin{definition}[全息量子临界点]\label{def:holo-QCP}
+在 AdS/CFT 中，量子相变可以通过体空间中的几何变化来描述。典型构造是在 AdS 空间中引入带电费米子或规范场。当改变控制参数（如化学势、磁场等）时，黑洞几何发生相变，对应于边界场论的量子相变。
+\end{definition}
+
+\begin{property}[动力学临界指数]\label{prop:dynamical-exp}
+全息量子临界点的一个重要特征是动力学临界指数 $z$，它描述了时间和空间的标度关系：
+\begin{equation}
+    t \to \lambda^z\,t, \qquad x \to \lambda\,x.
+\end{equation}
+在全息框架下，$z$ 由几何中的 Lifshitz 因子确定：
+\begin{equation}
+    ds^2 = L^2\left(-\frac{dt^2}{r^{2z}} + \frac{dr^2 + dx^i dx^i}{r^2}\right).
+\end{equation}
+对于不同的物理系统，$z$ 取不同值：$z = 1$ 对应洛伦兹不变，$z = 2$ 对应薛定谔不变，$z = \infty$ 对应 AdS$_2$ 红外几何（与 Reissner-Nordstr\"om 黑洞的近极端极限相关）。
+\end{property}
+
+\begin{remark}[全息量子临界点的普适性]
+全息量子临界点展现出丰富的物理现象，包括：(1) 非费米液体行为（$T$-线性电阻率）；(2) 量子临界扇区中的标度律；(3) 超导不稳定性。这些现象与铜氧化物高温超导体等凝聚态系统的实验观测非常相似，表明全息方法是探索强关联量子多体物理的重要途径。
+\end{remark}
+
+\begin{note}[总结与展望]
+本章展示了 AdS/CFT 对偶在黑洞热力学和流体动力学中的强大应用。从黑洞热力学四定律到 KSS 界，从全息流体动力学到膜范式，从 QGP 到全息超流体和量子临界点，这些应用充分体现了 AdS/CFT 作为"万能工具"的价值。特别是 $\eta/s = 1/(4\pi)$ 的预言与 QGP 实验数据的惊人一致，为 AdS/CFT 对偶提供了最强有力的实验支持。
+
+未来的发展方向包括：(1) 将全息方法推广到远离平衡态的动力学过程；(2) 理解全息纠缠熵与量子信息的关系；(3) 探索全息方法在量子混沌和遍历性破缺中的应用。这些方向将推动 AdS/CFT 对偶从理论框架走向更广泛的物理应用。
+\end{note}
+
+%=============================================================================

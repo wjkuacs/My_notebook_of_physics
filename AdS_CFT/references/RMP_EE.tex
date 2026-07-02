@@ -1,0 +1,113 @@
+\documentclass[rmp,reprint,amsmath,amssymb,longbibliography,floatfix,preprintnumbers]{revtex4-1}
+\usepackage{hyperref}
+\usepackage{tabu}
+\usepackage{bm,bbm}
+\usepackage{amsthm}
+%% For tikz
+\usepackage{tikz}
+\usetikzlibrary{intersections, calc,positioning,decorations.pathreplacing,decorations.pathmorphing,decorations.markings}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+
+%%% Theorems and Exercises
+\theoremstyle{plain}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{theorem}{Theorem}
+
+%% New colors 
+\usepackage{jcolor}
+\definecolor{verylightgray}{rgb}{0.92, 0.9, 0.88}
+
+%% Definitions of Symbols
+\def\D{{\Delta}}
+\def\pslash{\p \llap{/}}
+\def\Dslash{D \llap{/\,}}
+\def\nslash{\nabla \llap{/\,}}
+\def\tr{{\rm tr}}
+\def\i{\mathrm{i}}
+\def\d{\mathrm{d}}
+%Calligraphic letters
+\def\CA{{\cal A}}
+\def\CB{{\cal B}}
+\def\CC{{\cal C}}
+\def\CD{{\cal D}}
+\def\CE{{\cal E}}
+\def\CF{{\cal F}}
+\def\CG{{\cal G}}
+\def\CH{{\cal H}}
+\def\CI{{\cal I}}
+\def\CK{{\cal K}}
+\def\CL{{\cal L}}
+\def\CR{{\cal R}}
+\def\CM{{\cal M}}
+\def\CN{{\cal N}}
+\def\CO{{\cal O}}
+\def\CP{{\cal P}}
+\def\CQ{{\cal Q}}
+\def\CS{{\cal S}}
+\def\CT{{\cal T}}
+\def\CX{{\cal X}}
+\def\CY{{\cal Y}}
+\def\CW{{\cal W}}
+%Bold letters
+\def\BC{\mathbb{C}}
+\def\BN{\mathbb{N}}
+\def\BH{\mathbb{H}}
+\def\BR{\mathbb{R}}
+\def\BS{\mathbb{S}}
+\def\BT{{\mathbb T}}
+\def\BZ{\mathbb{Z}}
+\def\EM{\mathscr{M}}
+%Group symbols
+\def\SU{\mathrm{SU}}
+\def\U{\mathrm{U}}
+\def\SO{\mathrm{SO}}
+\def\O{\mathrm{O}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Entanglement entropy: holography and renormalization group}
+
+\author{Tatsuma Nishioka}
+\affiliation{Department of Physics, Faculty of Science, The University of Tokyo,
+		Bunkyo-ku, Tokyo 113-0033, Japan}
+\preprint{UT-18-02}
+
+\begin{abstract}
+Entanglement entropy plays a variety of roles in quantum field theory, including the connections between quantum states and gravitation through the holographic principle.
+This article provides a review of entanglement entropy from a mixed viewpoint of field theory and holography.
+A set of basic methods for the computation is developed and illustrated with simple examples such as free theories and conformal field theories.
+The structures of the ultraviolet divergences and the universal parts are determined and compared with the holographic descriptions of entanglement entropy.
+The utility of quantum inequalities of entanglement are discussed and shown to derive the $\CC$-theorem that constrains renormalization group flows of quantum field theories in diverse dimensions.
+\end{abstract}
+
+\maketitle
+\tableofcontents{}
+%-------------------------------------------------------------------------------------------------------------
+
+
+  \input{Introduction}%Introduction
+  \input{BasicEE}% Basics of EE
+  \input{RealTime}% Real time approach
+  \input{PathInt}% Path integral method
+  \input{UVHK}%UV and heat kernel
+  \input{CFT}% CFT methods
+  \input{AdS}% AdS side
+  \input{RGflow}% RG flow
+  \input{Outlook}%Outlook
+  
+%-------------------------------------------------------------------------------------------------------------
+\begin{acknowledgments}
+I am grateful to Shamik Banerjee, Chris Herzog, Igor Klebanov, Yuki Nakaguchi, Silviu Pufu, Ben Safdi, Tadashi Takayanagi, Amos Yarom and Kazuya Yonekura for stimulating collaborations on the various works partly reviewed in this article, and to Horacio Casini, Marina Huerta, and Noriaki Ogawa for valuable comments and discussions.
+I also thank the organizers of the $18^{th}$ APCTP Winter School on Fundamental Physics, the $9^{th}$ Asian Winter School on String, Particles and Cosmology and the $6^{th}$ Advanced String School at Puri for giving me the opportunities to deliver lectures and also the participants for many comments and questions.
+This work was supported in part by the JSPS Grant-in-Aid for Young Scientists (B) No.15K17628 and the JSPS Grant-in-Aid for Scientific Research (A) No.16H02182.
+\end{acknowledgments}
+
+\appendix
+  \input{RTFermion}
+
+\bibliography{RMP_EE}
+
+\end{document}

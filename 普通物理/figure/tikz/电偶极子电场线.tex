@@ -1,0 +1,28 @@
+\documentclass[border=5pt]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+\begin{document}
+\begin{tikzpicture}[scale=1.2]
+    % 电偶极子
+    \fill[red] (0,0.6) circle (4pt) node[above]{$+q$};
+    \fill[blue] (0,-0.6) circle (4pt) node[below]{$-q$};
+    
+    % 连线
+    \draw[thick,gray] (0,0.6) -- (0,-0.6);
+    \draw[<->,thick] (0.15,0.6) -- (0.15,-0.6) node[midway,right]{$l$};
+    
+    % 电场线 - 从正电荷发出
+    \foreach \angle in {0,30,60,90,120,150,180,210,240,270,300,330} {
+        \draw[->,thick,red!70!black,domain=0:2.5,samples=50] 
+            plot ({\x*cos(\angle + 180*0.6*sin(\angle)/3.14)},{0.6 + \x*sin(\angle + 180*0.6*sin(\angle)/3.14)});
+    }
+    
+    % 中垂线标注
+    \draw[dashed,gray] (-3,0) -- (3,0);
+    \node[right] at (3,0) {中垂线};
+    
+    % 延长线标注
+    \draw[dashed,gray] (0,2.8) -- (0,-2.8);
+    \node[above] at (0,2.8) {延长线};
+\end{tikzpicture}
+\end{document}

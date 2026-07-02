@@ -1,0 +1,148 @@
+\documentclass[lang=cn,10pt,chinese]{elegantbook}
+
+\title{AdS/CFT 对偶}
+
+\author{真田信繁}
+\institute{Your Institute}
+\date{\today}
+\bioinfo{主题}{AdS/CFT 对偶}
+
+\extrainfo{量子引力与量子场论的统一框架}
+
+\setcounter{tocdepth}{3}
+
+% 额外的宏包
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,backgrounds,positioning,calc}
+\usepackage[compat=1.1.0]{tikz-feynman}
+\usepackage{subcaption}
+\usepackage{physics}
+\usepackage{braket}
+\tikzset{every picture/.style={line width=0.75pt}}
+
+% 参考文献资源
+\addbibresource{reference.bib}
+\ExecuteBibliographyOptions{sorting=none}
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\tableofcontents
+
+\mainmatter
+%=============================================================================
+% 第一部分：基础理论
+%=============================================================================
+
+\chapter{引言 (Introduction)}
+
+\section{历史背景与动机}
+
+AdS/CFT 对偶是现代理论物理中最深刻的发现之一，它揭示了引力理论与量子场论之间看似不可能的等价关系。这个对偶最初由 Maldacena 于 1997 年在研究 D3-膜的低能有效理论时发现 \cite{Maldacena1997}，随后由 Gubser、Klebanov、Polyakov \cite{Gubser1998} 和 Witten \cite{Witten1998} 独立给出了具体的计算规则（即 GKPW 关系），建立了 $(d+1)$ 维反德西特时空中的引力理论与其边界上的 $d$ 维共形场论之间的深刻对偶关系。
+
+这个对偶的核心可以用配分函数的等价性来刻画：
+\begin{equation}
+    Z_{\text{CFT}}[\phi_0] = Z_{\text{gravity}}[\phi \to \phi_0 \text{ at boundary}],
+\end{equation}
+其中 $\phi_0$ 是边界上的源函数，$\phi$ 是体空间中的场。这个等式意味着：一个引力理论可以等价地用一个没有引力的量子场论来描述。
+
+\section{全息原理的起源}
+
+AdS/CFT 对偶的思想源于全息原理（holographic principle），后者最早由 't Hooft 和 Susskind 提出。全息原理的动机来自黑洞热力学：1970 年代，Bekenstein 和 Hawking 发现黑洞的熵与其视界面积成正比，$S_{\rm BH} = A/(4G_N)$ \cite{Bekenstein1973, Hawking1975}，而非通常的体积。这一面积律暗示引力系统的全部信息可以被编码在其边界上，正如全息图将三维信息编码在二维表面上。
+
+\section{AdS/CFT 的意义}
+
+AdS/CFT 对偶在多个领域具有深远影响：
+\begin{itemize}
+    \item \textbf{量子引力}：为量子引力提供了一个非微扰的定义——通过边界 CFT 来定义体空间中的量子引力理论
+    \item \textbf{强耦合量子场论}：通过强弱对偶，将强耦合问题转化为弱耦合的经典引力计算
+    \item \textbf{黑洞物理}：为黑洞信息悖论提供了新的视角，并导致了量子极小曲面和量子纠错等新概念的发现
+    \item \textbf{凝聚态物理}：全息超导体 \cite{Hartnoll2008} 和全息非费米液体等模型为强耦合凝聚态系统提供了新的理论工具
+    \item \textbf{夸克-胶子等离子体}：$\eta/s = 1/(4\pi)$ 的预言 \cite{Kovtun2005} 与 RHIC 和 LHC 的实验观测惊人一致
+\end{itemize}
+
+\section{本文结构}
+本文旨在从统计物理的基本概念出发，逐步引导读者理解 AdS/CFT 对偶的核心思想和主要应用。全文组织如下：
+\begin{itemize}
+    \item \textbf{第一部分（第 2-4 章）：基础理论}——统计物理中的配分函数揭示了微观与宏观之间的桥梁；量子场论中的配分函数作为生成泛函包含了所有关联函数的信息；应力张量作为能量-动量的流密度，在共形场论和 AdS/CFT 中都扮演着核心角色
+    \item \textbf{第二部分（第 5-6 章）：AdS 空间与 CFT}——反德西特空间的几何性质（等距群 $SO(2,d)$）与共形场论的对称性（共形群 $SO(2,d)$）精确匹配，这是 AdS/CFT 对偶的对称性基础
+    \item \textbf{第三部分（第 7-8 章）：AdS/CFT 对偶与引力配分函数}——GKPW 关系 \cite{Gubser1998, Witten1998} 将 CFT 的生成泛函与引力配分函数联系起来；全息重整化程序 \cite{Henningson1998, Balasubramanian1999} 给出了有限的物理量
+    \item \textbf{第四部分（第 9-13 章）：应用}——纠缠熵的全息公式 \cite{Ryu2006} 揭示了量子信息与引力几何的深刻联系；重整化群流的不可逆性由 $c$-定理 \cite{Zamolodchikov1986} 和 $a$-定理 \cite{Komargodski2011} 刻画；强耦合 QCD、相变理论和流体动力学是 AdS/CFT 的重要应用领域
+    \item \textbf{第五部分（第 14 章）：总结与展望}——回顾主要结果并讨论未来研究方向
+\end{itemize}
+
+%=============================================================================
+% 第一部分：基础理论
+%=============================================================================
+
+\chapter{统计物理中的配分函数 (Partition Functions in Statistical Physics)}
+
+\input{sections/statistical_physics}
+
+\chapter{量子场论中的配分函数 (Partition Functions in Quantum Field Theory)}
+
+\input{sections/qft}
+
+\chapter{应力张量 (Stress-Energy Tensor)}
+
+\input{sections/stress_tensor}
+%=============================================================================
+% 第二部分：AdS 空间与 CFT
+%=============================================================================
+
+\chapter{反德西特空间 (Anti-de Sitter Space)}
+
+\input{sections/ads}
+
+\chapter{共形场论 (Conformal Field Theory)}
+
+\input{sections/cft}
+%=============================================================================
+% 第三部分：AdS/CFT 对偶
+%=============================================================================
+
+\chapter{AdS/CFT 对偶 (AdS/CFT Correspondence)}
+
+\input{sections/ads_cft}
+
+\chapter{AdS 中的引力配分函数 (Gravitational Partition Functions in AdS)}
+
+\input{sections/gravitational_pf}
+
+\chapter{纠缠熵基础 (Basics of Entanglement Entropy)}
+
+\input{sections/entanglement_entropy}
+
+\chapter{全息纠缠熵 (Holographic Entanglement Entropy)}
+
+\input{sections/holographic_ee}
+
+\chapter{重整化群流 (Renormalization Group Flow)}
+
+\input{sections/rg_flow}
+
+\chapter{强耦合与 QCD (Strong Coupling and QCD)}
+
+\input{sections/strong_coupling}
+
+\chapter{相变理论 (Phase Transition Theory)}
+
+\input{sections/phase_transition}
+
+\chapter{黑洞热力学与流体动力学 (Black Hole Thermodynamics and Hydrodynamics)}
+
+\input{sections/bh_hydro}
+
+\chapter{总结与展望 (Conclusion and Outlook)}
+
+\input{sections/conclusion}
+
+%=============================================================================
+% 参考文献
+%=============================================================================
+
+\printbibliography[heading=bibintoc, title=\bibname]
+
+\end{document}

@@ -1,0 +1,161 @@
+% QCD 相图与相变总结
+% 基于 Natsuume (2014) 和相关文献整理
+
+\documentclass[12pt,a4paper]{ctexart}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2.5cm]{geometry}
+
+\title{QCD 相图与相变总结}
+\author{整理自 Natsuume (2014) 及相关文献}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{QCD 基本性质}
+
+\subsection{QCD 拉格朗日量}
+\begin{equation}
+    \mathcal{L}_{\text{QCD}} = \sum_f \bar{q}_f (i\gamma^\mu D_\mu - m_f) q_f
+    - \frac{1}{4} G_{\mu\nu}^a G^{a\mu\nu}
+\end{equation}
+
+其中：
+\begin{itemize}
+    \item $q_f$：夸克场（$f$ 是味指标）
+    \item $D_\mu = \partial_\mu - ig A_\mu^a T^a$：协变导数
+    \item $G_{\mu\nu}^a = \partial_\mu A_\nu^a - \partial_\nu A_\mu^a + g f^{abc} A_\mu^b A_\nu^c$：胶子场强
+    \item $T^a$：$SU(3)$ 生成元
+    \item $f^{abc}$：$SU(3)$ 结构常数
+\end{itemize}
+
+\subsection{渐近自由}
+
+QCD 耦合常数的能量依赖：
+\begin{equation}
+    \alpha_s(Q^2) = \frac{\alpha_s(\mu^2)}{1 + \frac{\alpha_s(\mu^2)}{12\pi} (33 - 2N_f) \ln(Q^2/\mu^2)}
+\end{equation}
+
+当 $N_f < 16$ 时，$\alpha_s$ 随能量增加而减小（渐近自由）。
+
+\section{QCD 相图}
+
+\subsection{相图概述}
+
+QCD 相图的两个主要轴：
+\begin{itemize}
+    \item 温度 $T$（垂直轴）
+    \item 重子化学势 $\mu_B$（水平轴）
+\end{itemize}
+
+主要相：
+\begin{enumerate}
+    \item \textbf{强子相}（Hadron phase）：低温低密度，夸克禁闭
+    \item \textbf{夸克-胶子等离子体}（QGP）：高温，夸克解禁闭
+    \item \textbf{色超导相}（Color superconducting phase）：高密度低温
+\end{enumerate}
+
+\subsection{相变类型}
+
+\begin{itemize}
+    \item $\mu_B = 0$：平滑过渡（crossover），$T_c \approx 150-170$ MeV
+    \item $\mu_B > 0$：可能存在一阶相变线
+    \item 临界点：一阶相变线的终点
+\end{itemize}
+
+\section{夸克-胶子等离子体}
+
+\subsection{QGP 的形成}
+
+在重离子碰撞中形成 QGP：
+\begin{itemize}
+    \item RHIC：$\sqrt{s_{NN}} = 200$ GeV，$T \approx 2T_c$
+    \item LHC：$\sqrt{s_{NN}} = 5.02$ TeV，$T \approx 5T_c$
+\end{itemize}
+
+\subsection{QGP 的性质}
+
+实验发现 QGP 是"完美流体"：
+\begin{equation}
+    \frac{\eta}{s} \approx \frac{1}{4\pi}
+\end{equation}
+
+\section{大 $N_c$ 极限}
+
+\subsection{'t Hooft 极限}
+
+考虑 $SU(N_c)$ 规范理论，取极限：
+\begin{equation}
+    N_c \to \infty, \quad \lambda = g_{\rm YM}^2 N_c \text{ 固定}
+\end{equation}
+
+\subsection{费曼图的拓扑展开}
+
+在大 $N_c$ 极限下，费曼图可以按拓扑分类：
+\begin{equation}
+    \mathcal{F} = \sum_{g=0}^{\infty} N_c^{2-2g} F_g(\lambda)
+\end{equation}
+其中 $g$ 是亏格（genus），类似于弦理论的世界面展开。
+
+\section{AdS/QCD 模型}
+
+\subsection{硬壁模型}
+
+在 AdS 空间中引入红外截断 $z_0$：
+\begin{equation}
+    ds^2 = \frac{L^2}{z^2} \left( -dt^2 + d\vec{x}^2 + dz^2 \right), \quad 0 \leq z \leq z_0
+\end{equation}
+
+\subsection{Sakai-Sugimoto 模型}
+
+基于 D4-D8-$\overline{\text{D8}}$ 膜系统：
+\begin{itemize}
+    \item D4 膜：提供 5 维规范理论
+    \item D8-$\overline{\text{D8}}$ 膜：提供手征对称性
+    \item 手征对称性破缺由膜的弯曲实现
+\end{itemize}
+
+\section{全息 QGP}
+
+\subsection{剪切粘滞系数}
+
+AdS/CFT 预言：
+\begin{equation}
+    \frac{\eta}{s} = \frac{1}{4\pi}
+\end{equation}
+
+这与 RHIC 实验结果一致。
+
+\subsection{扩散系数}
+
+重夸克扩散系数：
+\begin{equation}
+    D = \frac{1}{2\pi T}
+\end{equation}
+
+\section{相变的全息描述}
+
+\subsection{霍金-佩奇相变}
+
+热 AdS 和 AdS 黑洞之间的相变，对应于：
+\begin{itemize}
+    \item 禁闭相：热 AdS
+    \item 解禁闭相：AdS 黑洞
+\end{itemize}
+
+临界温度：
+\begin{equation}
+    T_c = \frac{d-1}{2\pi L}
+\end{equation}
+
+\subsection{全息超导体}
+
+在 AdS 空间中引入复标量场 $\psi$：
+\begin{equation}
+    S = \int d^{d+1}x \sqrt{-g} \left[ -\frac{1}{4}F_{\mu\nu}F^{\mu\nu}
+    - |D_\mu \psi|^2 - m^2 |\psi|^2 \right]
+\end{equation}
+
+当 $T < T_c$ 时，$\psi$ 获得非零期望值，$U(1)$ 对称性破缺。
+
+\end{document}

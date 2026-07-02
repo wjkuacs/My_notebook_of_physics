@@ -1,0 +1,414 @@
+% chapter06.tex - 黎曼曲率张量
+\chapter{黎曼曲率张量 (Riemann Curvature Tensor)}
+\label{chap:curvature}
+
+\section{曲率的物理直觉}
+
+\begin{note}[物理动机]
+在广义相对论中，\textbf{曲率就是引力}。这不是一个比喻——爱因斯坦场方程精确地表达了"曲率（爱因斯坦张量）等于物质（能量-动量张量）"。那么，什么样的几何量能衡量"弯曲"？
+
+最直观的方式是用\textbf{平行移动}来探测曲率：在平坦空间中，你搬着一个向量沿闭合回路走一圈，向量回到原位时方向不变。在弯曲空间中，向量回到原位时已经旋转了一个角度——这个角度正比于曲率，也正比于回路所包围的面积。例如，在地球（$S^2$）上，你从赤道某点带着一个指向北的向量出发，沿经线走到北极，再沿另一经线回到赤道，再沿赤道返回原点——向量在旅程结束时已经旋转了 $90^\circ$，而旋转的角度恰好等于球面的总曲率（$4\pi$）乘以回路包围的立体角比例 \cite{Carroll1997}。
+
+在物理上，曲率的效应体现为\textbf{潮汐力}：两个相邻的自由下落粒子之间的相对加速度由黎曼曲率张量决定。这是引力区别于匀加速参考系的关键特征——你可以在局部惯性系中消除引力，但无法消除潮汐力（因为它依赖于曲率张量的非零性）。
+\end{note}
+
+\section{黎曼曲率张量的定义}
+
+\subsection{作为协变导数交换子的曲率}
+
+\begin{definition}[黎曼曲率张量 —— 几何定义]
+设 $\nabla$ 是流形 $M$ 上的一个联络。\textbf{黎曼曲率张量} (Riemann curvature tensor) $R$ 是一个 $(1,3)$ 型张量，定义为任意两个向量场 $X, Y$ 的三阶协变导数的交换子减去沿李括号的协变导数：
+\begin{equation}
+    R(X, Y) Z = \nabla_X \nabla_Y Z - \nabla_Y \nabla_X Z - \nabla_{[X, Y]} Z.
+\end{equation}
+对于无挠联络（$[X, Y] = \nabla_X Y - \nabla_Y X$），此式简化为：
+\begin{equation}
+    R(X, Y) Z = [\nabla_X, \nabla_Y] Z - \nabla_{[X,Y]} Z.
+\end{equation}
+\end{definition}
+
+在分量形式（坐标基）下，黎曼曲率张量的分量 $R^\rho{}_{\sigma\mu\nu}$ 定义为：
+\begin{equation}
+    R^\rho{}_{\sigma\mu\nu} = \dd x^\rho \left( R(\pd_\mu, \pd_\nu) \pd_\sigma \right).
+\end{equation}
+
+我们现在展示为什么 $[\nabla_\mu, \nabla_\nu] V^\rho = R^\rho{}_{\sigma\mu\nu} V^\sigma$。对无挠联络，$[\nabla_\mu, \nabla_\nu] V^\rho$ 的作用可以分步计算。首先，协变导数作用在向量场 $V^\rho$ 上为：
+\begin{equation}
+    \nabla_\nu V^\rho = \partial_\nu V^\rho + \Gamma^\rho_{\lambda\nu} V^\lambda.
+\end{equation}
+再作用一次 $\nabla_\mu$：
+\begin{equation}
+    \nabla_\mu \nabla_\nu V^\rho = \partial_\mu(\partial_\nu V^\rho + \Gamma^\rho_{\lambda\nu} V^\lambda) + \Gamma^\rho_{\sigma\mu}(\partial_\nu V^\sigma + \Gamma^\sigma_{\lambda\nu} V^\lambda) - \Gamma^\lambda_{\nu\mu} \nabla_\lambda V^\rho,
+\end{equation}
+其中最后一项来自 $\nabla_\mu$ 作用在 $(1,0)$ 型张量上的联络项：$\nabla_\mu T^\rho_\nu = \partial_\mu T^\rho_\nu + \Gamma^\rho_{\sigma\mu}T^\sigma_\nu - \Gamma^\lambda_{\nu\mu}T^\rho_\lambda$。交换 $\mu \leftrightarrow \nu$ 并相减。对于无挠联络，$\Gamma^\lambda_{\mu\nu} = \Gamma^\lambda_{\nu\mu}$，所以含 $\Gamma^\lambda_{\nu\mu}\nabla_\lambda V^\rho$ 的项在交换子中相消。我们得到：
+\begin{align}
+    [\nabla_\mu, \nabla_\nu] V^\rho
+    &= (\partial_\mu \Gamma^\rho_{\lambda\nu} - \partial_\nu \Gamma^\rho_{\lambda\mu}) V^\lambda
+       + (\Gamma^\rho_{\sigma\mu}\Gamma^\sigma_{\lambda\nu} - \Gamma^\rho_{\sigma\nu}\Gamma^\sigma_{\lambda\mu}) V^\lambda \nonumber\\
+    &= \bigl( \partial_\mu \Gamma^\rho_{\lambda\nu} - \partial_\nu \Gamma^\rho_{\lambda\mu}
+             + \Gamma^\rho_{\sigma\mu}\Gamma^\sigma_{\lambda\nu}
+             - \Gamma^\rho_{\sigma\nu}\Gamma^\sigma_{\lambda\mu} \bigr) V^\lambda \nonumber\\
+    &\equiv R^\rho{}_{\lambda\mu\nu} V^\lambda.
+\end{align}
+这证明了 $[\nabla_\mu, \nabla_\nu] V^\rho = R^\rho{}_{\sigma\mu\nu} V^\sigma$——黎曼曲率张量正是协变导数交换子在向量场上的作用系数。这是曲率张量最核心的几何含义：它衡量平行移动对路径的依赖。
+
+\subsection{用 Christoffel 符号表示}
+
+\begin{property}[Riemann 张量的分量公式]
+在坐标基下，黎曼曲率张量的分量完全由 Christoffel 符号及其一阶导数决定：
+\begin{equation}
+    \boxed{R^\rho{}_{\sigma\mu\nu} = \pd_\mu \Gamma^\rho{}_{\nu\sigma} - \pd_\nu \Gamma^\rho{}_{\mu\sigma} + \Gamma^\rho{}_{\mu\lambda}\Gamma^\lambda{}_{\nu\sigma} - \Gamma^\rho{}_{\nu\lambda}\Gamma^\lambda{}_{\mu\sigma}}.
+\end{equation}
+\end{property}
+
+这个公式的结构值得仔细分析：
+\begin{itemize}
+    \item 第一项和第二项：Christoffel 符号的导数（线性部分）——类似于电磁学中的 $\pd_\mu A_\nu - \pd_\nu A_\mu$
+    \item 第三项和第四项：Christoffel 符号的二次项（非线性部分）——在引力场很强时（如黑洞附近）变得重要
+    \item 整体结构：$R \sim \pd\Gamma - \pd\Gamma + \Gamma\Gamma - \Gamma\Gamma$。对于弱引力场（$g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}$, $|h| \ll 1$），二次项可以忽略，曲率简化为 $h$ 的二阶导数
+\end{itemize}
+
+用球面度规 $g_{\theta\theta} = 1$, $g_{\phi\phi} = \sin^2\theta$，Christoffel 符号 $\Gamma^\theta{}_{\phi\phi} = -\sin\theta\cos\theta$, $\Gamma^\phi{}_{\theta\phi} = \cot\theta$，代入公式得：
+\begin{equation}
+    R^\theta{}_{\phi\theta\phi} = \sin^2\theta, \quad R_{\theta\phi\theta\phi} = \sin^2\theta.
+\end{equation}
+标量曲率：$R = 2$（球面曲率半径归一化为 $1$ 的 $S^2$）。这确认了球面确实有非零的曲率。
+
+\section{曲率张量的代数对称性}
+
+黎曼曲率张量并不是任意的 $(1,3)$ 型张量——它必须满足一系列由定义强制产生的对称性约束。
+
+\begin{property}[黎曼曲率张量的代数对称性]
+对于 Levi-Civita 联络（无挠且度规相容），黎曼曲率张量满足以下对称性：
+
+\begin{enumerate}
+    \item \textbf{反对称性对后两个指标}：
+    \begin{equation}
+        R^\rho{}_{\sigma\mu\nu} = -R^\rho{}_{\sigma\nu\mu}, \quad \text{即} \quad R_{\rho\sigma\mu\nu} = -R_{\rho\sigma\nu\mu}.
+    \end{equation}
+    
+    \item \textbf{反对称性对前两个指标}：
+    \begin{equation}
+        R_{\rho\sigma\mu\nu} = -R_{\sigma\rho\mu\nu}.
+    \end{equation}
+    
+    \item \textbf{块交换对称性}：
+    \begin{equation}
+        R_{\rho\sigma\mu\nu} = R_{\mu\nu\rho\sigma}.
+    \end{equation}
+    这一对称性意味着：曲率关于交换前后两对指标是\textbf{对称的}。这是 Levi-Civita 联络特有的（对一般联络不成立）。
+    
+    \item \textbf{第一 Bianchi 恒等式}（代数恒等式）：
+    \begin{equation}
+        R^\rho{}_{\sigma\mu\nu} + R^\rho{}_{\mu\nu\sigma} + R^\rho{}_{\nu\sigma\mu} = 0,
+    \end{equation}
+    或等价地：$R_{\rho[\sigma\mu\nu]} = 0$（全反对称为零）。
+\end{enumerate}
+\end{property}
+
+\begin{example}[第一 Bianchi 恒等式在 $S^2$ 上的验证]
+对于单位球面 $S^2$，非零的黎曼分量有：$R^\theta{}_{\phi\theta\phi} = \sin^2\theta$, $R^\phi{}_{\theta\phi\theta} = 1$（以及由反对称性导出的）。我们来验证第一 Bianchi 恒等式 $R^\rho{}_{\sigma\mu\nu} + R^\rho{}_{\mu\nu\sigma} + R^\rho{}_{\nu\sigma\mu} = 0$。
+
+取 $\rho = \theta$, $\sigma = \phi$, $\mu = \theta$, $\nu = \phi$：
+\[
+R^\theta{}_{\phi\theta\phi} + R^\theta{}_{\theta\phi\phi} + R^\theta{}_{\phi\phi\theta}
+= \sin^2\theta + 0 + (-\sin^2\theta) = 0.
+\]
+这里 $R^\theta{}_{\theta\phi\phi} = 0$（含相同指标对 $(\phi,\phi)$，由反对称性为零），$R^\theta{}_{\phi\phi\theta} = -R^\theta{}_{\phi\theta\phi} = -\sin^2\theta$。恒等式成立。
+
+再取 $\rho = \phi$, $\sigma = \theta$, $\mu = \theta$, $\nu = \phi$：
+\[
+R^\phi{}_{\theta\theta\phi} + R^\phi{}_{\theta\phi\theta} + R^\phi{}_{\phi\theta\theta}
+= 0 + 1 + 0 = 1 \neq 0\;?
+\]
+稍等——这里 $\rho,\sigma,\mu,\nu$ 分别为 $\phi,\theta,\theta,\phi$。第一项 $R^\phi{}_{\theta\theta\phi} = 0$（反对称性），第二项 $R^\phi{}_{\theta\phi\theta} = -R^\phi{}_{\theta\theta\phi} + \dots$ 实际上让我们用升降指标后的全协变形式 $R_{\rho\sigma\mu\nu}$ 更清楚地验证。对于 $S^2$：
+\[
+R_{\theta\phi\theta\phi} = \sin^2\theta,\quad R_{\phi\theta\phi\theta} = \sin^2\theta,\quad R_{\theta\phi\phi\theta} = -\sin^2\theta,\quad R_{\phi\theta\theta\phi} = -\sin^2\theta.
+\]
+验证 $R_{\theta[\phi\theta\phi]} = 0$：即 $R_{\theta\phi\theta\phi} + R_{\theta\theta\phi\phi} + R_{\theta\phi\phi\theta} = \sin^2\theta + 0 + (-\sin^2\theta) = 0$。\hfill $\checkmark$
+\end{example}
+
+\begin{property}[独立分量计数]
+由于这些对称性约束，$n$ 维流形上黎曼曲率张量的\textbf{独立分量数}为：
+\begin{equation}
+    \mathcal{N}_{\text{Riem}} = \frac{n^2(n^2 - 1)}{12}.
+\end{equation}
+具体地：
+\begin{itemize}
+    \item $n=1$：$\mathcal{N} = 0$（一维空间总是平坦的）
+    \item $n=2$：$\mathcal{N} = 1$（二维曲面由一个函数——高斯曲率——完全描述）
+    \item $n=3$：$\mathcal{N} = 6$（三维空间的曲率由里奇张量的 6 个分量完全确定）
+    \item $n=4$：$\mathcal{N} = 20$（四维时空有 20 个独立的曲率分量）
+\end{itemize}
+\end{property}
+
+\begin{remark}[$n=4$ 的特殊性]
+在四维时空中，黎曼曲率有 20 个独立分量。里奇张量 $R_{\mu\nu}$ 有 10 个独立分量，Weyl 张量 $C_{\rho\sigma\mu\nu}$ 也有 10 个独立分量，且这两个集合是互补的——黎曼张量分解为里奇部分和 Weyl 部分。这是四维时空特有的性质，在广义相对论中至关重要：爱因斯坦场方程只确定里奇张量，Weyl 张量代表了引力波的自由度。
+\end{remark}
+
+\section{里奇张量与标量曲率}
+
+\begin{definition}[里奇张量]
+\textbf{里奇张量} (Ricci tensor) 是黎曼曲率张量的缩并：
+\begin{equation}
+    R_{\mu\nu} \equiv R^\lambda{}_{\mu\lambda\nu}.
+\end{equation}
+里奇张量是对称的：$R_{\mu\nu} = R_{\nu\mu}$（由黎曼张量的对称性保证）。
+\end{definition}
+
+\begin{definition}[标量曲率]
+\textbf{标量曲率} (scalar curvature) 或 Ricci 标量是里奇张量的缩并：
+\begin{equation}
+    R \equiv g^{\mu\nu} R_{\mu\nu} = R^\mu{}_\mu.
+\end{equation}
+\end{definition}
+
+\begin{note}[物理意义]
+里奇张量是曲率的"平均"——它告诉你一个方向的平均曲率。标量曲率是一个数，告诉你每个点上的"总弯曲程度"。在爱因斯坦场方程 $R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} = 8\pi G T_{\mu\nu}$ 中，里奇张量直接与物质的能量-动量耦合。
+\end{note}
+
+\begin{note}[物理诠释：$R_{00}$ 与潮汐加速度]
+在广义相对论中，里奇张量的 $00$ 分量有直接的物理意义。考虑测地偏离方程（geodesic deviation equation）：
+\begin{equation}
+    \frac{D^2 \xi^\mu}{\dd\tau^2} = -R^\mu{}_{\nu\rho\sigma} u^\nu \xi^\rho u^\sigma,
+\end{equation}
+其中 $\xi^\mu$ 是两相邻测地线的分离矢量，$u^\mu$ 是四速度。对于静止观测者（$u^\mu = (1, 0, 0, 0)$），分离矢量的空间分量 $\xi^i$ 满足：
+\begin{equation}
+    \frac{\dd^2 \xi^i}{\dd t^2} \approx -R^i{}_{0j0}\, \xi^j.
+\end{equation}
+因此，$R^i{}_{0j0}$ 决定了沿 $j$ 方向分离的两个试验粒子在 $i$ 方向的相对加速度——这正是\emph{潮汐力}的数学表述。在弱场极限下（牛顿近似），$g_{00} = -(1 + 2\Phi)$，其中 $\Phi$ 是牛顿引力势，可以证明：
+\begin{equation}
+    R^i{}_{0j0} = \frac{\partial^2 \Phi}{\partial x^i \partial x^j},
+\end{equation}
+即 $R^i{}_{0j0}$ 等于牛顿引力势的二阶导数（潮汐张量）。里奇张量的 $00$ 分量则为：
+\begin{equation}
+    R_{00} = R^i{}_{0i0} = \nabla^2 \Phi = 4\pi G \rho,
+\end{equation}
+其中最后一步使用了泊松方程 $\nabla^2 \Phi = 4\pi G \rho$。因此，\textbf{$R_{00}$ 直接度量了物质密度}————这就是为什么爱因斯坦场方程中 $R_{\mu\nu}$ 与 $T_{\mu\nu}$ 耦合：$R_{00} \propto T_{00} = \rho$（在尘埃/完美流体的静止系中）。
+\end{note}
+
+\section{Weyl 张量：曲率的无迹部分}
+
+\begin{definition}[Weyl 张量]
+\textbf{Weyl 张量} (Weyl tensor) $C_{\rho\sigma\mu\nu}$ 是黎曼曲率张量的完全无迹部分。在 $n$ 维空间中：
+\begin{equation}
+    \begin{aligned}
+    C_{\rho\sigma\mu\nu} = R_{\rho\sigma\mu\nu} &- \frac{2}{n-2} \left( g_{\rho[\mu} R_{\nu]\sigma} - g_{\sigma[\mu} R_{\nu]\rho} \right) \\
+    &+ \frac{2}{(n-1)(n-2)} R \, g_{\rho[\mu} g_{\nu]\sigma}.
+    \end{aligned}
+\end{equation}
+\end{definition}
+
+Weyl 张量的所有缩并都为零（即 $C^\lambda{}_{\mu\lambda\nu} = 0$）——它是"无迹的"。它满足与黎曼张量相同的对称性。
+
+\begin{note}[物理意义]
+Weyl 张量在广义相对论中有特殊的物理意义：
+\begin{itemize}
+    \item 在\textbf{真空区域}（$T_{\mu\nu} = 0$），爱因斯坦场方程给出 $R_{\mu\nu} = 0$，但 $C_{\rho\sigma\mu\nu}$ 可以非零——这就是\textbf{引力波}的数学描述
+    \item Weyl 张量描述了在真空中传播的时空弯曲——它是引力的"自由传播部分"
+    \item 在黑洞附近（施瓦西解），里奇张量为零（真空），但 Weyl 张量非零——所有的潮汐效应都来自 Weyl 张量
+\end{itemize}
+\end{note}
+
+\section{截面曲率：二维方向上的曲率}
+
+\begin{definition}[截面曲率]
+设 $p \in M$，$U \subseteq T_pM$ 是一个由两个线性无关的切向量 $u, v$ 张成的二维子空间（即一个 $2$-平面）。$U$ 的\textbf{截面曲率} (sectional curvature) 定义为：
+\begin{equation}
+    K(u, v) = \frac{R_{\rho\sigma\mu\nu} u^\rho v^\sigma u^\mu v^\nu}{(g_{\rho\mu}g_{\sigma\nu} - g_{\rho\nu}g_{\sigma\mu}) u^\rho v^\sigma u^\mu v^\nu}.
+\end{equation}
+\end{definition}
+
+截面曲率衡量的是流形在二维方向 $U$ 上的"内蕴弯曲"程度。对于二维曲面，截面曲率就是高斯曲率。
+
+\begin{property}
+在 $n$ 维空间中，所有可能的截面曲率完全确定了整个黎曼曲率张量——也就是说，知道所有二维截面上的曲率就等价于知道完整的曲率张量。
+\end{property}
+
+\begin{example}[$S^2$ 上的截面曲率计算]
+对于单位球面 $S^2$，度规 $g_{\theta\theta}=1$, $g_{\phi\phi}=\sin^2\theta$。唯一的独立 Riemann 分量为 $R_{\theta\phi\theta\phi} = \sin^2\theta$。取切向量 $u = \partial_\theta$, $v = \partial_\phi$，它们张成整个切空间（二维流形上只有一个二维截面）。代入截面曲率公式：
+\begin{align}
+    K(\partial_\theta, \partial_\phi)
+    &= \frac{R_{\rho\sigma\mu\nu} u^\rho v^\sigma u^\mu v^\nu}
+            {(g_{\rho\mu}g_{\sigma\nu} - g_{\rho\nu}g_{\sigma\mu}) u^\rho v^\sigma u^\mu v^\nu} \nonumber\\
+    &= \frac{R_{\theta\phi\theta\phi} \cdot 1 \cdot 1 \cdot 1 \cdot 1}
+            {(g_{\theta\theta}g_{\phi\phi} - g_{\theta\phi}g_{\theta\phi}) \cdot 1 \cdot 1 \cdot 1 \cdot 1} \nonumber\\
+    &= \frac{\sin^2\theta}{1 \cdot \sin^2\theta - 0} = 1.
+\end{align}
+因此，单位球面 $S^2$ 的截面曲率为常数 $K=1$（即高斯曲率）。这印证了截面曲率是高斯曲率在高维的推广：对于二维流形，截面曲率就是高斯曲率。更一般地，半径为 $a$ 的球面 $S^2(a)$ 有 $K = 1/a^2$。
+\end{example}
+
+\section{Bianchi 恒等式与爱因斯坦张量}
+
+\subsection{第二 Bianchi 恒等式（微分恒等式）}
+
+\begin{theorem}[第二 Bianchi 恒等式]
+对于 Levi-Civita 联络，协变导数满足以下恒等式：
+\begin{equation}
+    \boxed{\nabla_\lambda R^\rho{}_{\sigma\mu\nu} + \nabla_\mu R^\rho{}_{\sigma\nu\lambda} + \nabla_\nu R^\rho{}_{\sigma\lambda\mu} = 0},
+\end{equation}
+即 $\nabla_{[\lambda} R^\rho{}_{|\sigma|\mu\nu]} = 0$。
+\end{theorem}
+
+这个恒等式是推导爱因斯坦场方程的核心。缩并两次后得到：
+\begin{equation}
+    \nabla^\mu \left( R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu} \right) = 0.
+\end{equation}
+
+\begin{definition}[爱因斯坦张量]
+\textbf{爱因斯坦张量} (Einstein tensor) 定义为：
+\begin{equation}
+    G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu}.
+\end{equation}
+由第二 Bianchi 恒等式的推论，爱因斯坦张量自动满足 $\nabla^\mu G_{\mu\nu} = 0$。
+\end{definition}
+
+\begin{note}[物理意义：守恒律的几何起源]
+$\nabla^\mu G_{\mu\nu} = 0$ 是一个几何上的恒等式——它不依赖于任何物理假设。爱因斯坦场方程将 $G_{\mu\nu}$ 与能量-动量张量 $T_{\mu\nu}$ 联系起来：$G_{\mu\nu} = 8\pi G T_{\mu\nu}$。由此，$\nabla^\mu T_{\mu\nu} = 0$ 成为了一个\textbf{自动成立的守恒律}——能量-动量守恒不再是额外的物理假设，而是时空几何（Bianchi 恒等式）的必然结果！
+\end{note}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3]
+    % Sphere for parallel transport illustration
+    \shade[ball color=blue!10,opacity=0.5] (0,0) circle (1.8);
+    \draw (0,0) circle (1.8);
+    
+    % N pole
+    \fill (0,1.5) circle (0.05) node[above] {$N$};
+    
+    % Equator point A
+    \fill[red] (-1.5,0) circle (0.05) node[left] {$A$};
+    % Equator point B
+    \fill[red] (1.5,0) circle (0.05) node[right] {$B$};
+    
+    % Path A → N
+    \draw[thick,->,blue] (-1.5,0) .. controls (-0.8,0.5) .. (0,1.5);
+    % Path N → B
+    \draw[thick,->,blue] (0,1.5) .. controls (0.8,0.5) .. (1.5,0);
+    % Path B → A (along equator)
+    \draw[thick,->,blue] (1.5,0) arc (0:180:1.5 and 0.3);
+    
+    % Vector at A (pointing north along meridian)
+    \draw[->,red,very thick] (-1.5,0) -- (-1.2,0.5);
+    \node[red,font=\footnotesize] at (-1.0,0.3) {$v_A$};
+    
+    % Vector at B (after parallel transport, now pointing south!)
+    \draw[->,red,very thick] (1.5,0) -- (1.2,-0.5);
+    \node[red,font=\footnotesize] at (1.0,-0.3) {$v_B$};
+    
+    % Angle annotation
+    \draw[->] (1.6,0.2) arc (30:300:0.3);
+    \node at (2.1,0) {$\alpha$};
+    
+    \node at (0,-1.2) {$v_B$ 相对于 $v_A$ 旋转了 $\alpha = \frac{1}{2} \times$ (立体角)};
+    \node at (0,-1.6) {旋转角 $\propto$ 回路包围的曲率};
+\end{tikzpicture}
+\caption{球面上的闭合回路平行移动——探测曲率的经典方法。从赤道点 $A$ 出发的向量 $v_A$ 经过 $A\to N\to B\to A$ 的闭合回路平行移动后，返回 $A$ 时变为 $v'_A$，与原始方向 $v_A$ 之间有一个旋转角 $\alpha$。$\alpha$ 正比于回路所包围的球面面积——这正是曲率的表现。在局部：$\delta v^\rho = R^\rho{}_{\sigma\mu\nu} v^\sigma \delta A^{\mu\nu}$。}
+\label{fig:curvature_parallel_transport}
+\end{figure}
+
+\section{曲率在广义相对论中的物理角色}
+
+曲率的物理效应在三个层面体现：
+
+\begin{enumerate}
+    \item \textbf{潮汐加速度}：两个相邻测地线的相对加速度由方程
+    \begin{equation}
+        \frac{D^2 \xi^\mu}{\dd\tau^2} = -R^\mu{}_{\nu\rho\sigma} u^\nu \xi^\rho u^\sigma
+    \end{equation}
+    给出（第 \ref{chap:geodesic} 章详细讨论）。在地球表面，上下的潮汐力来自于 $R^i{}_{0j0}$ 分量。
+
+    \item \textbf{引力透镜}：光线的偏折由 Weyl 张量的"电部分"（electric part）$E_{\mu\nu} = C_{\mu\rho\nu\sigma} u^\rho u^\sigma$ 决定。
+
+    \item \textbf{引力波}：在真空中（$R_{\mu\nu} = 0$），剩余的自由度是 Weyl 张量——引力波是 Weyl 曲率的传播。
+\end{enumerate}
+
+\begin{remark}[曲率与等效原理的统一]
+爱因斯坦等效原理告诉我们：在局部惯性系中，引力"消失"。但严格的表述是：在局部惯性系中，Christoffel 符号为零（$\Gamma^\lambda{}_{\mu\nu} = 0$），但黎曼曲率张量 $R^\rho{}_{\sigma\mu\nu} \neq 0$ 是可能的。换句话说，你可以在一个点上"消去"引力（通过选择自由下落参考系），但你无法消去潮汐力——因为潮汐力由曲率描述，而曲率是张量，不能通过坐标变换消除。这就是为什么\textbf{曲率（而非 Christoffel 符号）是真正的引力场} \cite{Wald1984,Morita2022}。
+\end{remark}
+
+\section{算例演练：曲率的计算}
+
+\subsection{例1：单位球面 $S^2$ 的曲率}
+
+由度规 $g_{\theta\theta}=1$, $g_{\phi\phi}=\sin^2\theta$，Christoffel 符号 $\Gamma^\theta{}_{\phi\phi} = -\sin\theta\cos\theta$, $\Gamma^\phi{}_{\theta\phi} = \cot\theta$（其他为零）。计算唯一独立的 Riemann 分量 $R^\theta{}_{\phi\theta\phi}$：
+\begin{align}
+    R^\theta{}_{\phi\theta\phi} &= \partial_\theta \Gamma^\theta{}_{\phi\phi} - \partial_\phi \Gamma^\theta{}_{\theta\phi} + \Gamma^\theta{}_{\theta\lambda}\Gamma^\lambda{}_{\phi\phi} - \Gamma^\theta{}_{\phi\lambda}\Gamma^\lambda{}_{\theta\phi} \\
+    &= \partial_\theta(-\sin\theta\cos\theta) - 0 + 0 - (-\sin\theta\cos\theta)(\cot\theta) \\
+    &= -(\cos^2\theta - \sin^2\theta) + \sin\theta\cos\theta \cdot \cot\theta = \sin^2\theta.
+\end{align}
+降指标：$R_{\theta\phi\theta\phi} = g_{\theta\theta} R^\theta{}_{\phi\theta\phi} = \sin^2\theta$。里奇张量：$R_{\theta\theta} = R^\phi{}_{\theta\phi\theta} = 1$, $R_{\phi\phi} = R^\theta{}_{\phi\theta\phi} = \sin^2\theta$, $R_{\theta\phi} = 0$。标量曲率：$R = g^{\theta\theta}R_{\theta\theta} + g^{\phi\phi}R_{\phi\phi} = 1 + \frac{1}{\sin^2\theta} \cdot \sin^2\theta = 2$。单位球面 $S^2$ 的标量曲率是常数 $R = 2$，与 $\theta$ 和 $\phi$ 无关——球面的曲率是均匀的。
+
+\subsection{例2：二维双曲空间 $\mathbb{H}^2$ 的曲率}
+
+二维双曲空间（Lobachevsky 平面）的度规在极坐标下可写为：
+\begin{equation}
+    \dd s^2 = \frac{4}{(1 - r^2)^2} (\dd r^2 + r^2 \dd\phi^2), \quad 0 \le r < 1,
+\end{equation}
+或等价地，在"标准"坐标下 $\dd s^2 = \dd\chi^2 + \sinh^2\chi \, \dd\phi^2$（$\chi \ge 0$）。使用后者，度规分量为 $g_{\chi\chi}=1$, $g_{\phi\phi}=\sinh^2\chi$。非零 Christoffel 符号：
+\begin{equation}
+    \Gamma^\chi{}_{\phi\phi} = -\sinh\chi\cosh\chi, \qquad \Gamma^\phi{}_{\chi\phi} = \coth\chi.
+\end{equation}
+计算 Riemann 分量 $R^\chi{}_{\phi\chi\phi}$：
+\begin{align}
+    R^\chi{}_{\phi\chi\phi} &= \partial_\chi \Gamma^\chi{}_{\phi\phi} - \partial_\phi \Gamma^\chi{}_{\chi\phi} + \Gamma^\chi{}_{\chi\lambda}\Gamma^\lambda{}_{\phi\phi} - \Gamma^\chi{}_{\phi\lambda}\Gamma^\lambda{}_{\chi\phi} \\
+    &= \partial_\chi(-\sinh\chi\cosh\chi) - 0 + 0 - (-\sinh\chi\cosh\chi)(\coth\chi) \\
+    &= -(\cosh^2\chi + \sinh^2\chi) + \sinh\chi\cosh\chi \cdot \coth\chi \\
+    &= -(\cosh^2\chi + \sinh^2\chi) + \cosh^2\chi = -\sinh^2\chi.
+\end{align}
+降指标：$R_{\chi\phi\chi\phi} = g_{\chi\chi} R^\chi{}_{\phi\chi\phi} = -\sinh^2\chi$。截面曲率：
+\begin{equation}
+    K = \frac{R_{\chi\phi\chi\phi}}{g_{\chi\chi}g_{\phi\phi}} = \frac{-\sinh^2\chi}{1 \cdot \sinh^2\chi} = -1.
+\end{equation}
+二维双曲空间具有\emph{常数负曲率} $K = -1$。这与球面 $S^2$（$K = +1$）和平面 $\mathbb{R}^2$（$K = 0$）形成完整的常曲率空间分类。里奇张量：$R_{\chi\chi} = -1$, $R_{\phi\phi} = -\sinh^2\chi$；标量曲率：$R = -2$。
+
+\subsection{例3：Minkowski 时空的平坦性验证}
+
+Minkowski 度规 $\eta_{\mu\nu} = \operatorname{diag}(-1, +1, +1, +1)$ 的所有分量均为常数，因此所有 Christoffel 符号 $\Gamma^\lambda_{\mu\nu} = 0$。代入 Riemann 公式：
+\begin{equation}
+    R^\rho{}_{\sigma\mu\nu} = \partial_\mu \Gamma^\rho_{\nu\sigma} - \partial_\nu \Gamma^\rho_{\mu\sigma} + \Gamma^\rho_{\mu\lambda}\Gamma^\lambda_{\nu\sigma} - \Gamma^\rho_{\nu\lambda}\Gamma^\lambda_{\mu\sigma},
+\end{equation}
+每一项都为零——导数项因为 $\Gamma = 0$ 的导数为零，二次项因为 $\Gamma$ 本身为零。因此：
+\begin{equation}
+    \boxed{R^\rho{}_{\sigma\mu\nu} = 0 \quad \text{处处成立}}.
+\end{equation}
+这意味着 Minkowski 时空是\emph{全局平坦}的。里奇张量 $R_{\mu\nu} = 0$，标量曲率 $R = 0$，Weyl 张量 $C_{\rho\sigma\mu\nu} = 0$。
+
+\textbf{重要警示}：如果在一个坐标系中所有 Christoffel 符号为零，则曲率处处为零，时空是平坦的。但反之不真——在弯曲时空中，你可以在某个点上选择坐标使 Christoffel 符号为零（局部惯性系），但 Riemann 张量在该点仍然非零。曲率是\emph{张量}：如果在一个坐标系中为零，则\emph{在所有坐标系中}为零。
+
+\subsection{例4：地球表面的潮汐力计算}
+
+在地球表面，时空度规在弱场近似下为（牛顿极限）：
+\begin{equation}
+    \dd s^2 = -\Bigl(1 + \frac{2\Phi}{c^2}\Bigr) c^2 \dd t^2 + \Bigl(1 - \frac{2\Phi}{c^2}\Bigr)(\dd x^2 + \dd y^2 + \dd z^2),
+\end{equation}
+其中 $\Phi(r) = -GM/r$ 是牛顿引力势，在地球表面 $r = R_\oplus \approx 6.37 \times 10^6\,\text{m}$，$M_\oplus \approx 5.97 \times 10^{24}\,\text{kg}$。对于径向分离的两个静止试验粒子，潮汐加速度由 $R^i{}_{0j0}$ 决定。计算 $R^r{}_{0r0}$（在球坐标中）：
+\begin{equation}
+    R^r{}_{0r0} \approx \frac{\partial^2 \Phi}{\partial r^2} = -\frac{2GM}{r^3}.
+\end{equation}
+（注意：此处的完整推导使用了 $\Phi = -GM/r$ 并计算了沿径向的潮汐张量。）
+
+在地球表面（$r = R_\oplus$），代入数值：
+\begin{equation}
+    R^r{}_{0r0} = -\frac{2GM_\oplus}{R_\oplus^3} \approx -\frac{2 \times (6.674 \times 10^{-11}) \times (5.97 \times 10^{24})}{(6.37 \times 10^6)^3} \approx -3.08 \times 10^{-6} \;\text{s}^{-2}.
+\end{equation}
+
+现在考虑两个相距 $\Delta r = 1\,\text{m}$ 的试验质量在地球表面自由下落。它们的相对加速度（潮汐加速度）为：
+\begin{equation}
+    \frac{\dd^2 (\Delta r)}{\dd t^2} = -c^2 R^r{}_{0r0}\, \Delta r = -(3 \times 10^8)^2 \times (-3.08 \times 10^{-6}) \times 1 \approx 2.77 \times 10^{11} \;\text{m/s}^2 \;?
+\end{equation}
+
+等等——这似乎太大了。实际上，在牛顿近似下测地偏离方程的正确形式是：
+\begin{equation}
+    \frac{\dd^2 \xi^i}{\dd t^2} = -R^i{}_{0j0}\, \xi^j,
+\end{equation}
+其中 $R^i{}_{0j0}$ 不含 $c^2$ 因子（上述 $R^r{}_{0r0} = -2GM/r^3$ 已经是正确的SI单位表达式）。因此：
+\begin{equation}
+    \frac{\dd^2 (\Delta r)}{\dd t^2} \approx -(-3.08 \times 10^{-6}) \times 1 = 3.08 \times 10^{-6} \;\text{m/s}^2.
+\end{equation}
+
+这个加速度极其微小——每秒钟 $3 \times 10^{-6}$ m/s 的速度差积累。但这正是地球潮汐力的量级：对于 $1$ m 的分离距离，潮汐加速度约为 $3 \times 10^{-7} g$（其中 $g = 9.8$ m/s$^2$ 是地表重力加速度）。对于更大的分离距离（如海洋尺度），潮汐效应变得可观测——这正是日月引潮力的几何起源。
+
+\textbf{物理诠释}：$R^i{}_{0j0}$ 的迹（即 $R_{00}$）正比于物质密度：$R_{00} = R^i{}_{0i0} = \nabla^2\Phi = 4\pi G\rho$。在地球表面（真空，$\rho=0$），$R_{00}=0$，但 $R^i{}_{0j0}$ 的\emph{无迹部分}非零——这正是潮汐力。因此，潮汐力由 Weyl 张量（里奇平坦时空中的曲率）描述，而物质密度由里奇张量描述。
+

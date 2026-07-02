@@ -1,0 +1,711 @@
+% chapter12.tex - 引力波
+\chapter{引力波 (Gravitational Waves)}
+\label{chap:GW}
+
+\section{引力波的物理图像}
+\label{sec:GW_physical_picture}
+
+爱因斯坦在1916年就预言了引力波的存在——时空度规的微小涟漪以光速传播。这是广义相对论最引人注目的预言之一，但直到整整一个世纪之后的2015年，才被激光干涉引力波天文台（LIGO）首次直接探测到 \cite{Abbott2016}。本章的推导和讨论参考了经典文献 \cite{Carroll1997,Misner1973,Wald1984}。
+
+引力波的本质可以从电磁波的类比来理解。在电动力学中，加速运动的电荷辐射电磁波——电场和磁场的振荡以光速传播。在广义相对论中，时空本身就是动力学实体，加速运动的质量（或更准确地说，质量四极矩随时间变化）辐射引力波——时空曲率的振荡以光速传播。
+
+\begin{note}[引力波与电磁波的对比]
+\begin{center}
+\begin{tabular}{l|l}
+\hline
+\textbf{电磁波} & \textbf{引力波} \\ \hline
+源：加速电荷 & 源：加速质量（四极矩变化） \\
+最低阶辐射：偶极辐射 & 最低阶辐射：四极辐射 \\
+偏振：两个矢量偏振态 & 偏振：两个张量偏振态（$+$ 和 $\times$） \\
+介质：电磁场 & 介质：时空本身 \\
+速度：$c$（在介质中可改变） & $c$（在所有介质中不变） \\
+\hline
+\end{tabular}
+\end{center}
+\end{note}
+
+为什么引力波的最低阶辐射是四极辐射而非偶极辐射？原因有二：（1）质量守恒禁止了质量偶极辐射（不存在负质量，无法构成振荡偶极）；（2）动量守恒禁止了质量流偶极辐射（孤立系统的质心匀速运动）。因此引力波辐射的第一个非平凡阶是四极辐射——由质量四极矩的二阶时间导数驱动。
+
+\begin{property}[引力波的基本特征]
+\begin{enumerate}
+    \item \textbf{横波性}：引力波是横波，振动方向垂直于传播方向
+    \item \textbf{两个偏振态}：$+$ 模（plus mode）和 $\times$ 模（cross mode），相差 $45^\circ$
+    \item \textbf{以光速传播}：$v = c$，与频率无关（无介质色散）
+    \item \textbf{潮汐效应}：引力波拉伸一个横向尺度同时压缩另一个正交横向尺度
+    \item \textbf{极其微弱}：到达地球的引力波典型应变为 $h \sim 10^{-21}$，相当于测量地球-太阳距离（$1.5\times10^{11}$ m）时精确到一个原子直径（$10^{-10}$ m）的量级
+\end{enumerate}
+\end{property}
+
+\section{线性化引力}
+\label{sec:linearized_gravity}
+
+\subsection{弱场展开}
+
+当引力场足够弱时，时空度规可以写为平坦 Minkowski 背景加上微小扰动：
+
+\begin{definition}[弱场度规]
+\begin{equation}
+    \boxed{g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}}, \qquad |h_{\mu\nu}| \ll 1.
+    \label{eq:weak_field}
+\end{equation}
+其中 $\eta_{\mu\nu} = \diag(-1, +1, +1, +1)$ 是 Minkowski 度规，$h_{\mu\nu}$ 是度规扰动张量。以下所有计算只保留 $h_{\mu\nu}$ 的\textbf{一阶项}，忽略 $\Order(h^2)$ 及更高阶，这就是\textbf{线性化引力}。
+\end{definition}
+
+在一阶近似下，指标升降使用背景度规 $\eta^{\mu\nu}$：
+\begin{equation}
+    g^{\mu\nu} = \eta^{\mu\nu} - h^{\mu\nu} + \Order(h^2), \qquad h^{\mu\nu} \equiv \eta^{\mu\rho}\eta^{\nu\sigma}h_{\rho\sigma}.
+\end{equation}
+注意 $h^\mu{}_\nu = \eta^{\mu\rho}h_{\rho\nu}$ 和 $h = \eta^{\mu\nu}h_{\mu\nu} = h^\mu{}_\mu$。
+
+\subsection{线性化的联络与曲率}
+
+到 $h$ 的一阶，Christoffel 符号为：
+\begin{equation}
+    \Gamma^\mu_{\nu\rho} = \frac{1}{2}\eta^{\mu\sigma}\left(\partial_\nu h_{\rho\sigma} + \partial_\rho h_{\nu\sigma} - \partial_\sigma h_{\nu\rho}\right) + \Order(h^2).
+    \label{eq:linear_Gamma}
+\end{equation}
+
+线性化的 Riemann 张量（到一阶）：
+\begin{equation}
+    R^\mu{}_{\nu\rho\sigma} = \partial_\rho\Gamma^\mu_{\sigma\nu} - \partial_\sigma\Gamma^\mu_{\rho\nu} + \Order(h^2).
+\end{equation}
+代入式 (\ref{eq:linear_Gamma})，得到：
+\begin{equation}
+    R_{\mu\nu\rho\sigma} = \frac{1}{2}\left(\partial_\nu\partial_\rho h_{\mu\sigma} + \partial_\mu\partial_\sigma h_{\nu\rho} - \partial_\mu\partial_\rho h_{\nu\sigma} - \partial_\nu\partial_\sigma h_{\mu\rho}\right).
+    \label{eq:linear_Riemann}
+\end{equation}
+
+线性化的 Ricci 张量和标量曲率：
+\begin{align}
+    R_{\mu\nu} &= \eta^{\rho\sigma}R_{\rho\mu\sigma\nu} \nonumber\\
+    &= \frac{1}{2}\left(\partial^\rho\partial_\mu h_{\nu\rho} + \partial^\rho\partial_\nu h_{\mu\rho} - \Box h_{\mu\nu} - \partial_\mu\partial_\nu h\right),
+    \label{eq:linear_Ricci}
+\end{align}
+其中 $\Box \equiv \eta^{\mu\nu}\partial_\mu\partial_\nu = -\partial_t^2 + \nabla^2$ 是平坦时空中的达朗贝尔算子（这里取 $c=1$），$h = \eta^{\mu\nu}h_{\mu\nu}$ 是扰动的迹。
+
+\begin{align}
+    R &= \eta^{\mu\nu}R_{\mu\nu} = \partial^\mu\partial^\nu h_{\mu\nu} - \Box h.
+    \label{eq:linear_Rscalar}
+\end{align}
+
+Einstein 张量的线性化形式为：
+\begin{equation}
+    G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}R\,\eta_{\mu\nu}
+    = \frac{1}{2}\left(\partial^\rho\partial_\mu h_{\nu\rho} + \partial^\rho\partial_\nu h_{\mu\rho} - \Box h_{\mu\nu} - \partial_\mu\partial_\nu h - \eta_{\mu\nu}\partial^\rho\partial^\sigma h_{\rho\sigma} + \eta_{\mu\nu}\Box h\right).
+    \label{eq:linear_Einstein}
+\end{equation}
+
+\subsection{规范自由与坐标变换}
+
+线性化引力具有\textbf{规范对称性}——它是广义相对论微分同胚不变性在线性化近似中的残留。考虑无穷小坐标变换：
+\begin{equation}
+    x^\mu \to x'^\mu = x^\mu + \xi^\mu(x),
+\end{equation}
+其中 $|\partial_\mu\xi^\nu| \sim \Order(h)$ 与 $h_{\mu\nu}$ 同阶。度规的张量变换律 $g'_{\mu\nu}(x') = \frac{\partial x^\rho}{\partial x'^\mu}\frac{\partial x^\sigma}{\partial x'^\nu} g_{\rho\sigma}(x)$ 在线性阶给出：
+\begin{equation}
+    \boxed{h_{\mu\nu} \to h'_{\mu\nu} = h_{\mu\nu} - \partial_\mu\xi_\nu - \partial_\nu\xi_\mu}.
+    \label{eq:gauge_trans}
+\end{equation}
+这里 $\xi_\mu = \eta_{\mu\nu}\xi^\nu$。这一变换称为\textbf{规范变换}，与电磁学中的 $A_\mu \to A_\mu + \partial_\mu\Lambda$ 完全类似。
+
+\begin{note}[规范不变性]
+可以验证，线性化的 Riemann 张量 (\ref{eq:linear_Riemann})、Ricci 张量 (\ref{eq:linear_Ricci}) 和 Einstein 张量 (\ref{eq:linear_Einstein}) 在规范变换 (\ref{eq:gauge_trans}) 下都是不变的。这意味着物理可观测量（如测地线偏离）不依赖于规范选择——规范只是描述上的冗余。
+\end{note}
+
+\section{引力波方程}
+\label{sec:GW_equation}
+
+\subsection{迹反转变量与 Lorenz 规范}
+
+为了简化线性化的 Einstein 方程，引入\textbf{迹反转扰动 (trace-reversed perturbation)}：
+
+\begin{definition}[迹反转变量]
+\begin{equation}
+    \boxed{\bar{h}_{\mu\nu} \equiv h_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu}h}.
+    \label{eq:bar_h}
+\end{equation}
+其逆关系为 $h_{\mu\nu} = \bar{h}_{\mu\nu} - \frac{1}{2}\eta_{\mu\nu}\bar{h}$，其中 $\bar{h} = \eta^{\mu\nu}\bar{h}_{\mu\nu} = -h$。
+\end{definition}
+
+将 $\bar{h}_{\mu\nu}$ 代入 Einstein 张量 (\ref{eq:linear_Einstein})，经过冗长但直接的代数化简（使用 $\partial_\mu\eta^{\mu\nu}=0$ 和交换偏导数），得到：
+\begin{equation}
+    G_{\mu\nu} = -\frac{1}{2}\left[\Box \bar{h}_{\mu\nu} + \eta_{\mu\nu}\partial^\rho\partial^\sigma\bar{h}_{\rho\sigma} - \partial^\rho\partial_\nu\bar{h}_{\mu\rho} - \partial^\rho\partial_\mu\bar{h}_{\nu\rho}\right].
+    \label{eq:Einstein_barh}
+\end{equation}
+
+现在选择规范来消去多余的项。类似电动力学中的 Lorentz 规范 $\partial^\mu A_\mu = 0$，在引力中我们选择：
+
+\begin{definition}[Lorenz 规范 / 谐和规范]
+\begin{equation}
+    \boxed{\partial^\mu \bar{h}_{\mu\nu} = 0}.
+    \label{eq:Lorenz_gauge}
+\end{equation}
+这一规范条件也称为\textbf{谐和坐标条件 (harmonic coordinate condition)}，因为 $\Box x^\mu = 0$。
+\end{definition}
+
+在 Lorenz 规范下，式 (\ref{eq:Einstein_barh}) 中后三项全部消失，Einstein 方程简化为平坦时空中的波动方程：
+
+\begin{theorem}[线性化 Einstein 方程 —— 引力波方程]
+在 Lorenz 规范 $\partial^\mu\bar{h}_{\mu\nu}=0$ 下，线性化的 Einstein 场方程变为：
+\begin{equation}
+    \boxed{\Box \bar{h}_{\mu\nu} = -\frac{16\pi G}{c^4} T_{\mu\nu}}.
+    \label{eq:wave_equation}
+\end{equation}
+这里恢复了 $c$。在真空中（$T_{\mu\nu}=0$），方程为 $\Box\bar{h}_{\mu\nu} = 0$ —— 正是以光速 $c$ 传播的波动方程。
+\end{theorem}
+
+\begin{proof}
+线性化的 Einstein 方程 $G_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}$（恢复 $c$）。利用式 (\ref{eq:Einstein_barh})，在 Lorenz 规范下，包含 $\partial^\mu\bar{h}_{\mu\nu}$ 的项全部为零，$G_{\mu\nu} = -\frac{1}{2}\Box\bar{h}_{\mu\nu}$。因此：
+\begin{equation}
+    -\frac{1}{2}\Box\bar{h}_{\mu\nu} = \frac{8\pi G}{c^4}T_{\mu\nu}
+    \quad\Longrightarrow\quad
+    \Box\bar{h}_{\mu\nu} = -\frac{16\pi G}{c^4}T_{\mu\nu}.
+\end{equation}
+\end{proof}
+
+\subsection{TT 规范（横无迹规范）}
+
+Lorenz 规范并未完全固定所有规范自由度。在真空中（$T_{\mu\nu}=0$），$\Box\bar{h}_{\mu\nu}=0$，但 $\bar{h}_{\mu\nu}$ 仍有 10 个独立分量，受 4 个 Lorenz 条件 $\partial^\mu\bar{h}_{\mu\nu}=0$ 约束。剩余的 6 个分量中，还有 4 个可以通过进一步的规范变换消去（在真空中可以保持 Lorenz 规范的同时进行此类变换）。最终只剩下 2 个物理自由度。
+
+\begin{definition}[TT 规范 —— 横无迹规范]
+对于沿 $z$ 方向传播的平面引力波，\textbf{TT 规范 (Transverse-Traceless gauge)} 由以下条件定义：
+\begin{equation}
+    \bar{h}_{0\mu} = 0, \qquad \bar{h}^\mu{}_\mu = 0, \qquad \partial^j \bar{h}_{ij} = 0.
+    \label{eq:TT_gauge}
+\end{equation}
+在 TT 规范中，$\bar{h}_{\mu\nu} = h_{\mu\nu}^{\text{TT}}$（因为无迹意味着 $h=0$，从而 $\bar{h}_{\mu\nu}=h_{\mu\nu}$）。
+\end{definition}
+
+对于沿 $+z$ 方向传播的平面引力波，TT 规范中的度规扰动具有如下形式：
+\begin{equation}
+    h_{\mu\nu}^{\text{TT}} = 
+    \begin{pmatrix}
+        0 & 0 & 0 & 0 \\
+        0 & h_+ & h_\times & 0 \\
+        0 & h_\times & -h_+ & 0 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix},
+    \label{eq:TT_matrix}
+\end{equation}
+其中 $h_+ = h_+(t-z/c)$ 和 $h_\times = h_\times(t-z/c)$ 是沿 $z$ 方向传播的两个独立偏振模式。这是一个横波：只有空间分量且垂直于传播方向（$x$-$y$ 平面），无迹（$h_{11}+h_{22}=0$）。
+
+\section{引力波的偏振}
+\label{sec:polarization}
+
+\subsection{两个偏振态的物理效应}
+
+考虑一排自由测试粒子排列在垂直于引力波传播方向的圆环上。当引力波通过时，TT 规范意味着测试粒子的坐标保持不变（$\dd^2 x^i/\dd\tau^2 = 0$），但\textbf{固有距离}随时间振荡。$h_+$ 偏振和 $h_\times$ 偏振对圆环测试粒子的效应如下：
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=2.8, >=stealth]
+
+    % --- h_+ 偏振 ---
+    \node[font=\bfseries] at (0, 1.4) {$h_+$ 偏振};
+    
+    % 未形变圆 (虚线)
+    \draw[dashed, gray, thick] (0,0) circle (1.0);
+    
+    % 时刻 0: 未形变
+    \draw[gray, thick] (0,0) circle (1.0);
+    \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+        \fill[gray] (\ang:{1.0}) circle (0.04);
+    }
+    \node at (0, -1.3) {$t = 0$};
+    
+    % 时刻 T/4: 水平拉伸, 竖直压缩
+    \begin{scope}[xshift=3.5cm]
+        \draw[blue, thick] (0,0) ellipse (1.2 and 0.8);
+        \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \pgfmathsetmacro{\rx}{1.2}
+            \pgfmathsetmacro{\ry}{0.8}
+            \pgfmathsetmacro{\px}{\rx*cos(\ang)}
+            \pgfmathsetmacro{\py}{\ry*sin(\ang)}
+            \fill[blue] (\px, \py) circle (0.04);
+        }
+        \node at (0, -1.3) {$t = T/4$};
+    \end{scope}
+
+    % 时刻 T/2: 未形变
+    \begin{scope}[xshift=7.0cm]
+        \draw[gray, thick] (0,0) circle (1.0);
+        \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \fill[gray] (\ang:{1.0}) circle (0.04);
+        }
+        \node at (0, -1.3) {$t = T/2$};
+    \end{scope}
+
+    % 时刻 3T/4: 竖直拉伸, 水平压缩
+    \begin{scope}[xshift=10.5cm]
+        \draw[red, thick] (0,0) ellipse (0.8 and 1.2);
+        \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \pgfmathsetmacro{\rx}{0.8}
+            \pgfmathsetmacro{\ry}{1.2}
+            \pgfmathsetmacro{\px}{\rx*cos(\ang)}
+            \pgfmathsetmacro{\py}{\ry*sin(\ang)}
+            \fill[red] (\px, \py) circle (0.04);
+        }
+        \node at (0, -1.3) {$t = 3T/4$};
+    \end{scope}
+
+    % --- h_× 偏振 (下一行) ---
+    \node[font=\bfseries] at (0, -2.5) {$h_\times$ 偏振};
+    
+    % 未形变
+    \begin{scope}[yshift=-3.5cm]
+        \draw[gray, thick] (0,0) circle (1.0);
+        \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \fill[gray] (\ang:{1.0}) circle (0.04);
+        }
+        \foreach \ang in {45, 135, 225, 315} {
+            \draw[gray, thin, densely dotted] (0,0) -- (\ang:1.3);
+        }
+        \node at (0, -1.3) {$t = 0$};
+    \end{scope}
+
+    % T/4: 对角线拉伸
+    \begin{scope}[xshift=3.5cm, yshift=-3.5cm]
+        % 旋转45度的椭圆
+        \begin{scope}[rotate=45]
+            \draw[blue, thick] (0,0) ellipse (1.2 and 0.8);
+        \end{scope}
+        \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \pgfmathsetmacro{\rx}{1.2}
+            \pgfmathsetmacro{\ry}{0.8}
+            \pgfmathsetmacro{\px}{\rx*cos(\ang-45)*cos(45) - \ry*sin(\ang-45)*sin(45)}
+            \pgfmathsetmacro{\py}{\rx*cos(\ang-45)*sin(45) + \ry*sin(\ang-45)*cos(45)}
+            \fill[blue] (\px, \py) circle (0.04);
+        }
+        \node at (0, -1.3) {$t = T/4$};
+    \end{scope}
+
+    % T/2: 未形变
+    \begin{scope}[xshift=7.0cm, yshift=-3.5cm]
+        \draw[gray, thick] (0,0) circle (1.0);
+        \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \fill[gray] (\ang:{1.0}) circle (0.04);
+        }
+        \node at (0, -1.3) {$t = T/2$};
+    \end{scope}
+
+    % 3T/4: 反对角线拉伸
+    \begin{scope}[xshift=10.5cm, yshift=-3.5cm]
+        \begin{scope}[rotate=45]
+            \draw[red, thick] (0,0) ellipse (0.8 and 1.2);
+        \end{scope}
+        \foreach \ang in {0, 45, 90, 135, 180, 225, 270, 315} {
+            \pgfmathsetmacro{\rx}{0.8}
+            \pgfmathsetmacro{\ry}{1.2}
+            \pgfmathsetmacro{\px}{\rx*cos(\ang-45)*cos(45) - \ry*sin(\ang-45)*sin(45)}
+            \pgfmathsetmacro{\py}{\rx*cos(\ang-45)*sin(45) + \ry*sin(\ang-45)*cos(45)}
+            \fill[red] (\px, \py) circle (0.04);
+        }
+        \node at (0, -1.3) {$t = 3T/4$};
+    \end{scope}
+
+\end{tikzpicture}
+\caption{引力波两种偏振态对环形测试粒子的效应。$h_+$ 模交替沿 $x$ 轴和 $y$ 轴方向拉伸/压缩环；$h_\times$ 模则沿 $45^\circ$ 对角线方向拉伸/压缩。两种模式周期相同但相差 $45^\circ$ 空间旋转。注意 TT 规范中测试粒子的坐标不变，改变的是它们之间的固有距离。}
+\label{fig:polarization}
+\end{figure}
+
+\begin{note}[测地线偏离与引力波探测]
+图 \ref{fig:polarization} 揭示了引力波探测的基本原理。当引力波通过时，自由粒子之间的\textbf{固有距离}发生振荡。这正是 LIGO 等干涉仪探测引力波的核心思想：激光干涉仪测量两个垂直臂中悬挂的镜面之间的距离变化——即引力波导致的潮汐形变。$h_+$ 模使一臂拉伸而另一臂压缩，$h_\times$ 模亦然但旋转 $45^\circ$。
+\end{note}
+
+\subsection{物质对引力波的响应}
+
+在 TT 规范中，线性化的测地线偏离方程为：
+\begin{equation}
+    \frac{\dd^2 \xi^i}{\dd t^2} = -R^i{}_{0j0}\,\xi^j = \frac{1}{2}\ddot{h}_{ij}^{\text{TT}}\,\xi^j,
+    \label{eq:geodesic_deviation}
+\end{equation}
+其中 $\xi^i$ 是两相邻自由粒子之间的偏离矢量。对于 $h_+$ 偏振，初始在 $(x_0, y_0)$ 的粒子感受到的加速度为：
+\begin{equation}
+    \ddot{x} = \frac{1}{2}\ddot{h}_+ x_0, \qquad \ddot{y} = -\frac{1}{2}\ddot{h}_+ y_0.
+\end{equation}
+这正是图 \ref{fig:polarization} 中描绘的拉伸-压缩模式。
+
+\section{引力波的能量辐射}
+\label{sec:energy_radiation}
+
+\subsection{Isaacson 有效能量-动量张量}
+
+引力波携带能量——这是引力场非线性的直接体现。然而，在广义相对论中定义引力场的局部能量是一个微妙的问题（由等效原理导致）。解决之道由 Isaacson 提出：通过将度规分离为慢变背景和快变引力波，在几个波长的尺度上作\textbf{Brill--Hartle 平均}，可以构造一个规范不变的\textbf{有效能量-动量张量}。
+
+\begin{definition}[Isaacson 能量-动量张量]
+引力波的有效能量-动量张量由度规扰动的二阶项通过 Brill--Hartle 平均给出：
+\begin{equation}
+    \boxed{T_{\mu\nu}^{\text{GW}} \equiv \frac{c^4}{32\pi G} \langle \partial_\mu h_{\alpha\beta}^{\text{TT}} \, \partial_\nu h^{\alpha\beta}_{\text{TT}} \rangle},
+    \label{eq:Isaacson}
+\end{equation}
+其中 $\langle \cdot \rangle$ 表示几个波长尺度上的时空平均。$h_{\alpha\beta}^{\text{TT}}$ 是 TT 规范中的度规扰动。这个张量具有能量-动量张量的所有正确性质：对称、守恒（$\partial^\mu T_{\mu\nu}^{\text{GW}} = 0$），并且在 Lorentz 变换下正确变换。
+\end{definition}
+
+特别地，引力波的能量密度为：
+\begin{equation}
+    \rho_{\text{GW}} \equiv T_{00}^{\text{GW}} = \frac{c^4}{32\pi G} \langle \dot{h}_{ij}^{\text{TT}} \dot{h}_{ij}^{\text{TT}} \rangle
+    = \frac{c^2}{16\pi G} \langle \dot{h}_+^2 + \dot{h}_\times^2 \rangle.
+    \label{eq:GW_energy_density}
+\end{equation}
+
+对于一个频率为 $f$、振幅为 $h$ 的单色引力波，其能流（单位面积单位时间的能量）为：
+\begin{equation}
+    F_{\text{GW}} = \frac{c^3}{16\pi G} \langle \dot{h}_+^2 + \dot{h}_\times^2 \rangle
+    = \frac{\pi c^3}{4G} f^2 h^2.
+    \label{eq:GW_flux}
+\end{equation}
+
+\begin{note}[量子对应：引力子]
+在量子语言中，频率为 $\omega = 2\pi f$ 的引力波可以看作引力子（自旋为2、静止质量为零的玻色子）的相干态。每个引力子携带能量 $\hbar\omega$，能流 $F_{\text{GW}}$ 对应于引力子通量。由 $F_{\text{GW}} \sim f^2 h^2$ 可知，$h \propto 1/f$ —— 频率越低的引力波（如来自于超大质量黑洞并合的引力波）振幅越大，这就是为什么 LISA（空间引力波天文台）被设计来探测毫赫兹频段的引力波。
+\end{note}
+
+\subsection{四极辐射公式}
+
+现在需要将引力波辐射与源的运动联系起来。这需要求解含源的波动方程 (\ref{eq:wave_equation})。
+
+对于远场（$r \to \infty$）中的波动方程的推迟解，标准 Green 函数方法给出：
+\begin{equation}
+    \bar{h}_{\mu\nu}(t, \vb*{x}) = \frac{4G}{c^4} \int \frac{T_{\mu\nu}(t - |\vb*{x} - \vb*{x}'|/c, \vb*{x}')}{|\vb*{x} - \vb*{x}'|} \dd^3 x'.
+    \label{eq:retarded_solution}
+\end{equation}
+
+在远离源的波区（$r \gg \lambda_{\text{GW}} \gg R_{\text{source}}$），且源运动速度 $v \ll c$ 时，可以作多极展开。由于质量守恒和动量守恒，偶极矩和磁偶极矩不贡献辐射。第一个非零贡献来自\textbf{质量四极矩}。
+
+\begin{theorem}[四极辐射公式 (Quadrupole Formula)]
+在低速（$v \ll c$）和远场近似下，TT 规范中的引力波振幅由源的质量四极矩的张量部分给出：
+\begin{equation}
+    \boxed{h_{ij}^{\text{TT}}(t, r) = \frac{2G}{c^4 r} \, \ddot{I}\!\!_{ij}^{\text{TT}}(t - r/c)},
+    \label{eq:quadrupole_amplitude}
+\end{equation}
+其中 $I_{ij}$ 是无迹约化四极矩张量：
+\begin{equation}
+    I_{ij} \equiv \int \rho(t, \vb*{x}) \left(x_i x_j - \frac{1}{3}\delta_{ij}r^2\right) \dd^3 x,
+\end{equation}
+$I_{ij}^{\text{TT}}$ 是其横向无迹投影（投影到垂直于视线方向的平面上并去除迹）。圆点表示时间导数。
+\end{theorem}
+
+引力波辐射的总功率由四极矩的三阶时间导数（即 $\dddot{I}_{ij}$，因为 $h \propto \ddot{I}$ 而能量 $\propto \dot{h}^2 \propto \dddot{I}^2$）给出：
+
+\begin{theorem}[引力波辐射功率 —— 四极公式]
+\begin{equation}
+    \boxed{P_{\text{GW}} = \frac{G}{5c^5} \langle \dddot{I}_{ij} \, \dddot{I}_{ij} \rangle}.
+    \label{eq:quadrupole_power}
+\end{equation}
+或者等价的非无迹形式：
+\begin{equation}
+    P_{\text{GW}} = \frac{G}{5c^5} \langle \dddot{Q}_{ij} \dddot{Q}_{ij} - \frac{1}{3}\dddot{Q}_{ii}\dddot{Q}_{jj} \rangle,
+\end{equation}
+其中 $Q_{ij} = \int \rho\, x_i x_j \,\dd^3x$ 是质量四极矩（带迹），而 $I_{ij} = Q_{ij} - \frac{1}{3}\delta_{ij}Q_{kk}$。
+\end{theorem}
+
+\begin{note}[$c^{-5}$ 因子的物理意义]
+辐射功率中的因子 $G/c^5$ 极其微小：$G/c^5 \approx 2.7 \times 10^{-60}\ \text{W}^{-1}$（当 $\dddot{I}$ 以 SI 单位表示时）。这意味着除非 $\dddot{I}_{ij}$ 极大（即天体以接近光速运动），引力波辐射的能量是极端微弱的。这解释了为什么引力波如此难以探测——需要一个世纪的技术进步才实现了首次直接探测。
+\end{note}
+
+\section{双星系统的引力辐射}
+\label{sec:binary_systems}
+
+\subsection{双星轨道的引力波辐射}
+
+双星系统是自然界中最重要、最可预测的引力波源。考虑两个质量分别为 $m_1$ 和 $m_2$ 的天体在 Kepler 轨道上相互绕转，轨道半长轴为 $a$，偏心率为 $e$。
+
+对于圆轨道（$e=0$）的双星系统，轨道频率为 $\omega = \sqrt{G(m_1+m_2)/a^3}$。四极矩 $Q_{ij}$ 以频率 $2\omega$ 振荡（因为质量分布在半个轨道周期后回复），因此 $\dddot{Q} \sim \rho a^2 \omega^3$。四极公式 (\ref{eq:quadrupole_power}) 给出：
+
+\begin{theorem}[圆轨道双星的引力波辐射]
+\begin{equation}
+    \boxed{P_{\text{GW}} = \frac{32}{5}\frac{G^4}{c^5}\frac{\mu^2 M^3}{a^5}},
+    \label{eq:circular_power}
+\end{equation}
+其中 $M = m_1 + m_2$ 是总质量，$\mu = m_1m_2/M$ 是约化质量。对偏心轨道 $e \neq 0$，功率需乘以修正因子：
+\begin{equation}
+    P_{\text{GW}}(e) = P_{\text{GW}}(e=0) \cdot \frac{1 + \frac{73}{24}e^2 + \frac{37}{96}e^4}{(1-e^2)^{7/2}}.
+    \label{eq:eccentric_correction}
+\end{equation}
+\end{theorem}
+
+引力波辐射带走轨道能量，导致轨道收缩——轨道周期随时间减小。由能量守恒 $\dd E_{\text{orbit}}/\dd t = -P_{\text{GW}}$，其中 $E_{\text{orbit}} = -Gm_1m_2/(2a)$（圆轨道），得到轨道频率的演化：
+\begin{equation}
+    \boxed{\dot{f}_{\text{GW}} = \frac{96}{5}\frac{c^3}{G}\frac{(G\mathcal{M}_c)^{5/3}}{c^5}\, f_{\text{GW}}^{11/3}},
+    \label{eq:chirp}
+\end{equation}
+其中 $\mathcal{M}_c \equiv (m_1m_2)^{3/5}/(m_1+m_2)^{1/5} = \mu^{3/5}M^{2/5}$ 是\textbf{啁啾质量 (chirp mass)}——它决定了引力波频率和振幅的演化速率，是可以从波形中直接测量的最精确参数。$f_{\text{GW}} = \omega/\pi$ 是引力波的频率（轨道频率的两倍）。
+
+\begin{property}[并合时间]
+从初始频率 $f_0$ 开始，双星系统并合所需的时间为：
+\begin{equation}
+    t_{\text{merge}} = \frac{5}{256}\frac{c^5}{G^3}\frac{a_0^4}{\mu M^2}
+    = \frac{5}{256}\frac{c^5}{G^{5/3}}\frac{1}{\mathcal{M}_c^{5/3}(\pi f_0)^{8/3}}.
+    \label{eq:merger_time}
+\end{equation}
+\end{property}
+
+\subsection{PSR B1913+16：引力波的第一个间接证据}
+
+\begin{note}[Hulse--Taylor 双脉冲星]
+1974年，Joseph Taylor 和 Russell Hulse 发现了\textbf{PSR B1913+16}——第一个双星系统中的脉冲星。该系统由两颗中子星组成，轨道周期约为 7.75 小时，轨道偏心率 $e \approx 0.617$。脉冲星以极高的精度发射周期性射电脉冲（周期约 59 ms），使其成为一个天然的精确时钟。
+
+通过精确测量脉冲到达时间，Taylor、Weisberg 等人在长达数十年的观测中发现了\textbf{轨道周期的逐渐减少}：$\dot{P}_b \approx -2.4 \times 10^{-12}$（每年约 76 微秒）。这一衰减速率与广义相对论四极公式 (\ref{eq:circular_power})（含偏心率修正 (\ref{eq:eccentric_correction})）的预言在 0.2\% 的精度范围内完全吻合。
+
+这一发现为 Hulse 和 Taylor 赢得了 1993 年诺贝尔物理学奖——这是引力波存在的第一个强有力的（虽然是间接的）实验证据。累积的轨道周期衰减曲线与广义相对论预言的完美吻合（见图 \ref{fig:HulseTaylor}）是广义相对论最精确的检验之一。
+\end{note}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.5, >=stealth]
+    % 坐标轴
+    \draw[->] (0, 0) -- (8, 0) node[right] {年份};
+    \draw[->] (0, -0.5) -- (0, 3.5) node[above] {累积轨道周期偏移 (s)};
+    
+    % 理论曲线 - 抛物线
+    \draw[red, thick, domain=0:7, samples=100] plot (\x, {-0.05*(\x-3.5)^2 + 2.55});
+    \node[red] at (6.5, 1.4) {广义相对论预言};
+    
+    % 数据点（示意）
+    \foreach \x/\y in {0.5/2.5, 1.0/2.35, 1.5/2.2, 2.0/2.05, 2.5/1.85, 3.0/1.7, 3.5/1.55, 4.0/1.45, 4.5/1.4, 5.0/1.4, 5.5/1.45, 6.0/1.55, 6.5/1.7, 7.0/1.9} {
+        \fill[blue] (\x, \y) circle (0.06);
+    }
+    \node[blue] at (6.5, 2.2) {观测数据};
+    
+    % 标注
+    \node at (4, -0.3) {1975--2005};
+    \draw[<->] (3.5, 2.6) -- (3.5, 1.5);
+    \node[rotate=90] at (3.1, 2.05) {$\sim 40$ s 偏移};
+    
+    % 说明框
+    \node[draw, rounded corners, fill=yellow!10, text width=5cm, font=\small, align=left] at (4, -1.0) {
+        PSR B1913+16 (Hulse--Taylor)\\
+        $P_b \approx 7.75$ h, $e \approx 0.617$\\
+        $\dot{P}_b \approx -2.4 \times 10^{-12}$ s/s\\
+        与 GR 预言吻合至 0.2\%
+    };
+\end{tikzpicture}
+\caption{PSR B1913+16 的累积轨道周期偏移。蓝色点为实际观测数据（示意），红色曲线为广义相对论四极辐射公式的预言。由于引力波辐射带走轨道能量，轨道周期每年减少约 $76\ \mu$s，累积效应在 30 年间达到约 40 秒。数据与理论预言的完美吻合为引力波的存在提供了第一个强有力的间接证据。}
+\label{fig:HulseTaylor}
+\end{figure}
+
+\section{LIGO 与引力波天文学}
+\label{sec:LIGO}
+
+\subsection{激光干涉仪探测原理}
+
+LIGO（Laser Interferometer Gravitational-Wave Observatory）是利用激光干涉测量原理探测引力波的巨大精密仪器。其基本思想是：当引力波通过时，干涉仪两条垂直臂中镜面之间的固有距离发生周期性变化，引起干涉条纹的移动。
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.3, >=stealth]
+    % 激光源
+    \fill[red!50] (-0.5, 0) circle (0.25);
+    \node[font=\small] at (-0.5, -0.5) {激光源};
+    \draw[red, ->, thick] (-0.25, 0) -- (0.5, 0);
+    
+    % 分束镜
+    \fill[gray!60] (0.8, -0.1) rectangle (1.2, 0.1);
+    \node[font=\small] at (1.0, -0.5) {分束镜};
+    \draw[->, thick] (1.0, 0) -- (1.0, -0.3);
+    \node[font=\footnotesize] at (1.4, -0.4) {50/50};
+    
+    % x 臂
+    \draw[red, ->, thick] (1.0, 0.15) -- (6.5, 0.15);
+    \node[font=\small] at (3.75, 0.4) {$L_x = 4$ km (x 臂)};
+    \fill[blue!40] (6.8, -0.1) rectangle (7.0, 0.4);
+    \node[font=\footnotesize] at (7.5, 0.15) {端镜};
+    
+    % y 臂
+    \draw[red, ->, thick] (0.85, 0) -- (0.85, -4.5);
+    \node[font=\small, rotate=90] at (0.55, -2.25) {$L_y = 4$ km (y 臂)};
+    \fill[blue!40] (0.7, -4.8) rectangle (1.0, -5.0);
+    \node[font=\footnotesize] at (0.3, -4.9) {端镜};
+    
+    % 腔镜
+    \fill[blue!30] (6.3, -0.1) rectangle (6.5, 0.4);
+    \fill[blue!30] (0.7, -4.3) rectangle (1.0, -4.5);
+    \node[font=\footnotesize] at (6.4, 0.6) {输入腔镜};
+    \node[font=\footnotesize, rotate=90] at (0.5, -4.0) {输入腔镜};
+    
+    % Fabry-Perot 腔标注
+    \draw[decorate, decoration={brace, amplitude=6pt}, thick] (6.3, -0.5) -- (1.3, -0.5);
+    \node[font=\footnotesize] at (3.8, -0.85) {Fabry-Perot 谐振腔（~280 次往返，有效臂长 ~1120 km）};
+    \draw[decorate, decoration={brace, amplitude=6pt, mirror}, thick] (0.4, -4.5) -- (0.4, -0.2);
+    \node[font=\footnotesize, rotate=90] at (-0.15, -2.35) {Fabry-Perot 谐振腔};
+    
+    % 光探测器
+    \draw[red, dashed, ->] (1.0, -0.3) -- (1.8, -1.5);
+    \fill[black] (1.8, -1.6) circle (0.2);
+    \node[font=\small] at (2.8, -1.6) {光电探测器};
+    
+    % 引力波标注
+    \node[font=\bfseries, purple] at (8.5, 2.5) {引力波};
+    \draw[purple, ->, thick, decorate, decoration={snake, amplitude=0.8mm, segment length=3mm}] (8.5, 2.2) -- (8.5, -3.0);
+    
+    % 臂长变化示意
+    \draw[<->, purple, thick] (6.0, 1.0) -- (7.5, 1.0) node[midway, above, font=\footnotesize] {$\Delta L \sim 10^{-18}$ m};
+    
+    % 臂
+    \draw[->] (7.0, -3.0) -- (7.0, -4.0);
+\end{tikzpicture}
+\caption{LIGO 激光干涉仪原理示意图。激光束经分束镜分成两束，分别进入两条长度为 4 km 的 Fabry--Perot 谐振腔。引力波通过时改变两臂的相对长度，产生的微小相位差通过干涉条纹的移动被光电探测器记录。Fabry--Perot 腔使光子往返约 280 次，将有效臂长提升至约 1120 km，从而使应变灵敏度达到 $h \sim 10^{-22}$ 量级。}
+\label{fig:LIGO_schematic}
+\end{figure}
+
+\begin{property}[LIGO 的基本参数]
+\begin{itemize}
+    \item \textbf{臂长}：$L = 4$ km（Hanford, WA 和 Livingston, LA 各一台）
+    \item \textbf{有效臂长}：约 1120 km（Fabry--Perot 腔，光子往返 ~280 次）
+    \item \textbf{应变灵敏度}：$\Delta L/L \sim 10^{-22}$（相当于测量地球-太阳距离时分辨一个原子核的尺度）
+    \item \textbf{频率范围}：约 10 Hz 至 10 kHz
+    \item \textbf{主要噪声源}：地震噪声（低频）、热噪声（中频）、量子散粒噪声（高频）
+\end{itemize}
+\end{property}
+
+\subsection{GW150914：第一次直接探测}
+
+2015年9月14日，LIGO 的两台探测器（Hanford 和 Livingston）几乎同时记录到了一个特征性的``啁啾''信号——频率从 35 Hz 快速上升到 250 Hz，振幅随之增大，然后迅速衰减。这个信号被命名为\textbf{GW150914} \cite{Abbott2016}。
+
+\begin{note}[GW150914 的关键参数]
+\begin{center}
+\begin{tabular}{l|l}
+\hline
+\textbf{参数} & \textbf{数值} \\ \hline
+源 & 两个黑洞的并合 \\
+初始黑洞质量 & $36^{+5}_{-4}\,M_\odot$ 和 $29^{+4}_{-4}\,M_\odot$ \\
+末态黑洞质量 & $62^{+4}_{-4}\,M_\odot$ \\
+辐射的引力波能量 & $3.0^{+0.5}_{-0.5}\,M_\odot c^2$ \\
+并合时的光度距离 & $410^{+160}_{-180}$ Mpc \\
+峰值引力波光度 & $\sim 3.6 \times 10^{56}$ erg/s（$>10\times$ 可观测宇宙总电磁光度） \\
+到达地球的峰值应变 & $h \sim 1.0 \times 10^{-21}$ \\
+信号持续时间 & $\sim 0.2$ 秒（可听频段） \\
+\hline
+\end{tabular}
+\end{center}
+\end{note}
+
+GW150914 的意义怎么强调都不为过：（1）首次直接探测到引力波，验证了爱因斯坦 100 年前的预言；（2）首次观测到双黑洞系统；（3）证明存在质量为 $30\,M_\odot$ 以上的恒星质量黑洞；（4）开启了\textbf{引力波天文学}这一全新观测窗口；（5）检验了强场、高速（$v \sim 0.6c$）下的广义相对论，未发现任何偏离。
+
+\subsection{GW170817：引力波与电磁波的协同观测}
+
+2017年8月17日，LIGO 和 Virgo 探测器共同探测到了\textbf{GW170817}——两个中子星并合产生的引力波信号。与 GW150914 不同，这一事件触发了史无前例的\textbf{多信使天文学}：引力波信号到达后约 1.7 秒，Fermi 和 INTEGRAL 卫星探测到了短伽马射线暴（GRB 170817A）；随后全球数十台望远镜在电磁波各波段（从射电到伽马射线）对同一片天区进行了跟踪观测。
+
+\begin{property}[GW170817 的科学成果]
+\begin{enumerate}
+    \item \textbf{千新星 (kilonova)}：观测到了中子星并合抛射物中 $r$-过程核合成产生的光学/近红外暂现源，证实了重元素（金、铂、铀等）的主要来源是中子星并合
+    \item \textbf{引力波速度}：引力波与伽马射线的到达时间差（$1.7$ 秒，经过 $1.3 \times 10^8$ 光年的传播）将引力波速度与光速的偏差限制在 $|v_{\text{GW}} - c|/c < 10^{-15}$ 量级
+    \item \textbf{Hubble 常数}：结合引力波距离测量与宿主星系 NGC 4993 的红移，独立测定了 Hubble 常数：$H_0 \approx 70^{+12}_{-8}\ \text{km s}^{-1}\text{Mpc}^{-1}$
+    \item \textbf{中子星状态方程}：潮汐形变信号限制了中子星的潮汐 Love 数，进而约束了高密度核物质的状态方程
+\end{enumerate}
+\end{property}
+
+\subsection{引力波天文学的未来}
+
+\begin{note}[新一代引力波探测器]
+\begin{itemize}
+    \item \textbf{Advanced LIGO/Virgo/KAGRA}：当前运行的地面探测器网络（O4 观测运行中）。频率范围 10 Hz--10 kHz，灵敏度不断提高。
+    \item \textbf{LISA (Laser Interferometer Space Antenna)}：欧空局计划的空间引力波天文台（预计 2030s 发射），三条 $2.5\times10^6$ km 的臂构成空间三角形。目标频率范围 $0.1$ mHz--$0.1$ Hz，将探测超大质量黑洞并合、极端质量比旋近（EMRI）和银河系内大量双白矮星。
+    \item \textbf{脉冲星计时阵列 (PTA)}：利用毫秒脉冲星精确计时阵列探测纳赫兹频段（nHz）引力波。2023年，多个 PTA 合作组（NANOGrav、EPTA、PPTA、CPTA）联合宣布了随机引力波背景的强证据——可能来自超大质量黑洞双星的并合。
+    \item \textbf{第三代地面探测器（Einstein Telescope, Cosmic Explorer）}：臂长 10--40 km，灵敏度比 Advanced LIGO 提高一个数量级以上，将能探测到宇宙中几乎所有恒星质量黑洞并合事件。
+\end{itemize}
+\end{note}
+
+\section{算例}
+\label{sec:calculations}
+
+\subsection{例1：GW150914 到达地球的应变}
+
+计算频率为 $f = 150$ Hz（并合前）、光度距离 $D = 410$ Mpc 的双黑洞并合到达地球的引力波应变振幅。
+
+引力波应变与源的啁啾质量 $\mathcal{M}_c$ 和距离 $D$ 的关系为（量级估计）：
+\begin{equation}
+    h \sim \frac{G^{5/3}}{c^4} \frac{\mathcal{M}_c^{5/3} (\pi f)^{2/3}}{D}.
+\end{equation}
+
+GW150914 的啁啾质量 $\mathcal{M}_c \approx 30\,M_\odot$。代入数值（使用 SI 单位，$G = 6.67\times10^{-11}$，$c = 3.00\times10^8$，$M_\odot = 1.99\times10^{30}$ kg，$1\ \text{pc} = 3.09\times10^{16}$ m）：
+
+\begin{align}
+    \mathcal{M}_c &= 30 \times 1.99\times10^{30} = 5.97\times10^{31}\ \text{kg},\\[2pt]
+    D &= 410 \times 10^6 \times 3.09\times10^{16} = 1.27\times10^{25}\ \text{m},\\[2pt]
+    \pi f &= \pi \times 150 = 471\ \text{s}^{-1}.
+\end{align}
+
+\begin{align}
+    h &\sim \frac{(6.67\times10^{-11})^{5/3}}{(3.00\times10^8)^4} \cdot \frac{(5.97\times10^{31})^{5/3} \times (471)^{2/3}}{1.27\times10^{25}} \\[2pt]
+      &\sim \frac{2.86\times10^{-18}}{8.10\times10^{33}} \cdot \frac{(5.97\times10^{31})^{5/3} \times 60.6}{1.27\times10^{25}} \\[2pt]
+      &\approx 1.0 \times 10^{-21}.
+\end{align}
+（注：这是一个量级估计；完整的计算结果取决于源的倾角和方位角，以及探测器的天线响应函数。）
+
+\textbf{物理直觉}：$h \sim 10^{-21}$ 意味着 4 km 长的 LIGO 臂的长度变化仅为 $\Delta L \sim h L \sim 4 \times 10^{-18}$ m——约为质子直径的千分之一。LIGO 能够测到如此微小的位移，是人类工程技术的巅峰成就。
+
+\subsection{例2：并合时标}
+
+对于 GW150914 的双黑洞系统，假设初始引力波频率为 $f_0 = 30$ Hz，估算从该频率到并合的时间。
+
+由式 (\ref{eq:merger_time})：
+\begin{equation}
+    t_{\text{merge}} = \frac{5}{256}\frac{c^5}{G^{5/3}}\frac{1}{\mathcal{M}_c^{5/3}(\pi f_0)^{8/3}}.
+\end{equation}
+
+使用 GW150914 的啁啾质量 $\mathcal{M}_c \approx 30\,M_\odot \approx 5.97\times10^{31}$ kg：
+\begin{align}
+    t_{\text{merge}} &= \frac{5}{256}\frac{(3.00\times10^8)^5}{(6.67\times10^{-11})^{5/3}}\frac{1}{(5.97\times10^{31})^{5/3}(\pi \times 30)^{8/3}} \\[2pt]
+    &\approx \frac{5}{256} \cdot \frac{2.43\times10^{42}}{2.86\times10^{-18}} \cdot \frac{1}{(5.97\times10^{31})^{5/3} \times (94.2)^{8/3}} \\[2pt]
+    &\sim 0.15\ \text{s}.
+\end{align}
+
+实际 GW150914 信号的可探测部分（$f \gtrsim 35$ Hz）持续了约 0.2 秒，与上述量级估计一致。值得注意的是，这两个黑洞从形成到并合可能经历了数十亿年的轨道衰减——但最后 0.2 秒的旋近产生的引力波频率恰好落在 LIGO 的灵敏频段内。
+
+\subsection{例3：互绕频率的啁啾演化}
+
+在双星旋近的最后阶段，引力波频率 $f_{\text{GW}}$（= 2 × 轨道频率）随时间增加——这就是 ``啁啾'' 信号的来源。由式 (\ref{eq:chirp})：
+
+\begin{equation}
+    \dot{f}_{\text{GW}} = \frac{96}{5}\pi^{8/3}\frac{G^{5/3}}{c^5}\mathcal{M}_c^{5/3} f_{\text{GW}}^{11/3}.
+\end{equation}
+
+对于 GW150914在 $f_{\text{GW}} = 100$ Hz 时：
+\begin{align}
+    \dot{f}_{\text{GW}} &= \frac{96}{5}\pi^{8/3}\frac{(6.67\times10^{-11})^{5/3}}{(3.00\times10^8)^5}(5.97\times10^{31})^{5/3} (100)^{11/3} \\[2pt]
+    &\approx 19.2 \times 205.2 \times \frac{2.86\times10^{-18}}{2.43\times10^{42}} \times (5.97\times10^{31})^{5/3} \times 2.15\times10^7 \\[2pt]
+    &\sim 50\ \text{Hz/s}.
+\end{align}
+
+当频率接近 250 Hz时，$\dot{f} \propto f^{11/3}$ 急剧增大——这就是信号结束时频率急速飙升的物理原因。
+
+\subsection{例4：地面探测器网络的天图定位}
+
+考虑 LIGO Hanford (H, 美国华盛顿州)、LIGO Livingston (L, 路易斯安那州) 和 Virgo (V, 意大利) 三台探测器组成的网络。GW170817 的引力波信号到达三台探测器的时间差 $\Delta t_{HL}$、$\Delta t_{HV}$、$\Delta t_{LV}$ 可用于三角定位——类似于 GPS 定位原理。三台探测器使天区定位精度从双探测器时代的 $\sim 600\ \text{deg}^2$ 提升至 $\sim 30\ \text{deg}^2$。正是这一大幅提升的定位精度使电磁对应体的快速跟进观测成为可能。
+
+\begin{equation}
+    \Delta t_{ij} = \frac{\vb*{d}_{ij} \cdot \vu*{n}_{\text{GW}}}{c},
+\end{equation}
+其中 $\vb*{d}_{ij}$ 是两探测器之间的基矢量，$\vu*{n}_{\text{GW}}$ 是指向引力波源的单位矢量。
+
+\section*{本章小结}
+
+引力波是广义相对论最令人着迷的预言之一，也是时空动力学性质最直接的体现。本章从线性化引力出发，推导了引力波满足的波动方程 $\Box\bar{h}_{\mu\nu} = -16\pi G T_{\mu\nu}/c^4$，讨论了 Lorenz 规范和 TT 规范，揭示了引力波的两种偏振态（$h_+$ 和 $h_\times$）及其对物质产生的潮汐形变效应。四极辐射公式 $P = \frac{G}{5c^5}\langle\dddot{I}_{ij}\dddot{I}_{ij}\rangle$ 将引力波辐射与源的质量四极矩变化联系起来——双星系统因此成为天然的引力波源。PSR B1913+16 的轨道周期衰减精确验证了这一公式（1993 年诺贝尔奖），而 LIGO 的 GW150914（2015年）和 GW170817（2017年）标志着一个全新天文学时代的来临。引力波的探测不仅是爱因斯坦理论的最终胜利，更开启了一个崭新的观测宇宙的新窗口。
+
+%=============================================================================
+% 习题
+%=============================================================================
+
+\begin{exercise}
+验证线性化的 Einstein 张量在规范变换 $h_{\mu\nu} \to h_{\mu\nu} - \partial_\mu\xi_\nu - \partial_\nu\xi_\mu$ 下保持不变。
+\end{exercise}
+
+\begin{exercise}
+从线性化的 Ricci 张量出发，推导出用 $\bar{h}_{\mu\nu}$ 表示的 Einstein 张量 (\ref{eq:Einstein_barh})。验证在 Lorenz 规范 $\partial^\mu\bar{h}_{\mu\nu}=0$ 下它简化为 $-\frac{1}{2}\Box\bar{h}_{\mu\nu}$。
+\end{exercise}
+
+\begin{exercise}
+考虑沿 $z$ 方向传播的单色平面引力波 $h_+(t,z) = A\cos[\omega(t-z/c)]$。计算 Isaacson 能量密度 (\ref{eq:GW_energy_density})，并展示它在规范变换下不变。
+\end{exercise}
+
+\begin{exercise}
+从四极辐射公式出发，推导双星系统在圆轨道下的引力波辐射功率 (\ref{eq:circular_power})。提示：将两体问题约化为单体问题，写出四极矩的显式表达式。
+\end{exercise}
+
+\begin{exercise}
+对于 PSR B1913+16，已知 $m_1 \approx m_2 \approx 1.4 M_\odot$，轨道周期 $P_b \approx 7.75$ h，偏心率 $e \approx 0.617$。使用四极公式（含偏心率修正）估算轨道周期的变化率 $\dot{P}_b$，并与观测值 $-2.4\times10^{-12}$ 比较。
+\end{exercise}
+
+\begin{exercise}
+推导啁啾质量 $\mathcal{M}_c$ 如何从引力波波形的频率演化 $\dot{f}_{\text{GW}}$ 中直接测量。为什么 $\mathcal{M}_c$ 的测量精度远高于单个质量 $m_1$ 和 $m_2$？
+\end{exercise}

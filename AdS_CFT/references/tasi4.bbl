@@ -1,0 +1,508 @@
+\providecommand{\href}[2]{#2}\begingroup\raggedright\begin{thebibliography}{100}
+
+\bibitem{Banks:1998dd}
+T.~Banks, M.~R. Douglas, G.~T. Horowitz, and E.~J. Martinec, {\it {AdS dynamics
+  from conformal field theory}},
+  \href{http://arxiv.org/abs/hep-th/9808016}{{\tt hep-th/9808016}}.
+
+\bibitem{Hamilton:2006az}
+A.~Hamilton, D.~N. Kabat, G.~Lifschytz, and D.~A. Lowe, {\it {Holographic
+  representation of local bulk operators}},  {\em Phys. Rev.} {\bf D74} (2006)
+  066009, [\href{http://arxiv.org/abs/hep-th/0606141}{{\tt hep-th/0606141}}].
+
+\bibitem{Heemskerk:2009pn}
+I.~Heemskerk, J.~Penedones, J.~Polchinski, and J.~Sully, {\it {Holography from
+  Conformal Field Theory}},  {\em JHEP} {\bf 10} (2009) 079,
+  [\href{http://arxiv.org/abs/0907.0151}{{\tt arXiv:0907.0151}}].
+
+\bibitem{Heemskerk:2012mn}
+I.~Heemskerk, D.~Marolf, J.~Polchinski, and J.~Sully, {\it {Bulk and
+  Transhorizon Measurements in AdS/CFT}},  {\em JHEP} {\bf 10} (2012) 165,
+  [\href{http://arxiv.org/abs/1201.3664}{{\tt arXiv:1201.3664}}].
+
+\bibitem{Heemskerk:2012np}
+I.~Heemskerk, {\it {Construction of Bulk Fields with Gauge Redundancy}},  {\em
+  JHEP} {\bf 09} (2012) 106, [\href{http://arxiv.org/abs/1201.3666}{{\tt
+  arXiv:1201.3666}}].
+
+\bibitem{Wall:2012uf}
+A.~C. Wall, {\it {Maximin Surfaces, and the Strong Subadditivity of the
+  Covariant Holographic Entanglement Entropy}},  {\em Class. Quant. Grav.} {\bf
+  31} (2014), no.~22 225007, [\href{http://arxiv.org/abs/1211.3494}{{\tt
+  arXiv:1211.3494}}].
+
+\bibitem{Papadodimas:2012aq}
+K.~Papadodimas and S.~Raju, {\it {An Infalling Observer in AdS/CFT}},  {\em
+  JHEP} {\bf 10} (2013) 212, [\href{http://arxiv.org/abs/1211.6767}{{\tt
+  arXiv:1211.6767}}].
+
+\bibitem{Faulkner:2013ana}
+T.~Faulkner, A.~Lewkowycz, and J.~Maldacena, {\it {Quantum corrections to
+  holographic entanglement entropy}},  {\em JHEP} {\bf 11} (2013) 074,
+  [\href{http://arxiv.org/abs/1307.2892}{{\tt arXiv:1307.2892}}].
+
+\bibitem{Headrick:2014cta}
+M.~Headrick, V.~E. Hubeny, A.~Lawrence, and M.~Rangamani, {\it {Causality \&
+  holographic entanglement entropy}},  {\em JHEP} {\bf 12} (2014) 162,
+  [\href{http://arxiv.org/abs/1408.6300}{{\tt arXiv:1408.6300}}].
+
+\bibitem{Almheiri:2014lwa}
+A.~Almheiri, X.~Dong, and D.~Harlow, {\it {Bulk Locality and Quantum Error
+  Correction in AdS/CFT}},  {\em JHEP} {\bf 04} (2015) 163,
+  [\href{http://arxiv.org/abs/1411.7041}{{\tt arXiv:1411.7041}}].
+
+\bibitem{Pastawski:2015qua}
+F.~Pastawski, B.~Yoshida, D.~Harlow, and J.~Preskill, {\it {Holographic quantum
+  error-correcting codes: Toy models for the bulk/boundary correspondence}},
+  {\em JHEP} {\bf 06} (2015) 149, [\href{http://arxiv.org/abs/1503.06237}{{\tt
+  arXiv:1503.06237}}].
+
+\bibitem{Jafferis:2015del}
+D.~L. Jafferis, A.~Lewkowycz, J.~Maldacena, and S.~J. Suh, {\it {Relative
+  entropy equals bulk relative entropy}},  {\em JHEP} {\bf 06} (2016) 004,
+  [\href{http://arxiv.org/abs/1512.06431}{{\tt arXiv:1512.06431}}].
+
+\bibitem{Hayden:2016cfa}
+P.~Hayden, S.~Nezami, X.-L. Qi, N.~Thomas, M.~Walter, and Z.~Yang, {\it
+  {Holographic duality from random tensor networks}},  {\em JHEP} {\bf 11}
+  (2016) 009, [\href{http://arxiv.org/abs/1601.01694}{{\tt arXiv:1601.01694}}].
+
+\bibitem{Dong:2016eik}
+X.~Dong, D.~Harlow, and A.~C. Wall, {\it {Reconstruction of Bulk Operators
+  within the Entanglement Wedge in Gauge-Gravity Duality}},  {\em Phys. Rev.
+  Lett.} {\bf 117} (2016), no.~2 021601,
+  [\href{http://arxiv.org/abs/1601.05416}{{\tt arXiv:1601.05416}}].
+
+\bibitem{Harlow:2016vwg}
+D.~Harlow, {\it {The Ryu-Takayanagi Formula from Quantum Error Correction}},
+  \href{http://arxiv.org/abs/1607.03901}{{\tt arXiv:1607.03901}}.
+
+\bibitem{Cotler:2017erl}
+J.~Cotler, P.~Hayden, G.~Salton, B.~Swingle, and M.~Walter, {\it {Entanglement
+  Wedge Reconstruction via Universal Recovery Channels}},
+  \href{http://arxiv.org/abs/1704.05839}{{\tt arXiv:1704.05839}}.
+
+\bibitem{Harlow:2014yka}
+D.~Harlow, {\it {Jerusalem Lectures on Black Holes and Quantum Information}},
+  {\em Rev. Mod. Phys.} {\bf 88} (2016) 15002,
+  [\href{http://arxiv.org/abs/1409.1231}{{\tt arXiv:1409.1231}}]. [Rev. Mod.
+  Phys.88,15002(2016)].
+
+\bibitem{DeJonckheere:2017qkk}
+T.~De~Jonckheere, {\it {Modave lectures on bulk reconstruction in AdS/CFT}},
+  in {\em {13th Modave Summer School in Mathematical Physics Modave, Belgium,
+  September 10-16, 2017}}, 2017.
+\newblock \href{http://arxiv.org/abs/1711.07787}{{\tt arXiv:1711.07787}}.
+
+\bibitem{Maldacena:1997re}
+J.~M. Maldacena, {\it {The Large N limit of superconformal field theories and
+  supergravity}},  {\em Int. J. Theor. Phys.} {\bf 38} (1999) 1113--1133,
+  [\href{http://arxiv.org/abs/hep-th/9711200}{{\tt hep-th/9711200}}]. [Adv.
+  Theor. Math. Phys.2,231(1998)].
+
+\bibitem{Gubser:1998bc}
+S.~S. Gubser, I.~R. Klebanov, and A.~M. Polyakov, {\it {Gauge theory
+  correlators from noncritical string theory}},  {\em Phys. Lett.} {\bf B428}
+  (1998) 105--114, [\href{http://arxiv.org/abs/hep-th/9802109}{{\tt
+  hep-th/9802109}}].
+
+\bibitem{Witten:1998qj}
+E.~Witten, {\it {Anti-de Sitter space and holography}},  {\em Adv. Theor. Math.
+  Phys.} {\bf 2} (1998) 253--291,
+  [\href{http://arxiv.org/abs/hep-th/9802150}{{\tt hep-th/9802150}}].
+
+\bibitem{Henneaux:1985tv}
+M.~Henneaux and C.~Teitelboim, {\it {Asymptotically anti-De Sitter Spaces}},
+  {\em Commun. Math. Phys.} {\bf 98} (1985) 391--424.
+
+\bibitem{Freivogel:2016zsb}
+B.~Freivogel, R.~A. Jefferson, and L.~Kabir, {\it {Precursors, Gauge
+  Invariance, and Quantum Error Correction in AdS/CFT}},  {\em JHEP} {\bf 04}
+  (2016) 119, [\href{http://arxiv.org/abs/1602.04811}{{\tt arXiv:1602.04811}}].
+
+\bibitem{Breitenlohner:1982jf}
+P.~Breitenlohner and D.~Z. Freedman, {\it {Stability in Gauged Extended
+  Supergravity}},  {\em Annals Phys.} {\bf 144} (1982) 249.
+
+\bibitem{Klebanov:1999tb}
+I.~R. Klebanov and E.~Witten, {\it {AdS / CFT correspondence and symmetry
+  breaking}},  {\em Nucl. Phys.} {\bf B556} (1999) 89--114,
+  [\href{http://arxiv.org/abs/hep-th/9905104}{{\tt hep-th/9905104}}].
+
+\bibitem{Witten:1998zw}
+E.~Witten, {\it {Anti-de Sitter space, thermal phase transition, and
+  confinement in gauge theories}},  {\em Adv. Theor. Math. Phys.} {\bf 2}
+  (1998) 505--532, [\href{http://arxiv.org/abs/hep-th/9803131}{{\tt
+  hep-th/9803131}}].
+
+\bibitem{Weinberg:1995mt}
+S.~Weinberg, {\em {The Quantum theory of fields. Vol. 1: Foundations}}.
+\newblock Cambridge University Press, 2005.
+
+\bibitem{Penedones:2010ue}
+J.~Penedones, {\it {Writing CFT correlation functions as AdS scattering
+  amplitudes}},  {\em JHEP} {\bf 03} (2011) 025,
+  [\href{http://arxiv.org/abs/1011.1485}{{\tt arXiv:1011.1485}}].
+
+\bibitem{Aharony:2016dwx}
+O.~Aharony, L.~F. Alday, A.~Bissi, and E.~Perlmutter, {\it {Loops in AdS from
+  Conformal Field Theory}},  \href{http://arxiv.org/abs/1612.03891}{{\tt
+  arXiv:1612.03891}}.
+
+\bibitem{Aharony:2008ug}
+O.~Aharony, O.~Bergman, D.~L. Jafferis, and J.~Maldacena, {\it {N=6
+  superconformal Chern-Simons-matter theories, M2-branes and their gravity
+  duals}},  {\em JHEP} {\bf 10} (2008) 091,
+  [\href{http://arxiv.org/abs/0806.1218}{{\tt arXiv:0806.1218}}].
+
+\bibitem{Klebanov:2000hb}
+I.~R. Klebanov and M.~J. Strassler, {\it {Supergravity and a confining gauge
+  theory: Duality cascades and chi SB resolution of naked singularities}},
+  {\em JHEP} {\bf 08} (2000) 052,
+  [\href{http://arxiv.org/abs/hep-th/0007191}{{\tt hep-th/0007191}}].
+
+\bibitem{Giddings:2001yu}
+S.~B. Giddings, S.~Kachru, and J.~Polchinski, {\it {Hierarchies from fluxes in
+  string compactifications}},  {\em Phys. Rev.} {\bf D66} (2002) 106006,
+  [\href{http://arxiv.org/abs/hep-th/0105097}{{\tt hep-th/0105097}}].
+
+\bibitem{Kachru:2003aw}
+S.~Kachru, R.~Kallosh, A.~D. Linde, and S.~P. Trivedi, {\it {De Sitter vacua in
+  string theory}},  {\em Phys. Rev.} {\bf D68} (2003) 046005,
+  [\href{http://arxiv.org/abs/hep-th/0301240}{{\tt hep-th/0301240}}].
+
+\bibitem{Strominger:1997eq}
+A.~Strominger, {\it {Black hole entropy from near horizon microstates}},  {\em
+  JHEP} {\bf 02} (1998) 009, [\href{http://arxiv.org/abs/hep-th/9712251}{{\tt
+  hep-th/9712251}}].
+
+\bibitem{Hartman:2014oaa}
+T.~Hartman, C.~A. Keller, and B.~Stoica, {\it {Universal Spectrum of 2d
+  Conformal Field Theory in the Large c Limit}},  {\em JHEP} {\bf 09} (2014)
+  118, [\href{http://arxiv.org/abs/1405.5137}{{\tt arXiv:1405.5137}}].
+
+\bibitem{Benini:2015eyy}
+F.~Benini, K.~Hristov, and A.~Zaffaroni, {\it {Black hole microstates in
+  AdS$_{4}$ from supersymmetric localization}},  {\em JHEP} {\bf 05} (2016)
+  054, [\href{http://arxiv.org/abs/1511.04085}{{\tt arXiv:1511.04085}}].
+
+\bibitem{Maldacena:2015waa}
+J.~Maldacena, S.~H. Shenker, and D.~Stanford, {\it {A bound on chaos}},  {\em
+  JHEP} {\bf 08} (2016) 106, [\href{http://arxiv.org/abs/1503.01409}{{\tt
+  arXiv:1503.01409}}].
+
+\bibitem{Maldacena:2001kr}
+J.~M. Maldacena, {\it {Eternal black holes in anti-de Sitter}},  {\em JHEP}
+  {\bf 04} (2003) 021, [\href{http://arxiv.org/abs/hep-th/0106112}{{\tt
+  hep-th/0106112}}].
+
+\bibitem{Kabat:2011rz}
+D.~Kabat, G.~Lifschytz, and D.~A. Lowe, {\it {Constructing local bulk
+  observables in interacting AdS/CFT}},  {\em Phys. Rev.} {\bf D83} (2011)
+  106009, [\href{http://arxiv.org/abs/1102.2910}{{\tt arXiv:1102.2910}}].
+
+\bibitem{Kabat:2012hp}
+D.~Kabat, G.~Lifschytz, S.~Roy, and D.~Sarkar, {\it {Holographic representation
+  of bulk fields with spin in AdS/CFT}},  {\em Phys. Rev.} {\bf D86} (2012)
+  026004, [\href{http://arxiv.org/abs/1204.0126}{{\tt arXiv:1204.0126}}].
+
+\bibitem{Kabat:2013wga}
+D.~Kabat and G.~Lifschytz, {\it {Decoding the hologram: Scalar fields
+  interacting with gravity}},  {\em Phys. Rev.} {\bf D89} (2014), no.~6 066010,
+  [\href{http://arxiv.org/abs/1311.3020}{{\tt arXiv:1311.3020}}].
+
+\bibitem{Verlinde:2015qfa}
+H.~Verlinde, {\it {Poking Holes in AdS/CFT: Bulk Fields from Boundary States}},
+   \href{http://arxiv.org/abs/1505.05069}{{\tt arXiv:1505.05069}}.
+
+\bibitem{Nakayama:2015mva}
+Y.~Nakayama and H.~Ooguri, {\it {Bulk Locality and Boundary Creating
+  Operators}},  {\em JHEP} {\bf 10} (2015) 114,
+  [\href{http://arxiv.org/abs/1507.04130}{{\tt arXiv:1507.04130}}].
+
+\bibitem{Czech:2016xec}
+B.~Czech, L.~Lamprou, S.~McCandlish, B.~Mosk, and J.~Sully, {\it {A
+  Stereoscopic Look into the Bulk}},  {\em JHEP} {\bf 07} (2016) 129,
+  [\href{http://arxiv.org/abs/1604.03110}{{\tt arXiv:1604.03110}}].
+
+\bibitem{Anand:2017dav}
+N.~Anand, H.~Chen, A.~L. Fitzpatrick, J.~Kaplan, and D.~Li, {\it {An Exact
+  Operator That Knows Its Location}},
+  \href{http://arxiv.org/abs/1708.04246}{{\tt arXiv:1708.04246}}.
+
+\bibitem{Kabat:2012av}
+D.~Kabat and G.~Lifschytz, {\it {CFT representation of interacting bulk gauge
+  fields in AdS}},  {\em Phys. Rev.} {\bf D87} (2013), no.~8 086004,
+  [\href{http://arxiv.org/abs/1212.3788}{{\tt arXiv:1212.3788}}].
+
+\bibitem{Duff:1973zz}
+M.~J. Duff, {\it {Quantum Tree Graphs and the Schwarzschild Solution}},  {\em
+  Phys. Rev.} {\bf D7} (1973) 2317--2326.
+
+\bibitem{Morrison:2014jha}
+I.~A. Morrison, {\it {Boundary-to-bulk maps for AdS causal wedges and the
+  Reeh-Schlieder property in holography}},  {\em JHEP} {\bf 05} (2014) 053,
+  [\href{http://arxiv.org/abs/1403.3426}{{\tt arXiv:1403.3426}}].
+
+\bibitem{Bousso:2012sj}
+R.~Bousso, S.~Leichenauer, and V.~Rosenhaus, {\it {Light-sheets and AdS/CFT}},
+  {\em Phys. Rev.} {\bf D86} (2012) 046009,
+  [\href{http://arxiv.org/abs/1203.6619}{{\tt arXiv:1203.6619}}].
+
+\bibitem{Czech:2012bh}
+B.~Czech, J.~L. Karczmarek, F.~Nogueira, and M.~Van~Raamsdonk, {\it {The
+  Gravity Dual of a Density Matrix}},  {\em Class. Quant. Grav.} {\bf 29}
+  (2012) 155009, [\href{http://arxiv.org/abs/1204.1330}{{\tt
+  arXiv:1204.1330}}].
+
+\bibitem{Bousso:2012mh}
+R.~Bousso, B.~Freivogel, S.~Leichenauer, V.~Rosenhaus, and C.~Zukowski, {\it
+  {Null Geodesics, Local CFT Operators and AdS/CFT for Subregions}},  {\em
+  Phys. Rev.} {\bf D88} (2013) 064057,
+  [\href{http://arxiv.org/abs/1209.4641}{{\tt arXiv:1209.4641}}].
+
+\bibitem{Hubeny:2012wa}
+V.~E. Hubeny and M.~Rangamani, {\it {Causal Holographic Information}},  {\em
+  JHEP} {\bf 06} (2012) 114, [\href{http://arxiv.org/abs/1204.1698}{{\tt
+  arXiv:1204.1698}}].
+
+\bibitem{Polchinski:1999yd}
+J.~Polchinski, L.~Susskind, and N.~Toumbas, {\it {Negative energy,
+  superluminosity and holography}},  {\em Phys. Rev.} {\bf D60} (1999) 084006,
+  [\href{http://arxiv.org/abs/hep-th/9903228}{{\tt hep-th/9903228}}].
+
+\bibitem{Streater:1989vi}
+R.~F. Streater and A.~S. Wightman, {\em {PCT, spin and statistics, and all
+  that}}.
+\newblock 1989.
+
+\bibitem{Papadodimas:2013jku}
+K.~Papadodimas and S.~Raju, {\it {State-Dependent Bulk-Boundary Maps and Black
+  Hole Complementarity}},  {\em Phys. Rev.} {\bf D89} (2014), no.~8 086010,
+  [\href{http://arxiv.org/abs/1310.6335}{{\tt arXiv:1310.6335}}].
+
+\bibitem{Harlow:2014yoa}
+D.~Harlow, {\it {Aspects of the Papadodimas-Raju Proposal for the Black Hole
+  Interior}},  {\em JHEP} {\bf 11} (2014) 055,
+  [\href{http://arxiv.org/abs/1405.1995}{{\tt arXiv:1405.1995}}].
+
+\bibitem{Papadodimas:2015jra}
+K.~Papadodimas and S.~Raju, {\it {Remarks on the necessity and implications of
+  state-dependence in the black hole interior}},  {\em Phys. Rev.} {\bf D93}
+  (2016), no.~8 084049, [\href{http://arxiv.org/abs/1503.08825}{{\tt
+  arXiv:1503.08825}}].
+
+\bibitem{Marolf:2015dia}
+D.~Marolf and J.~Polchinski, {\it {Violations of the Born rule in cool
+  state-dependent horizons}},  {\em JHEP} {\bf 01} (2016) 008,
+  [\href{http://arxiv.org/abs/1506.01337}{{\tt arXiv:1506.01337}}].
+
+\bibitem{shor1995scheme}
+P.~W. Shor, {\it Scheme for reducing decoherence in quantum computer memory},
+  {\em Physical review A} {\bf 52} (1995), no.~4 R2493.
+
+\bibitem{Gottesman:1997zz}
+D.~Gottesman, {\it {Stabilizer codes and quantum error correction}},
+  \href{http://arxiv.org/abs/quant-ph/9705052}{{\tt quant-ph/9705052}}.
+
+\bibitem{Cleve:1999qg}
+R.~Cleve, D.~Gottesman, and H.-K. Lo, {\it {How to share a quantum secret}},
+  {\em Phys.Rev.Lett.} {\bf 83} (1999) 648--651,
+  [\href{http://arxiv.org/abs/quant-ph/9901025}{{\tt quant-ph/9901025}}].
+
+\bibitem{nielsen2002quantum}
+M.~A. Nielsen and I.~Chuang, {\it Quantum computation and quantum information},
+   2002.
+
+\bibitem{Schumacher:1996dy}
+B.~Schumacher and M.~A. Nielsen, {\it {Quantum data processing and error
+  correction}},  {\em Phys. Rev.} {\bf A54} (1996) 2629,
+  [\href{http://arxiv.org/abs/quant-ph/9604022}{{\tt quant-ph/9604022}}].
+
+\bibitem{Grassl:1996eh}
+M.~Grassl, T.~Beth, and T.~Pellizzari, {\it {Codes for the quantum erasure
+  channel}},  {\em Phys. Rev.} {\bf A56} (1997) 33,
+  [\href{http://arxiv.org/abs/quant-ph/9610042}{{\tt quant-ph/9610042}}].
+
+\bibitem{Knill:1996ny}
+E.~Knill and R.~Laflamme, {\it {A Theory of quantum error correcting codes}},
+  {\em Phys. Rev. Lett.} {\bf 84} (2000) 2525--2528,
+  [\href{http://arxiv.org/abs/quant-ph/9604034}{{\tt quant-ph/9604034}}].
+
+\bibitem{Susskind:1998dq}
+L.~Susskind and E.~Witten, {\it {The Holographic bound in anti-de Sitter
+  space}},  \href{http://arxiv.org/abs/hep-th/9805114}{{\tt hep-th/9805114}}.
+
+\bibitem{deBoer:1999tgo}
+J.~de~Boer, E.~P. Verlinde, and H.~L. Verlinde, {\it {On the holographic
+  renormalization group}},  {\em JHEP} {\bf 08} (2000) 003,
+  [\href{http://arxiv.org/abs/hep-th/9912012}{{\tt hep-th/9912012}}].
+
+\bibitem{Heemskerk:2010hk}
+I.~Heemskerk and J.~Polchinski, {\it {Holographic and Wilsonian Renormalization
+  Groups}},  {\em JHEP} {\bf 06} (2011) 031,
+  [\href{http://arxiv.org/abs/1010.1264}{{\tt arXiv:1010.1264}}].
+
+\bibitem{Swingle:2009bg}
+B.~Swingle, {\it {Entanglement Renormalization and Holography}},  {\em Phys.
+  Rev.} {\bf D86} (2012) 065007, [\href{http://arxiv.org/abs/0905.1317}{{\tt
+  arXiv:0905.1317}}].
+
+\bibitem{Qi:2013caa}
+X.-L. Qi, {\it {Exact holographic mapping and emergent space-time geometry}},
+  \href{http://arxiv.org/abs/1309.6282}{{\tt arXiv:1309.6282}}.
+
+\bibitem{Mintun:2015qda}
+E.~Mintun, J.~Polchinski, and V.~Rosenhaus, {\it {Bulk-Boundary Duality, Gauge
+  Invariance, and Quantum Error Corrections}},  {\em Phys. Rev. Lett.} {\bf
+  115} (2015), no.~15 151601, [\href{http://arxiv.org/abs/1501.06577}{{\tt
+  arXiv:1501.06577}}].
+
+\bibitem{Ryu:2006bv}
+S.~Ryu and T.~Takayanagi, {\it {Holographic derivation of entanglement entropy
+  from AdS/CFT}},  {\em Phys. Rev. Lett.} {\bf 96} (2006) 181602,
+  [\href{http://arxiv.org/abs/hep-th/0603001}{{\tt hep-th/0603001}}].
+
+\bibitem{Hubeny:2007xt}
+V.~E. Hubeny, M.~Rangamani, and T.~Takayanagi, {\it {A Covariant holographic
+  entanglement entropy proposal}},  {\em JHEP} {\bf 07} (2007) 062,
+  [\href{http://arxiv.org/abs/0705.0016}{{\tt arXiv:0705.0016}}].
+
+\bibitem{Lewkowycz:2013nqa}
+A.~Lewkowycz and J.~Maldacena, {\it {Generalized gravitational entropy}},  {\em
+  JHEP} {\bf 08} (2013) 090, [\href{http://arxiv.org/abs/1304.4926}{{\tt
+  arXiv:1304.4926}}].
+
+\bibitem{Dong:2013qoa}
+X.~Dong, {\it {Holographic Entanglement Entropy for General Higher Derivative
+  Gravity}},  {\em JHEP} {\bf 01} (2014) 044,
+  [\href{http://arxiv.org/abs/1310.5713}{{\tt arXiv:1310.5713}}].
+
+\bibitem{Dong:2016hjy}
+X.~Dong, A.~Lewkowycz, and M.~Rangamani, {\it {Deriving covariant holographic
+  entanglement}},  {\em JHEP} {\bf 11} (2016) 028,
+  [\href{http://arxiv.org/abs/1607.07506}{{\tt arXiv:1607.07506}}].
+
+\bibitem{EngelHar}
+N.~Engelhardt and D.~Harlow, {\it {A New Outfit for Bulk Operators in
+  AdS/CFT}},  {\em To Appear, 2018}.
+
+\bibitem{Shenker:2013yza}
+S.~H. Shenker and D.~Stanford, {\it {Multiple Shocks}},  {\em JHEP} {\bf 12}
+  (2014) 046, [\href{http://arxiv.org/abs/1312.3296}{{\tt arXiv:1312.3296}}].
+
+\bibitem{Engelhardt:2014gca}
+N.~Engelhardt and A.~C. Wall, {\it {Quantum Extremal Surfaces: Holographic
+  Entanglement Entropy beyond the Classical Regime}},  {\em JHEP} {\bf 01}
+  (2015) 073, [\href{http://arxiv.org/abs/1408.3203}{{\tt arXiv:1408.3203}}].
+
+\bibitem{Dong:2017xht}
+X.~Dong and A.~Lewkowycz, {\it {Entropy, Extremality, Euclidean Variations, and
+  the Equations of Motion}},  {\em JHEP} {\bf 01} (2018) 081,
+  [\href{http://arxiv.org/abs/1705.08453}{{\tt arXiv:1705.08453}}].
+
+\bibitem{Almheiri:2016blp}
+A.~Almheiri, X.~Dong, and B.~Swingle, {\it {Linearity of Holographic
+  Entanglement Entropy}},  {\em JHEP} {\bf 02} (2017) 074,
+  [\href{http://arxiv.org/abs/1606.04537}{{\tt arXiv:1606.04537}}].
+
+\bibitem{Jones}
+V.~F. Jones, {\em Von Neumann Algebras}.
+\newblock https://math.berkeley.edu/~vfr/VonNeumann2009.pdf, 2009.
+
+\bibitem{Solodukhin:2011gn}
+S.~N. Solodukhin, {\it {Entanglement entropy of black holes}},  {\em Living
+  Rev. Rel.} {\bf 14} (2011) 8, [\href{http://arxiv.org/abs/1104.3712}{{\tt
+  arXiv:1104.3712}}].
+
+\bibitem{Klebanov:2002ja}
+I.~R. Klebanov and A.~M. Polyakov, {\it {AdS dual of the critical O(N) vector
+  model}},  {\em Phys. Lett.} {\bf B550} (2002) 213--219,
+  [\href{http://arxiv.org/abs/hep-th/0210114}{{\tt hep-th/0210114}}].
+
+\bibitem{Kitaev:2017awl}
+A.~Kitaev and S.~J. Suh, {\it {The soft mode in the Sachdev-Ye-Kitaev model and
+  its gravity dual}},  \href{http://arxiv.org/abs/1711.08467}{{\tt
+  arXiv:1711.08467}}.
+
+\bibitem{Maldacena:2016hyu}
+J.~Maldacena and D.~Stanford, {\it {Remarks on the Sachdev-Ye-Kitaev model}},
+  {\em Phys. Rev.} {\bf D94} (2016), no.~10 106002,
+  [\href{http://arxiv.org/abs/1604.07818}{{\tt arXiv:1604.07818}}].
+
+\bibitem{Bao:2015uaa}
+N.~Bao, C.~Cao, S.~M. Carroll, A.~Chatwin-Davies, N.~Hunter-Jones, J.~Pollack,
+  and G.~N. Remmen, {\it {Consistency conditions for an AdS multiscale
+  entanglement renormalization ansatz correspondence}},  {\em Phys. Rev.} {\bf
+  D91} (2015), no.~12 125036, [\href{http://arxiv.org/abs/1504.06632}{{\tt
+  arXiv:1504.06632}}].
+
+\bibitem{Banks:1996vh}
+T.~Banks, W.~Fischler, S.~H. Shenker, and L.~Susskind, {\it {M theory as a
+  matrix model: A Conjecture}},  {\em Phys. Rev.} {\bf D55} (1997) 5112--5128,
+  [\href{http://arxiv.org/abs/hep-th/9610043}{{\tt hep-th/9610043}}].
+
+\bibitem{Ooguri:2016pdq}
+H.~Ooguri and C.~Vafa, {\it {Non-supersymmetric AdS and the Swampland}},
+  \href{http://arxiv.org/abs/1610.01533}{{\tt arXiv:1610.01533}}.
+
+\bibitem{Cotler:2016fpe}
+J.~S. Cotler, G.~Gur-Ari, M.~Hanada, J.~Polchinski, P.~Saad, S.~H. Shenker,
+  D.~Stanford, A.~Streicher, and M.~Tezuka, {\it {Black Holes and Random
+  Matrices}},  {\em JHEP} {\bf 05} (2017) 118,
+  [\href{http://arxiv.org/abs/1611.04650}{{\tt arXiv:1611.04650}}].
+
+\bibitem{Shenker:2013pqa}
+S.~H. Shenker and D.~Stanford, {\it {Black holes and the butterfly effect}},
+  {\em JHEP} {\bf 03} (2014) 067, [\href{http://arxiv.org/abs/1306.0622}{{\tt
+  arXiv:1306.0622}}].
+
+\bibitem{Gao:2016bin}
+P.~Gao, D.~L. Jafferis, and A.~Wall, {\it {Traversable Wormholes via a Double
+  Trace Deformation}},  {\em JHEP} {\bf 12} (2017) 151,
+  [\href{http://arxiv.org/abs/1608.05687}{{\tt arXiv:1608.05687}}].
+
+\bibitem{Maldacena:2017axo}
+J.~Maldacena, D.~Stanford, and Z.~Yang, {\it {Diving into traversable
+  wormholes}},  {\em Fortsch. Phys.} {\bf 65} (2017), no.~5 1700034,
+  [\href{http://arxiv.org/abs/1704.05333}{{\tt arXiv:1704.05333}}].
+
+\bibitem{Almheiri:2013hfa}
+A.~Almheiri, D.~Marolf, J.~Polchinski, D.~Stanford, and J.~Sully, {\it {An
+  Apologia for Firewalls}},  {\em JHEP} {\bf 09} (2013) 018,
+  [\href{http://arxiv.org/abs/1304.6483}{{\tt arXiv:1304.6483}}].
+
+\bibitem{Marolf:2013dba}
+D.~Marolf and J.~Polchinski, {\it {Gauge/Gravity Duality and the Black Hole
+  Interior}},  {\em Phys. Rev. Lett.} {\bf 111} (2013) 171301,
+  [\href{http://arxiv.org/abs/1307.4706}{{\tt arXiv:1307.4706}}].
+
+\bibitem{Polchinski:2015pzt}
+J.~Polchinski, {\it {String theory to the rescue}},  2015.
+\newblock \href{http://arxiv.org/abs/1512.02477}{{\tt arXiv:1512.02477}}.
+
+\bibitem{Polchinski:2016xto}
+J.~Polchinski, {\it {Why trust a theory? Some further remarks (part 1)}},
+  \href{http://arxiv.org/abs/1601.06145}{{\tt arXiv:1601.06145}}.
+
+\bibitem{harlowinf}
+D.~Harlow, {\it {Business as Usual}},  {\em Inference Review} {\bf 3} (2017).
+
+\bibitem{Susskind:2007pv}
+L.~Susskind, {\it {The Census taker's hat}},
+  \href{http://arxiv.org/abs/0710.1129}{{\tt arXiv:0710.1129}}.
+
+\bibitem{Harlow:2010my}
+D.~Harlow and L.~Susskind, {\it {Crunches, Hats, and a Conjecture}},
+  \href{http://arxiv.org/abs/1012.5302}{{\tt arXiv:1012.5302}}.
+
+\bibitem{Harlow:2012dd}
+D.~Harlow, S.~H. Shenker, D.~Stanford, and L.~Susskind, {\it {The Three Faces
+  of a Fixed Point}},  \href{http://arxiv.org/abs/1203.5802}{{\tt
+  arXiv:1203.5802}}.
+
+\bibitem{Polchinski:2017vik}
+J.~Polchinski, {\it {Memories of a Theoretical Physicist}},
+  \href{http://arxiv.org/abs/1708.09093}{{\tt arXiv:1708.09093}}.
+
+\end{thebibliography}\endgroup

@@ -1,0 +1,116 @@
+\documentclass[lang=cn,newtx,11pt,scheme=chinese]{elegantbook}
+\usepackage{physics}
+\usepackage{simpler-wick}
+\usepackage{tikz-feynman}
+
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{
+    \begin{minipage}[c]{0.06\textwidth}
+        \centering
+        \includegraphics[height=7.5mm]{院徽.jpg}
+    \end{minipage}
+    \begin{minipage}[c]{0.4\textwidth}
+    The Note of Quantum Field Theory
+    \end{minipage}
+}
+\fancyfoot[C]{\thepage}
+
+
+\title{Note of Quantum Field Theory}
+\author{Kaiser\\University of South China}
+
+
+
+
+\setcounter{tocdepth}{3}
+
+\logo{院徽.jpg}
+\cover{cover.png}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+% 修改标题页的橙色带
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{plain} 
+
+\frontmatter
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{refs}
+
+
+    % \begin{thebibliography}{99} 
+    %     \bibitem{1} David Tong,\textit{Quantum Field Theory}
+    %     \bibitem{2} M.Peskin and D.Schroeder,\textit{An Introduction of Quantum Field Theory}
+    %     \bibitem{3} A.Zee,\textit{Quantum Field Theory in a Nutshell}
+    %     \bibitem{4} S.Weinberg,\textit{The Quantum Theory of Field (Volume 1)}
+    %     \bibitem{5} Landau,Lev D.,and Lifshitz,E.M.,\textit{The Classical Theory of Field}
+    %     \bibitem{6} 高显，\textit{经典力学}
+    %     \bibitem{7} 陈童，\textit{经典场论}
+    %     \bibitem{8} 埃格先生，\textit{微分流形与分析力学初步}
+    %     \bibitem{9} 陈童，\textit{经典力学新讲}
+    %     \bibitem{10} Tom Lancaster,Stephen J.Blundell,\textit{Quantum Field Theory For Gifted Amature}
+    % \end{thebibliography}
+
+
+
+
+
+
+\mainmatter
+\newpage
+
+
+
+
+
+\input{chapter/chapter1.tex}
+
+
+\input{chapter/chapter2.tex}
+
+
+\input{chapter/chapter3.tex}
+
+
+\input{chapter/chapter4.tex}
+
+
+\input{chapter/chapter5.tex}
+
+
+\input{chapter/chapter6.tex}
+
+
+\input{chapter/chapter7.tex}
+
+
+\input{chapter/chapter8.tex}
+
+
+\input{chapter/chapter9.tex}
+
+
+\input{chapter/附录.tex}
+
+\end{document}

@@ -1,0 +1,170 @@
+% appendixB.tex - 符号约定与单位制
+\chapter{符号约定与常用公式 (Conventions and Useful Formulas)}
+
+\section{度规号差约定}
+
+本文采用 \textbf{$(-,+,+,+)$ 号差约定}（即"mostly plus"约定）：
+\begin{equation}
+    \eta_{\mu\nu} = \operatorname{diag}(-1, +1, +1, +1).
+\end{equation}
+类时向量满足 $g_{\mu\nu} v^\mu v^\nu < 0$，类空向量满足 $g_{\mu\nu} v^\mu v^\nu > 0$。
+
+另一种常见约定是 $(+,-,-,-)$（"mostly minus"），两者之间的转换只需将度规整体取负号。本文的约定与 Carroll、Wald 等教材一致。
+
+\section{曲率张量约定}
+
+黎曼曲率张量定义为协变导数交换子：
+\begin{equation}
+    [\nabla_\mu, \nabla_\nu] V^\rho = R^\rho{}_{\sigma\mu\nu} V^\sigma.
+\end{equation}
+
+分量形式（坐标基）：
+\begin{equation}
+    R^\rho{}_{\sigma\mu\nu} = \pd_\mu \Gamma^\rho{}_{\nu\sigma} - \pd_\nu \Gamma^\rho{}_{\mu\sigma} + \Gamma^\rho{}_{\mu\lambda}\Gamma^\lambda{}_{\nu\sigma} - \Gamma^\rho{}_{\nu\lambda}\Gamma^\lambda{}_{\mu\sigma}.
+\end{equation}
+
+里奇张量：
+\begin{equation}
+    R_{\mu\nu} = R^\lambda{}_{\mu\lambda\nu}.
+\end{equation}
+
+标量曲率：
+\begin{equation}
+    R = g^{\mu\nu} R_{\mu\nu}.
+\end{equation}
+
+爱因斯坦张量：
+\begin{equation}
+    G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2} R g_{\mu\nu}.
+\end{equation}
+
+爱因斯坦场方程：
+\begin{equation}
+    G_{\mu\nu} + \Lambda g_{\mu\nu} = \frac{8\pi G}{c^4} T_{\mu\nu}.
+\end{equation}
+
+\section{张量指标约定}
+
+\begin{itemize}
+    \item 希腊字母指标 $\mu,\nu,\rho,\lambda,\ldots$ 取值 $\{0,1,2,3\}$，表示\textbf{时空指标}（$0$ = 时间，$1,2,3$ = 空间）
+    \item 拉丁字母指标 $i,j,k,\ell,\ldots$ 取值 $\{1,2,3\}$，表示\textbf{空间指标}
+    \item 拉丁字母指标 $a,b,c,\ldots$（小写罗马体）用于抽象指标记法
+    \item Einstein 求和约定：重复的上指标和下指标自动求和，如 $A^\mu B_\mu \equiv \sum_{\mu=0}^3 A^\mu B_\mu$
+    \item 对称化括号：$T_{(\mu\nu)} = \frac{1}{2}(T_{\mu\nu} + T_{\nu\mu})$
+    \item 反对称化括号：$T_{[\mu\nu]} = \frac{1}{2}(T_{\mu\nu} - T_{\nu\mu})$
+\end{itemize}
+
+\section{自然单位制}
+
+\begin{itemize}
+    \item \textbf{几何单位制}（$G = c = 1$）：长度、时间、质量具有相同量纲。$1\,\text{s} \approx 3 \times 10^8\,\text{m}$，$1\,\text{kg} \approx 7.4 \times 10^{-28}\,\text{m}$。Einstein 方程简化为 $G_{\mu\nu} = 8\pi T_{\mu\nu}$。
+    \item \textbf{Planck 单位制}（$G = c = \hbar = k_B = 1$）：所有物理量无量纲。Planck 长度 $\ell_P = \sqrt{\hbar G / c^3} \approx 1.6 \times 10^{-35}\,\text{m}$，Planck 质量 $M_P = \sqrt{\hbar c / G} \approx 2.2 \times 10^{-8}\,\text{kg}$。
+    \item \textbf{粒子物理单位制}（$\hbar = c = 1$）：能量、质量、动量具有相同量纲（常用 eV）。
+\end{itemize}
+
+\section{常用张量恒等式}
+
+\subsection{缩并恒等式}
+\begin{align}
+    \delta^\mu_\mu &= n \quad (n\text{维时空}) \\
+    g^{\mu\nu} g_{\nu\rho} &= \delta^\mu_\rho \\
+    g^{\mu\nu} g_{\mu\nu} &= n \\
+    \varepsilon^{\mu\nu\rho\sigma} \varepsilon_{\mu\nu\rho\sigma} &= -24 \quad \text{（四维洛伦兹）}
+\end{align}
+
+\subsection{Bianchi 恒等式}
+\begin{align}
+    R^\rho{}_{[\sigma\mu\nu]} &= 0 \quad \text{（第一 Bianchi，代数恒等式）} \\
+    \nabla_{[\lambda} R^\rho{}_{|\sigma|\mu\nu]} &= 0 \quad \text{（第二 Bianchi，微分恒等式）} \\
+    \nabla^\mu G_{\mu\nu} &= 0 \quad \text{（缩并的 Bianchi → 爱因斯坦张量守恒）}
+\end{align}
+
+\subsection{Levi-Civita 联络公式}
+\begin{equation}
+    \Gamma^\lambda{}_{\mu\nu} = \frac{1}{2} g^{\lambda\rho} (\pd_\mu g_{\nu\rho} + \pd_\nu g_{\mu\rho} - \pd_\rho g_{\mu\nu}).
+\end{equation}
+
+\subsection{协变导数}
+\begin{align}
+    \nabla_\mu V^\nu &= \pd_\mu V^\nu + \Gamma^\nu{}_{\mu\rho} V^\rho \\
+    \nabla_\mu \omega_\nu &= \pd_\mu \omega_\nu - \Gamma^\rho{}_{\mu\nu} \omega_\rho \\
+    \nabla_\rho g_{\mu\nu} &= 0 \quad \text{（度规相容性）}
+\end{align}
+
+\subsection{测地线方程}
+\begin{equation}
+    \frac{\dd^2 x^\mu}{\dd\lambda^2} + \Gamma^\mu{}_{\nu\rho} \frac{\dd x^\nu}{\dd\lambda} \frac{\dd x^\rho}{\dd\lambda} = 0.
+\end{equation}
+
+\subsection{测地线偏差方程}
+\begin{equation}
+    \frac{D^2 \xi^\mu}{\dd\tau^2} + R^\mu{}_{\nu\rho\sigma} u^\nu \xi^\rho u^\sigma = 0.
+\end{equation}
+
+\section{常用度规}
+
+\paragraph{闵可夫斯基度规（笛卡尔坐标）}
+\begin{equation}
+    \dd s^2 = -\dd t^2 + \dd x^2 + \dd y^2 + \dd z^2, \quad \eta_{\mu\nu} = \operatorname{diag}(-1,+1,+1,+1).
+\end{equation}
+
+\paragraph{闵可夫斯基度规（球坐标）}
+\begin{equation}
+    \dd s^2 = -\dd t^2 + \dd r^2 + r^2(\dd\theta^2 + \sin^2\theta\,\dd\phi^2).
+\end{equation}
+
+\paragraph{施瓦西度规}
+\begin{equation}
+    \dd s^2 = -\left(1 - \frac{2GM}{r}\right) \dd t^2 + \left(1 - \frac{2GM}{r}\right)^{-1} \dd r^2 + r^2(\dd\theta^2 + \sin^2\theta\,\dd\phi^2).
+\end{equation}
+
+\paragraph{FLRW 度规}
+\begin{equation}
+    \dd s^2 = -\dd t^2 + a^2(t)\left[ \frac{\dd r^2}{1 - kr^2} + r^2(\dd\theta^2 + \sin^2\theta\,\dd\phi^2) \right].
+\end{equation}
+
+\paragraph{二维球面 $S^2$ 度规}
+\begin{equation}
+    \dd s^2 = \dd\theta^2 + \sin^2\theta\,\dd\phi^2.
+\end{equation}
+
+\paragraph{AdS$_{d+1}$ 度规（Poincaré 坐标）}
+\begin{equation}
+    \dd s^2 = \frac{L^2}{z^2}\left( \dd z^2 + \eta_{\mu\nu} \dd x^\mu \dd x^\nu \right), \quad z > 0.
+\end{equation}
+
+\section{常用物理常数（SI → 几何单位）}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lll}
+\toprule
+常数 & SI 值 & 几何单位转换 \\
+\midrule
+$c$ & $3.00 \times 10^8$ m/s & $=1$（定义） \\
+$G$ & $6.67 \times 10^{-11}$ m$^3$/kg/s$^2$ & $=1$（定义） \\
+$M_\odot$ & $2.0 \times 10^{30}$ kg & $\approx 1.5$ km \\
+$1$ pc & $3.09 \times 10^{16}$ m & — \\
+$H_0$ & $70$ km/s/Mpc & $\approx 2.3 \times 10^{-18}$ s$^{-1}$ \\
+$\Lambda$ & — & $\approx 10^{-52}$ m$^{-2}$ \\
+\bottomrule
+\end{tabular}
+\caption{常用物理常数及在几何单位制（$G=c=1$）下的值。}
+\end{table}
+
+\section{自定义命令速查}
+
+\begin{itemize}
+    \item \verb|\M| = $\mathcal{M}$ — 时空流形
+    \item \verb|\Lag| = $\mathcal{L}$ — 拉格朗日量
+    \item \verb|\Ham| = $\mathcal{H}$ — 哈密顿量
+    \item \verb|\Riem| = $\mathrm{Riem}$ — 黎曼曲率张量
+    \item \verb|\Ric| = $\mathrm{Ric}$ — 里奇张量
+    \item \verb|\Rcal| = $R$ — 标量曲率
+    \item \verb|\g| = $\mathrm{g}$ — 度规
+    \item \verb|\dd| = $\dd$ — 外微分算子
+    \item \verb|\pd| = $\partial$ — 偏导数
+    \item \verb|\Lie| = $\mathcal{L}$ — 李导数
+    \item \verb|\diag| = $\operatorname{diag}$ — 对角矩阵
+    \item \verb|\Order| = $\mathcal{O}$ — 量级符号
+\end{itemize}

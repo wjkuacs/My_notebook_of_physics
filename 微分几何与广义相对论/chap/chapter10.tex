@@ -1,0 +1,711 @@
+% chapter10.tex - 爱因斯坦场方程
+\chapter{爱因斯坦场方程 (Einstein Field Equations)}
+\label{chap:einstein}
+
+\section{场方程的物理动机}
+\label{sec:motivation}
+
+广义相对论的核心任务是找到一个方程，将时空的几何（由度规 $g_{\mu\nu}$ 描述）与物质和能量的分布（由能量-动量张量 $T_{\mu\nu}$ 描述）联系起来。这个方程就是\textbf{爱因斯坦场方程}。约翰·惠勒 (John Wheeler) 用一句话概括了它的物理内容：\textbf{物质告诉时空如何弯曲，时空告诉物质如何运动}。
+
+\begin{note}[从经典场论看场方程的必要性]
+在经典物理学中，最基本的两个场论是：
+\begin{itemize}
+    \item \textbf{牛顿引力}：引力势 $\Phi$ 满足 \textbf{Poisson 方程}
+    \begin{equation}
+        \nabla^2 \Phi = 4\pi G \,\rho,
+    \end{equation}
+    其中 $\rho$ 是质量密度。这是一个二阶线性偏微分方程，将引力势（几何量）与质量分布（物质）联系起来。
+    \item \textbf{ Maxwell 电磁理论}：电磁势 $A^\mu$ 满足波动方程
+    \begin{equation}
+        \Box A^\mu - \partial^\mu(\partial_\nu A^\nu) = \mu_0 J^\mu,
+    \end{equation}
+    或等价地，场强 $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$ 满足 Maxwell 方程
+    \begin{equation}
+        \partial_\nu F^{\mu\nu} = \mu_0 J^\mu, \qquad \partial_{[\rho}F_{\mu\nu]} = 0.
+    \end{equation}
+\end{itemize}
+两个理论共享相同的结构：\textbf{二阶微分算符作用在\"势\"上 = 源}。在牛顿引力中，源是质量密度；在电磁学中，源是四维电流密度。在广义相对论中，引力\"势\"是度规 $g_{\mu\nu}$（有 10 个独立分量），源是能量-动量张量 $T_{\mu\nu}$（也有 10 个独立分量）。我们需要一个将度规的二阶导数与 $T_{\mu\nu}$ 联系起来的张量方程。
+\end{note}
+
+\begin{definition}[构建场方程的基本要求]
+一个合理的引力场方程必须满足以下条件：
+\begin{enumerate}
+    \item \textbf{张量性}：方程必须是张量方程，在任意坐标变换下协变
+    \item \textbf{二阶性}：方程包含度规的二阶导数，但不含更高阶导数（与 Poisson 方程和 Maxwell 方程一致）
+    \item \textbf{守恒性}：必须蕴含能量-动量守恒 $\nabla^\mu T_{\mu\nu} = 0$
+    \item \textbf{Newton 极限}：在弱场、低速极限下约化为 Poisson 方程 $\nabla^2\Phi = 4\pi G\rho$
+    \item \textbf{物质源}：$T_{\mu\nu}$ 应以线性方式出现在方程右侧
+\end{enumerate}
+\end{definition}
+
+物理直觉告诉我们：牛顿引力中的潮汐力由 Riemann 曲率张量的测地线偏离方程描述（$\nabla_{\dot\gamma}\nabla_{\dot\gamma} \xi^\mu = -R^\mu{}_{\nu\rho\sigma} \dot x^\nu \dot x^\rho \xi^\sigma$），而 Poisson 方程的左侧是引力势的二阶导数 $\partial_i\partial^i\Phi$。在弯曲时空中，度规的二阶导数信息编码在 Ricci 张量 $R_{\mu\nu}$ 和标量曲率 $R$ 中（它们由 Riemann 张量缩并得到）。因此，最自然的猜测是：场方程的左侧应该是 $R_{\mu\nu}$ 和 $R g_{\mu\nu}$ 的线性组合——这正是 Einstein 张量 $G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu}$。下一节我们将看到，这个张量可以从一个优雅的作用量原理严格推导出来。
+
+\section{Einstein--Hilbert 作用量}
+\label{sec:EH_action}
+
+\subsection{作用量的构造}
+
+在物理学中，最基本的动力学方程几乎都可以从\textbf{最小作用量原理}推导出来。广义相对论也不例外。1915 年，David Hilbert 几乎与 Einstein 同时发现了引力场的作用量原理，现在称为 \textbf{Einstein--Hilbert 作用量}。
+
+\begin{definition}[Einstein--Hilbert 作用量]
+四维时空流形 $(\M, g_{\mu\nu})$ 上的引力作用量为：
+\begin{equation}
+    \boxed{S_{\text{EH}}[g_{\mu\nu}] = \frac{1}{16\pi G} \int_{\M} R \, \sqrt{-g} \; \dd^4 x},
+    \label{eq:EH_action}
+\end{equation}
+其中 $R = g^{\mu\nu} R_{\mu\nu}$ 是 Ricci 标量曲率，$g = \det(g_{\mu\nu})$ 是度规行列式，$G$ 是牛顿引力常数。因子 $1/16\pi G$ 将在 Newton 极限中被确定。包含物质场的总作用量为：
+\begin{equation}
+    S = S_{\text{EH}} + S_{\text{matter}} = \frac{1}{16\pi G} \int_{\M} R \, \sqrt{-g} \; \dd^4 x + S_{\text{matter}}[g_{\mu\nu}, \psi],
+    \label{eq:total_action}
+\end{equation}
+其中 $\psi$ 表示所有物质场（标量场、电磁场、流体等）。
+\end{definition}
+
+\begin{note}[为什么选择 $R$ 作为 Lagrangian？]
+在四维时空中，我们可以构造的标量（由度规及其导数构成）非常有限：
+\begin{itemize}
+    \item 常数项：$\int \sqrt{-g}\,\dd^4 x$ —— 这就是宇宙学常数项
+    \item Ricci 标量：$\int R\sqrt{-g}\,\dd^4 x$ —— 给出 Einstein 张量
+    \item 高阶曲率项：$\int R^2\sqrt{-g}\,\dd^4 x$，$\int R_{\mu\nu}R^{\mu\nu}\sqrt{-g}\,\dd^4 x$ 等 —— 导致四阶场方程，在低能极限下被抑制
+\end{itemize}
+在所有可能的曲率标量中，$R$ 是唯一给出二阶场方程的选择（高阶项会产生四阶微分方程，并引入鬼场）。这类似于经典力学中 Lagrangian 只含一阶导数（给出二阶运动方程）。
+\end{note}
+
+\subsection{变分所需的预备公式}
+
+在推导场方程之前，我们需要几个关键的变分恒等式。
+
+\begin{property}[度规行列式的变分]
+度规行列式 $g = \det(g_{\mu\nu})$ 的变分为：
+\begin{equation}
+    \boxed{\delta \sqrt{-g} = -\frac{1}{2} \sqrt{-g} \, g_{\mu\nu} \, \delta g^{\mu\nu}}.
+    \label{eq:delta_sqrtg}
+\end{equation}
+等价地：
+\begin{equation}
+    \delta g = g \, g^{\mu\nu} \, \delta g_{\mu\nu} = -g \, g_{\mu\nu} \, \delta g^{\mu\nu}.
+\end{equation}
+\end{property}
+
+\begin{proof}
+利用行列式的 Jacobi 公式：对于任意可逆矩阵 $A$，$\delta(\ln\det A) = \tr(A^{-1}\delta A)$。应用到度规：
+\begin{equation}
+    \delta(\ln g) = g^{\mu\nu} \delta g_{\mu\nu}.
+\end{equation}
+因此 $\delta g = g \, g^{\mu\nu} \delta g_{\mu\nu}$。注意 $g_{\mu\rho} g^{\rho\nu} = \delta_\mu^\nu$ 的变分给出：
+\begin{equation}
+    \delta g_{\mu\rho} \, g^{\rho\nu} + g_{\mu\rho} \, \delta g^{\rho\nu} = 0
+    \quad\Longrightarrow\quad
+    \delta g_{\mu\nu} = -g_{\mu\rho} g_{\nu\sigma} \delta g^{\rho\sigma}.
+\end{equation}
+代入得 $\delta g = g \, g^{\mu\nu}(-g_{\mu\rho}g_{\nu\sigma}\delta g^{\rho\sigma}) = -g \, g_{\rho\sigma} \delta g^{\rho\sigma}$。最后：
+\begin{equation}
+    \delta\sqrt{-g} = \frac{1}{2\sqrt{-g}}\delta(-g) = -\frac{1}{2\sqrt{-g}} \delta g
+    = -\frac{1}{2}\sqrt{-g} \, g_{\mu\nu} \delta g^{\mu\nu}.
+\end{equation}
+\end{proof}
+
+\begin{property}[Ricci 张量的变分 —— Palatini 恒等式]
+Ricci 张量的变分可以写为：
+\begin{equation}
+    \boxed{\delta R_{\mu\nu} = \nabla_\rho (\delta \Gamma^\rho_{\nu\mu}) - \nabla_\nu (\delta \Gamma^\rho_{\rho\mu})}.
+    \label{eq:palatini}
+\end{equation}
+其中 $\delta\Gamma^\rho_{\nu\mu}$ 是 Christoffel 符号的变分。注意 $\delta\Gamma^\rho_{\nu\mu}$ 是一个张量（两个联络之差是张量）。
+\end{property}
+
+\begin{proof}
+在测地线坐标系（局部惯性系）中计算，此时 $\Gamma^\rho_{\mu\nu} = 0$（在一点处），但 $\partial_\sigma \Gamma^\rho_{\mu\nu} \neq 0$。Ricci 张量为：
+\begin{equation}
+    R_{\mu\nu} = \partial_\rho \Gamma^\rho_{\nu\mu} - \partial_\nu \Gamma^\rho_{\rho\mu} + \Gamma^\rho_{\rho\sigma}\Gamma^\sigma_{\nu\mu} - \Gamma^\rho_{\nu\sigma}\Gamma^\sigma_{\rho\mu}.
+\end{equation}
+在 $\Gamma = 0$ 的点处变分：
+\begin{equation}
+    \delta R_{\mu\nu} = \partial_\rho(\delta\Gamma^\rho_{\nu\mu}) - \partial_\nu(\delta\Gamma^\rho_{\rho\mu}).
+\end{equation}
+由于 $\delta\Gamma^\rho_{\nu\mu}$ 是张量，在任意坐标系中偏导数应替换为协变导数：
+\begin{equation}
+    \delta R_{\mu\nu} = \nabla_\rho(\delta\Gamma^\rho_{\nu\mu}) - \nabla_\nu(\delta\Gamma^\rho_{\rho\mu}).
+\end{equation}
+这是张量方程，在一个坐标系中成立则在所有坐标系中成立。
+\end{proof}
+
+\subsection{作用量的完整变分}
+
+现在对 Einstein--Hilbert 作用量进行变分。
+
+\begin{theorem}[Einstein--Hilbert 变分]
+总作用量 $S = S_{\text{EH}} + S_{\text{matter}}$ 对 $g^{\mu\nu}$ 的变分给出：
+\begin{equation}
+    \delta S = \frac{1}{16\pi G} \int_{\M} \left(R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu}\right) \delta g^{\mu\nu} \sqrt{-g} \; \dd^4 x
+    + \frac{1}{16\pi G} \int_{\M} \nabla_\rho v^\rho \sqrt{-g} \; \dd^4 x
+    + \delta S_{\text{matter}},
+\end{equation}
+其中 $v^\rho = g^{\mu\nu}\delta\Gamma^\rho_{\nu\mu} - g^{\mu\rho}\delta\Gamma^\nu_{\nu\mu}$ 是边界项。
+\end{theorem}
+
+\begin{proof}
+将作用量写为 $S_{\text{EH}} = \frac{1}{16\pi G} \int R\sqrt{-g}\,\dd^4 x$。变分包含两项：
+\begin{equation}
+    \delta S_{\text{EH}} = \frac{1}{16\pi G} \int \left[ (\delta R)\sqrt{-g} + R(\delta\sqrt{-g}) \right] \dd^4 x.
+\end{equation}
+
+\textbf{第一项}：$\delta R = \delta(g^{\mu\nu}R_{\mu\nu}) = R_{\mu\nu}\delta g^{\mu\nu} + g^{\mu\nu}\delta R_{\mu\nu}$。
+利用 Palatini 恒等式 (\ref{eq:palatini})：
+\begin{equation}
+    g^{\mu\nu}\delta R_{\mu\nu} = g^{\mu\nu}\left[\nabla_\rho(\delta\Gamma^\rho_{\nu\mu}) - \nabla_\nu(\delta\Gamma^\rho_{\rho\mu})\right]
+    = \nabla_\rho\left(g^{\mu\nu}\delta\Gamma^\rho_{\nu\mu} - g^{\mu\rho}\delta\Gamma^\nu_{\nu\mu}\right) \equiv \nabla_\rho v^\rho.
+\end{equation}
+这里用到了度规的协变导数为零 $\nabla_\rho g^{\mu\nu} = 0$。因此：
+\begin{equation}
+    g^{\mu\nu}\delta R_{\mu\nu} = \nabla_\rho v^\rho.
+\end{equation}
+
+\textbf{第二项}：利用公式 (\ref{eq:delta_sqrtg})：
+\begin{equation}
+    R \, \delta\sqrt{-g} = -\frac{1}{2}R \, g_{\mu\nu} \, \delta g^{\mu\nu} \sqrt{-g}.
+\end{equation}
+
+合并两项：
+\begin{equation}
+    \delta S_{\text{EH}} = \frac{1}{16\pi G} \int_{\M} \left[ R_{\mu\nu}\delta g^{\mu\nu} - \frac{1}{2}R g_{\mu\nu}\delta g^{\mu\nu} + \nabla_\rho v^\rho \right] \sqrt{-g} \; \dd^4 x.
+\end{equation}
+
+边界项 $\int_{\M} \nabla_\rho v^\rho \sqrt{-g}\,\dd^4 x = \int_{\partial\M} v^\rho \dd\Sigma_\rho$ 可以借助 Stokes 定理化为边界积分。在变分原理中，我们假设 $\delta g^{\mu\nu}$（以及 $\delta\Gamma$）在边界 $\partial\M$ 上为零，因此边界项消失。
+\end{proof}
+
+\begin{note}[Gibbons--Hawking--York 边界项]
+在一般的变分原理中，需要固定边界上的度规（Dirichlet 边界条件），但 Einstein--Hilbert 作用量包含度规的二阶导数，导致边界项同时涉及 $\delta g^{\mu\nu}$ 和它的法向导数。为使变分原理适定，需添加 \textbf{Gibbons--Hawking--York (GHY) 项}：
+\begin{equation}
+    S_{\text{GHY}} = \frac{1}{8\pi G} \int_{\partial\M} \varepsilon K \sqrt{|h|} \; \dd^3 y,
+\end{equation}
+其中 $K$ 是边界的外曲率迹，$h$ 是边界上的诱导度规，$\varepsilon = \pm 1$ 取决于边界的类时/类空性质。在本书的后续章节中，我们通常假设边界上的变分为零，或直接处理无边界流形，因此 GHY 项的详细讨论从略。
+\end{note}
+
+\section{爱因斯坦场方程的推导}
+\label{sec:EFE_derivation}
+
+\subsection{物质能量-动量张量的定义}
+
+物质作用量 $S_{\text{matter}}$ 对度规的变分定义了\textbf{能量-动量张量} $T_{\mu\nu}$。
+
+\begin{definition}[能量-动量张量 —— 变分定义]
+物质场的能量-动量张量由物质作用量对度规的泛函导数给出：
+\begin{equation}
+    \boxed{T_{\mu\nu} \equiv -\frac{2}{\sqrt{-g}} \frac{\delta S_{\text{matter}}}{\delta g^{\mu\nu}}}.
+    \label{eq:EMT_definition}
+\end{equation}
+等价地，物质作用量的变分为：
+\begin{equation}
+    \delta S_{\text{matter}} = -\frac{1}{2} \int_{\M} T_{\mu\nu} \, \delta g^{\mu\nu} \sqrt{-g} \; \dd^4 x.
+    \label{eq:Smatter_variation}
+\end{equation}
+\end{definition}
+
+\begin{note}[与经典定义的对应]
+对于点粒子，作用量为 $S_{\text{pp}} = -m\int \dd\tau = -m\int\sqrt{-g_{\mu\nu}\dot x^\mu \dot x^\nu}\,\dd\lambda$，变分给出：
+\begin{equation}
+    T^{\mu\nu}_{\text{pp}}(x) = \frac{m}{\sqrt{-g}} \int \frac{\dd x^\mu}{\dd\tau}\frac{\dd x^\nu}{\dd\tau} \, \delta^{(4)}(x - x(\tau)) \,\dd\tau.
+\end{equation}
+对于理想流体，$T^{\mu\nu} = (\rho + p)u^\mu u^\nu + p g^{\mu\nu}$。对于电磁场，$T^{\mu\nu} = F^{\mu\rho}F^\nu{}_\rho - \frac{1}{4}g^{\mu\nu}F_{\rho\sigma}F^{\rho\sigma}$。
+\end{note}
+
+\subsection{完整场方程的导出}
+
+\begin{theorem}[爱因斯坦场方程]
+由最小作用量原理 $\delta S = 0$ 对任意变分 $\delta g^{\mu\nu}$（在边界上为零），得到：
+\begin{equation}
+    \boxed{G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2} R \, g_{\mu\nu} = 8\pi G \, T_{\mu\nu}}.
+    \label{eq:Einstein_equation}
+\end{equation}
+其中 $G_{\mu\nu}$ 称为\textbf{Einstein 张量}，$T_{\mu\nu}$ 是物质能量-动量张量。这里采用自然单位制 $c = 1$；恢复 $c$ 时，右侧为 $(8\pi G/c^4)T_{\mu\nu}$。
+\end{theorem}
+
+\begin{proof}
+将上一节的变分结果代入 $\delta S = 0$：
+\begin{equation}
+    \delta S = \frac{1}{16\pi G} \int_{\M} \left(R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu}\right) \delta g^{\mu\nu} \sqrt{-g} \; \dd^4 x
+    + \delta S_{\text{matter}} = 0.
+\end{equation}
+利用物质变分公式 (\ref{eq:Smatter_variation})：
+\begin{equation}
+    \frac{1}{16\pi G} \int_{\M} \left(R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu}\right) \delta g^{\mu\nu} \sqrt{-g} \; \dd^4 x
+    - \frac{1}{2} \int_{\M} T_{\mu\nu} \, \delta g^{\mu\nu} \sqrt{-g} \; \dd^4 x = 0.
+\end{equation}
+由于 $\delta g^{\mu\nu}$ 是任意的（除边界条件外），被积函数必须为零：
+\begin{equation}
+    \frac{1}{16\pi G}\left(R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu}\right) - \frac{1}{2} T_{\mu\nu} = 0.
+\end{equation}
+移项即得 $R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} = 8\pi G \, T_{\mu\nu}$。
+\end{proof}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=1.2, >=stealth,
+    box/.style={draw, rounded corners, minimum width=4.5cm, minimum height=1.2cm, align=center, fill=blue!5},
+    arrow/.style={->, thick, >=stealth}]
+
+    % 总作用量
+    \node[box] (total) at (0, 0) {总作用量 \\ $S = S_{\text{EH}} + S_{\text{matter}}$};
+
+    % EH 作用量
+    \node[box, fill=red!5] (EH) at (-5, -3) {Einstein--Hilbert 作用量 \\
+    $S_{\text{EH}} = \frac{1}{16\pi G}\int R\sqrt{-g}\,\dd^4 x$};
+
+    % 物质作用量
+    \node[box, fill=green!5] (matter) at (5, -3) {物质作用量 \\
+    $S_{\text{matter}}[g_{\mu\nu}, \psi]$};
+
+    % 变分结果
+    \node[box, fill=orange!10] (varEH) at (-5, -6) {$\displaystyle \frac{\delta S_{\text{EH}}}{\delta g^{\mu\nu}} = \frac{\sqrt{-g}}{16\pi G}G_{\mu\nu}$};
+
+    \node[box, fill=orange!10] (varM) at (5, -6) {$\displaystyle \frac{\delta S_{\text{matter}}}{\delta g^{\mu\nu}} = -\frac{\sqrt{-g}}{2}T_{\mu\nu}$};
+
+    % 最终方程
+    \node[box, fill=purple!10, minimum width=6cm] (efe) at (0, -9) {\textbf{爱因斯坦场方程} \\
+    $\boxed{G_{\mu\nu} = 8\pi G \, T_{\mu\nu}}$};
+
+    % 箭头
+    \draw[arrow] (total) -- (EH) node[midway, left] {几何部分};
+    \draw[arrow] (total) -- (matter) node[midway, right] {物质部分};
+    \draw[arrow] (EH) -- (varEH) node[midway, left] {变分 $\delta g^{\mu\nu}$};
+    \draw[arrow] (matter) -- (varM) node[midway, right] {变分 $\delta g^{\mu\nu}$};
+    \draw[arrow] (varEH) -- (efe) node[midway, left] {$\delta S = 0$};
+    \draw[arrow] (varM) -- (efe) node[midway, right] {$\delta S = 0$};
+
+    % 标注
+    \node[align=center, font=\small] at (0, -4.5) {$\Downarrow$ 最小作用量原理 $\delta S = 0$};
+\end{tikzpicture}
+\caption{从作用量原理到爱因斯坦场方程的推导流程。Einstein--Hilbert 作用量提供几何部分（Einstein 张量），物质作用量提供物质部分（能量-动量张量），最小作用量原理将它们等起来。}
+\label{fig:action_schematic}
+\end{figure}
+
+\subsection{迹反转形式}
+
+对场方程取迹是极其实用的操作。
+
+\begin{property}[爱因斯坦场方程的迹反转形式]
+对式 (\ref{eq:Einstein_equation}) 两边与 $g^{\mu\nu}$ 缩并：
+\begin{equation}
+    g^{\mu\nu}G_{\mu\nu} = R - 2R = -R = 8\pi G \, g^{\mu\nu}T_{\mu\nu} = 8\pi G \, T,
+\end{equation}
+其中 $T = g^{\mu\nu}T_{\mu\nu}$ 是能量-动量张量的迹。因此 $R = -8\pi G \, T$。代回原方程：
+\begin{equation}
+    \boxed{R_{\mu\nu} = 8\pi G \left(T_{\mu\nu} - \frac{1}{2} T \, g_{\mu\nu}\right)}.
+    \label{eq:trace_reversed}
+\end{equation}
+这个形式称为\textbf{迹反转的爱因斯坦方程}。在真空中（$T_{\mu\nu} = 0$），它简化为 $R_{\mu\nu} = 0$ —— 真空爱因斯坦方程。
+\end{property}
+
+\section{场方程的性质}
+\label{sec:properties}
+
+\subsection{Bianchi 恒等式与自动守恒}
+
+\begin{theorem}[Bianchi 恒等式的缩并]
+缩并的 Bianchi 恒等式给出：
+\begin{equation}
+    \boxed{\nabla^\mu G_{\mu\nu} = 0}.
+    \label{eq:contracted_bianchi}
+\end{equation}
+即 Einstein 张量的协变散度恒为零。
+\end{theorem}
+
+\begin{proof}
+第二 Bianchi 恒等式为 $\nabla_{[\lambda} R_{\rho\sigma]\mu\nu} = 0$。与 $g^{\rho\mu}g^{\sigma\nu}$ 缩并两次：
+\begin{align}
+    0 &= g^{\rho\mu}g^{\sigma\nu} \left(\nabla_\lambda R_{\rho\sigma\mu\nu} + \nabla_\rho R_{\sigma\lambda\mu\nu} + \nabla_\sigma R_{\lambda\rho\mu\nu}\right) \\
+      &= \nabla_\lambda R - \nabla^\mu R_{\lambda\mu} - \nabla^\nu R_{\lambda\nu} \\
+      &= \nabla_\lambda R - 2\nabla^\mu R_{\lambda\mu}.
+\end{align}
+因此 $\nabla^\mu R_{\mu\nu} = \frac{1}{2}\nabla_\nu R$。于是：
+\begin{equation}
+    \nabla^\mu G_{\mu\nu} = \nabla^\mu\left(R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu}\right)
+    = \frac{1}{2}\nabla_\nu R - \frac{1}{2}\nabla_\nu R = 0.
+\end{equation}
+\end{proof}
+
+\begin{note}[能量-动量自动守恒]
+缩并 Bianchi 恒等式 $\nabla^\mu G_{\mu\nu} = 0$ 与场方程 $G_{\mu\nu} = 8\pi G\,T_{\mu\nu}$ 结合，立即给出：
+\begin{equation}
+    \boxed{\nabla^\mu T_{\mu\nu} = 0}.
+\end{equation}
+这意味着\textbf{能量和动量守恒是场方程的内在推论}，不需要作为额外的假设。这是广义相对论最深刻的特征之一：物质如何交换能量和动量由时空几何本身决定。
+\end{note}
+
+\subsection{非线性与自相互作用}
+
+Einstein 场方程的高度非线性是其最显著的特征之一。$G_{\mu\nu}$ 包含 Christoffel 符号的乘积项（$\Gamma\Gamma$），而 $\Gamma \sim \partial g$，因此方程包含 $(\partial g)^2$ 型的非线性项。
+
+\begin{note}[非线性的物理意义]
+线性方程（如 Maxwell 方程）满足叠加原理：两个解之和仍是解。Einstein 方程的非线性意味着：
+\begin{itemize}
+    \item \textbf{引力场本身携带能量}：引力波携带能量，引力场的能量本身也是引力的源——引力的\"引力\" 
+    \item \textbf{无叠加原理}：两个 Schwarzschild 黑洞的时空不能简单相加
+    \item \textbf{引力的自相互作用}：类似于 Yang--Mills 理论中规范玻色子的自相互作用，引力子（引力的量子）也自相互作用
+\end{itemize}
+这正是 Einstein 场方程与 Newton 引力 $(\nabla^2\Phi = 4\pi G\rho)$ 的根本区别——Newton 方程是线性的。
+\end{note}
+
+\subsection{约束方程与动力学方程}
+
+将 Einstein 方程按照时间/空间分解具有重要的理论与数值意义。
+
+\begin{property}[$3+1$ 分解]
+在以 $t = x^0$ 为时间坐标的 $3+1$ 分解中，Einstein 方程的 10 个分量分为两类：
+\begin{itemize}
+    \item \textbf{约束方程}（4 个）：$G^0{}_0 = 8\pi G\,T^0{}_0$ 和 $G^0{}_i = 8\pi G\,T^0{}_i$。它们不含度规对时间的二阶导数，是每一时刻必须满足的椭圆型方程。
+    \item \textbf{动力学方程}（6 个）：$G^i{}_j = 8\pi G\,T^i{}_j$。它们包含度规的时间二阶导数，决定了时空的演化。
+\end{itemize}
+Bianchi 恒等式保证：如果约束方程在初始时刻成立，则动力学方程保证它们在所有时刻都成立。
+\end{property}
+
+\subsection{自由度计数}
+
+\begin{property}[Einstein 方程的物理自由度]
+对 Einstein 方程的自由度进行计数：
+\begin{itemize}
+    \item 度规 $g_{\mu\nu}$ 在四维时空中有 10 个独立分量
+    \item 坐标变换的自由度（微分同胚不变性）：4 个任意函数（可选择 4 个坐标条件/规范条件）
+    \item 约束方程：4 个（$G^0{}_0$ 和 $G^0{}_i$ 分量）
+    \item Bianchi 恒等式自动消去 4 个动力学方程中的冗余
+\end{itemize}
+因此，物理自由度 = $10 - 4 - 4 + (4-4) = 2$。这 2 个自由度对应于引力波的两个偏振态（$+$ 和 $\times$），类似于电磁波的两个偏振态。正如电动力学中光子只有两个物理偏振一样，引力子也只有两个物理偏振。
+\end{property}
+
+\section{Newton 极限}
+\label{sec:newtonian_limit}
+
+广义相对论必须在弱场、低速极限下约化为牛顿引力理论。这一要求不仅验证了理论的正确性，也确定了 Einstein--Hilbert 作用量中的系数 $1/16\pi G$。
+
+\subsection{弱场近似}
+
+\begin{definition}[弱场度规]
+在远离强引力源的区域，时空近似平坦，度规可以写为：
+\begin{equation}
+    g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}, \qquad |h_{\mu\nu}| \ll 1,
+    \label{eq:weak_field}
+\end{equation}
+其中 $\eta_{\mu\nu} = \diag(-1, +1, +1, +1)$ 是 Minkowski 度规，$h_{\mu\nu}$ 是小扰动。以下我们保留到 $h_{\mu\nu}$ 的一阶项。
+\end{definition}
+
+在一阶近似下，指标升降使用 $\eta^{\mu\nu}$：
+\begin{equation}
+    g^{\mu\nu} = \eta^{\mu\nu} - h^{\mu\nu} + \Order(h^2), \qquad h^{\mu\nu} \equiv \eta^{\mu\rho}\eta^{\nu\sigma} h_{\rho\sigma}.
+\end{equation}
+
+Christoffel 符号到一阶为：
+\begin{equation}
+    \Gamma^\mu_{\nu\rho} = \frac{1}{2}\eta^{\mu\sigma}\left(\partial_\nu h_{\rho\sigma} + \partial_\rho h_{\nu\sigma} - \partial_\sigma h_{\nu\rho}\right) + \Order(h^2).
+    \label{eq:linear_Christoffel}
+\end{equation}
+
+\subsection{Newton 极限的推导}
+
+我们考虑以下物理条件（Newton 极限）：
+\begin{enumerate}
+    \item \textbf{弱场}：$|h_{\mu\nu}| \ll 1$，只保留一阶项
+    \item \textbf{静态}：$\partial_0 h_{\mu\nu} = 0$（引力场不随时间变化）
+    \item \textbf{低速}：测试粒子的速度 $v \ll c$，即 $\dd x^i/\dd t \ll 1$
+    \item \textbf{非相对论物质}：应力远小于能量密度，$|T_{ij}| \ll |T_{00}|$，并且压强可忽略，$p \ll \rho$
+\end{enumerate}
+
+\begin{theorem}[从 Einstein 方程到 Poisson 方程]
+在上述 Newton 极限条件下，Einstein 场方程的 $00$ 分量约化为 Poisson 方程：
+\begin{equation}
+    \boxed{\nabla^2 \Phi = 4\pi G \,\rho},
+    \label{eq:poisson}
+\end{equation}
+其中 $\Phi$ 是 Newton 引力势，定义为 $h_{00} = -2\Phi$，$\rho = T_{00}$ 是质量密度。
+\end{theorem}
+
+\begin{proof}
+\textbf{步骤 1：测地线方程与 Newton 第二定律。}
+
+自由粒子的测地线方程为：
+\begin{equation}
+    \frac{\dd^2 x^\mu}{\dd\tau^2} + \Gamma^\mu_{\nu\rho} \frac{\dd x^\nu}{\dd\tau}\frac{\dd x^\rho}{\dd\tau} = 0.
+\end{equation}
+在低速极限下，$\dd t/\dd\tau \approx 1$，$\dd x^i/\dd\tau \approx \dd x^i/\dd t \ll 1$，因此速度相关项可以忽略：
+\begin{equation}
+    \frac{\dd^2 x^i}{\dd t^2} \approx -\Gamma^i_{00}.
+\end{equation}
+由式 (\ref{eq:linear_Christoffel}) 并利用静态条件 $\partial_0 h_{\mu\nu} = 0$：
+\begin{equation}
+    \Gamma^i_{00} = \frac{1}{2}\eta^{i\sigma}(\partial_0 h_{0\sigma} + \partial_0 h_{0\sigma} - \partial_\sigma h_{00})
+    = -\frac{1}{2}\delta^{ij}\partial_j h_{00} = -\frac{1}{2}\partial_i h_{00}.
+\end{equation}
+因此：
+\begin{equation}
+    \frac{\dd^2 \mathbf{x}}{\dd t^2} = \frac{1}{2}\nabla h_{00}.
+    \label{eq:geodesic_newton}
+\end{equation}
+与 Newton 第二定律 $\dd^2\mathbf{x}/\dd t^2 = -\nabla\Phi$ 比较，得到：
+\begin{equation}
+    h_{00} = -2\Phi.
+    \label{eq:h00_Phi}
+\end{equation}
+
+\textbf{步骤 2：计算线性化的 Ricci 张量。}
+
+到 $h$ 的一阶：
+\begin{equation}
+    R_{\mu\nu} = \partial_\rho \Gamma^\rho_{\nu\mu} - \partial_\nu \Gamma^\rho_{\rho\mu} + \Order(h^2).
+\end{equation}
+对于 $R_{00}$，利用静态条件 $\partial_0 = 0$：
+\begin{align}
+    R_{00} &= \partial_i \Gamma^i_{00} - \cancel{\partial_0 \Gamma^\rho_{\rho 0}} \\
+           &= \partial_i\left(-\frac{1}{2}\partial_i h_{00}\right)
+           = -\frac{1}{2}\nabla^2 h_{00}.
+\end{align}
+代入 $h_{00} = -2\Phi$ 得：
+\begin{equation}
+    R_{00} = \nabla^2 \Phi.
+    \label{eq:R00_Newton}
+\end{equation}
+
+\textbf{步骤 3：计算能量-动量张量。}
+
+对于静止的非相对论尘埃（$p = 0$，$u^\mu = (1, 0, 0, 0)$）：
+\begin{align}
+    T_{\mu\nu} &= \rho \, u_\mu u_\nu, \\
+    T_{00} &= \rho \, u_0 u_0 = \rho \, (g_{00})^2 \approx \rho, \\
+    T &= g^{\mu\nu} T_{\mu\nu} \approx -\rho.
+\end{align}
+
+\textbf{步骤 4：利用迹反转形式。}
+
+迹反转的爱因斯坦方程 $R_{\mu\nu} = 8\pi G(T_{\mu\nu} - \frac{1}{2}T g_{\mu\nu})$ 的 $00$ 分量为：
+\begin{align}
+    R_{00} &= 8\pi G\left(T_{00} - \frac{1}{2}T g_{00}\right) \\
+           &= 8\pi G\left(\rho - \frac{1}{2}(-\rho)(-1)\right) \\
+           &= 8\pi G\left(\rho - \frac{1}{2}\rho\right)
+           = 4\pi G \,\rho.
+\end{align}
+将 $R_{00} = \nabla^2\Phi$ 代入，即得 Poisson 方程：
+\begin{equation}
+    \nabla^2\Phi = 4\pi G \,\rho.
+\end{equation}
+如果当初在作用量中使用了不同于 $1/16\pi G$ 的系数，这里得到的系数就不是 $4\pi G$，从而无法与 Newton 引力理论衔接。这验证了作用量系数的正确性。
+\end{proof}
+
+\begin{note}[恢复光速 $c$]
+如果显式恢复 $c$，弱场度规为 $g_{00} = -(1 + 2\Phi/c^2)$，Poisson 方程为 $\nabla^2\Phi = 4\pi G\rho$，Einstein 方程为 $G_{\mu\nu} = (8\pi G/c^4)T_{\mu\nu}$。因子 $c^{-4}$ 解释了为什么在日常生活中时空弯曲效应极其微小：物质密度对应的能量密度 $\rho c^2$ 除以 $c^4$ 得到一个极小的曲率。
+\end{note}
+
+\begin{tikzpicture}[scale=1.0, >=stealth]
+    % 坐标轴
+    \draw[->] (-0.5, 0) -- (10, 0) node[right] {引力场强度};
+    \draw[->] (0, -0.5) -- (0, 4.5) node[above] {理论精度};
+
+    % 区域
+    \fill[blue!10] (0, 0) rectangle (3.5, 4);
+    \fill[red!10] (3.5, 0) rectangle (7, 4);
+    \fill[purple!10] (7, 0) rectangle (9.5, 4);
+
+    \node[font=\small] at (1.75, 3.5) {Newton 引力};
+    \node[font=\small] at (1.75, 3.0) {$\nabla^2\Phi = 4\pi G\rho$};
+    \node[font=\small] at (5.25, 3.5) {Einstein 引力};
+    \node[font=\small] at (5.25, 3.0) {$G_{\mu\nu}=8\pi G T_{\mu\nu}$};
+    \node[font=\small] at (8.25, 3.5) {量子引力？};
+    \node[font=\small] at (8.25, 3.0) {未知};
+
+    % 分界线
+    \draw[dashed, thick] (3.5, 0.3) -- (3.5, 3.8) node[above, font=\footnotesize] {弱场};
+    \draw[dashed, thick] (7, 0.3) -- (7, 3.8) node[above, font=\footnotesize] {强场/Planck};
+
+    % 箭头标注
+    \draw[<->, thick] (0.5, 0.8) -- (3.2, 0.8) node[midway, above, font=\footnotesize] {地球、太阳};
+    \draw[<->, thick] (3.8, 0.8) -- (6.7, 0.8) node[midway, above, font=\footnotesize] {中子星、黑洞};
+\end{tikzpicture}
+\captionof{figure}{引力理论的适用范围：Newton 理论在弱场低速下足够精确，Einstein 理论覆盖了从中等场到强场的所有经典引力现象，Planck 尺度则需要量子引力理论。}
+
+\section{宇宙学常数}
+\label{sec:cosmological_constant}
+
+\subsection{$\Lambda$ 项的引入}
+
+Einstein--Hilbert 作用量可以自然地添加一个常数项：
+
+\begin{definition}[含宇宙学常数的 Einstein--Hilbert 作用量]
+\begin{equation}
+    S = \frac{1}{16\pi G} \int_{\M} (R - 2\Lambda) \sqrt{-g} \; \dd^4 x + S_{\text{matter}},
+    \label{eq:EH_Lambda}
+\end{equation}
+其中 $\Lambda$ 称为\textbf{宇宙学常数} (cosmological constant)。变分后得到修正的场方程：
+\begin{equation}
+    \boxed{G_{\mu\nu} + \Lambda \, g_{\mu\nu} = 8\pi G \, T_{\mu\nu}}.
+    \label{eq:EFE_Lambda}
+\end{equation}
+或等价地：
+\begin{equation}
+    R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} + \Lambda g_{\mu\nu} = 8\pi G \, T_{\mu\nu}.
+\end{equation}
+\end{definition}
+
+\begin{proof}
+常数项的变分：$\delta(2\Lambda\sqrt{-g}) = 2\Lambda \cdot \delta\sqrt{-g} = -\Lambda g_{\mu\nu}\delta g^{\mu\nu} \sqrt{-g}$。因此：
+\begin{equation}
+    \delta S = \frac{1}{16\pi G} \int \left( R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} + \Lambda g_{\mu\nu} - 8\pi G T_{\mu\nu} \right) \delta g^{\mu\nu} \sqrt{-g} \; \dd^4 x.
+\end{equation}
+令 $\delta S = 0$ 即得含 $\Lambda$ 的场方程。
+\end{proof}
+
+\subsection{宇宙学常数的物理诠释}
+
+\begin{note}[$\Lambda$ 作为真空能量]
+将 $\Lambda$ 项移到方程右侧：
+\begin{equation}
+    G_{\mu\nu} = 8\pi G\left(T_{\mu\nu} - \frac{\Lambda}{8\pi G}g_{\mu\nu}\right)
+    \equiv 8\pi G\left(T_{\mu\nu} + T^{\Lambda}_{\mu\nu}\right),
+\end{equation}
+其中定义了\textbf{真空能量-动量张量}：
+\begin{equation}
+    T^{\Lambda}_{\mu\nu} \equiv -\frac{\Lambda}{8\pi G} \, g_{\mu\nu} = -\rho_{\Lambda} \, g_{\mu\nu},
+\end{equation}
+$\rho_{\Lambda} = \Lambda/8\pi G$ 是真空能量密度。真空的压强为 $p_{\Lambda} = -\rho_{\Lambda}$（状态方程 $w = p/\rho = -1$），这意味着真空具有\textbf{负压}——这正是宇宙加速膨胀所需的排斥性引力效应。
+\end{note}
+
+\subsection{历史回顾与现代意义}
+
+\begin{note}[Einstein 的"最大错误"]
+1917 年，Einstein 将广义相对论应用于宇宙学，试图构建一个静态的宇宙模型。然而，不含 $\Lambda$ 的场方程 $G_{\mu\nu} = 8\pi G T_{\mu\nu}$ 无法给出静态解（引力总是吸引的，宇宙必须膨胀或收缩）。为了得到静态宇宙，Einstein 引入了宇宙学常数 $\Lambda$，精细调节使其恰好平衡物质引力。1929 年 Hubble 发现宇宙膨胀后，Einstein 放弃了 $\Lambda$ 项，称其为"我一生中最大的错误 (biggest blunder)"。
+
+然而，1998 年两个独立的超新星观测团队 \cite{Riess1998} 发现宇宙正在加速膨胀——这意味着某种"暗能量"的存在。观测数据与 $\Lambda \approx 10^{-52}\,\text{m}^{-2}$ 的宇宙学常数高度吻合。$\Lambda$ 起死回生，成为现代宇宙学的核心要素。今天，宇宙学常数（或动力学暗能量）被认为是驱动宇宙加速膨胀的主要原因，约占宇宙总能量密度的 $68\%$。
+\end{note}
+
+\begin{property}[含 $\Lambda$ 的 Newton 极限]
+在弱场极限下，$\Lambda$ 项修改了 Poisson 方程：
+\begin{equation}
+    \nabla^2 \Phi = 4\pi G\rho - \Lambda c^2.
+\end{equation}
+这产生了一个排斥性的修正：即使 $\rho = 0$，$\Lambda > 0$ 也产生一个常数的"反引力"加速度。然而，$\Lambda$ 的观测值极其微小，在太阳系尺度上完全可以忽略。
+\end{property}
+
+\section{算例}
+\label{sec:examples}
+
+\subsection{标量场的能量-动量张量}
+
+\begin{example}[实标量场的能量-动量张量]
+考虑实标量场 $\phi$，其弯曲时空中的作用量为：
+\begin{equation}
+    S_{\phi} = \int_{\M} \Lag_\phi \sqrt{-g} \; \dd^4 x, \qquad
+    \Lag_\phi = -\frac{1}{2} g^{\mu\nu} \partial_\mu\phi \, \partial_\nu\phi - V(\phi).
+\end{equation}
+计算能量-动量张量 $T_{\mu\nu} = -\frac{2}{\sqrt{-g}}\frac{\delta S_\phi}{\delta g^{\mu\nu}}$。
+
+\textbf{计算步骤：}
+\begin{align}
+    \delta S_\phi &= \int \left[ \frac{\partial\Lag_\phi}{\partial g^{\mu\nu}} \delta g^{\mu\nu} \sqrt{-g} + \Lag_\phi \, \delta\sqrt{-g} \right] \dd^4 x \\
+    &= \int \left[ -\frac{1}{2}\partial_\mu\phi\,\partial_\nu\phi \cdot \delta g^{\mu\nu} \sqrt{-g} + \Lag_\phi\left(-\frac{1}{2}g_{\mu\nu}\delta g^{\mu\nu}\sqrt{-g}\right) \right] \dd^4 x \\
+    &= \int \left[ -\frac{1}{2}\partial_\mu\phi\,\partial_\nu\phi - \frac{1}{2}\Lag_\phi\, g_{\mu\nu} \right] \delta g^{\mu\nu} \sqrt{-g} \; \dd^4 x.
+\end{align}
+因此：
+\begin{equation}
+    \boxed{T_{\mu\nu} = \partial_\mu\phi \, \partial_\nu\phi + g_{\mu\nu} \Lag_\phi
+    = \partial_\mu\phi\,\partial_\nu\phi - \frac{1}{2}g_{\mu\nu}\left(g^{\rho\sigma}\partial_\rho\phi\,\partial_\sigma\phi + 2V(\phi)\right)}.
+\end{equation}
+特别地，在平坦时空中，能量密度为 $T_{00} = \frac{1}{2}\dot\phi^2 + \frac{1}{2}(\nabla\phi)^2 + V(\phi)$，正是标量场的标准 Hamiltonian 密度。
+\end{example}
+
+\subsection{迹反转形式的验证}
+
+\begin{example}[理想流体的迹反转方程]
+理想流体的能量-动量张量为 $T_{\mu\nu} = (\rho + p)u_\mu u_\nu + p g_{\mu\nu}$。
+计算迹：$T = g^{\mu\nu}T_{\mu\nu} = -(\rho + p) + 4p = -\rho + 3p$。
+代入迹反转形式 $R_{\mu\nu} = 8\pi G(T_{\mu\nu} - \frac{1}{2}T g_{\mu\nu})$：
+\begin{align}
+    R_{\mu\nu} &= 8\pi G\left[ (\rho + p)u_\mu u_\nu + p g_{\mu\nu} - \frac{1}{2}(-\rho + 3p)g_{\mu\nu} \right] \\
+    &= 8\pi G\left[ (\rho + p)u_\mu u_\nu + \frac{1}{2}(\rho - p)g_{\mu\nu} \right].
+\end{align}
+在流体的静止系中（$u^\mu = (1, 0, 0, 0)$，$u_\mu = g_{\mu 0} \approx (-1, 0, 0, 0)$ 在局部 Lorentz 系）：
+\begin{align}
+    R_{00} &= 8\pi G\left[ (\rho + p)(-1)^2 + \frac{1}{2}(\rho - p)(-1) \right] \\
+           &= 8\pi G\left[ \rho + p - \frac{1}{2}\rho + \frac{1}{2}p \right]
+           = 4\pi G(\rho + 3p).
+\end{align}
+对于非相对论物质 $p \ll \rho$，$R_{00} \approx 4\pi G\rho$，与 Newton 极限一致。对于辐射 $p = \rho/3$，$R_{00} = 4\pi G(\rho + \rho) = 8\pi G\rho$——辐射的引力效应是同等能量密度的非相对论物质的两倍。
+\end{example}
+
+\subsection{FLRW 度规的 Einstein 张量}
+
+在宇宙学中，最重要的度规是 \textbf{Friedmann--Lemaître--Robertson--Walker (FLRW)} 度规，它描述了均匀各向同性的宇宙。
+
+\begin{example}[FLRW 度规的 Einstein 张量]
+FLRW 度规为：
+\begin{equation}
+    \dd s^2 = -\dd t^2 + a^2(t) \left[ \frac{\dd r^2}{1 - k r^2} + r^2(\dd\theta^2 + \sin^2\theta\,\dd\phi^2) \right],
+\end{equation}
+其中 $a(t)$ 是尺度因子，$k = -1, 0, +1$ 分别对应开放、平坦和闭合宇宙。
+
+\textbf{计算步骤}（非零 Christoffel 符号）：
+\begin{align}
+    \Gamma^0_{ij} &= a\dot a \, \tilde\gamma_{ij}, &
+    \Gamma^i_{0j} &= \frac{\dot a}{a} \, \delta^i_j, \\
+    \Gamma^i_{jk} &= \tilde\Gamma^i_{jk} \quad (\text{三维最大对称空间的 Christoffel 符号}).
+\end{align}
+其中 $\tilde\gamma_{ij}$ 是 $t = \text{const}$ 超曲面上的三维度规，$\dot a = \dd a/\dd t$。
+
+\textbf{Ricci 张量}：
+\begin{align}
+    R_{00} &= -3\frac{\ddot a}{a}, \\
+    R_{ij} &= \left( \frac{\ddot a}{a} + 2\frac{\dot a^2}{a^2} + 2\frac{k}{a^2} \right) g_{ij}.
+\end{align}
+这里 $g_{ij} = a^2\tilde\gamma_{ij}$ 是空间部分度规。
+
+\textbf{标量曲率}：
+\begin{equation}
+    R = g^{00}R_{00} + g^{ij}R_{ij} = -R_{00} + \frac{3}{a^2}\left( \frac{\ddot a}{a} + 2\frac{\dot a^2}{a^2} + 2\frac{k}{a^2} \right) a^2
+    = 6\left( \frac{\ddot a}{a} + \frac{\dot a^2}{a^2} + \frac{k}{a^2} \right).
+\end{equation}
+
+\textbf{Einstein 张量}：
+\begin{align}
+    G_{00} &= R_{00} - \frac{1}{2}R g_{00}
+            = -3\frac{\ddot a}{a} - \frac{1}{2}\left[6\left(\frac{\ddot a}{a} + \frac{\dot a^2}{a^2} + \frac{k}{a^2}\right)\right](-1) \nonumber\\
+           &= -3\frac{\ddot a}{a} + 3\frac{\ddot a}{a} + 3\frac{\dot a^2}{a^2} + 3\frac{k}{a^2}
+            = 3\left( \frac{\dot a^2}{a^2} + \frac{k}{a^2} \right).
+\end{align}
+\begin{align}
+    G_{ij} &= R_{ij} - \frac{1}{2}R g_{ij} \nonumber\\
+           &= \left( \frac{\ddot a}{a} + 2\frac{\dot a^2}{a^2} + 2\frac{k}{a^2} \right) g_{ij}
+              - \frac{1}{2}\left[6\left(\frac{\ddot a}{a} + \frac{\dot a^2}{a^2} + \frac{k}{a^2}\right)\right] g_{ij} \nonumber\\
+           &= -\left( 2\frac{\ddot a}{a} + \frac{\dot a^2}{a^2} + \frac{k}{a^2} \right) g_{ij}.
+\end{align}
+
+假设宇宙充满理想流体（$T_{00} = \rho$，$T_{ij} = p g_{ij}$），Einstein 场方程 $G_{\mu\nu} + \Lambda g_{\mu\nu} = 8\pi G\,T_{\mu\nu}$ 给出著名的 \textbf{Friedmann 方程}：
+\begin{align}
+    \boxed{\left(\frac{\dot a}{a}\right)^2 = \frac{8\pi G}{3}\rho - \frac{k}{a^2} + \frac{\Lambda}{3}}, \qquad
+    \boxed{\frac{\ddot a}{a} = -\frac{4\pi G}{3}(\rho + 3p) + \frac{\Lambda}{3}}.
+\end{align}
+第一个方程决定了膨胀速率，第二个方程决定了膨胀的加速度。当 $\Lambda$ 主导时（$\rho, p \to 0$），$\ddot a > 0$——宇宙加速膨胀，这正是 1998 年观测到的现象 \cite{Riess1998}。
+\end{example}
+
+\section*{本章小结}
+
+爱因斯坦场方程 $G_{\mu\nu} + \Lambda g_{\mu\nu} = 8\pi G\,T_{\mu\nu}$ 是广义相对论的核心。它可以从简洁的 Einstein--Hilbert 作用量 $S = \frac{1}{16\pi G}\int (R-2\Lambda)\sqrt{-g}\,\dd^4 x + S_{\text{matter}}$ 通过变分原理严格推导出来。Bianchi 恒等式 $\nabla^\mu G_{\mu\nu} = 0$ 自动蕴含了能量-动量守恒 $\nabla^\mu T_{\mu\nu} = 0$。在弱场低速极限下，场方程约化为 Newton 的 Poisson 方程 $\nabla^2\Phi = 4\pi G\rho$，这不仅验证了理论的正确性，也确定了耦合常数 $8\pi G$。宇宙学常数 $\Lambda$ 虽然曾被 Einstein 放弃，但今天已成为理解宇宙加速膨胀不可或缺的要素。场方程的高度非线性使其精确解极为稀少——下一章我们将学习第一个、也是最重要的精确解：Schwarzschild 解。
+
+%=============================================================================
+% 习题
+%=============================================================================
+
+\begin{exercise}
+验证 $\delta g_{\mu\nu} = -g_{\mu\rho}g_{\nu\sigma}\delta g^{\rho\sigma}$，并由此推导 $\delta\sqrt{-g} = -\frac{1}{2}\sqrt{-g}\,g_{\mu\nu}\delta g^{\mu\nu}$。
+\end{exercise}
+
+\begin{exercise}
+利用 Einstein 场方程的迹反转形式 $R_{\mu\nu} = 8\pi G(T_{\mu\nu} - \frac{1}{2}T g_{\mu\nu})$，证明在真空中（$T_{\mu\nu} = 0$），Ricci 张量为零但 Riemann 张量不一定为零。举例说明。
+\end{exercise}
+
+\begin{exercise}
+考虑含宇宙学常数 $\Lambda$ 的真空 Einstein 方程 $R_{\mu\nu} = \Lambda g_{\mu\nu}$（由 $T_{\mu\nu}=0$ 和 $R = 4\Lambda$ 得到）。验证 de Sitter 时空是其中一个解，并求其 Ricci 标量。
+\end{exercise}
+
+\begin{exercise}
+从标量场的作用量出发，推导其能量-动量张量为 $T_{\mu\nu} = \partial_\mu\phi\,\partial_\nu\phi - \frac{1}{2}g_{\mu\nu}(\partial_\rho\phi\,\partial^\rho\phi + 2V(\phi))$，并验证 $\nabla^\mu T_{\mu\nu} = 0$ 等价于标量场的运动方程 $\Box\phi - V'(\phi) = 0$。
+\end{exercise}
+
+\begin{exercise}
+对于 FLRW 度规，直接计算 Christoffel 符号，进而导出 Ricci 张量和 Einstein 张量的各个分量。验证计算结果与正文中给出的一致。
+\end{exercise}
